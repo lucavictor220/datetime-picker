@@ -3,7 +3,8 @@
   "description": "A picker for date and time, that prefers to use the native input.",
   "main": "datetime-picker.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.7.0"
+    "polymer": "Polymer/polymer#^1.7.0",
+    "datetime-picker": "fooloomanzoo/datetime-picker"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

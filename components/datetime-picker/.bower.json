@@ -13,14 +13,15 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "_release": "08ee8728dd",
+  "version": "1.0.1",
+  "_release": "1.0.1",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "08ee8728dd6bec7baa0612b7337850566fdf6d75"
+    "type": "version",
+    "tag": "1.0.1",
+    "commit": "33b131d1f81e9b7cdbdc29575ecadce25c07e2f8"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
-  "_target": "master",
+  "_target": "^1.0.1",
   "_originalSource": "fooloomanzoo/datetime-picker",
   "_direct": true
 }
