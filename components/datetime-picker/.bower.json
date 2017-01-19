@@ -1,6 +1,6 @@
 {
   "name": "datetime-picker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "authors": [
     "Johannes Brautzsch <johannes.brautzsch@gmail.com>"
   ],
@@ -30,11 +30,11 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "license": "MIT",
-  "_release": "1.0.6",
+  "_release": "1.0.7",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.6",
-    "commit": "39f2d9da8dbb7d2f6f12965a2b824387dbba4faf"
+    "tag": "1.0.7",
+    "commit": "bc30753666b9040fa375c1b9b64892b8820e23df"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
