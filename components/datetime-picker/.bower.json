@@ -1,9 +1,27 @@
 {
   "name": "datetime-picker",
+  "version": "1.0.6",
+  "authors": [
+    "Johannes Brautzsch <johannes.brautzsch@gmail.com>"
+  ],
   "description": "A picker for date and time, that prefers to use the native input.",
+  "homepage": "https://github.com/fooloomanzoo/datetime-picker/",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "datepicker",
+    "datetimepicker",
+    "datetime-picker",
+    "calendar"
+  ],
+  "ignore": [
+    "/components/",
+    "/test/"
+  ],
   "main": "datetime-picker.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.7.0"
+    "polymer": "Polymer/polymer#^1.7.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -12,13 +30,11 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "license": "MIT",
-  "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "version": "1.0.5",
-  "_release": "1.0.5",
+  "_release": "1.0.6",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.5",
-    "commit": "131aa92d2920159816a9e75b115184dedb6a3725"
+    "tag": "1.0.6",
+    "commit": "39f2d9da8dbb7d2f6f12965a2b824387dbba4faf"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
