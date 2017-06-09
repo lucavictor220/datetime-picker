@@ -1,6 +1,6 @@
 {
   "name": "datetime-picker",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "authors": [
     "Johannes Brautzsch <johannes.brautzsch@gmail.com>"
   ],
@@ -20,7 +20,12 @@
     "test": "test"
   },
   "scripts": {
+    "build": "polymer build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fooloomanzoo/datetime-picker.git"
   },
   "license": "MIT"
 }

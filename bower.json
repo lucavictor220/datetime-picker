@@ -4,7 +4,11 @@
   "main": "datetime-picker.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.1",
-    "datetime-picker": "fooloomanzoo/datetime-picker"
+    "datetime-picker": "fooloomanzoo/datetime-picker#^2.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "resolutions": {
+    "polymer": "^2.0.1",
+    "webcomponentsjs": "^v1.0.0"
+  }
 }
