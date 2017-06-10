@@ -1,42 +1,43 @@
 {
   "name": "datetime-picker",
-  "version": "1.0.9",
-  "authors": [
-    "Johannes Brautzsch <johannes.brautzsch@gmail.com>"
-  ],
-  "description": "A picker for date and time, that prefers to use the native input.",
-  "homepage": "https://github.com/fooloomanzoo/datetime-picker/",
-  "keywords": [
-    "web-component",
-    "web-components",
-    "polymer",
-    "datepicker",
-    "datetimepicker",
-    "datetime-picker",
-    "calendar"
-  ],
-  "ignore": [
-    "/components/",
-    "/test/"
-  ],
   "main": "datetime-picker.html",
+  "authors": [
+    "Johannes Brautzsch <fooloomanzoo>"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "date",
+    "time",
+    "calendar",
+    "picker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fooloomanzoo/datetime-picker.git"
+  },
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.7.1"
+    "polymer": "Polymer/polymer#^2.0.1"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
+    "web-component-tester": "Polymer/web-component-tester",
+    "webcomponentsjs": "webcomponents/webcomponentsjs"
   },
-  "license": "MIT",
-  "_release": "1.0.9",
+  "resolutions": {
+    "polymer": "^2.0.1",
+    "webcomponentsjs": "^1.0.1"
+  },
+  "homepage": "https://github.com/fooloomanzoo/datetime-picker",
+  "version": "2.0.0",
+  "_release": "2.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.9",
-    "commit": "6f9205484ab8a08dc524586272e65cdc19089d1d"
+    "tag": "2.0.0",
+    "commit": "a6cc550594b7db85c5400b4c9eae9c40ec4a3106"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
-  "_target": "*",
+  "_target": "^2.0.0",
   "_originalSource": "fooloomanzoo/datetime-picker"
 }
