@@ -30,12 +30,12 @@
     "webcomponentsjs": "^1.0.1"
   },
   "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "version": "2.0.0",
-  "_release": "2.0.0",
+  "version": "2.0.1",
+  "_release": "2.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.0",
-    "commit": "a6cc550594b7db85c5400b4c9eae9c40ec4a3106"
+    "tag": "2.0.1",
+    "commit": "1fb7113c89eb265c5777ca6030ae84aaa63718f1"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "^2.0.0",
