@@ -27,6 +27,5 @@
     "commit": "c4caa3d19f85742f12cef349379c3ba3ca90a830"
   },
   "_source": "https://github.com/Polymer/polymer-analyzer.git",
-  "_target": "hydrolysis-1.x",
-  "_originalSource": "Polymer/polymer-analyzer"
+  "_target": "hydrolysis-1.x"
 }
