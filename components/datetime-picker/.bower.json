@@ -23,21 +23,22 @@
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
     "web-component-tester": "Polymer/web-component-tester",
-    "webcomponentsjs": "webcomponents/webcomponentsjs"
+    "webcomponentsjs": "webcomponents/webcomponentsjs",
+    "datetime-picker": "fooloomanzoo/datetime-picker"
   },
   "resolutions": {
     "polymer": "^2.0.1",
     "webcomponentsjs": "^1.0.1"
   },
   "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "version": "2.0.2",
-  "_release": "2.0.2",
+  "version": "2.0.3",
+  "_release": "2.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.2",
-    "commit": "3dfc6199e327da25c10b5ffecc6b6c9779b8c2fd"
+    "tag": "2.0.3",
+    "commit": "f36a78f395d7448c08d36bf9c045da993ea82e6e"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
-  "_target": "^2.0.2",
+  "_target": "^2.0.3",
   "_originalSource": "fooloomanzoo/datetime-picker"
 }

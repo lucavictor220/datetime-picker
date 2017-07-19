@@ -4,7 +4,7 @@
   "main": "datetime-picker.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.1",
-    "datetime-picker": "fooloomanzoo/datetime-picker#^2.0.2",
+    "datetime-picker": "fooloomanzoo/datetime-picker#^2.0.3",
     "webcomponentsjs": "^v1.0.1"
   },
   "devDependencies": {
