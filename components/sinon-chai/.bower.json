@@ -9,5 +9,6 @@
     "commit": "8cc70ec25a3e3681ab11c04d496444ddbaf0fd8c"
   },
   "_source": "https://github.com/domenic/sinon-chai.git",
-  "_target": "^2.7.0"
+  "_target": "^2.7.0",
+  "_originalSource": "sinon-chai"
 }

@@ -30,5 +30,6 @@
     "commit": "eb86ce25c850bb20523d47a55d07235f0fad5858"
   },
   "_source": "https://github.com/polymerelements/test-fixture.git",
-  "_target": "^3.0.0-rc.1"
+  "_target": "^3.0.0-rc.1",
+  "_originalSource": "polymerelements/test-fixture"
 }

@@ -61,5 +61,6 @@
     "commit": "87c6f872c3ebd78c0be21e5a390096f263849f40"
   },
   "_source": "https://github.com/PolymerElements/iron-validatable-behavior.git",
-  "_target": "1 - 2"
+  "_target": "1 - 2",
+  "_originalSource": "PolymerElements/iron-validatable-behavior"
 }

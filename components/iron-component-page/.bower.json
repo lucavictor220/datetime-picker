@@ -66,5 +66,6 @@
     "commit": "079c41fb8d779267475ff9abb5306b4a0fee392b"
   },
   "_source": "https://github.com/PolymerElements/iron-component-page.git",
-  "_target": "^2.0.0"
+  "_target": "^2.0.0",
+  "_originalSource": "PolymerElements/iron-component-page"
 }
