@@ -17,27 +17,49 @@
     "type": "git",
     "url": "https://github.com/fooloomanzoo/datetime-picker.git"
   },
+  "licence": "https://github.com/fooloomanzoo/datetime-picker/raw/master/LICENSE.txt",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.1"
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
-    "web-component-tester": "Polymer/web-component-tester",
-    "webcomponentsjs": "webcomponents/webcomponentsjs"
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "web-animations-js": "web-animations/web-animations-js#^2.2"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.1.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.1.0",
+        "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+        "web-animations-js": "web-animations/web-animations-js#^2.2"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
   },
   "resolutions": {
-    "polymer": "^2.0.1",
-    "webcomponentsjs": "^1.0.1"
+    "webcomponentsjs": "^1.0.0"
   },
   "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "version": "2.0.0",
-  "_release": "2.0.0",
+  "version": "2.0.4",
+  "_release": "2.0.4",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.0",
-    "commit": "a6cc550594b7db85c5400b4c9eae9c40ec4a3106"
+    "tag": "2.0.4",
+    "commit": "fd741636a01f8106de2f0bdf794d228d0b34c3bf"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
-  "_target": "^2.0.0",
+  "_target": "^2.0.4",
   "_originalSource": "fooloomanzoo/datetime-picker"
 }

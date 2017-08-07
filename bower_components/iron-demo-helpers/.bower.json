@@ -67,6 +67,7 @@
     "commit": "9afb195a0c7e31308ce3396a8ad4ed57f585ff43"
   },
   "_source": "https://github.com/PolymerElements/iron-demo-helpers.git",
-  "_target": "*",
-  "_originalSource": "PolymerElements/iron-demo-helpers"
+  "_target": "^2.0.0",
+  "_originalSource": "iron-demo-helpers",
+  "_direct": true
 }
