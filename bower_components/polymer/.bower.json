@@ -40,6 +40,10 @@
     "commit": "c90ebdced65c2ee6eeeb4d9a96c2d1b0f48b789e"
   },
   "_source": "https://github.com/Polymer/polymer.git",
+<<<<<<< HEAD:bower_components/polymer/.bower.json
   "_target": "^2.0.2",
+=======
+  "_target": "^2.0.1",
+>>>>>>> origin/gh-pages:components/polymer/.bower.json
   "_originalSource": "Polymer/polymer"
 }
