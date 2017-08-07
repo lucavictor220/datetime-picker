@@ -3,19 +3,11 @@
   "description": "A picker for date and time, that prefers to use the native input.",
   "main": "datetime-picker.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.2",
-    "datetime-picker": "fooloomanzoo/datetime-picker#^2.0.4",
-    "webcomponentsjs": "^v1.0.5"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "datetime-picker": "fooloomanzoo/datetime-picker#^2.0.5"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
-    "web-component-tester": "^6.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.5"
-  },
-  "license": "MIT",
-  "resolutions": {
-    "webcomponentsjs": "^v1.0.5",
-    "polymer": "^2.0.2"
+    "iron-flex-layout": "PolymerElements/iron-flex-layout",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   }
 }
