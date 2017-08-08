@@ -1,0 +1,65 @@
+## &lt;datetime-picker&gt;
+
+### What is it for?
+`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that prefers to use the native input. This element is for using the *native* date-picker, if it exists, or to replace it by a CustomElement. The `calendar-element` and the `time-element` will just be used if the native picker is not available or is explicitly wanted.
+
+_TODO: If the `calendar-` or the `time-element` should appear in an overlay then set the `overlay` of the element, else it will appear as a backdrop. The elements are then infused into an element that extends *IronOverlayBehavior* and will reproduce it's attribute-bindings to `datetime-picker`._
+
+If you build an app using `polymer-cli` or `polymer-build` and bundle your resources and still wnat to maintain the optional load capability, then please note `bower_components/*` in `extraDependencies`.
+
+Unbundled and minified versions are provided in `build/es5` and in `build/es6`. When you use them, you have to consider the correct location of the dependencies. You can build the sources manually by running `npm run build` or `gulp build`.
+
+### Motivation
+Internally it uses two input-elements, that are initially set to type *date* and *time*. If the Browser leaves these attributes as they are, then it will be assumed that native *date*- and *time*-inputs are available. If it won't, a `calendar-element` and a `time-element` will be displayed instead. `calendar-element` and `time-element` can also be used separately.
+It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, or you like to have a different look and you are using *Polymer* already.
+
+### How?
+The **[component page](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/)** explains, which of the attributes you can use and how. You can see there a **[Demo](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/#/elements/datetime-picker/demos/demo/datetime-picker.html)**, too.
+
+You can use it stand-alone or as a range of dates. Examples:
+
+#### Force to use the polyfill
+
+```html
+<datetime-picker use-not-native></datetime-picker>
+```
+
+#### Simple example
+
+```html
+<datetime-picker value="{{value}}"></datetime-picker>
+```
+
+#### Stand-alone calendar
+```html
+<calendar-element date="{{date}}"></calendar-element>
+```
+
+#### Stand-alone time-picker
+```html
+<time-element time="{{time}}"></time-element>
+```
+
+#### Periods
+```html
+<datetime-picker id="from" date="{{min}}" max="[[max]]"></datetime-picker>
+<datetime-picker id="to" date="{{max}}" min="[[min]]"></datetime-picker>
+```
+
+### Changes in 2.0
+- changed properties `dateString` and `timeString` to `date` and `time`
+- polyfill is split up in two elements ('calendar-element' and 'time-element')
+- minified version available ('datetime-picker.min.html', 17kB)
+
+### Changes in 2.0.6
+- overlay-element introduced
+- shared custom-style-element introduced
+- renaming some custom-style-properties
+
+### Installation
+```
+bower install --save fooloomanzoo/datetime-picker
+```
+
+### Contribute?
+Feel free to send a new issue, a commit, a pull request or just fork it!
