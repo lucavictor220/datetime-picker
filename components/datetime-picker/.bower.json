@@ -1,17 +1,19 @@
 {
   "name": "datetime-picker",
-  "main": "datetime-picker.html",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
+  "description": "A picker for date and time, that prefers to use the native input. It includes a calendar and a timer.",
+  "homepage": "https://github.com/fooloomanzoo/datetime-picker/",
   "keywords": [
-    "web-components",
     "web-component",
+    "web-components",
     "polymer",
-    "date",
-    "time",
+    "datepicker",
+    "datetimepicker",
+    "datetime-picker",
     "calendar",
-    "picker"
+    "timer"
   ],
   "repository": {
     "type": "git",
@@ -49,13 +51,12 @@
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "homepage": "https://github.com/fooloomanzoo/datetime-picker",
-  "version": "2.0.7",
-  "_release": "2.0.7",
+  "version": "2.1.0",
+  "_release": "2.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.7",
-    "commit": "c6bf53a55e312159e4f0a992bc5bb12d21497bbd"
+    "tag": "2.1.0",
+    "commit": "53d36adf5d488f62ee010e5f0597fd192b72d5ea"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
