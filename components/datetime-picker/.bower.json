@@ -51,12 +51,12 @@
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "version": "2.1.0",
-  "_release": "2.1.0",
+  "version": "2.1.2",
+  "_release": "2.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.0",
-    "commit": "53d36adf5d488f62ee010e5f0597fd192b72d5ea"
+    "tag": "2.1.2",
+    "commit": "36eafd7976649b149b00cc2bedf2696bc89acfe1"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
