@@ -25,7 +25,7 @@
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior"
   },
   "devDependencies": {
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs",
     "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0"
@@ -51,12 +51,12 @@
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "version": "2.1.4",
-  "_release": "2.1.4",
+  "version": "2.1.6",
+  "_release": "2.1.6",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.4",
-    "commit": "5ad5706950c64c2bb47862b3a2890a0ddfa8e602"
+    "tag": "2.1.6",
+    "commit": "9874aa859cea7438ac55d31e88175fef81f5f84f"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
