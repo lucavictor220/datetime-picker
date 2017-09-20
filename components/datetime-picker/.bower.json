@@ -6,14 +6,15 @@
   "description": "A picker for date and time, that prefers to use the native input. It includes a calendar and a timer.",
   "homepage": "https://github.com/fooloomanzoo/datetime-picker/",
   "keywords": [
-    "web-component",
-    "web-components",
+    "webcomponents",
     "polymer",
-    "datepicker",
-    "datetimepicker",
-    "datetime-picker",
+    "picker",
+    "datetime",
+    "date",
     "calendar",
-    "timer"
+    "time",
+    "timer",
+    "element-collection"
   ],
   "repository": {
     "type": "git",
@@ -22,7 +23,8 @@
   "licence": "https://github.com/fooloomanzoo/datetime-picker/raw/master/LICENSE.txt",
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
-    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior"
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior",
+    "number-input": "fooloomanzoo/number-input"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs",
@@ -48,15 +50,12 @@
       }
     }
   },
-  "resolutions": {
-    "webcomponentsjs": "^1.0.0"
-  },
-  "version": "2.1.6",
-  "_release": "2.1.6",
+  "version": "2.1.7",
+  "_release": "2.1.7",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.6",
-    "commit": "9874aa859cea7438ac55d31e88175fef81f5f84f"
+    "tag": "2.1.7",
+    "commit": "74a9d05551f06b1281104c170ef58337c3c6fca5"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",

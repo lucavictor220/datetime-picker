@@ -12,7 +12,15 @@
       static get properties() {
         return {
           /**
-           * The date as a string of the selected date (format: iso8061)
+           * the selected date and time (format: iso8061)
+           */
+          datetime: {
+            type: String,
+            reflectToAttribute: true,
+            notify: true
+          },
+          /**
+           * the selected date (format: iso8061)
            */
           date: {
             type: String,
@@ -21,7 +29,7 @@
           },
 
           /**
-           * The time as a string of the selected time
+           * the selected time (format: iso8061)
            */
           time: {
             type: String,
@@ -54,7 +62,7 @@
           },
 
           /**
-           * The hours of the selected date
+           * The hours of the selected time
            */
           hours: {
             type: Number,
@@ -62,7 +70,7 @@
           },
 
           /**
-           * The minutes of the selected date
+           * The minutes of the selected time
            */
           minutes: {
             type: Number,
@@ -70,7 +78,7 @@
           },
 
           /**
-           * The seconds of the selected date
+           * The seconds of the selected time
            */
           seconds: {
             type: Number,
@@ -78,7 +86,7 @@
           },
 
           /**
-           * The milliseconds of the selected date
+           * The milliseconds of the selected time
            */
           milliseconds: {
             type: Number,
@@ -107,6 +115,33 @@
           max: {
             type: String,
             notify: true
+          },
+
+          /**
+           * when true 12-hour local time format, else 24-hour
+           * @type {boolean}
+           */
+          hour12: {
+            type: Boolean,
+            value: false
+          },
+
+          /**
+           * true, when A.M. (when `hours` < 12)
+           * @type {boolean}
+           */
+          isAm: {
+            type: Boolean,
+            observer: '_isAmChanged'
+          },
+
+          /**
+           * hours in 12-hour-format
+           * @type {number}
+           */
+          hours12: {
+            type: Number,
+            notify: true
           }
         }
       }
@@ -118,7 +153,9 @@
           '_computeDate(year, month, day)',
           '_computeValue(date, time)',
           '_minChanged(min)',
-          '_maxChanged(max)'
+          '_maxChanged(max)',
+          '_hours12Changed(hours12)',
+          '_hoursChanged(hours)'
         ]
       }
 
@@ -162,9 +199,15 @@
 
       _computeValue(date, time) {
         if (!(date && time)) return;
-        const d = new Date(date + 'T' + time);
+        const datetime = date + 'T' + time
+        let d = new Date(datetime);
 
-        if (!isNaN(+d) && this._checkMin(d) !== false && this._checkMax(d) !== false) {
+        if (!isNaN(+d)) {
+          if (this.min && this._checkMin(d) === false) {
+            d = new Date(this.min);
+          } else if (this.max && this._checkMax(d) === false) {
+            d = new Date(this.max);
+          }
           this.setProperties({
             year: d.getFullYear(),
             month: d.getMonth() + 1,
@@ -173,6 +216,7 @@
             minutes: d.getMinutes(),
             seconds: d.getSeconds(),
             milliseconds: d.getMilliseconds(),
+            datetime: datetime,
             value: +d
           });
         } else if (!isNaN(this.value)){
@@ -182,9 +226,17 @@
 
       _valueChanged(value) {
         if (!value) return;
-        const d = new Date(value);
+        let d = new Date(value);
 
-        if (!isNaN(+d) && this._checkMin(d) !== false && this._checkMax(d) !== false) {
+        if (!isNaN(+d)) {
+          if (this.min && this._checkMin(d) === false) {
+            d = new Date(this.min);
+          } else if (this.max && this._checkMax(d) === false) {
+            d = new Date(this.max);
+          }
+          const date = this._toDate(d);
+          const time = this._toTime(d);
+
           this.setProperties({
             year: d.getFullYear(),
             month: d.getMonth() + 1,
@@ -193,22 +245,23 @@
             minutes: d.getMinutes(),
             seconds: d.getSeconds(),
             milliseconds: d.getMilliseconds(),
-            date: this._toDate(d),
-            time: this._toTime(d)
+            date: date,
+            time: time,
+            datetime: date + 'T' + time
           });
         } else if (this.date && this.time){
           this._computeValue(this.date, this.time);
         }
       }
 
-      _pad(n, targetLength, padString) {
+      _pad(n, padLength) {
         let str = '' + n;
-        targetLength = Math.ceil(typeof targetLength === 'number' ? Math.abs(targetLength) : Math.log10(+n));
-        padString = padString || '0';
+        let targetLength = padLength || this.padLength || (this.placeholder && this.placeholder.length) || Math.log10(+n);
+        const padString = '0';
         if (str.length > targetLength) {
           return str;
         } else {
-          targetLength = targetLength - str.length - padString.length + 1;
+          targetLength = targetLength - str.length;
           for (let i = 0; i < targetLength; i++) {
             str = padString + str;
           }
@@ -244,37 +297,65 @@
 
       _checkMax(d) {
         const max = this.max ? (new Date(this.max)) : undefined;
-        if (!max || !isNaN(+max)) {
+
+        if (!max || isNaN(+max)) {
           return null;
         }
-        if (d && d.getTime && !isNaN(+d) && max < d) {
+
+        if (d && d.getTime && max < d) {
           return false;
         }
+
         return true;
       }
 
       _checkMin(d) {
         const min = this.min ? (new Date(this.min)) : undefined;
-        if (!min || !isNaN(+min)) {
+
+        if (!min || isNaN(+min)) {
           return null;
         }
-        if (d && d.getTime && !isNaN(+d) && min > d) {
+
+        if (d && d.getTime && min > d) {
           return false;
         }
+
         return true;
       }
 
       _toDate(d) {
         if (isNaN(+d) || !d.getTime)
           return '';
+
         return d.getFullYear() + '-' + this._pad(d.getMonth() + 1, 2) + '-' + this._pad(d.getDate(), 2);
       }
 
       _toTime(d) {
         if (isNaN(+d) || !d.getTime)
           return '';
+
         return this._pad(d.getHours(), 2) + ':' + this._pad(d.getMinutes(), 2) + ':' + this._pad(d.getSeconds(), 2) + '.' + this._pad(d.getMilliseconds(), 3);
       }
+
+      _hoursChanged(hours) {
+        this.isAm = hours < 13;
+        this.hours12 = hours > 12 ? hours - 12 : hours;
+      }
+
+      _hours12Changed(hours12) {
+        this.hours = this.isAm ? hours12 : hours12 + 12;
+      }
+
+      _isAmChanged(isAm) {
+        if (isAm === undefined) return;
+
+        if (this.hours > 12 && isAm === true) {
+          this.hours -= 12;
+        } else if (this.hours < 13 && isAm === false) {
+          this.hours += 12;
+        }
+      }
+
     }
   }
 

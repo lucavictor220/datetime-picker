@@ -1,176 +1,55 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="overlay-element.html">
 <link rel="import" href="datetime-picker.html">
-
+<link rel="import" href="overlay-picker-extension.html">
 
 <dom-module id="overlay-datetime-picker">
-  <template strip-whitespace>
-    <style include="datetime-shared-style dropdown-style">
-      :host {
-        display: inline-flex;
-      }
-      .replacement:hover {
-        background-color: var(--datetime-selected-background);
-        color: var(--datetime-selected-color);
-      }
-      .replacement:hover > * {
-        background-color: transparent;
-        color: var(--datetime-selected-color);
-      }
-      input[type="text"]:first-of-type {
-        text-align: right;
-      }
-      input[type="text"]:last-of-type {
-        text-align: left;
-      }
-      .replacement,
-      input#date,
-      input#time {
-        cursor: pointer;
-        border-radius: 2px;
-        padding: 0.35em;
-        @apply --datetime-native-input;
-      }
-    </style>
-
-    <div>
-      <input id="date" type="date" hidden$="[[!_useNative]]" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value="{{date::input}}">
-      <template is="dom-if" if="[[!_useNative]]">
-        <div class="replacement" on-click="_toggleCalendarElement">
-          <input class="l4" id="year" on-focus="_connectTextInputs" type="text" min="-271" max="4211" disabled$="[[disabled]]" value="{{year::input}}">
-          <span>-</span>
-          <input class="l2" id="month" on-focus="_connectTextInputs" type="text" min="1" max="12" disabled$="[[disabled]]" value="{{month::input}}">
-          <span>-</span>
-          <input class="l2" id="day" on-focus="_connectTextInputs" type="text" min="1" max="31" disabled$="[[disabled]]" value="{{day::input}}">
-        </div>
-        <overlay-element id="calendarPolyfill"
-          always-on-top="[[alwaysOnTop]]"
-          with-backdrop="[[withBackdrop]]"
-          no-cancel-on-outside-click="[[noCancelOnOutsideClick]]"
-          no-cancel-on-esc-key="[[noCancelOnEscKey]]"
-          no-overlap="[[noOverlap]]"
-          dynamic-align="[[dynamicAlign]]"
-          vertical-align="[[verticalAlign]]"
-          horizontal-align="[[horizontalAlign]]"
-          opened="{{calendarOpened}}">
-          <calendar-element
-            closable
-            value="{{value}}"
-            year="{{year}}"
-            month="{{month}}"
-            day="{{day}}"
-            min="{{min}}"
-            max="{{max}}"
-            hidden$="[[disabled]]"
-            opened="{{calendarOpened}}">
-          </calendar-element>
-        </overlay-element>
-      </template>
-    </div>
-    <div>
-      <input id="time" type="time" hidden$="[[!_useNative]]" disabled$="[[disabled]]" value="{{time::input}}" step="1">
-      <template is="dom-if" if="[[!_useNative]]">
-        <div class="replacement" on-click="_toggleTimeElement">
-          <input class="l2" id="hours" on-focus="_connectTextInputs" min="0" max="23" type="text" disabled$="[[disabled]]" value="{{hours::input}}">
-          <span>:</span>
-          <input class="l2" id="minutes" on-focus="_connectTextInputs" min="0" max="59" type="text" disabled$="[[disabled]]" value="{{minutes::input}}">
-          <span>:</span>
-          <input class="l2" id="seconds" on-focus="_connectTextInputs" min="0" max="59" type="text" disabled$="[[disabled]]" value="{{seconds::input}}">
-          <span>.</span>
-          <input class="l3" id="milliseconds" on-focus="_connectTextInputs" min="0" max="999" type="text" disabled$="[[disabled]]" value="{{milliseconds::input}}">
-        </div>
-        <overlay-element id="timePolyfill"
-          always-on-top="[[alwaysOnTop]]"
-          with-backdrop="[[withBackdrop]]"
-          no-cancel-on-outside-click="[[noCancelOnOutsideClick]]"
-          no-cancel-on-esc-key="[[noCancelOnEscKey]]"
-          no-overlap="[[noOverlap]]"
-          dynamic-align="[[dynamicAlign]]"
-          vertical-align="[[verticalAlign]]"
-          horizontal-align="[[horizontalAlign]]"
-          opened="{{timeOpened}}">
-          <time-element
-            closable
-            value="{{value}}"
-            hours="{{hours}}"
-            minutes="{{minutes}}"
-            seconds="{{seconds}}"
-            milliseconds="{{milliseconds}}"
-            min="{{min}}"
-            max="{{max}}"
-            hidden$="[[disabled]]"
-            opened="{{timeOpened}}">
-          </time-element>
-        </overlay-element>
-      </template>
-    </div>
-
-  </template>
-
   <script>
-/**
- *   `overlay-datetime-picker` extends `datetime-picker` and create the polyfilled elements `time-element` and `calendar-element` in an `overlay-element`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings. *IronOverlayBehavior* itself extends also *IronFitBehavior* and *IronResizableBehavior*. Styling the overlay is currently not possible.
- *
- *   ```html
- *   <overlay-datetime-picker value="{{value}}" use-not-native></overlay-datetime-picker>
- *   ```
- *
- *   @customElement
- *   @polymer
- *   @extends DatetimePicker
- *
- *   @demo demo/overlay.html
- */
-    class OverlayDatetimePicker extends DatetimePicker { // eslint-disable-line no-undef
+    /**
+     *   `overlay-datetime-picker` extends `datetime-picker` and create the polyfilled elements `time-element` and `calendar-element` in an `overlay-element`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings. *IronOverlayBehavior* itself extends also *IronFitBehavior* and *IronResizableBehavior*.
+     *
+     *   ```html
+     *   <overlay-datetime-picker value="{{value}}" use-not-native></overlay-datetime-picker>
+     *   ```
+     *
+     *  A use case could be for example, if you want on mobile devices use the `native picker` and on desktop devices the polyfill.
+     *
+     *  ```html
+     *    <overlay-datetime-picker use-not-native="[[!isMobile]]"></overlay-datetime-picker>
+     *    ...
+     *      isMobile() {
+     *        const ua = window.navigator.userAgent;
+     *        return (/[mM]obi/i.test(ua) || /[tT]ablet/i.test(ua) || /[aA]ndroid/i.test(ua));
+     *      }
+     *    ...
+     *  ```
+     *
+     *  If you need an **overlay** then use `overlay-datetime-picker`, that creates the element in an `overlay-element`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
+     *
+     *  Custom property | Description | Default
+     *  ----------------|-------------|----------
+     *  `--datetime-background` | text-color of the time-element | `#252525`
+     *  `--datetime-color` | text-color of the time-element | `#ccc`
+     *  `--datetime-selected-background` | background-color of the focussed time-input and the hovered icons | `--primary-color, #253EEC`
+     *  `--datetime-selected-color` | color of the focussed time-input and the hovered icons | `#f1f1f1`
+     *  `--datetime-element` | Mixin applied to the time-element and the calender-element | `{}`
+     *  `--datetime-input` | Mixin applied to the inputs | {border-radius: 2px; padding: 0.35em; border: none; outline: none; text-align: center; box-sizing: content-box; background-color: transparent; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);}`
+     *  `--datetime-icon` | Mixin applied to closing icon | `{padding: 8px; height: 16px; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1); fill: currentColor;}`
+     *
+     *  @customElement
+     *  @polymer
+     *
+     *  @extends DatetimePicker
+     *
+     *
+     *  @demo demo/overlay.html
+     **/
+    class OverlayDatetimePicker extends OverlayPickerExtension(DatetimePicker) { // eslint-disable-line no-undef
 
       static get is() {
         return 'overlay-datetime-picker';
       }
 
-      static get properties() {
-        return {
-          /**
-           * Set to true to keep overlay always on top.
-           */
-          alwaysOnTop: {
-            type: Boolean
-          },
-          /**
-           * Will position the element around the positionTarget without overlapping it.
-           */
-          noOverlap: {
-            type: Boolean,
-            value: false
-          },
-          /**
-           * Set to true to display a backdrop behind the overlay. It traps the focus
-           * within the light DOM of the overlay.
-           */
-          withBackdrop: {
-            type: Boolean,
-            value: false
-          },
-
-          /**
-           * Set to true to disable canceling the overlay by clicking outside it.
-           */
-          noCancelOnOutsideClick: {
-            type: Boolean,
-            value: false
-          },
-          /**
-           * If true, it will use `horizontalAlign` and `verticalAlign` values as preferred alignment
-           * and if there's not enough space, it will pick the values which minimize the cropping.
-           */
-          dynamicAlign: {
-            type: Boolean,
-            value: false
-          }
-        }
-      }
     }
-
     window.customElements.define(OverlayDatetimePicker.is, OverlayDatetimePicker);
-
   </script>
 </dom-module>

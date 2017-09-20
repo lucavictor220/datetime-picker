@@ -1,0 +1,75 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../number-input/number-input.html">
+
+<link rel="import" href="polyfill-picker-pattern.html">
+<link rel="import" href="dropdown-style.html">
+<link rel="import" href="datetime-shared-style.html">
+<link rel="import" href="calendar-element.html">
+
+<dom-module id="date-picker">
+  <script>
+  /**
+   *  `date-picker` is a picker for date for **[Polymer](https://github.com/Polymer/polymer)** that prefers to use the native input. This element is for using the *native* date-picker, if it exists, or to replace it by a CustomElement. The `calendar-element` and the `time-element` will just be used if the native picker is not available or is explicitly wanted.
+   *
+   *  ```html
+   *    <date-picker value="{{value}}"></date-picker>
+   *  ```
+   *
+   *  If you need an **overlay** then use `overlay-date-picker`, that creates the element in an `overlay-element`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
+   *
+   *
+   *  Custom property | Description | Default
+   *  ----------------|-------------|----------
+   *  `--datetime-background` | text-color of the time-element | `#252525`
+   *  `--datetime-color` | text-color of the time-element | `#ccc`
+   *  `--datetime-selected-background` | background-color of the focussed time-input and the hovered icons | `--primary-color, #253EEC`
+   *  `--datetime-selected-color` | color of the focussed time-input and the hovered icons | `#f1f1f1`
+   *  `--datetime-element` | Mixin applied to the time-element and the calender-element | `{}`
+   *  `--datetime-input` | Mixin applied to the inputs | {border-radius: 2px; padding: 0.35em; border: none; outline: none; text-align: center; box-sizing: content-box; background-color: transparent; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);}`
+   *  `--datetime-icon` | Mixin applied to closing icon | `{padding: 8px; height: 16px; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1); fill: currentColor;}`
+   *
+   *  @polymer
+   *  @customElement
+   *
+   *  @appliesMixin CalendarElementPattern
+   *  @appliesMixin PickerMixin
+   *  @appliesMixin PolyfillPickerPattern
+   *
+   *  @demo demo/date-picker.html
+   **/
+    class DatePicker extends PolyfillPickerPattern(CalendarElementPattern(PickerMixin(Polymer.Element))) { // eslint-disable-line no-undef
+
+      static get is() {
+        return 'date-picker';
+      }
+
+      static get expectedNativeInputType() {
+        return 'date';
+      }
+
+      static get customStyleToInclude() {
+        return `datetime-shared-style dropdown-style`;
+      }
+
+      static get replacementInputTemplate() {
+        return `
+          <number-input style="order:[[_orderDate.year]];" pad-length="4" min="-271" max="4211" disabled="[[disabled]]" value="{{year}}" on-click="open"></number-input>
+          <span style="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
+          <number-input style="order:[[_orderDate.month]];" hidden$="[[_hideMonth]]" pad-length="2" min="1" max="12" disabled="[[disabled]]" value="{{month}}" on-click="open"></number-input>
+          <span style="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
+          <number-input style="order:[[_orderDate.day]];" hidden$="[[_hideDay]]" pad-length="2" min="1" max="31" disabled="[[disabled]]" value="{{day}}" on-click="open"></number-input>
+        `;
+      }
+
+      static get pickerTemplate() {
+        return `
+          <div id="picker" class="dropdown" opened$="[[opened]]">
+            ${this.calendarTemplate}
+          </div>
+        `;
+      }
+    }
+
+    window.customElements.define(DatePicker.is, DatePicker);
+  </script>
+</dom-module>
