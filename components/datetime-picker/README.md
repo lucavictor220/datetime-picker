@@ -25,10 +25,10 @@ Internally it uses two input-elements, that are initially set to type *date* and
 
 It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, or you like to have a different look and you are using *Polymer* already.
 
-Another use case could be for example, if you want on mobile devices use the `native picker` and on desktop devices this polyfill.
+Another use case could be for example, if you want on mobile devices use the `native picker`, when supported, and on desktop devices this polyfill.
 
 ```html
-  <datetime-picker use-not-native="[[!isMobile]]"></datetime-picker>
+  <datetime-picker not-native="[[!isMobile]]"></datetime-picker>
   ...
     isMobile() {
       const ua = window.navigator.userAgent;
@@ -43,41 +43,7 @@ The **[component page](https://fooloomanzoo.github.io/datetime-picker/components
 
 You can use it stand-alone, with overlay or as a range of dates. Examples:
 
-#### use the polyfill
-
-<!--
-```
-<custom-element-demo height="330">
-  <template>
-    <link rel="import" href="datetime-picker.html">
-    <style>
-      html {
-        font-family: 'Source Sans Pro', sans-serif;
-        line-height: 1.5;
-      }
-    </style>
-    <dom-bind>
-      <template is="dom-bind">
-        <next-code-block></next-code-block>
-      </template>
-    </dom-bind>
-  </template>
-</custom-element-demo>
-```
--->
-```html
-
-<datetime-picker use-not-native value="{{value}}" date="{{synchronized}}"></datetime-picker>
-
-<div style="padding: 8px;"><code>Two pickers can be synchronized: </code> <b>[[synchronized]]</b></div>
-<div style="padding: 8px;"><code>A number representation is automatically provided: </code> <b>[[value]]</b></div>
-
-<datetime-picker value="{{value}}"></datetime-picker>
-
-```
-
 #### Stand-alone calendar
-
 <!--
 ```
 <custom-element-demo height="300">
@@ -103,7 +69,6 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 ```
 
 #### Stand-alone time-picker
-
 <!--
 ```
 <custom-element-demo height="100">
@@ -128,18 +93,49 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 <div style="padding: 12px;"><code>time: </code> <b>[[time]]</b></div>
 ```
 
-#### Periods
+#### use the polyfill
+<!--
+```
+<custom-element-demo height="410">
+  <template>
+    <link rel="import" href="datetime-picker.html">
+    <style>
+      html {
+        font-family: 'Source Sans Pro', sans-serif;
+        line-height: 1.5;
+      }
+    </style>
+    <dom-bind>
+      <template is="dom-bind">
+        <next-code-block></next-code-block>
+      </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
 
+<datetime-picker not-native value="{{value}}" date="{{synchronized}}"></datetime-picker>
+
+<div style="padding: 8px;"><code>Two pickers can be synchronized: </code> <b>[[synchronized]]</b></div>
+<div style="padding: 8px;"><code>A number representation is automatically provided: </code> <b>[[value]]</b></div>
+
+<datetime-picker value="{{value}}"></datetime-picker>
+
+```
+
+
+#### Periods
 ```html
 <datetime-picker id="from" date="{{min}}" max="[[max]]"></datetime-picker>
 <datetime-picker id="to" date="{{max}}" min="[[min]]"></datetime-picker>
 ```
 
 #### Overlay
-
 <!--
 ```
-<custom-element-demo height="300">
+<custom-element-demo height="380">
   <template>
     <link rel="import" href="overlay-datetime-picker.html">
     <style>
@@ -157,7 +153,7 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 ```
 -->
 ```html
-<overlay-datetime-picker value="{{value}}" use-not-native></overlay-datetime-picker>
+<overlay-datetime-picker value="{{value}}" not-native></overlay-datetime-picker>
 <div style="padding: 12px;"><code>value: </code> <b>[[value]]</b></div>
 ```
 
@@ -169,12 +165,10 @@ bower install --save fooloomanzoo/datetime-picker
 
 
 ### Notable Changes
-
 * 2.0.0
   - changed properties `dateString` and `timeString` to `date` and `time`
   - polyfill is split up in two elements ('calendar-element' and 'time-element')
   - minified version available ('build/..', ~18kB)
-
 
 * 2.0.6 - 7
   - `overlay`-element introduced
@@ -182,8 +176,7 @@ bower install --save fooloomanzoo/datetime-picker
   - unifying some custom-style-properties
   - renaming `position` to `verticalAlign` and `horizontalAlign`
 
-
-* 2.1.6
+* 2.1.7
   - all elements are using `template-strings`
   - using `<number-input>` for all numeric inputs
   - `<datetime-picker>` uses as native input now `<input type="datetime-local">`
@@ -194,6 +187,8 @@ bower install --save fooloomanzoo/datetime-picker
   - internationalization/localization for datetime-part-order and separation signs
   - abstractions of each element leads to smaller file sizes
 
+* 2.2.0
+  - `use-not-native` is renamed to `not-native`
 
 ### Contribute?
 Feel free to send a new issue, a commit, a pull request or just fork it!

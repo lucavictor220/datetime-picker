@@ -13,8 +13,7 @@
     "date",
     "calendar",
     "time",
-    "timer",
-    "element-collection"
+    "timer"
   ],
   "repository": {
     "type": "git",
@@ -50,12 +49,12 @@
       }
     }
   },
-  "version": "2.1.7",
-  "_release": "2.1.7",
+  "version": "2.2.0",
+  "_release": "2.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.7",
-    "commit": "74a9d05551f06b1281104c170ef58337c3c6fca5"
+    "tag": "2.2.0",
+    "commit": "0b3cdd884a7d234962df53a2e49c44a9b9a02d71"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
