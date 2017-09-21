@@ -5,27 +5,29 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
 
 ### What is it for?
 
-`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that prefers to use the native input. This element is for using the *native* date-picker, if it exists, or to replace it by a CustomElement. The `calendar-element` and the `time-element` will just be used if the native picker is not available or is explicitly wanted.
+`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that prefers to use the native input. This element is for using the *native* date-picker, if it exists, or to replace it by a CustomElement. The `<calendar-element>` and the `<time-element>` will be used if the native picker is not available or is explicitly wanted.
 
-If you like an **overlay** then use `overlay-datetime-picker`, what extends `datetime-picker` and create the polyfilled elements `time-element` and `calendar-element` in an `overlay-element`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
+If you like an **overlay** then use `<overlay-datetime-picker>`, what creates the polyfill in an `<overlay-element>`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
 
-In this collection are:
+You can use other pickers, too. In this collection are:
 * `<datetime-picker>`
 * `<date-picker>`
 * `<time-picker>`
-* `<calendar-element>`
-* `<time-element>`
 * `<overlay-datetime-picker>`
 * `<overlay-date-picker>`
 * `<overlay-time-picker>`
+* `<calendar-element>`
+* `<time-element>`
+
+Every Element has the same API, so that it would use the native or the polyfill picker.
 
 ### Motivation
 
-Internally it uses two input-elements, that are initially set to type *date* and *time*. If the Browser leaves these attributes as they are, then it will be assumed that native *date*- and *time*-inputs are available. If it won't, a `calendar-element` and a `time-element` will be displayed instead. `calendar-element` and `time-element` can also be used separately.
+Internally it tests the browser, if **native** input-types `datetime-local`, `date` or `time` are supported. If it is not, a `<calendar-element>` or a `<time-element>` will be displayed instead, according to the kind of picker. You can decide to use the native or the replacements during runtime. calendar-element and time-element can also be used separately. **Internationalization** of the view in the pickers is inplemented and the attributes remain in **iso8061**-format.
 
-It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, or you like to have a different look and you are using *Polymer* already.
+It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, you like to have a different look or you would like to have a guaranteed working **datetime-picker**.
 
-Another use case could be for example, if you want on mobile devices use the `native picker`, when supported, and on desktop devices this polyfill.
+Another use case could be for example, if you want on *mobile devices* use the native picker, when supported, and on *desktop devices* this polyfill.
 
 ```html
   <datetime-picker not-native="[[!isMobile]]"></datetime-picker>
@@ -44,6 +46,7 @@ The **[component page](https://fooloomanzoo.github.io/datetime-picker/components
 You can use it stand-alone, with overlay or as a range of dates. Examples:
 
 #### Stand-alone calendar
+
 <!--
 ```
 <custom-element-demo height="300">
@@ -63,12 +66,15 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 </custom-element-demo>
 ```
 -->
+
 ```html
 <calendar-element date="{{date}}"></calendar-element>
-<div style="padding: 12px;"><code>date: </code> <b>[[date]]</b></div>
+
+date: [[date]]
 ```
 
 #### Stand-alone time-picker
+
 <!--
 ```
 <custom-element-demo height="100">
@@ -88,12 +94,16 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 </custom-element-demo>
 ```
 -->
+
 ```html
 <time-element time="{{time}}"></time-element>
-<div style="padding: 12px;"><code>time: </code> <b>[[time]]</b></div>
+
+time: [[time]]
 ```
 
-#### use the polyfill
+#### Use the polyfill or the native picker
+By default it checks if `datetime-local`, `date` or `time` is supported as input. If it is not or you set `not-native`, the polyfill will be used instead of the native:
+
 <!--
 ```
 <custom-element-demo height="410">
@@ -114,24 +124,24 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 </custom-element-demo>
 ```
 -->
-```html
 
+```html
 <h4>Polyfill Picker</h4>
 <datetime-picker not-native value="{{value}}" datetime="{{synchronized}}"></datetime-picker>
+
 <h4>Native Picker</h4>
 <datetime-picker value="{{value}}"></datetime-picker>
-<div style="padding: 8px;">Two pickers can be synchronized: <b>[[synchronized]]</b></div>
-<div style="padding: 8px;">A number representation is automatically provided: <b>[[value]]</b></div>
 
+Two pickers can be synchronized: [[synchronized]]
+A number representation is automatically provided: [[value]]
 ```
 
-#### Periods
-```html
-<datetime-picker id="from" date="{{min}}" max="[[max]]"></datetime-picker>
-<datetime-picker id="to" date="{{max}}" min="[[min]]"></datetime-picker>
-```
+#### Use it in an overlay
+Choose then the related elements:
+* `<overlay-datetime-picker>`
+* `<overlay-date-picker>`
+* `<overlay-time-picker>`
 
-#### Overlay
 <!--
 ```
 <custom-element-demo height="380">
@@ -151,17 +161,65 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 </custom-element-demo>
 ```
 -->
+
 ```html
 <overlay-datetime-picker value="{{value}}" not-native></overlay-datetime-picker>
-<div style="padding: 12px;"><code>value: </code> <b>[[value]]</b></div>
+
+value: [[value]]
 ```
 
+#### Use locale date formats
+The properties `date`, `time`, `datetime` are always in **iso8061** but the visualization will be localized. By default your locale date format from `window.navigator.language` will be used, but you can select another *locale*:
+
+<!--
+```
+<custom-element-demo height="300">
+  <template>
+    <link rel="import" href="overlay-datetime-picker.html">
+    <style>
+      html {
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+    </style>
+    <dom-bind>
+      <template is="dom-bind">
+        <next-code-block></next-code-block>
+      </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
+
+```html
+<select value="{{locale::change}}">
+  <option value="en">english</option>
+  <option value="fr">français</option>
+  <option value="de">deutsch</option>
+  <option value="es">español</option>
+  <option value="it">italiano</option>
+  <option value="ru">русский</option>
+  <option value="ja">日本語</option>
+  <option value="zh">中文</option>
+</select>
+
+<calendar-element datetime="{{datetime}}" locale="{{locale}}" not-native></calendar-element>
+
+datetime: [[datetime]]
+```
+
+#### Define date ranges
+Set cross data bindings to limit the values of the inputs. Please also visit the [demos](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/#/elements/datetime-picker/demos/demo/datetime-picker.html):
+
+```html
+<datetime-picker id="from" datetime="{{min}}" max="[[max]]"></datetime-picker>
+<datetime-picker id="to" datetime="{{max}}" min="[[min]]"></datetime-picker>
+```
 
 ### Installation
 ```
 bower install --save fooloomanzoo/datetime-picker
 ```
-
 
 ### Notable Changes
 * 2.0.0
