@@ -49,12 +49,12 @@
       }
     }
   },
-  "version": "2.2.4",
-  "_release": "2.2.4",
+  "version": "2.2.5",
+  "_release": "2.2.5",
   "_resolution": {
     "type": "version",
-    "tag": "2.2.4",
-    "commit": "20ce6f91866c276a66f2a1c1384f2af68b350355"
+    "tag": "2.2.5",
+    "commit": "8ccbe0e64fac44224fe16c98cd9e4016349696ef"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
