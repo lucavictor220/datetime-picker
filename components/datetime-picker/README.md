@@ -1,4 +1,6 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker)
+[![API](https://img.shields.io/badge/API-available-green.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker/elements/atetime-picker)
+[![Demo](https://img.shields.io/badge/demo-available-red.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker/demo/demo/datetime-picker.html)
 
 _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/)_
 ## &lt;datetime-picker&gt;
@@ -205,8 +207,8 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
 </p>
 
 <p>
-  <calendar-element date="{{date}}" locale="{{locale}}" not-native hour12></calendar-element>
-  <time-element datetime="{{datetime}}" date="{{date}}" locale="{{locale}}" not-native hour12></time-element>
+  <calendar-element locale="{{locale}}" date="{{date}}" not-native></calendar-element>
+  <time-element locale="{{locale}}" hour12 datetime="{{datetime}}" date="{{date}}" not-native></time-element>
 </p>
 
 <p>datetime: [[datetime]]</p>
@@ -223,6 +225,16 @@ Set cross data bindings to limit the values of the inputs. Please also visit the
 ### Installation
 ```
 bower install --save fooloomanzoo/datetime-picker
+```
+or
+```
+npm install --save @fooloomanzoo/datetime-picker
+```
+
+### Update
+to last version
+```
+bower update
 ```
 
 ### Notable Changes

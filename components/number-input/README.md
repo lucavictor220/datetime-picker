@@ -2,7 +2,8 @@
 [![API](https://img.shields.io/badge/API-available-green.svg)](https://www.webcomponents.org/element/fooloomanzoo/number-input/elements/number-input)
 [![Demo](https://img.shields.io/badge/demo-available-red.svg)](https://www.webcomponents.org/element/fooloomanzoo/number-input/demo/demo/index.html)
 
- [Demo](https://www.webcomponents.org/element/fooloomanzoo/number-input/demo/demo/index.html) and [API docs](https://www.webcomponents.org/element/fooloomanzoo/number-input/elements/number-input)
+_[API](https://fooloomanzoo.github.io/number-input/components/number-input/#/elements/number-input)_ and
+_[Demo](https://fooloomanzoo.github.io/number-input/components/number-input/#/elements/number-input/demos/demo/index.html)_
 
 ## \<number-input\>
 
@@ -16,8 +17,11 @@ The normal `input` with `type="number"` is fairly good to use, but it has some f
 * guarantee **live**-data to be valid
 * pad a value with `0` (to a specific length)
 * size the input (according to it's length)
+* overflows to minimum or underflows to maximum
 
-This element wants to achieve that. It does use **decimal notation**, like `123.4`, but not _scientific (exponential) notation_, like `1.234e+2`.
+This element wants to achieve that. It does use **decimal notation**, like `123.4`, but does not display _scientific (exponential) notation_, like `1.234e+2`.
+
+![alt text](https://github.com/fooloomanzoo/number-input/raw/master/docs/number-input.gif "Demo")
 
 ### Example
 
@@ -55,7 +59,7 @@ This element wants to achieve that. It does use **decimal notation**, like `123.
 ```
 -->
 ```html
-<number-input min="-5000" step="50" max="5000" pad-length="4"></number-input>
+<number-input min="-150" step="0.15" max="300" pad-length="5"></number-input>
 ```
 
 ### Installation
