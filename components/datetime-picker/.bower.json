@@ -13,7 +13,10 @@
     "date",
     "calendar",
     "time",
-    "timer"
+    "timer",
+    "range",
+    "input",
+    "polyfill"
   ],
   "repository": {
     "type": "git",
@@ -23,7 +26,8 @@
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior",
-    "number-input": "fooloomanzoo/number-input"
+    "number-input": "fooloomanzoo/number-input",
+    "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs",
@@ -34,7 +38,9 @@
   "variants": {
     "1.x": {
       "dependencies": {
-        "polymer": "Polymer/polymer#^1.9"
+        "polymer": "Polymer/polymer#^1.9",
+        "number-input": "fooloomanzoo/number-input",
+        "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
       },
       "devDependencies": {
         "web-component-tester": "^4.0.0",
@@ -49,12 +55,12 @@
       }
     }
   },
-  "version": "2.3.4",
-  "_release": "2.3.4",
+  "version": "2.3.5",
+  "_release": "2.3.5",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.4",
-    "commit": "602d3c04304db52bd5fa8e16482b0394d91fca0e"
+    "tag": "2.3.5",
+    "commit": "29fb17bad7bc1d4f46f54ffb8a8098efc34d291e"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "*",
