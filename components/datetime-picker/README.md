@@ -7,7 +7,7 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
 
 ### What is it for?
 
-`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element use the **polyfill** date-picker. The `<calendar-element>` and the `<time-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
+`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` and the `<time-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
 
 If you like an **overlay** then use `<overlay-datetime-picker>`, what creates the polyfill in an `<overlay-element>`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
 
@@ -104,7 +104,7 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 ```
 
 #### Use the polyfill or the native picker
-By default it checks if `datetime-local`, `date` or `time` is supported as input. If it is not or you set ``, the polyfill will be used instead of the native:
+By default it checks if `datetime-local`, `date` or `time` is supported as input. If `native` is set, the native picker will be used instead of the polyfill:
 
 <!--
 ```
@@ -165,8 +165,8 @@ Set cross data bindings to limit the values of the inputs. Please also visit the
 
 ```html
 <div class="vertical-section-container">
-  <date-picker class="begin" datetime="{{min}}" max="{{max}}"></date-picker>
-  <date-picker class="end" datetime="{{max}}" min="{{min}}"></date-picker>
+  <datetime-picker class="begin" datetime="{{min}}" max="{{max}}"></datetime-picker>
+  <datetime-picker class="end" datetime="{{max}}" min="{{min}}"></datetime-picker>
 </div>
 <div class="vertical-section-container result">
   <div><code>start</code>: <b>[[min]]</b></div>
