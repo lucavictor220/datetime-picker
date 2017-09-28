@@ -55,11 +55,11 @@
       }
     }
   },
-  "_release": "a2dffefe2f",
+  "_release": "9110706d77",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "a2dffefe2f8457d417966aa3287035125db96ba7"
+    "commit": "9110706d7752f5140dd3540bacdc6e025b8393ac"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",
