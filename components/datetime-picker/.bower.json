@@ -25,7 +25,6 @@
   "licence": "https://github.com/fooloomanzoo/datetime-picker/raw/master/LICENSE.txt",
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
-    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior",
     "number-input": "fooloomanzoo/number-input",
     "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
   },
@@ -55,11 +54,11 @@
       }
     }
   },
-  "_release": "56cb60e681",
+  "_release": "5ea85a99df",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "56cb60e681d4606a977b50f1030c280c9c807d56"
+    "commit": "5ea85a99df84a67235f7a056d5caf235143c6885"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",

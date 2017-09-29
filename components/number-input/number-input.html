@@ -63,6 +63,12 @@
               display: block;
               box-sizing: content-box;
             }
+            --number-input {
+              @apply --input-style;
+            }
+            --number-input-focus {
+              @apply --input-focus;
+            }
             #input {
               font-family: inherit;
               font-size: inherit;
@@ -429,6 +435,8 @@
         if (min !== undefined && (length = ('' + min).replace(/\D/g, '').length) > (width || 0))
             width = length;
         if (max !== undefined && (length = ('' + max).replace(/\D/g, '').length) > (width || 0))
+            width = length;
+        if (step !== undefined && (length = ('' + step).replace(/\D/g, '').length) > (width || 0))
             width = length;
         // signs
         if (width && (min === undefined || min < 0 || max < 0)) {
