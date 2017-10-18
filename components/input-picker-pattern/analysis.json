@@ -2336,11 +2336,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 191,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 194,
               "column": 11
             }
           },
@@ -2356,11 +2356,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 199,
               "column": 10
             },
             "end": {
-              "line": 184,
+              "line": 204,
               "column": 11
             }
           },
@@ -2378,11 +2378,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 190,
+              "line": 210,
               "column": 10
             },
             "end": {
-              "line": 193,
+              "line": 213,
               "column": 11
             }
           },
@@ -2397,11 +2397,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 198,
+              "line": 218,
               "column": 10
             },
             "end": {
-              "line": 202,
+              "line": 222,
               "column": 11
             }
           },
@@ -2417,11 +2417,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 207,
+              "line": 227,
               "column": 10
             },
             "end": {
-              "line": 210,
+              "line": 230,
               "column": 11
             }
           },
@@ -2431,17 +2431,17 @@
           "defaultValue": "false"
         },
         {
-          "name": "mediated",
+          "name": "autoConfirm",
           "type": "boolean",
-          "description": "Set to true to make the input mediatable",
+          "description": "Set to true to make the input auto-confirming",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 215,
+              "line": 235,
               "column": 10
             },
             "end": {
-              "line": 218,
+              "line": 238,
               "column": 11
             }
           },
@@ -2457,11 +2457,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 223,
+              "line": 243,
               "column": 10
             },
             "end": {
-              "line": 226,
+              "line": 246,
               "column": 11
             }
           },
@@ -2478,11 +2478,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 230,
+              "line": 250,
               "column": 6
             },
             "end": {
-              "line": 233,
+              "line": 253,
               "column": 7
             }
           },
@@ -2495,11 +2495,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 239,
+              "line": 259,
               "column": 6
             },
             "end": {
-              "line": 258,
+              "line": 278,
               "column": 7
             }
           },
@@ -2518,11 +2518,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 263,
+              "line": 283,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 288,
               "column": 7
             }
           },
@@ -2535,11 +2535,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 294,
               "column": 6
             },
             "end": {
-              "line": 284,
+              "line": 304,
               "column": 7
             }
           },
@@ -2558,11 +2558,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 290,
+              "line": 310,
               "column": 6
             },
             "end": {
-              "line": 298,
+              "line": 318,
               "column": 7
             }
           },
@@ -2581,11 +2581,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 304,
+              "line": 324,
               "column": 6
             },
             "end": {
-              "line": 312,
+              "line": 332,
               "column": 7
             }
           },
@@ -2604,11 +2604,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 318,
+              "line": 338,
               "column": 6
             },
             "end": {
-              "line": 330,
+              "line": 350,
               "column": 7
             }
           },
@@ -2631,7 +2631,7 @@
           "column": 2
         },
         "end": {
-          "line": 333,
+          "line": 352,
           "column": 3
         }
       },
@@ -2643,11 +2643,11 @@
           "description": "use the native input, if it exists",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 191,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 194,
               "column": 11
             }
           },
@@ -2659,11 +2659,11 @@
           "description": "opens the picker",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 199,
               "column": 10
             },
             "end": {
-              "line": 184,
+              "line": 204,
               "column": 11
             }
           },
@@ -2675,11 +2675,11 @@
           "description": "The orientation against which to align the element horizontally\nrelative to the related input element. Possible values are \"left\", \"right\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 190,
+              "line": 210,
               "column": 10
             },
             "end": {
-              "line": 193,
+              "line": 213,
               "column": 11
             }
           },
@@ -2691,11 +2691,11 @@
           "description": "The orientation against which to align the element vertically\nrelative to the related input element. Possible values are \"top\", \"bottom\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 198,
+              "line": 218,
               "column": 10
             },
             "end": {
-              "line": 202,
+              "line": 222,
               "column": 11
             }
           },
@@ -2707,11 +2707,11 @@
           "description": "disables the input elements",
           "sourceRange": {
             "start": {
-              "line": 207,
+              "line": 227,
               "column": 10
             },
             "end": {
-              "line": 210,
+              "line": 230,
               "column": 11
             }
           },
@@ -2719,15 +2719,15 @@
           "type": "boolean"
         },
         {
-          "name": "mediated",
-          "description": "Set to true to make the input mediatable",
+          "name": "auto-confirm",
+          "description": "Set to true to make the input auto-confirming",
           "sourceRange": {
             "start": {
-              "line": 215,
+              "line": 235,
               "column": 10
             },
             "end": {
-              "line": 218,
+              "line": 238,
               "column": 11
             }
           },
@@ -2739,11 +2739,11 @@
           "description": "Set to true to disable canceling the overlay with the ESC key.",
           "sourceRange": {
             "start": {
-              "line": 223,
+              "line": 243,
               "column": 10
             },
             "end": {
-              "line": 226,
+              "line": 246,
               "column": 11
             }
           },

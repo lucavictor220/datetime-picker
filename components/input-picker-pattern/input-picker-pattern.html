@@ -92,6 +92,26 @@
           #picker[horizontal] {
             flex-direction: row;
           }
+          #picker > :not(:first-child) {
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+          }
+          #picker > :not(:last-child) {
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+          #picker[horizontal] > :not(:first-child) {
+            border-bottom-left-radius: 0 !important;
+          }
+          #picker[horizontal] > :first-child {
+            border-bottom-left-radius: inherit !important;
+          }
+          #picker[horizontal] > :not(:last-child) {
+            border-top-right-radius: 0 !important;
+          }
+          #picker[horizontal] > :last-child {
+            border-top-right-radius: inherit !important;
+          }
         `;
       }
 
@@ -329,7 +349,6 @@
         }
         this.close();
       }
-
     }
   }
 </script>
