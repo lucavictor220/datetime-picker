@@ -5,11 +5,12 @@
 <link rel="import" href="polyfill-picker-pattern.html">
 <link rel="import" href="datetime-shared-style.html">
 <link rel="import" href="calendar-element.html">
+<link rel="import" href="date-input.html">
 
 <dom-module id="date-picker">
   <script>
   /**
-   *  `<date-picker>` is a picker for time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
+   *  `<date-picker>` is a picker for date for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
    *
    *  ```html
    *    <date-picker value="{{value}}"></date-picker>
@@ -47,18 +48,8 @@
         return 'date';
       }
 
-      static get customStyleToInclude() {
-        return `datetime-shared-style dropdown-style`;
-      }
-
-      static get replacementInputTemplate() {
-        return `
-          <number-input style="order:[[_orderDate.year]];" pad-length="4" disabled="[[disabled]]" value="{{year}}"></number-input>
-          <span style="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
-          <number-input style="order:[[_orderDate.month]];" hidden$="[[_hideMonth]]" pad-length="2" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></number-input>
-          <span style="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
-          <number-input style="order:[[_orderDate.day]];" hidden$="[[_hideDay]]" pad-length="2" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></number-input>
-        `;
+      static get nativeInputBinding() {
+        return 'date';
       }
 
       static get pickerTemplate() {
@@ -72,15 +63,27 @@
         `;
       }
 
-      renderCalendar(_viewYear, _viewMonth, day) {
+      _onDblClickDay(e) {
+        if (!this.autoConfirm) {
+          super.renderCalendar(this.year, this.month, this.day, this.date);
+          this.confirm();
+        }
+      }
+
+      renderCalendar(year, month, day) {
         if (DatePicker._hasNative && !!this.native) {
           return;
         }
-        super.renderCalendar(_viewYear, _viewMonth, day);
+        super.renderCalendar(year, month, day, this.confirmedDate);
       }
 
+      open() {
+        if (super.open) {
+          super.open();
+        }
+        this.renderCalendar(this.year, this.month, this.day, this.confirmedDate);
+      }
     }
-
     window.customElements.define(DatePicker.is, DatePicker);
   </script>
 </dom-module>

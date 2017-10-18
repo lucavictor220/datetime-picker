@@ -2336,11 +2336,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 170,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 173,
+              "line": 174,
               "column": 11
             }
           },
@@ -2356,11 +2356,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 178,
+              "line": 179,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 184,
               "column": 11
             }
           },
@@ -2378,11 +2378,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 189,
+              "line": 190,
               "column": 10
             },
             "end": {
-              "line": 192,
+              "line": 193,
               "column": 11
             }
           },
@@ -2397,11 +2397,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 197,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 201,
+              "line": 202,
               "column": 11
             }
           },
@@ -2417,11 +2417,31 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 206,
+              "line": 207,
               "column": 10
             },
             "end": {
-              "line": 209,
+              "line": 210,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "mediated",
+          "type": "boolean",
+          "description": "Set to true to make the input mediatable",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 215,
+              "column": 10
+            },
+            "end": {
+              "line": 218,
               "column": 11
             }
           },
@@ -2437,11 +2457,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 214,
+              "line": 223,
               "column": 10
             },
             "end": {
-              "line": 217,
+              "line": 226,
               "column": 11
             }
           },
@@ -2458,28 +2478,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 222,
-              "column": 6
-            },
-            "end": {
-              "line": 225,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 227,
-              "column": 6
-            },
-            "end": {
               "line": 230,
+              "column": 6
+            },
+            "end": {
+              "line": 233,
               "column": 7
             }
           },
@@ -2492,11 +2495,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 236,
+              "line": 239,
               "column": 6
             },
             "end": {
-              "line": 243,
+              "line": 258,
               "column": 7
             }
           },
@@ -2515,11 +2518,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 248,
+              "line": 263,
               "column": 6
             },
             "end": {
-              "line": 253,
+              "line": 268,
               "column": 7
             }
           },
@@ -2532,11 +2535,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 274,
               "column": 6
             },
             "end": {
-              "line": 267,
+              "line": 284,
               "column": 7
             }
           },
@@ -2555,11 +2558,57 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 273,
+              "line": 290,
               "column": 6
             },
             "end": {
-              "line": 281,
+              "line": 298,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e",
+              "type": "[type]",
+              "description": "Event"
+            }
+          ]
+        },
+        {
+          "name": "confirm",
+          "description": "confirms the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 304,
+              "column": 6
+            },
+            "end": {
+              "line": 312,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e",
+              "type": "[type]",
+              "description": "Event"
+            }
+          ]
+        },
+        {
+          "name": "cancel",
+          "description": "cancels the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 318,
+              "column": 6
+            },
+            "end": {
+              "line": 330,
               "column": 7
             }
           },
@@ -2582,7 +2631,7 @@
           "column": 2
         },
         "end": {
-          "line": 283,
+          "line": 333,
           "column": 3
         }
       },
@@ -2594,11 +2643,11 @@
           "description": "use the native input, if it exists",
           "sourceRange": {
             "start": {
-              "line": 170,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 173,
+              "line": 174,
               "column": 11
             }
           },
@@ -2610,11 +2659,11 @@
           "description": "opens the picker",
           "sourceRange": {
             "start": {
-              "line": 178,
+              "line": 179,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 184,
               "column": 11
             }
           },
@@ -2626,11 +2675,11 @@
           "description": "The orientation against which to align the element horizontally\nrelative to the related input element. Possible values are \"left\", \"right\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 189,
+              "line": 190,
               "column": 10
             },
             "end": {
-              "line": 192,
+              "line": 193,
               "column": 11
             }
           },
@@ -2642,11 +2691,11 @@
           "description": "The orientation against which to align the element vertically\nrelative to the related input element. Possible values are \"top\", \"bottom\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 197,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 201,
+              "line": 202,
               "column": 11
             }
           },
@@ -2658,11 +2707,27 @@
           "description": "disables the input elements",
           "sourceRange": {
             "start": {
-              "line": 206,
+              "line": 207,
               "column": 10
             },
             "end": {
-              "line": 209,
+              "line": 210,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "mediated",
+          "description": "Set to true to make the input mediatable",
+          "sourceRange": {
+            "start": {
+              "line": 215,
+              "column": 10
+            },
+            "end": {
+              "line": 218,
               "column": 11
             }
           },
@@ -2674,11 +2739,11 @@
           "description": "Set to true to disable canceling the overlay with the ESC key.",
           "sourceRange": {
             "start": {
-              "line": 214,
+              "line": 223,
               "column": 10
             },
             "end": {
-              "line": 217,
+              "line": 226,
               "column": 11
             }
           },

@@ -8,6 +8,9 @@
    *
    * @mixinFunction
    * @polymer
+   *
+   * @param {Object} superClass class to extend
+   * @return {Object} extended class
    */
   const PolyfillPickerPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
@@ -20,6 +23,40 @@
         return `
           <input class="native" type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value="{{${this.nativeInputBinding || this.expectedNativeInputType}::input}}" step="1">
         `;
+      }
+
+      static get nativeInputBinding() {
+        return 'datetime';
+      }
+
+      static get customStyleToInclude() {
+        return `datetime-shared-style dropdown-style`;
+      }
+
+      static get observers() {
+        return [
+          '_computeValue(confirmedDate, confirmedTime)',
+          '_computeValue(confirmedDatetime)'
+        ];
+      }
+
+      static get properties() {
+        return {
+          confirmedDate: {
+            type: String,
+            notify: true
+          },
+
+          confirmedTime: {
+            type: String,
+            notify: true
+          },
+
+          confirmedDatetime: {
+            type: String,
+            notify: true
+          }
+        };
       }
 
       /**
@@ -35,6 +72,9 @@
           }
           #polyfill {
             @apply --datetime-input;
+          }
+          #polyfill .replacement {
+            padding: 0;
           }
           #polyfill:focus,
           #polyfill:hover {
@@ -53,10 +93,66 @@
             background-color: var(--datetime-background);
             color: var(--datetime-color);
           }
-          #picker > * {
-            border-radius: 0 !important;
-          }
         `;
+      }
+
+      static get replacementInputTemplate() {
+        return `
+          <${this.nativeInputBinding}-input class="replacement" locale="[[locale]]" hour12=[[hour12]] clamp="[[clamp]]" datetime="{{confirmedDatetime}}"></${this.nativeInputBinding}-input>
+        `;
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.confirm();
+      }
+
+      /**
+       * key press event handler
+       * @param  {[type]} e Event
+       */
+      _checkKeycode(e) {
+        if (!e) {
+          return;
+        }
+        if (this.opened) {
+          super._checkKeycode(e);
+        } else {
+          this.open();
+        }
+      }
+
+      _computeValue(date, time) {
+        super._computeValue(date, time);
+        if (this.autoConfirm) {
+          this.setProperties({
+            confirmedDate: this.date,
+            confirmedTime: this.time,
+            confirmedDatetime: this.datetime
+          })
+        }
+      }
+
+      confirm() {
+        this.setProperties({
+          confirmedDate: this.date,
+          confirmedTime: this.time,
+          confirmedDatetime: this.datetime
+        })
+        setTimeout(() => {
+          super.confirm();
+        }, 0);
+      }
+
+      cancel() {
+        this.setProperties({
+          date: this.confirmedDate,
+          time: this.confirmedTime,
+          datetime: this.confirmedDatetime
+        })
+        setTimeout(() => {
+          super.cancel();
+        }, 0);
       }
     }
   }

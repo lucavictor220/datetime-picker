@@ -11,17 +11,25 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
 
 If you like an **overlay** then use `<overlay-datetime-picker>`, what creates the polyfill in an `<overlay-element>`, that extends *IronOverlayBehavior* and will create some of its attribute-bindings.
 
-You can use other pickers, too. In this collection are:
-* `<datetime-picker>`
-* `<date-picker>`
-* `<time-picker>`
-* `<overlay-datetime-picker>`
-* `<overlay-date-picker>`
-* `<overlay-time-picker>`
-* `<calendar-element>`
-* `<time-element>`
+You can use other pickers and elements, too. In this collection are for:
+* **datetime**
+  * `<overlay-datetime-picker>`
+  * `<datetime-picker>`
+  * `<datetime-input>`
+* **date**
+  * `<overlay-date-picker>`
+  * `<date-picker>`
+  * `<date-input>`
+  * `<calendar-element>`
+* **time**
+  * `<overlay-time-picker>`
+  * `<time-picker>`
+  * `<time-element>`
+  * `<time-input>`
 
-Every Element has the same API, so that it would use the native or the polyfill picker.
+Every Element has the same API, so that it would use the given date-properties or for the pickers the native or the polyfill picker. Please see the [docs](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/component-page.html#/mixins/DatetimeMixin) for the given attributes.
+
+The picker-elements can use **auto-confirm**-attribute, so that all values will be auto-confirmed.  Else the attributes will update like the picker is used but will reset to the old attributes when being canceled and `confirmed-datetime`-, `confirmed-date`- and `confirmed-time`-attribute will only be set if they are confirmed.
 
 ### Motivation
 
@@ -47,7 +55,7 @@ The **[component page](https://fooloomanzoo.github.io/datetime-picker/components
 
 You can use it stand-alone, with overlay or as a range of dates. Examples:
 
-#### Stand-alone calendar
+#### Stand-alone calendar and date-input
 
 <!--
 ```
@@ -72,10 +80,10 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 
 ```html
 <calendar-element date="{{date}}"></calendar-element>
-<p>date: [[date]]</p>
+<p>date: <date-input date="{{date}}"></date-input></p>
 ```
 
-#### Stand-alone time-picker
+#### Stand-alone time-picker and time-input
 
 <!--
 ```
@@ -100,7 +108,7 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 
 ```html
 <time-element time="{{time}}"></time-element>
-<p> time: [[time]]</p>
+<p> time: <time-input time="{{time}}"></time-input></p>
 ```
 
 #### Use the polyfill or the native picker
@@ -129,7 +137,7 @@ By default it checks if `datetime-local`, `date` or `time` is supported as input
 -->
 
 ```html
-  <p>Polyfill Picker <datetime-picker  value="{{value}}" datetime="{{synchronized}}"></datetime-picker></p>
+  <p>Autoconfirming Polyfill Picker <datetime-picker auto-confirm value="{{value}}" datetime="{{synchronized}}"></datetime-picker></p>
 
   <p>Native Picker <datetime-picker native value="{{value}}"></datetime-picker></p>
 
@@ -165,8 +173,8 @@ Set cross data bindings to limit the values of the inputs. Please also visit the
 
 ```html
 <div class="vertical-section-container">
-  <datetime-picker class="begin" datetime="{{min}}" max="{{max}}"></datetime-picker>
-  <datetime-picker class="end" datetime="{{max}}" min="{{min}}"></datetime-picker>
+  <datetime-picker class="begin" confirmed-datetime="{{min}}" max="{{max}}"></datetime-picker>
+  <datetime-picker class="end" confirmed-datetime="{{max}}" min="{{min}}"></datetime-picker>
 </div>
 <div class="vertical-section-container result">
   <div><code>start</code>: <b>[[min]]</b></div>
@@ -295,6 +303,11 @@ bower update
 * 2.3.5
   - `not-native` is deprecated, use `native` to get a native picker
   - `dropdown-style.html` moved to `input-picker-pattern`
+
+* 2.4.2
+  - new elements: `datetime-input`, `date-input` and `date-input`
+  - extended keyboard navigation support
+  - `auto-confirm`-attribute for using `confirmed-datetime`, `confirmed-date` and `confirmed-time`
 
 ### Contribute?
 Feel free to send a new issue, a commit, a pull request or just fork it!

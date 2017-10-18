@@ -4,6 +4,9 @@
    *
    * @mixinFunction
    * @polymer
+   *
+   * @param {Object} superClass class to extend
+   * @return {Object} extended class
    */
   const DatetimeMixin = (superClass) => { // eslint-disable-line no-unused-vars no-undef
 
@@ -16,7 +19,6 @@
            */
           datetime: {
             type: String,
-            reflectToAttribute: true,
             notify: true
           },
           /**
@@ -24,7 +26,6 @@
            */
           date: {
             type: String,
-            reflectToAttribute: true,
             notify: true
           },
 
@@ -33,7 +34,6 @@
            */
           time: {
             type: String,
-            reflectToAttribute: true,
             notify: true
           },
 
@@ -147,119 +147,201 @@
             type: Number,
             notify: true,
             observer: '_hours12Changed'
+          },
+
+          /**
+           * Clamp datetime to a property
+           * possible values:'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'
+           */
+          clamp: {
+            type: String
+          },
+
+          /**
+           * The current locale
+           */
+          locale: {
+            type: String,
+            value: window.navigator.language,
+            observer: '_localeChanged'
+          },
+
+          /**
+           * locale representation of 'AM'
+           */
+          _am: {
+            type: String
+          },
+
+          /**
+           * locale representation of 'PM'
+           */
+          _pm: {
+            type: String
+          },
+
+          /**
+           * Separator for local date values (date-string is still in ISO-Format)
+           * @type {string}
+           */
+          _localDateSeparator: {
+            type: String,
+            value: '-'
+          },
+
+          /**
+           * Separator for local time values (time-string is still in ISO-Format)
+           * @type {string}
+           */
+          _localTimeSeparator: {
+            type: String,
+            value: ':'
+          },
+
+          /**
+           * Separator for local decimal values
+           * @type {string}
+           */
+          _localDecimalSeparator: {
+            type: String,
+            value: '.'
+          },
+
+          /**
+           * order of date-parts
+           */
+          _orderDate: {
+            type: Object,
+            value: function() {
+              return {
+                year: 1,
+                separatorYearMonth: 2,
+                month: 3,
+                separatorMonthDay: 4,
+                day: 5
+              };
+            }
+          },
+
+          _maxDayOfMonth: {
+            type: Number
           }
         }
       }
 
       static get observers() {
         return [
-          '_computeTime(hours, minutes, seconds, milliseconds)',
-          '_computeDate(year, month, day)',
+          '_computeDatetime(year, month, day, hours, minutes, seconds, milliseconds)',
           '_computeValue(date, time)',
-          '_computeValue(datetime)'
+          '_computeValue(datetime)',
+          '_computeMaxDayOfMonth(year, month)'
         ]
-      }
-
-      connectedCallback() {
-        super.connectedCallback();
-        setTimeout(() => {
-          if (this.date) {
-            if (this.time) {
-              this.value = +(new Date(this.date + 'T' + this.time));
-            } else {
-              this.value = +(new Date(this.date));
-            }
-          } else if (this.time) {
-            this.value = +(new Date(this._toDate(new Date())) + 'T' + this.time);
-          }
-        }, 0);
       }
 
       /**
        *  Sets value to the actual date
        **/
       now() {
-        this.value = +(new Date());
+        this._computeValue(new Date());
       }
 
-      _computeTime(hours, minutes, seconds, milliseconds) {
-        if (isNaN(+hours) || isNaN(+minutes) || isNaN(+seconds)) return;
-        const time = this._pad(+hours, 2) + ':' + this._pad(+minutes, 2) + ':' + this._pad(+seconds, 2) + '.' + this._pad(+milliseconds || 0, 3);
-        if (this.time !== time) {
-          this.time = time;
-        }
-      }
-
-      _computeDate(year, month, day) {
-        if (isNaN(+year) || isNaN(+month) || isNaN(+day)) return;
-        const date = this._pad(+year, 4) + '-' + this._pad(+month, 2) + '-' + this._pad(+day, 2);
-        if (this.date !== date) {
-          this.date = date;
-        }
+      _computeDatetime(year, month, day, hours, minutes, seconds, milliseconds) {
+        this._setDate(new Date(year, month - 1, day, hours, minutes, seconds, milliseconds));
       }
 
       _computeValue(date, time) {
         if (date === undefined && time === undefined) return;
-        let datetime;
-        if (time !== undefined) {
-          datetime = (date || this.date || this._toDate(new Date()) ) + 'T' + time;
-        } else if (!date.match(/[T]/i)) {
-          datetime = date + 'T' + (this.time || '00:00:00');
+        let d;
+        if (typeof date === 'object') {
+          d = date;
+        } else if (time !== undefined) {
+          d = new Date((date || this.date || this._toDate(new Date()) ) + 'T' + time);
+        } else if (typeof date === 'string' && !date.match(/[T]/i)) {
+          d = new Date(date + 'T' + (this.time || '00:00:00'));
         } else {
-          datetime = date;
+          d = new Date(date);
         }
-        let d = new Date(datetime);
-
-        if (!isNaN(+d)) {
-          if (this.min && this._checkMin(d) === false) {
-            d = new Date(this.min);
-          } else if (this.max && this._checkMax(d) === false) {
-            d = new Date(this.max);
-          }
-          this.setProperties({
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            hours: d.getHours(),
-            minutes: d.getMinutes(),
-            seconds: d.getSeconds(),
-            milliseconds: d.getMilliseconds(),
-            datetime: datetime,
-            value: +d
-          });
-        } else if (!isNaN(this.value)){
-          this._valueChanged(this.value);
-        }
+        this._setDate(d);
       }
 
       _valueChanged(value) {
         if (!value) return;
-        let d = new Date(value);
+        let d = typeof value === 'object' ? value : new Date(value);
 
+        this._setDate(d);
+      }
+
+      /**
+       * [_setDate sets date to all necessary properties]
+       * @param {[Date]} d [the date to set]
+       */
+      _setDate(d) {
         if (!isNaN(+d)) {
           if (this.min && this._checkMin(d) === false) {
             d = new Date(this.min);
           } else if (this.max && this._checkMax(d) === false) {
             d = new Date(this.max);
           }
-          const date = this._toDate(d);
-          const time = this._toTime(d);
+          d = this._clamp(d, this.clamp);
+          let toSet = {};
 
-          this.setProperties({
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            hours: d.getHours(),
-            minutes: d.getMinutes(),
-            seconds: d.getSeconds(),
-            milliseconds: d.getMilliseconds(),
-            date: date,
-            time: time,
-            datetime: date + 'T' + time
-          });
-        } else if (this.date && this.time){
+          const value = +d,
+            date = this._toDate(d),
+            time = this._toTime(d),
+            datetime = date + 'T' + time;
+
+          if (this.value !== value || this.date !== date || this.time !== time || this.datetime !== datetime) {
+            toSet.value = value;
+            toSet.date = date;
+            toSet.time = time;
+            toSet.datetime = datetime;
+            this.setProperties(toSet);
+            return;
+          }
+
+          const year = d.getFullYear(),
+            month = d.getMonth() + 1,
+            day = d.getDate(),
+            hours = d.getHours(),
+            minutes = d.getMinutes(),
+            seconds = d.getSeconds(),
+            milliseconds = d.getMilliseconds();
+
+          if (this.year !== year || this.month !== month || this.day !== day || this.hours !== hours || this.minutes !== minutes || this.seconds !== seconds || this.milliseconds !== milliseconds) {
+            toSet.year = year;
+            toSet.month = month;
+            toSet.day = day;
+            toSet.hours = hours;
+            toSet.minutes = minutes;
+            toSet.seconds = seconds;
+            toSet.milliseconds = milliseconds;
+            this.setProperties(toSet);
+            return;
+          }
+        } else if (!isNaN(this.value)) {
+          this._valueChanged(this.value);
+        } else if (this.date && this.time) {
           this._computeValue(this.date, this.time);
         }
+      }
+
+      _clamp(d, clamp) {
+        switch (clamp) {
+          case 'year':
+          case 'month':
+            d.setMonth(0); // falls through
+          case 'day':
+            d.setDate(1); // falls through
+          case 'hours':
+            d.setHours(0); // falls through
+          case 'minutes':
+            d.setMinutes(0); // falls through
+          case 'seconds':
+            d.setSeconds(0); // falls through
+          case 'milliseconds':
+            d.setMilliseconds(0);
+        }
+        return d;
       }
 
       _pad(n, padLength) {
@@ -289,7 +371,7 @@
           return;
         }
         if (this.value && this._checkMin(this.value) === false)
-          this.value = +(new Date(min));
+          this._computeValue(new Date(min));
       }
 
       _maxChanged(max) {
@@ -304,7 +386,7 @@
           return;
         }
         if (this.value && this._checkMax(this.value) === false)
-          this.value = +(new Date(max));
+          this._computeValue(new Date(max));
       }
 
       _checkMax(d) {
@@ -368,6 +450,81 @@
         }
       }
 
+      /**
+       * clamp to date component
+       * @param  {string} clamp 'clamp'-property
+       * @param  {string} comp the property to compare to
+       * @return {boolean}     true when should be hidden
+       */
+      _ifClamped(clamp, comp) {
+        const features = ['month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'];
+        const pos = features.indexOf(clamp);
+        const index = features.indexOf(comp);
+        return pos !== -1 && index !== -1 && pos <= index;
+      }
+
+      _localeChanged(locale) {
+        if (!locale) {
+          this.locale = window.navigator.language;
+          return;
+        }
+        // test locale (currently just for Latin letters and Western Arabic/European numerals)
+        locale += '-u-nu-latn-ca-iso8601';
+
+        let date = new Date(1970, 10, 15, 6, 24, 25);
+
+        // check date
+        const dateString = date.toLocaleDateString( locale, { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+        // date separator
+        const dateSeparator = dateString.split(/\d|\s/g).filter(s => { return s !== ''; })[0];
+
+        // order of the date parts
+        let parts = dateString.split(/\D/);
+        parts.splice(1, 0, '');
+        parts.splice(3, 0, '');
+
+        let order = {};
+        order.year = parts.indexOf('1970') + 1;
+        order.month = parts.indexOf('11') + 1;
+        order.day = parts.indexOf('15') + 1;
+        order.separatorYearMonth = order.year > order.month ? order.year - 1 : order.month - 1;
+        order.separatorMonthDay = order.month > order.day ? order.month - 1 : order.day - 1;
+
+        // check time
+        let timeString = date.toLocaleTimeString( locale, { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false });
+
+        // time separator
+        const timeSeparator = timeString.split(/\d/g).filter(s => { return s !== ''; }).pop();
+
+        // am-string
+        timeString = date.toLocaleTimeString( locale, { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+        const am = timeString.split(/\d/g).filter(s => { return /[^\s:|\/,;\.]{1}/.test(s); }).pop();
+
+        // pm-string
+        date = new Date(1970, 10, 15, 18, 24, 25);
+        timeString = date.toLocaleTimeString( locale, { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+        const pm = timeString.split(/\d/g).filter(s => { return /[^\s:|\/,;\.]{1}/.test(s); }).pop();
+
+        // decimal separator
+        let decimalSeparator = new Intl.NumberFormat(locale).format(1.2).split(/\d/g).filter(s => { return s !== ''; }).pop();
+
+        this.setProperties({
+          _orderDate: order,
+          _localDateSeparator: dateSeparator,
+          _localTimeSeparator: timeSeparator,
+          _localDecimalSeparator: decimalSeparator,
+          _am: am,
+          _pm: pm
+        });
+      }
+
+      _computeMaxDayOfMonth(year, month) {
+        const d = new Date(year, month - 1);
+        if (!isNaN(+d)) {
+          this._maxDayOfMonth = (new Date(year, month, 0)).getDate();
+        }
+      }
     }
   }
 
