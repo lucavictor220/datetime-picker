@@ -23,7 +23,7 @@
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior",
     "webcomponentsjs": "webcomponents/webcomponentsjs",
     "iron-component-page": "PolymerElements/iron-component-page",
-    "iron-component-page": "PolymerElements/iron-demo-helpers",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
     "datetime-picker": "fooloomanzoo/datetime-picker"
   },
   "resolutions": {
