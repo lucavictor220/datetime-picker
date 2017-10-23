@@ -72,11 +72,12 @@
           if (!isNaN(oldValue)) {
             return oldValue;
           }
-          return this.min || this.max || 0;
+          return (this.min !== undefined) ? this.min : (this.max !== undefined ? this.max : 0);
         }
         const saturate = this.saturate,
           min = this.min,
           max = this.max;
+
         if (min !== undefined && value <= min) {
           if (saturate || max === undefined || oldValue !== min) {
             return min;

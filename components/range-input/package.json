@@ -1,6 +1,6 @@
 {
   "name": "range-input",
-  "version": "0.1.0",
+  "version": "0.5.1",
   "description": "alternative inputs for ranges",
   "main": "range-input.html",
   "directories": {
