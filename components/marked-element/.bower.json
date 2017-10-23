@@ -53,14 +53,14 @@
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "homepage": "https://github.com/polymerelements/marked-element",
+  "homepage": "https://github.com/PolymerElements/marked-element",
   "_release": "2.3.0",
   "_resolution": {
     "type": "version",
     "tag": "v2.3.0",
     "commit": "4b0e836c20f08d662ae1aeb36c92192d7730aa00"
   },
-  "_source": "https://github.com/polymerelements/marked-element.git",
+  "_source": "https://github.com/PolymerElements/marked-element.git",
   "_target": "1 - 2",
-  "_originalSource": "polymerelements/marked-element"
+  "_originalSource": "PolymerElements/marked-element"
 }
