@@ -18,23 +18,24 @@
   },
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#1.9 - 2"
+    "polymer": "Polymer/polymer",
+    "range-input": "fooloomanzoo/range-input"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs",
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0"
+    "iron-component-page": "PolymerElements/iron-component-page",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "version": "1.1.10",
-  "_release": "1.1.10",
+  "version": "1.2.0",
+  "_release": "1.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.1.10",
-    "commit": "c9184b698073d665474664f903678393cd1becd7"
+    "tag": "1.2.0",
+    "commit": "1053e565b6a863fab07204f9eccb49d01a3e707a"
   },
   "_source": "https://github.com/fooloomanzoo/number-input.git",
   "_target": "*",
