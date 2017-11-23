@@ -26,13 +26,14 @@
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
     "number-input": "fooloomanzoo/number-input",
+    "property-mixins": "fooloomanzoo/property-mixins",
     "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs",
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0"
+    "iron-component-page": "PolymerElements/iron-component-page",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
   },
   "variants": {
     "1.x": {
@@ -54,11 +55,11 @@
       }
     }
   },
-  "_release": "1c782e6889",
+  "_release": "bf0182f813",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "1c782e6889f8744032b74084f2bb965df3ba5746"
+    "commit": "bf0182f8133bc025f3c25cbab9b05b613ced6877"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",

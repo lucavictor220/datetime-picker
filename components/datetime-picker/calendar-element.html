@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../number-input/number-input.html">
 
 <link rel="import" href="datetime-picker-mixin.html">
@@ -104,18 +104,18 @@
           will-change: background-color;
           transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1), border-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
         }
-        #calendar #dates .day.recent {
+        #calendar #dates .day.selected {
           background-color: var(--datetime-selected-background);
           color: var(--datetime-selected-color);
           border-color: rgba(255, 255, 255, 0.33);
         }
+        #calendar #dates .day:hover {
+          border-color: rgba(255, 255, 255, 0.4);
+        }
         #calendar #dates .day.current {
           border-color: rgba(255, 255, 255, 0.5);
         }
-        #calendar #dates .day:hover {
-          border-color: rgba(255, 255, 255, 0.33);
-        }
-        #calendar #dates .day.selected {
+        #calendar #dates .day.recent {
           border-color: var(--datetime-selected-background);
         }
         #calendar #dates .day.notinmonth {
@@ -136,8 +136,8 @@
           <div id="top">
             <svg class="icon switch" step="-1" viewBox="0 0 24 24"><g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></g></svg>
             <div class="view">
-              <select id='month' style="order:[[_orderDate.month]];" hidden$="[[_hideMonth]]" value="{{month::change}}"></select>
-              <number-input id="year" style="order:[[_orderDate.year]];" pad-length="4" value="{{year}}"></number-input>
+              <select id="month" hidden$="[[_hideMonth]]" style="order:[[_orderDate.month]];" index="1" value="{{month::change}}"></select>
+              <number-input id="year" style="order:[[_orderDate.year]];" index="3" pad-length="4" value="{{year}}"></number-input>
             </div>
             <svg class="icon switch" step="1" viewBox="0 0 24 24"><g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g></svg>
           </div>

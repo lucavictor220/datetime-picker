@@ -93,7 +93,7 @@
         {
           "name": "horizontalAlign",
           "type": "string",
-          "description": "The orientation against which to align the element horizontally\nrelative to the `positionTarget`. Possible values are \"left\", \"right\", \"auto\".",
+          "description": "The orientation against which to align the element horizontally\nrelative to the `positionTarget`. Possible values are \"left\", \"right\", \"center\", \"auto\".",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
@@ -114,7 +114,7 @@
         {
           "name": "verticalAlign",
           "type": "string",
-          "description": "The orientation against which to align the element vertically\nrelative to the `positionTarget`. Possible values are \"top\", \"bottom\", \"auto\".",
+          "description": "The orientation against which to align the element vertically\nrelative to the `positionTarget`. Possible values are \"top\", \"bottom\", \"middle\", \"auto\".",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
@@ -156,7 +156,7 @@
         {
           "name": "horizontalOffset",
           "type": "number",
-          "description": "A pixel value that will be added to the position calculated for the\ngiven `horizontalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `horizontalAlign`.\n\nIf `horizontalAlign` is \"left\", this offset will increase or decrease\nthe distance to the left side of the screen: a negative offset will\nmove the dropdown to the left; a positive one, to the right.\n\nConversely if `horizontalAlign` is \"right\", this offset will increase\nor decrease the distance to the right side of the screen: a negative\noffset will move the dropdown to the right; a positive one, to the left.",
+          "description": "A pixel value that will be added to the position calculated for the\ngiven `horizontalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `horizontalAlign`.\n\nIf `horizontalAlign` is \"left\" or \"center\", this offset will increase or\ndecrease the distance to the left side of the screen: a negative offset will\nmove the dropdown to the left; a positive one, to the right.\n\nConversely if `horizontalAlign` is \"right\", this offset will increase\nor decrease the distance to the right side of the screen: a negative\noffset will move the dropdown to the right; a positive one, to the left.",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
@@ -180,7 +180,7 @@
         {
           "name": "verticalOffset",
           "type": "number",
-          "description": "A pixel value that will be added to the position calculated for the\ngiven `verticalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `verticalAlign`.\n\nIf `verticalAlign` is \"top\", this offset will increase or decrease\nthe distance to the top side of the screen: a negative offset will\nmove the dropdown upwards; a positive one, downwards.\n\nConversely if `verticalAlign` is \"bottom\", this offset will increase\nor decrease the distance to the bottom side of the screen: a negative\noffset will move the dropdown downwards; a positive one, upwards.",
+          "description": "A pixel value that will be added to the position calculated for the\ngiven `verticalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `verticalAlign`.\n\nIf `verticalAlign` is \"top\" or \"middle\", this offset will increase or\ndecrease the distance to the top side of the screen: a negative offset will\nmove the dropdown upwards; a positive one, downwards.\n\nConversely if `verticalAlign` is \"bottom\", this offset will increase\nor decrease the distance to the bottom side of the screen: a negative\noffset will move the dropdown downwards; a positive one, upwards.",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
@@ -297,11 +297,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 28,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 33,
+              "line": 34,
               "column": 7
             }
           },
@@ -322,11 +322,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 38,
+              "line": 39,
               "column": 6
             },
             "end": {
-              "line": 43,
+              "line": 44,
               "column": 7
             }
           },
@@ -347,11 +347,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 49,
+              "line": 50,
               "column": 6
             },
             "end": {
-              "line": 52,
+              "line": 53,
               "column": 7
             }
           },
@@ -370,11 +370,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 58,
+              "line": 59,
               "column": 6
             },
             "end": {
-              "line": 61,
+              "line": 62,
               "column": 7
             }
           },
@@ -392,11 +392,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 66,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 69,
+              "line": 70,
               "column": 7
             }
           },
@@ -414,11 +414,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 74,
+              "line": 75,
               "column": 6
             },
             "end": {
-              "line": 77,
+              "line": 78,
               "column": 7
             }
           },
@@ -436,11 +436,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 84,
+              "line": 85,
               "column": 6
             },
             "end": {
-              "line": 88,
+              "line": 89,
               "column": 7
             }
           },
@@ -457,11 +457,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 93,
+              "line": 94,
               "column": 6
             },
             "end": {
-              "line": 96,
+              "line": 97,
               "column": 7
             }
           },
@@ -479,11 +479,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 103,
+              "line": 104,
               "column": 6
             },
             "end": {
-              "line": 105,
+              "line": 106,
               "column": 7
             }
           },
@@ -500,11 +500,32 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 110,
+              "line": 111,
               "column": 6
             },
             "end": {
-              "line": 112,
+              "line": 113,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "scrollAction",
+          "type": "string",
+          "description": "Determines which action to perform when scroll outside an opened overlay happens.\nPossible values:\nlock - blocks scrolling from happening,\nrefit - computes the new position on the overlay\ncancel - causes the overlay to close",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 122,
+              "column": 6
+            },
+            "end": {
+              "line": 124,
               "column": 7
             }
           },
@@ -521,11 +542,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 119,
+              "line": 131,
               "column": 6
             },
             "end": {
-              "line": 122,
+              "line": 134,
               "column": 7
             }
           },
@@ -542,11 +563,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 128,
+              "line": 140,
               "column": 6
             },
             "end": {
-              "line": 130,
+              "line": 142,
               "column": 7
             }
           },
@@ -672,17 +693,36 @@
           "inheritedFrom": "Polymer.IronFitBehavior"
         },
         {
+          "name": "__shouldPosition",
+          "description": "True if the element should be positioned instead of centered.",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
+            "start": {
+              "line": 252,
+              "column": 4
+            },
+            "end": {
+              "line": 255,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronFitBehavior"
+        },
+        {
           "name": "attached",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 183,
+              "line": 202,
               "column": 4
             },
             "end": {
-              "line": 189,
+              "line": 208,
               "column": 5
             }
           },
@@ -697,11 +737,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 191,
+              "line": 210,
               "column": 4
             },
             "end": {
-              "line": 211,
+              "line": 232,
               "column": 5
             }
           },
@@ -716,11 +756,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 280,
+              "line": 289,
               "column": 4
             },
             "end": {
-              "line": 284,
+              "line": 293,
               "column": 5
             }
           },
@@ -735,11 +775,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 290,
+              "line": 299,
               "column": 4
             },
             "end": {
-              "line": 327,
+              "line": 336,
               "column": 5
             }
           },
@@ -754,11 +794,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 333,
+              "line": 342,
               "column": 4
             },
             "end": {
-              "line": 343,
+              "line": 352,
               "column": 5
             }
           },
@@ -773,11 +813,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 351,
+              "line": 360,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 367,
               "column": 5
             }
           },
@@ -792,11 +832,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 363,
+              "line": 372,
               "column": 4
             },
             "end": {
-              "line": 413,
+              "line": 422,
               "column": 5
             }
           },
@@ -811,11 +851,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 419,
+              "line": 428,
               "column": 4
             },
             "end": {
-              "line": 446,
+              "line": 455,
               "column": 5
             }
           },
@@ -830,11 +870,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 452,
+              "line": 461,
               "column": 4
             },
             "end": {
-              "line": 454,
+              "line": 463,
               "column": 5
             }
           },
@@ -865,11 +905,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 459,
+              "line": 468,
               "column": 4
             },
             "end": {
-              "line": 469,
+              "line": 478,
               "column": 5
             }
           },
@@ -900,11 +940,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 475,
+              "line": 484,
               "column": 4
             },
             "end": {
-              "line": 508,
+              "line": 517,
               "column": 5
             }
           },
@@ -919,11 +959,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 510,
+              "line": 519,
               "column": 4
             },
             "end": {
-              "line": 522,
+              "line": 531,
               "column": 5
             }
           },
@@ -936,17 +976,17 @@
           "inheritedFrom": "Polymer.IronFitBehavior"
         },
         {
-          "name": "__getCroppedArea",
+          "name": "__getOffscreenArea",
           "description": "",
           "privacy": "private",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 524,
+              "line": 533,
               "column": 4
             },
             "end": {
-              "line": 528,
+              "line": 537,
               "column": 5
             }
           },
@@ -971,11 +1011,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
-              "line": 531,
+              "line": 540,
               "column": 4
             },
             "end": {
-              "line": 618,
+              "line": 659,
               "column": 5
             }
           },
@@ -989,6 +1029,9 @@
             },
             {
               "name": "size"
+            },
+            {
+              "name": "sizeNoMargins"
             },
             {
               "name": "positionRect"
@@ -1249,11 +1292,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 142,
+              "line": 158,
               "column": 4
             },
             "end": {
-              "line": 144,
+              "line": 160,
               "column": 5
             }
           },
@@ -1268,11 +1311,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 150,
+              "line": 166,
               "column": 4
             },
             "end": {
-              "line": 152,
+              "line": 168,
               "column": 5
             }
           },
@@ -1287,11 +1330,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 164,
+              "line": 180,
               "column": 4
             },
             "end": {
-              "line": 166,
+              "line": 182,
               "column": 5
             }
           },
@@ -1306,11 +1349,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 168,
+              "line": 184,
               "column": 4
             },
             "end": {
-              "line": 181,
+              "line": 200,
               "column": 5
             }
           },
@@ -1325,11 +1368,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 216,
+              "line": 237,
               "column": 4
             },
             "end": {
-              "line": 219,
+              "line": 240,
               "column": 5
             }
           },
@@ -1344,11 +1387,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 224,
+              "line": 245,
               "column": 4
             },
             "end": {
-              "line": 227,
+              "line": 248,
               "column": 5
             }
           },
@@ -1363,11 +1406,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 232,
+              "line": 253,
               "column": 4
             },
             "end": {
-              "line": 235,
+              "line": 256,
               "column": 5
             }
           },
@@ -1382,11 +1425,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 241,
+              "line": 262,
               "column": 4
             },
             "end": {
-              "line": 249,
+              "line": 270,
               "column": 5
             }
           },
@@ -1407,11 +1450,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 255,
+              "line": 276,
               "column": 4
             },
             "end": {
-              "line": 257,
+              "line": 278,
               "column": 5
             }
           },
@@ -1426,11 +1469,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 259,
+              "line": 280,
               "column": 4
             },
             "end": {
-              "line": 266,
+              "line": 287,
               "column": 5
             }
           },
@@ -1445,11 +1488,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 273,
+              "line": 294,
               "column": 4
             },
             "end": {
-              "line": 290,
+              "line": 311,
               "column": 5
             }
           },
@@ -1469,11 +1512,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 292,
+              "line": 313,
               "column": 4
             },
             "end": {
-              "line": 295,
+              "line": 316,
               "column": 5
             }
           },
@@ -1488,11 +1531,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 297,
+              "line": 318,
               "column": 4
             },
             "end": {
-              "line": 309,
+              "line": 330,
               "column": 5
             }
           },
@@ -1507,11 +1550,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 315,
+              "line": 336,
               "column": 4
             },
             "end": {
-              "line": 331,
+              "line": 352,
               "column": 5
             }
           },
@@ -1526,11 +1569,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 337,
+              "line": 358,
               "column": 4
             },
             "end": {
-              "line": 339,
+              "line": 360,
               "column": 5
             }
           },
@@ -1545,11 +1588,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 345,
+              "line": 366,
               "column": 4
             },
             "end": {
-              "line": 347,
+              "line": 368,
               "column": 5
             }
           },
@@ -1564,11 +1607,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 353,
+              "line": 374,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 379,
               "column": 5
             }
           },
@@ -1583,11 +1626,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 364,
+              "line": 385,
               "column": 4
             },
             "end": {
-              "line": 372,
+              "line": 393,
               "column": 5
             }
           },
@@ -1602,11 +1645,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 374,
+              "line": 395,
               "column": 4
             },
             "end": {
-              "line": 378,
+              "line": 399,
               "column": 5
             }
           },
@@ -1621,11 +1664,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 380,
+              "line": 401,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 414,
               "column": 5
             }
           },
@@ -1640,11 +1683,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 399,
+              "line": 420,
               "column": 4
             },
             "end": {
-              "line": 430,
+              "line": 451,
               "column": 5
             }
           },
@@ -1659,11 +1702,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 437,
+              "line": 458,
               "column": 4
             },
             "end": {
-              "line": 441,
+              "line": 462,
               "column": 5
             }
           },
@@ -1683,11 +1726,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 448,
+              "line": 469,
               "column": 4
             },
             "end": {
-              "line": 459,
+              "line": 480,
               "column": 5
             }
           },
@@ -1707,11 +1750,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 466,
+              "line": 487,
               "column": 4
             },
             "end": {
-              "line": 470,
+              "line": 491,
               "column": 5
             }
           },
@@ -1731,11 +1774,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 478,
+              "line": 499,
               "column": 4
             },
             "end": {
-              "line": 520,
+              "line": 541,
               "column": 5
             }
           },
@@ -1755,11 +1798,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 526,
+              "line": 547,
               "column": 4
             },
             "end": {
-              "line": 530,
+              "line": 551,
               "column": 5
             }
           },
@@ -1774,11 +1817,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 537,
+              "line": 558,
               "column": 4
             },
             "end": {
-              "line": 543,
+              "line": 564,
               "column": 5
             }
           },
@@ -1793,11 +1836,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 549,
+              "line": 570,
               "column": 4
             },
             "end": {
-              "line": 555,
+              "line": 576,
               "column": 5
             }
           },
@@ -1812,11 +1855,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 562,
+              "line": 583,
               "column": 4
             },
             "end": {
-              "line": 578,
+              "line": 599,
               "column": 5
             }
           },
@@ -1825,28 +1868,152 @@
           "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
         },
         {
-          "name": "__onNextAnimationFrame",
-          "description": "Executes a callback on the next animation frame, overriding any previous\ncallback awaiting for the next animation frame. e.g.\n`__onNextAnimationFrame(callback1) && __onNextAnimationFrame(callback2)`;\n`callback1` will never be invoked.",
+          "name": "__deraf",
+          "description": "Debounces the execution of a callback to the next animation frame.",
           "privacy": "private",
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 588,
+              "line": 607,
               "column": 4
             },
             "end": {
-              "line": 597,
+              "line": 616,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
+              "name": "jobname",
+              "type": "!string"
+            },
+            {
               "name": "callback",
               "type": "!Function",
-              "description": "Its `this` parameter is the overlay itself."
+              "description": "Always bound to `this`"
             }
           ],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__updateScrollObservers",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 624,
+              "column": 4
+            },
+            "end": {
+              "line": 639,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "isAttached",
+              "type": "boolean"
+            },
+            {
+              "name": "opened",
+              "type": "boolean"
+            },
+            {
+              "name": "scrollAction",
+              "type": "string="
+            }
+          ],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__isValidScrollAction",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 646,
+              "column": 4
+            },
+            "end": {
+              "line": 650,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "scrollAction",
+              "type": "string="
+            }
+          ],
+          "return": {
+            "type": "boolean"
+          },
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__onCaptureScroll",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 655,
+              "column": 4
+            },
+            "end": {
+              "line": 673,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "event"
+            }
+          ],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__saveScrollPosition",
+          "description": "Memoizes the scroll position of the outside scrolling element.",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 679,
+              "column": 4
+            },
+            "end": {
+              "line": 688,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__restoreScrollPosition",
+          "description": "Resets the scroll position of the outside scrolling element.",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 694,
+              "column": 4
+            },
+            "end": {
+              "line": 703,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
           "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
         },
         {
@@ -1965,7 +2132,7 @@
         },
         {
           "name": "horizontal-align",
-          "description": "The orientation against which to align the element horizontally\nrelative to the `positionTarget`. Possible values are \"left\", \"right\", \"auto\".",
+          "description": "The orientation against which to align the element horizontally\nrelative to the `positionTarget`. Possible values are \"left\", \"right\", \"center\", \"auto\".",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
@@ -1983,7 +2150,7 @@
         },
         {
           "name": "vertical-align",
-          "description": "The orientation against which to align the element vertically\nrelative to the `positionTarget`. Possible values are \"top\", \"bottom\", \"auto\".",
+          "description": "The orientation against which to align the element vertically\nrelative to the `positionTarget`. Possible values are \"top\", \"bottom\", \"middle\", \"auto\".",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
@@ -2019,7 +2186,7 @@
         },
         {
           "name": "horizontal-offset",
-          "description": "A pixel value that will be added to the position calculated for the\ngiven `horizontalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `horizontalAlign`.\n\nIf `horizontalAlign` is \"left\", this offset will increase or decrease\nthe distance to the left side of the screen: a negative offset will\nmove the dropdown to the left; a positive one, to the right.\n\nConversely if `horizontalAlign` is \"right\", this offset will increase\nor decrease the distance to the right side of the screen: a negative\noffset will move the dropdown to the right; a positive one, to the left.",
+          "description": "A pixel value that will be added to the position calculated for the\ngiven `horizontalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `horizontalAlign`.\n\nIf `horizontalAlign` is \"left\" or \"center\", this offset will increase or\ndecrease the distance to the left side of the screen: a negative offset will\nmove the dropdown to the left; a positive one, to the right.\n\nConversely if `horizontalAlign` is \"right\", this offset will increase\nor decrease the distance to the right side of the screen: a negative\noffset will move the dropdown to the right; a positive one, to the left.",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
@@ -2037,7 +2204,7 @@
         },
         {
           "name": "vertical-offset",
-          "description": "A pixel value that will be added to the position calculated for the\ngiven `verticalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `verticalAlign`.\n\nIf `verticalAlign` is \"top\", this offset will increase or decrease\nthe distance to the top side of the screen: a negative offset will\nmove the dropdown upwards; a positive one, downwards.\n\nConversely if `verticalAlign` is \"bottom\", this offset will increase\nor decrease the distance to the bottom side of the screen: a negative\noffset will move the dropdown downwards; a positive one, upwards.",
+          "description": "A pixel value that will be added to the position calculated for the\ngiven `verticalAlign`, in the direction of alignment. You can think\nof it as increasing or decreasing the distance to the side of the\nscreen given by `verticalAlign`.\n\nIf `verticalAlign` is \"top\" or \"middle\", this offset will increase or\ndecrease the distance to the top side of the screen: a negative offset will\nmove the dropdown upwards; a positive one, downwards.\n\nConversely if `verticalAlign` is \"bottom\", this offset will increase\nor decrease the distance to the bottom side of the screen: a negative\noffset will move the dropdown downwards; a positive one, upwards.",
           "sourceRange": {
             "file": "bower_components\\iron-fit-behavior\\iron-fit-behavior.html",
             "start": {
@@ -2077,11 +2244,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 28,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 33,
+              "line": 34,
               "column": 7
             }
           },
@@ -2095,11 +2262,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 38,
+              "line": 39,
               "column": 6
             },
             "end": {
-              "line": 43,
+              "line": 44,
               "column": 7
             }
           },
@@ -2113,11 +2280,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 49,
+              "line": 50,
               "column": 6
             },
             "end": {
-              "line": 52,
+              "line": 53,
               "column": 7
             }
           },
@@ -2131,11 +2298,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 58,
+              "line": 59,
               "column": 6
             },
             "end": {
-              "line": 61,
+              "line": 62,
               "column": 7
             }
           },
@@ -2149,11 +2316,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 66,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 69,
+              "line": 70,
               "column": 7
             }
           },
@@ -2167,11 +2334,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 74,
+              "line": 75,
               "column": 6
             },
             "end": {
-              "line": 77,
+              "line": 78,
               "column": 7
             }
           },
@@ -2185,11 +2352,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 84,
+              "line": 85,
               "column": 6
             },
             "end": {
-              "line": 88,
+              "line": 89,
               "column": 7
             }
           },
@@ -2203,11 +2370,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 93,
+              "line": 94,
               "column": 6
             },
             "end": {
-              "line": 96,
+              "line": 97,
               "column": 7
             }
           },
@@ -2221,11 +2388,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 103,
+              "line": 104,
               "column": 6
             },
             "end": {
-              "line": 105,
+              "line": 106,
               "column": 7
             }
           },
@@ -2239,16 +2406,34 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 110,
+              "line": 111,
               "column": 6
             },
             "end": {
-              "line": 112,
+              "line": 113,
               "column": 7
             }
           },
           "metadata": {},
           "type": "boolean",
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "scroll-action",
+          "description": "Determines which action to perform when scroll outside an opened overlay happens.\nPossible values:\nlock - blocks scrolling from happening,\nrefit - computes the new position on the overlay\ncancel - causes the overlay to close",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 122,
+              "column": 6
+            },
+            "end": {
+              "line": 124,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "string",
           "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
         }
       ],

@@ -42,7 +42,7 @@
        */
       static get _styleTemplate() {
         return `
-          <style include="${this.customStyleToInclude}">
+          <style include="${this.customStyleToInclude || ''}">
             ${this.customStyleContent}
           </style>
         `;
