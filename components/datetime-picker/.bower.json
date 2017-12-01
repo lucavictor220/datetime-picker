@@ -24,7 +24,7 @@
   },
   "licence": "https://github.com/fooloomanzoo/datetime-picker/raw/master/LICENSE.txt",
   "dependencies": {
-    "polymer": "Polymer/polymer#1.9 - 2",
+    "polymer": "Polymer/polymer#2",
     "number-input": "fooloomanzoo/number-input",
     "property-mixins": "fooloomanzoo/property-mixins",
     "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
@@ -35,31 +35,11 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
   },
-  "variants": {
-    "1.x": {
-      "dependencies": {
-        "polymer": "Polymer/polymer#^1.9",
-        "number-input": "fooloomanzoo/number-input",
-        "input-picker-pattern": "fooloomanzoo/input-picker-pattern"
-      },
-      "devDependencies": {
-        "web-component-tester": "^4.0.0",
-        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-        "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
-        "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
-        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
-      },
-      "resolutions": {
-        "webcomponentsjs": "^0.7"
-      }
-    }
-  },
-  "_release": "652a175fd5",
+  "_release": "f5e40d126d",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "652a175fd521ce0ba233da0a1cf9ad287a96669c"
+    "commit": "f5e40d126d2a9f7cff80f6191c28e2313507cf87"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",

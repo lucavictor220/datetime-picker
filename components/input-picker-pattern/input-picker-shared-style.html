@@ -12,7 +12,9 @@ shared styles of the picker elements
       --input-background: #2b2b2b;
       --input-color: #dadada;
       --input-selected-background: var(--primary-color, #394FE8);
+      --input-disabled-background: transparent;
       --input-selected-color: #f5f5f5;
+      --input-disabled-color: #9c9c9c;
     }
   </style>
 <custom-style>
@@ -31,7 +33,7 @@ shared styles of the picker elements
         /* initial mixins */
         --input-style: {
           border-radius: 4px;
-          padding: 0.3em 0.2em;
+          padding: 0.25em 0.2em;
           border: none;
           outline: none;
           text-align: center;
@@ -44,6 +46,12 @@ shared styles of the picker elements
         --input-focus: {
           background-color: var(--input-selected-background);
           color: var(--input-selected-color);
+        };
+        --input-disabled: {
+          background-color: var(--input-disabled-background);
+          color: var(--input-disabled-color);
+          font-weight: lighter;
+          cursor: default;
         };
         --input-element: {
           border-radius: 4px;
@@ -82,10 +90,10 @@ shared styles of the picker elements
         font-size: inherit;
         @apply --input-input;
       }
-      input[type=tel]:focus,
-      input[type=tel]:hover,
-      input[type=text]:focus,
-      input[type=text]:hover {
+      input[type=tel]:focus:not([disabled]),
+      input[type=tel]:hover:not([disabled]),
+      input[type=text]:focus:not([disabled]),
+      input[type=text]:hover:not([disabled]) {
         @apply --input-focus;
       }
       .icon {

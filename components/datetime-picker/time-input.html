@@ -10,7 +10,7 @@
    *
    * @demo demo/time-picker.html
    **/
-  TimeInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
+  const TimeInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
     return class extends superClass { // eslint-disable-line no-undef
 
@@ -33,7 +33,7 @@
             <span>[[_localDecimalSeparator]]</span>
             <number-input index="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></number-input>
           </div>
-          <div class="am-switch" hidden$="[[!hour12]]" style="order:11;" on-mouseup="_switchAm">
+          <div class="single-switch" hidden$="[[!hour12]]" style="order:11;" on-mouseup="_switchAm">
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
@@ -47,7 +47,8 @@
             display: inline-flex;
             align-items: center;
           }
-          .am-switch {
+          .single-switch {
+            align-self: stretch;
             cursor: pointer;
             font-size: 0.8em;
             margin: 0 0.2em;
@@ -98,7 +99,7 @@
 <dom-module id="time-input">
   <script>
     /**
-     *  `<time-input>` is a input for time for **[Polymer](https://github.com/Polymer/polymer)**
+     *  `<time-input>` is an input for time for **[Polymer](https://github.com/Polymer/polymer)**
      *
      *  ```html
      *    <time-input value="{{value}}"></time-input>
