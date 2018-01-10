@@ -44,6 +44,13 @@
             observer: '_valueChanged'
           },
           /**
+           * default-value of the input
+           * @type {number}
+           */
+          default: {
+            type: Number
+          },
+          /**
            * if true, the value does not revolve the range according to the maximum or the minimum
            * @type {boolean}
            */
@@ -60,18 +67,19 @@
         ]
       }
 
+      connectedCallback() {
+        super.connectedCallback();
+        if (this.value === undefined && !isNaN(this.default)) {
+          this.value = this.default;
+        }
+      }
+
       _minMaxChanged(min, max) {
         if (+max < +min) {
           this.setProperties({
             min: +max,
             max: +min
           })
-        } else if (min !== undefined && max !== undefined && this.value === undefined) {
-          if (+min <= 0 && +max >= 0) {
-            this.value = 0;
-          } else {
-            this.value = this._checkStep((+max - min) / 2, this.step)
-          }
         } else {
           this._updateValue();
         }
@@ -93,14 +101,18 @@
           if (!isNaN(oldValue)) {
             return oldValue;
           }
-          return (this.min !== undefined) ? this.min : (this.max !== undefined ? this.max : 0);
+          if (!isNaN(this.default)) {
+            return this.default;
+          }
+          return (this.min !== undefined) ? this.min : (this.max !== undefined ? this._checkStep(this.max, this.step) : 0);
         }
+
         const saturate = this.saturate,
           min = this.min,
           max = this.max;
 
         if (min !== undefined && value <= min) {
-          if (saturate || max === undefined || oldValue !== min) {
+          if (saturate || value === min || max === undefined || oldValue !== min) {
             return min;
           }
           return max;
@@ -108,7 +120,7 @@
         }
         if (max !== undefined && value >= max) {
           // max = this._checkStep(max, this.step);
-          if (saturate || min === undefined || max !== oldValue) {
+          if (saturate || value === max || min === undefined || max !== oldValue) {
             return max;
           }
           return min;
@@ -193,7 +205,8 @@
 
         return Number(sign + whole.slice(0, whole.length - decimal) + '.' + whole.slice(whole.length - decimal));
       }
-
     }
   }
+
+  window.RangeMixin = RangeMixin;
 </script>

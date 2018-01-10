@@ -97,9 +97,9 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "saturate",
-          "type": "boolean",
-          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "name": "default",
+          "type": "number",
+          "description": "default-value of the input",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
@@ -108,7 +108,28 @@
               "column": 10
             },
             "end": {
-              "line": 52,
+              "line": 51,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "inheritedFrom": "RangeMixin"
+        },
+        {
+          "name": "saturate",
+          "type": "boolean",
+          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 56,
+              "column": 10
+            },
+            "end": {
+              "line": 59,
               "column": 11
             }
           },
@@ -126,11 +147,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 84,
               "column": 10
             },
             "end": {
-              "line": 82,
+              "line": 86,
               "column": 11
             }
           },
@@ -146,11 +167,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 92,
               "column": 10
             },
             "end": {
-              "line": 90,
+              "line": 94,
               "column": 11
             }
           },
@@ -166,11 +187,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 100,
               "column": 10
             },
             "end": {
-              "line": 99,
+              "line": 103,
               "column": 11
             }
           },
@@ -186,11 +207,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 109,
               "column": 10
             },
             "end": {
-              "line": 109,
+              "line": 113,
               "column": 11
             }
           },
@@ -209,11 +230,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 115,
+              "line": 119,
               "column": 10
             },
             "end": {
-              "line": 117,
+              "line": 121,
               "column": 11
             }
           },
@@ -229,11 +250,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 127,
               "column": 10
             },
             "end": {
-              "line": 127,
+              "line": 131,
               "column": 11
             }
           },
@@ -252,17 +273,17 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 133,
+              "line": 137,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 140,
               "column": 11
             }
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_checkInput\""
+              "observer": "\"_unitChanged\""
             }
           },
           "inheritedFrom": "NumberInputMixin"
@@ -274,11 +295,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 141,
+              "line": 145,
               "column": 10
             },
             "end": {
-              "line": 145,
+              "line": 149,
               "column": 11
             }
           },
@@ -296,11 +317,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 151,
+              "line": 155,
               "column": 10
             },
             "end": {
-              "line": 153,
+              "line": 157,
               "column": 11
             }
           },
@@ -316,11 +337,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 10
             },
             "end": {
-              "line": 161,
+              "line": 165,
               "column": 11
             }
           },
@@ -336,11 +357,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
               "column": 11
             }
           },
@@ -358,11 +379,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 180,
               "column": 10
             },
             "end": {
-              "line": 179,
+              "line": 183,
               "column": 11
             }
           },
@@ -374,17 +395,17 @@
           "inheritedFrom": "NumberInputMixin"
         },
         {
-          "name": "_longestStatic",
+          "name": "_longestStaticLength",
           "type": "number",
           "description": "longest number-string of the given range",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 185,
+              "line": 189,
               "column": 10
             },
             "end": {
-              "line": 188,
+              "line": 192,
               "column": 11
             }
           },
@@ -402,11 +423,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 197,
+              "line": 201,
               "column": 11
             }
           },
@@ -424,11 +445,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 203,
+              "line": 207,
               "column": 10
             },
             "end": {
-              "line": 206,
+              "line": 210,
               "column": 11
             }
           },
@@ -442,17 +463,35 @@
       ],
       "methods": [
         {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 221,
+              "column": 6
+            },
+            "end": {
+              "line": 229,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "NumberInputMixin"
+        },
+        {
           "name": "_minMaxChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 62,
+              "line": 76,
               "column": 6
             },
             "end": {
-              "line": 77,
+              "line": 85,
               "column": 7
             }
           },
@@ -473,11 +512,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 295,
+              "line": 313,
               "column": 6
             },
             "end": {
-              "line": 312,
+              "line": 330,
               "column": 7
             }
           },
@@ -499,11 +538,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 90,
+              "line": 98,
               "column": 6
             },
             "end": {
-              "line": 116,
+              "line": 128,
               "column": 7
             }
           },
@@ -525,11 +564,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 118,
+              "line": 130,
               "column": 6
             },
             "end": {
-              "line": 122,
+              "line": 134,
               "column": 7
             }
           },
@@ -544,11 +583,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 124,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 137,
+              "line": 149,
               "column": 7
             }
           },
@@ -570,11 +609,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 145,
+              "line": 157,
               "column": 6
             },
             "end": {
-              "line": 167,
+              "line": 179,
               "column": 7
             }
           },
@@ -604,11 +643,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 175,
+              "line": 187,
               "column": 6
             },
             "end": {
-              "line": 194,
+              "line": 206,
               "column": 7
             }
           },
@@ -632,34 +671,16 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "connectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 217,
-              "column": 6
-            },
-            "end": {
-              "line": 221,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "NumberInputMixin"
-        },
-        {
           "name": "disconnectedCallback",
           "description": "",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 223,
+              "line": 231,
               "column": 6
             },
             "end": {
-              "line": 227,
+              "line": 235,
               "column": 7
             }
           },
@@ -673,11 +694,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 229,
+              "line": 237,
               "column": 6
             },
             "end": {
-              "line": 234,
+              "line": 242,
               "column": 7
             }
           },
@@ -701,11 +722,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 236,
+              "line": 244,
               "column": 6
             },
             "end": {
-              "line": 244,
+              "line": 252,
               "column": 7
             }
           },
@@ -735,11 +756,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 254,
               "column": 6
             },
             "end": {
-              "line": 250,
+              "line": 258,
               "column": 7
             }
           },
@@ -763,11 +784,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 260,
               "column": 6
             },
             "end": {
-              "line": 256,
+              "line": 264,
               "column": 7
             }
           },
@@ -792,16 +813,38 @@
           "inheritedFrom": "NumberInputMixin"
         },
         {
+          "name": "_computeChWidth",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 266,
+              "column": 6
+            },
+            "end": {
+              "line": 268,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "str"
+            }
+          ],
+          "inheritedFrom": "NumberInputMixin"
+        },
+        {
           "name": "_computeRegExpDecimalSeparator",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 258,
+              "line": 270,
               "column": 6
             },
             "end": {
-              "line": 260,
+              "line": 272,
               "column": 7
             }
           },
@@ -819,11 +862,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 262,
+              "line": 274,
               "column": 6
             },
             "end": {
-              "line": 264,
+              "line": 276,
               "column": 7
             }
           },
@@ -841,11 +884,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 278,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 281,
               "column": 7
             }
           },
@@ -854,16 +897,38 @@
           "inheritedFrom": "NumberInputMixin"
         },
         {
+          "name": "_unitChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 283,
+              "column": 6
+            },
+            "end": {
+              "line": 286,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "unit"
+            }
+          ],
+          "inheritedFrom": "NumberInputMixin"
+        },
+        {
           "name": "_valueStringChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 288,
               "column": 6
             },
             "end": {
-              "line": 293,
+              "line": 311,
               "column": 7
             }
           },
@@ -884,11 +949,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 314,
+              "line": 332,
               "column": 6
             },
             "end": {
-              "line": 342,
+              "line": 360,
               "column": 7
             }
           },
@@ -906,11 +971,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 344,
+              "line": 362,
               "column": 6
             },
             "end": {
-              "line": 353,
+              "line": 371,
               "column": 7
             }
           },
@@ -928,11 +993,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 355,
+              "line": 373,
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 377,
               "column": 7
             }
           },
@@ -946,11 +1011,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 361,
+              "line": 379,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 384,
               "column": 7
             }
           },
@@ -968,11 +1033,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 368,
+              "line": 386,
               "column": 6
             },
             "end": {
-              "line": 372,
+              "line": 390,
               "column": 7
             }
           },
@@ -990,11 +1055,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 374,
+              "line": 392,
               "column": 6
             },
             "end": {
-              "line": 379,
+              "line": 397,
               "column": 7
             }
           },
@@ -1012,11 +1077,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 381,
+              "line": 399,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 416,
               "column": 7
             }
           },
@@ -1034,11 +1099,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 406,
+              "line": 418,
               "column": 6
             },
             "end": {
-              "line": 425,
+              "line": 426,
               "column": 7
             }
           },
@@ -1056,11 +1121,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 427,
+              "line": 428,
               "column": 6
             },
             "end": {
-              "line": 435,
+              "line": 436,
               "column": 7
             }
           },
@@ -1078,11 +1143,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 440,
+              "line": 441,
               "column": 6
             },
             "end": {
-              "line": 442,
+              "line": 443,
               "column": 7
             }
           },
@@ -1096,11 +1161,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 447,
+              "line": 448,
               "column": 6
             },
             "end": {
-              "line": 449,
+              "line": 450,
               "column": 7
             }
           },
@@ -1114,11 +1179,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 451,
+              "line": 452,
               "column": 6
             },
             "end": {
-              "line": 478,
+              "line": 479,
               "column": 7
             }
           },
@@ -1137,11 +1202,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 527,
+          "line": 528,
           "column": 4
         },
         "end": {
-          "line": 532,
+          "line": 533,
           "column": 5
         }
       },
@@ -1222,8 +1287,8 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "saturate",
-          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "name": "default",
+          "description": "default-value of the input",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
@@ -1231,7 +1296,25 @@
               "column": 10
             },
             "end": {
-              "line": 52,
+              "line": 51,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "number",
+          "inheritedFrom": "RangeMixin"
+        },
+        {
+          "name": "saturate",
+          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 56,
+              "column": 10
+            },
+            "end": {
+              "line": 59,
               "column": 11
             }
           },
@@ -1244,11 +1327,11 @@
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 84,
               "column": 10
             },
             "end": {
-              "line": 82,
+              "line": 86,
               "column": 11
             }
           },
@@ -1261,11 +1344,11 @@
           "description": "placeholder string",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 92,
               "column": 10
             },
             "end": {
-              "line": 90,
+              "line": 94,
               "column": 11
             }
           },
@@ -1278,11 +1361,11 @@
           "description": "disables the input",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 100,
               "column": 10
             },
             "end": {
-              "line": 99,
+              "line": 103,
               "column": 11
             }
           },
@@ -1295,11 +1378,11 @@
           "description": "disable autosizing",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 109,
               "column": 10
             },
             "end": {
-              "line": 109,
+              "line": 113,
               "column": 11
             }
           },
@@ -1312,11 +1395,11 @@
           "description": "enables auto padding",
           "sourceRange": {
             "start": {
-              "line": 115,
+              "line": 119,
               "column": 10
             },
             "end": {
-              "line": 117,
+              "line": 121,
               "column": 11
             }
           },
@@ -1329,11 +1412,11 @@
           "description": "value string of the input",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 127,
               "column": 10
             },
             "end": {
-              "line": 127,
+              "line": 131,
               "column": 11
             }
           },
@@ -1346,11 +1429,11 @@
           "description": "unit of the value",
           "sourceRange": {
             "start": {
-              "line": 133,
+              "line": 137,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 140,
               "column": 11
             }
           },
@@ -1363,11 +1446,11 @@
           "description": "The current locale to set the decimal-separator automatically",
           "sourceRange": {
             "start": {
-              "line": 141,
+              "line": 145,
               "column": 10
             },
             "end": {
-              "line": 145,
+              "line": 149,
               "column": 11
             }
           },
@@ -1380,11 +1463,11 @@
           "description": "Separator for local decimal values",
           "sourceRange": {
             "start": {
-              "line": 151,
+              "line": 155,
               "column": 10
             },
             "end": {
-              "line": 153,
+              "line": 157,
               "column": 11
             }
           },
@@ -1397,11 +1480,11 @@
           "description": "always put the sign in the beginning",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 10
             },
             "end": {
-              "line": 161,
+              "line": 165,
               "column": 11
             }
           },
@@ -1414,11 +1497,11 @@
           "description": "minimum digits right to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
               "column": 11
             }
           },
@@ -1431,11 +1514,11 @@
           "description": "minimum digits left to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 180,
               "column": 10
             },
             "end": {
-              "line": 179,
+              "line": 183,
               "column": 11
             }
           },
@@ -1553,9 +1636,9 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "saturate",
-          "type": "boolean",
-          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "name": "default",
+          "type": "number",
+          "description": "default-value of the input",
           "privacy": "public",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
@@ -1564,7 +1647,28 @@
               "column": 10
             },
             "end": {
-              "line": 52,
+              "line": 51,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "inheritedFrom": "RangeMixin"
+        },
+        {
+          "name": "saturate",
+          "type": "boolean",
+          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 56,
+              "column": 10
+            },
+            "end": {
+              "line": 59,
               "column": 11
             }
           },
@@ -1582,11 +1686,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 84,
               "column": 10
             },
             "end": {
-              "line": 82,
+              "line": 86,
               "column": 11
             }
           },
@@ -1601,11 +1705,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 92,
               "column": 10
             },
             "end": {
-              "line": 90,
+              "line": 94,
               "column": 11
             }
           },
@@ -1620,11 +1724,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 100,
               "column": 10
             },
             "end": {
-              "line": 99,
+              "line": 103,
               "column": 11
             }
           },
@@ -1639,11 +1743,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 109,
               "column": 10
             },
             "end": {
-              "line": 109,
+              "line": 113,
               "column": 11
             }
           },
@@ -1661,11 +1765,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 115,
+              "line": 119,
               "column": 10
             },
             "end": {
-              "line": 117,
+              "line": 121,
               "column": 11
             }
           },
@@ -1680,11 +1784,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 127,
               "column": 10
             },
             "end": {
-              "line": 127,
+              "line": 131,
               "column": 11
             }
           },
@@ -1702,17 +1806,17 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 133,
+              "line": 137,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 140,
               "column": 11
             }
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_checkInput\""
+              "observer": "\"_unitChanged\""
             }
           }
         },
@@ -1723,11 +1827,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 141,
+              "line": 145,
               "column": 10
             },
             "end": {
-              "line": 145,
+              "line": 149,
               "column": 11
             }
           },
@@ -1744,11 +1848,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 151,
+              "line": 155,
               "column": 10
             },
             "end": {
-              "line": 153,
+              "line": 157,
               "column": 11
             }
           },
@@ -1763,11 +1867,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 10
             },
             "end": {
-              "line": 161,
+              "line": 165,
               "column": 11
             }
           },
@@ -1782,11 +1886,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
               "column": 11
             }
           },
@@ -1803,11 +1907,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 180,
               "column": 10
             },
             "end": {
-              "line": 179,
+              "line": 183,
               "column": 11
             }
           },
@@ -1818,17 +1922,17 @@
           }
         },
         {
-          "name": "_longestStatic",
+          "name": "_longestStaticLength",
           "type": "number",
           "description": "longest number-string of the given range",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 185,
+              "line": 189,
               "column": 10
             },
             "end": {
-              "line": 188,
+              "line": 192,
               "column": 11
             }
           },
@@ -1845,11 +1949,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 197,
+              "line": 201,
               "column": 11
             }
           },
@@ -1866,11 +1970,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 203,
+              "line": 207,
               "column": 10
             },
             "end": {
-              "line": 206,
+              "line": 210,
               "column": 11
             }
           },
@@ -1883,17 +1987,34 @@
       ],
       "methods": [
         {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 221,
+              "column": 6
+            },
+            "end": {
+              "line": 229,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
           "name": "_minMaxChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 62,
+              "line": 76,
               "column": 6
             },
             "end": {
-              "line": 77,
+              "line": 85,
               "column": 7
             }
           },
@@ -1914,11 +2035,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 295,
+              "line": 313,
               "column": 6
             },
             "end": {
-              "line": 312,
+              "line": 330,
               "column": 7
             }
           },
@@ -1939,11 +2060,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 90,
+              "line": 98,
               "column": 6
             },
             "end": {
-              "line": 116,
+              "line": 128,
               "column": 7
             }
           },
@@ -1965,11 +2086,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 118,
+              "line": 130,
               "column": 6
             },
             "end": {
-              "line": 122,
+              "line": 134,
               "column": 7
             }
           },
@@ -1984,11 +2105,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 124,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 137,
+              "line": 149,
               "column": 7
             }
           },
@@ -2010,11 +2131,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 145,
+              "line": 157,
               "column": 6
             },
             "end": {
-              "line": 167,
+              "line": 179,
               "column": 7
             }
           },
@@ -2044,11 +2165,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 175,
+              "line": 187,
               "column": 6
             },
             "end": {
-              "line": 194,
+              "line": 206,
               "column": 7
             }
           },
@@ -2072,33 +2193,16 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "connectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 217,
-              "column": 6
-            },
-            "end": {
-              "line": 221,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
           "name": "disconnectedCallback",
           "description": "",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 223,
+              "line": 231,
               "column": 6
             },
             "end": {
-              "line": 227,
+              "line": 235,
               "column": 7
             }
           },
@@ -2111,11 +2215,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 229,
+              "line": 237,
               "column": 6
             },
             "end": {
-              "line": 234,
+              "line": 242,
               "column": 7
             }
           },
@@ -2138,11 +2242,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 236,
+              "line": 244,
               "column": 6
             },
             "end": {
-              "line": 244,
+              "line": 252,
               "column": 7
             }
           },
@@ -2171,11 +2275,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 254,
               "column": 6
             },
             "end": {
-              "line": 250,
+              "line": 258,
               "column": 7
             }
           },
@@ -2198,11 +2302,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 260,
               "column": 6
             },
             "end": {
-              "line": 256,
+              "line": 264,
               "column": 7
             }
           },
@@ -2226,16 +2330,37 @@
           ]
         },
         {
+          "name": "_computeChWidth",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 266,
+              "column": 6
+            },
+            "end": {
+              "line": 268,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "str"
+            }
+          ]
+        },
+        {
           "name": "_computeRegExpDecimalSeparator",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 258,
+              "line": 270,
               "column": 6
             },
             "end": {
-              "line": 260,
+              "line": 272,
               "column": 7
             }
           },
@@ -2252,11 +2377,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 262,
+              "line": 274,
               "column": 6
             },
             "end": {
-              "line": 264,
+              "line": 276,
               "column": 7
             }
           },
@@ -2273,11 +2398,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 278,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 281,
               "column": 7
             }
           },
@@ -2285,16 +2410,37 @@
           "params": []
         },
         {
+          "name": "_unitChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 283,
+              "column": 6
+            },
+            "end": {
+              "line": 286,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "unit"
+            }
+          ]
+        },
+        {
           "name": "_valueStringChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 288,
               "column": 6
             },
             "end": {
-              "line": 293,
+              "line": 311,
               "column": 7
             }
           },
@@ -2314,11 +2460,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 314,
+              "line": 332,
               "column": 6
             },
             "end": {
-              "line": 342,
+              "line": 360,
               "column": 7
             }
           },
@@ -2335,11 +2481,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 344,
+              "line": 362,
               "column": 6
             },
             "end": {
-              "line": 353,
+              "line": 371,
               "column": 7
             }
           },
@@ -2356,11 +2502,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 355,
+              "line": 373,
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 377,
               "column": 7
             }
           },
@@ -2373,11 +2519,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 361,
+              "line": 379,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 384,
               "column": 7
             }
           },
@@ -2394,11 +2540,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 368,
+              "line": 386,
               "column": 6
             },
             "end": {
-              "line": 372,
+              "line": 390,
               "column": 7
             }
           },
@@ -2415,11 +2561,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 374,
+              "line": 392,
               "column": 6
             },
             "end": {
-              "line": 379,
+              "line": 397,
               "column": 7
             }
           },
@@ -2436,11 +2582,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 381,
+              "line": 399,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 416,
               "column": 7
             }
           },
@@ -2457,11 +2603,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 406,
+              "line": 418,
               "column": 6
             },
             "end": {
-              "line": 425,
+              "line": 426,
               "column": 7
             }
           },
@@ -2478,11 +2624,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 427,
+              "line": 428,
               "column": 6
             },
             "end": {
-              "line": 435,
+              "line": 436,
               "column": 7
             }
           },
@@ -2499,11 +2645,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 440,
+              "line": 441,
               "column": 6
             },
             "end": {
-              "line": 442,
+              "line": 443,
               "column": 7
             }
           },
@@ -2516,11 +2662,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 447,
+              "line": 448,
               "column": 6
             },
             "end": {
-              "line": 449,
+              "line": 450,
               "column": 7
             }
           },
@@ -2533,11 +2679,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 451,
+              "line": 452,
               "column": 6
             },
             "end": {
-              "line": 478,
+              "line": 479,
               "column": 7
             }
           },
@@ -2554,7 +2700,7 @@
           "column": 2
         },
         "end": {
-          "line": 480,
+          "line": 481,
           "column": 3
         }
       },
@@ -2634,8 +2780,8 @@
           "inheritedFrom": "RangeMixin"
         },
         {
-          "name": "saturate",
-          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "name": "default",
+          "description": "default-value of the input",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
@@ -2643,7 +2789,25 @@
               "column": 10
             },
             "end": {
-              "line": 52,
+              "line": 51,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "number",
+          "inheritedFrom": "RangeMixin"
+        },
+        {
+          "name": "saturate",
+          "description": "if true, the value does not revolve the range according to the maximum or the minimum",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 56,
+              "column": 10
+            },
+            "end": {
+              "line": 59,
               "column": 11
             }
           },
@@ -2656,11 +2820,11 @@
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 84,
               "column": 10
             },
             "end": {
-              "line": 82,
+              "line": 86,
               "column": 11
             }
           },
@@ -2672,11 +2836,11 @@
           "description": "placeholder string",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 92,
               "column": 10
             },
             "end": {
-              "line": 90,
+              "line": 94,
               "column": 11
             }
           },
@@ -2688,11 +2852,11 @@
           "description": "disables the input",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 100,
               "column": 10
             },
             "end": {
-              "line": 99,
+              "line": 103,
               "column": 11
             }
           },
@@ -2704,11 +2868,11 @@
           "description": "disable autosizing",
           "sourceRange": {
             "start": {
-              "line": 105,
+              "line": 109,
               "column": 10
             },
             "end": {
-              "line": 109,
+              "line": 113,
               "column": 11
             }
           },
@@ -2720,11 +2884,11 @@
           "description": "enables auto padding",
           "sourceRange": {
             "start": {
-              "line": 115,
+              "line": 119,
               "column": 10
             },
             "end": {
-              "line": 117,
+              "line": 121,
               "column": 11
             }
           },
@@ -2736,11 +2900,11 @@
           "description": "value string of the input",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 127,
               "column": 10
             },
             "end": {
-              "line": 127,
+              "line": 131,
               "column": 11
             }
           },
@@ -2752,11 +2916,11 @@
           "description": "unit of the value",
           "sourceRange": {
             "start": {
-              "line": 133,
+              "line": 137,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 140,
               "column": 11
             }
           },
@@ -2768,11 +2932,11 @@
           "description": "The current locale to set the decimal-separator automatically",
           "sourceRange": {
             "start": {
-              "line": 141,
+              "line": 145,
               "column": 10
             },
             "end": {
-              "line": 145,
+              "line": 149,
               "column": 11
             }
           },
@@ -2784,11 +2948,11 @@
           "description": "Separator for local decimal values",
           "sourceRange": {
             "start": {
-              "line": 151,
+              "line": 155,
               "column": 10
             },
             "end": {
-              "line": 153,
+              "line": 157,
               "column": 11
             }
           },
@@ -2800,11 +2964,11 @@
           "description": "always put the sign in the beginning",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 10
             },
             "end": {
-              "line": 161,
+              "line": 165,
               "column": 11
             }
           },
@@ -2816,11 +2980,11 @@
           "description": "minimum digits right to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 171,
               "column": 10
             },
             "end": {
-              "line": 170,
+              "line": 174,
               "column": 11
             }
           },
@@ -2832,11 +2996,11 @@
           "description": "minimum digits left to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 176,
+              "line": 180,
               "column": 10
             },
             "end": {
-              "line": 179,
+              "line": 183,
               "column": 11
             }
           },
