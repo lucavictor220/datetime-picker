@@ -31,12 +31,12 @@
       }
     }
   },
-  "version": "1.0.11",
-  "_release": "1.0.11",
+  "version": "1.0.12",
+  "_release": "1.0.12",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.11",
-    "commit": "8ab7ec0c7242d334b8387087314d091c832cfd56"
+    "tag": "1.0.12",
+    "commit": "e3b90ac0795257d874cab9ac948aa7261fd3d2c6"
   },
   "_source": "https://github.com/fooloomanzoo/input-picker-pattern.git",
   "_target": "*",
