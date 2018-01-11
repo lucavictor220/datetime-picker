@@ -718,11 +718,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 202,
+              "line": 204,
               "column": 4
             },
             "end": {
-              "line": 208,
+              "line": 210,
               "column": 5
             }
           },
@@ -737,11 +737,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 210,
+              "line": 212,
               "column": 4
             },
             "end": {
-              "line": 232,
+              "line": 234,
               "column": 5
             }
           },
@@ -1353,7 +1353,7 @@
               "column": 4
             },
             "end": {
-              "line": 200,
+              "line": 202,
               "column": 5
             }
           },
@@ -1368,11 +1368,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 237,
+              "line": 239,
               "column": 4
             },
             "end": {
-              "line": 240,
+              "line": 242,
               "column": 5
             }
           },
@@ -1387,11 +1387,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 245,
+              "line": 247,
               "column": 4
             },
             "end": {
-              "line": 248,
+              "line": 250,
               "column": 5
             }
           },
@@ -1406,11 +1406,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 253,
+              "line": 255,
               "column": 4
             },
             "end": {
-              "line": 256,
+              "line": 258,
               "column": 5
             }
           },
@@ -1425,11 +1425,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 262,
+              "line": 264,
               "column": 4
             },
             "end": {
-              "line": 270,
+              "line": 272,
               "column": 5
             }
           },
@@ -1450,11 +1450,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 276,
+              "line": 278,
               "column": 4
             },
             "end": {
-              "line": 278,
+              "line": 280,
               "column": 5
             }
           },
@@ -1469,11 +1469,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 280,
+              "line": 282,
               "column": 4
             },
             "end": {
-              "line": 287,
+              "line": 289,
               "column": 5
             }
           },
@@ -1488,11 +1488,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 294,
+              "line": 296,
               "column": 4
             },
             "end": {
-              "line": 311,
+              "line": 313,
               "column": 5
             }
           },
@@ -1512,11 +1512,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 313,
+              "line": 315,
               "column": 4
             },
             "end": {
-              "line": 316,
+              "line": 318,
               "column": 5
             }
           },
@@ -1531,11 +1531,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 318,
+              "line": 320,
               "column": 4
             },
             "end": {
-              "line": 330,
+              "line": 332,
               "column": 5
             }
           },
@@ -1550,11 +1550,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 336,
+              "line": 338,
               "column": 4
             },
             "end": {
-              "line": 352,
+              "line": 354,
               "column": 5
             }
           },
@@ -1569,11 +1569,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 358,
+              "line": 360,
               "column": 4
             },
             "end": {
-              "line": 360,
+              "line": 362,
               "column": 5
             }
           },
@@ -1588,11 +1588,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 366,
+              "line": 368,
               "column": 4
             },
             "end": {
-              "line": 368,
+              "line": 370,
               "column": 5
             }
           },
@@ -1607,11 +1607,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 374,
+              "line": 376,
               "column": 4
             },
             "end": {
-              "line": 379,
+              "line": 381,
               "column": 5
             }
           },
@@ -1626,11 +1626,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 385,
+              "line": 387,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 395,
               "column": 5
             }
           },
@@ -1645,11 +1645,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 395,
+              "line": 397,
               "column": 4
             },
             "end": {
-              "line": 399,
+              "line": 401,
               "column": 5
             }
           },
@@ -1664,11 +1664,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 401,
+              "line": 403,
               "column": 4
             },
             "end": {
-              "line": 414,
+              "line": 416,
               "column": 5
             }
           },
@@ -1683,11 +1683,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 420,
+              "line": 422,
               "column": 4
             },
             "end": {
-              "line": 451,
+              "line": 453,
               "column": 5
             }
           },
@@ -1702,11 +1702,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 458,
+              "line": 460,
               "column": 4
             },
             "end": {
-              "line": 462,
+              "line": 464,
               "column": 5
             }
           },
@@ -1726,11 +1726,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 469,
+              "line": 471,
               "column": 4
             },
             "end": {
-              "line": 480,
+              "line": 482,
               "column": 5
             }
           },
@@ -1750,11 +1750,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 487,
+              "line": 489,
               "column": 4
             },
             "end": {
-              "line": 491,
+              "line": 493,
               "column": 5
             }
           },
@@ -1774,11 +1774,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 499,
+              "line": 501,
               "column": 4
             },
             "end": {
-              "line": 541,
+              "line": 543,
               "column": 5
             }
           },
@@ -1798,11 +1798,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 547,
+              "line": 549,
               "column": 4
             },
             "end": {
-              "line": 551,
+              "line": 553,
               "column": 5
             }
           },
@@ -1817,11 +1817,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 558,
+              "line": 560,
               "column": 4
             },
             "end": {
-              "line": 564,
+              "line": 566,
               "column": 5
             }
           },
@@ -1836,11 +1836,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 570,
+              "line": 572,
               "column": 4
             },
             "end": {
-              "line": 576,
+              "line": 578,
               "column": 5
             }
           },
@@ -1855,11 +1855,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 583,
+              "line": 585,
               "column": 4
             },
             "end": {
-              "line": 599,
+              "line": 601,
               "column": 5
             }
           },
@@ -1874,11 +1874,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 607,
+              "line": 609,
               "column": 4
             },
             "end": {
-              "line": 616,
+              "line": 618,
               "column": 5
             }
           },
@@ -1903,11 +1903,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 624,
+              "line": 626,
               "column": 4
             },
             "end": {
-              "line": 639,
+              "line": 637,
               "column": 5
             }
           },
@@ -1929,17 +1929,55 @@
           "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
         },
         {
+          "name": "__addScrollListeners",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 642,
+              "column": 4
+            },
+            "end": {
+              "line": 664,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
+          "name": "__removeScrollListeners",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
+            "start": {
+              "line": 669,
+              "column": 4
+            },
+            "end": {
+              "line": 681,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronOverlayBehaviorImpl"
+        },
+        {
           "name": "__isValidScrollAction",
           "description": "",
           "privacy": "private",
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 646,
+              "line": 688,
               "column": 4
             },
             "end": {
-              "line": 650,
+              "line": 692,
               "column": 5
             }
           },
@@ -1962,11 +2000,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 655,
+              "line": 697,
               "column": 4
             },
             "end": {
-              "line": 673,
+              "line": 719,
               "column": 5
             }
           },
@@ -1985,11 +2023,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 679,
+              "line": 725,
               "column": 4
             },
             "end": {
-              "line": 688,
+              "line": 734,
               "column": 5
             }
           },
@@ -2004,11 +2042,11 @@
           "sourceRange": {
             "file": "bower_components\\iron-overlay-behavior\\iron-overlay-behavior.html",
             "start": {
-              "line": 694,
+              "line": 740,
               "column": 4
             },
             "end": {
-              "line": 703,
+              "line": 749,
               "column": 5
             }
           },
@@ -2521,11 +2559,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 191,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 194,
+              "line": 201,
               "column": 11
             }
           },
@@ -2541,11 +2579,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 199,
+              "line": 206,
               "column": 10
             },
             "end": {
-              "line": 204,
+              "line": 211,
               "column": 11
             }
           },
@@ -2563,17 +2601,18 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 210,
+              "line": 217,
               "column": 10
             },
             "end": {
-              "line": 213,
+              "line": 221,
               "column": 11
             }
           },
           "metadata": {
             "polymer": {}
-          }
+          },
+          "defaultValue": "\"auto\""
         },
         {
           "name": "verticalAlign",
@@ -2582,11 +2621,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 218,
+              "line": 226,
               "column": 10
             },
             "end": {
-              "line": 222,
+              "line": 230,
               "column": 11
             }
           },
@@ -2599,26 +2638,6 @@
           "name": "disabled",
           "type": "boolean",
           "description": "disables the input elements",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 227,
-              "column": 10
-            },
-            "end": {
-              "line": 230,
-              "column": 11
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "autoConfirm",
-          "type": "boolean",
-          "description": "Set to true to make the input auto-confirming",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -2636,9 +2655,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "noCancelOnEscKey",
+          "name": "autoConfirm",
           "type": "boolean",
-          "description": "Set to true to disable canceling the overlay with the ESC key.",
+          "description": "Set to true to make the input auto-confirming",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -2647,6 +2666,26 @@
             },
             "end": {
               "line": 246,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "noCancelOnEscKey",
+          "type": "boolean",
+          "description": "Set to true to disable canceling the overlay with the ESC key.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 10
+            },
+            "end": {
+              "line": 254,
               "column": 11
             }
           },
@@ -2663,11 +2702,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 250,
+              "line": 258,
               "column": 6
             },
             "end": {
-              "line": 253,
+              "line": 261,
               "column": 7
             }
           },
@@ -2680,11 +2719,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 267,
               "column": 6
             },
             "end": {
-              "line": 278,
+              "line": 286,
               "column": 7
             }
           },
@@ -2703,11 +2742,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 283,
+              "line": 291,
               "column": 6
             },
             "end": {
-              "line": 288,
+              "line": 296,
               "column": 7
             }
           },
@@ -2720,11 +2759,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 294,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 304,
+              "line": 312,
               "column": 7
             }
           },
@@ -2743,11 +2782,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 310,
+              "line": 318,
               "column": 6
             },
             "end": {
-              "line": 318,
+              "line": 326,
               "column": 7
             }
           },
@@ -2766,11 +2805,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 324,
+              "line": 332,
               "column": 6
             },
             "end": {
-              "line": 332,
+              "line": 339,
               "column": 7
             }
           },
@@ -2789,11 +2828,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 338,
+              "line": 345,
               "column": 6
             },
             "end": {
-              "line": 350,
+              "line": 357,
               "column": 7
             }
           },
@@ -2816,7 +2855,7 @@
           "column": 2
         },
         "end": {
-          "line": 352,
+          "line": 359,
           "column": 3
         }
       },
@@ -2828,11 +2867,11 @@
           "description": "use the native input, if it exists",
           "sourceRange": {
             "start": {
-              "line": 191,
+              "line": 198,
               "column": 10
             },
             "end": {
-              "line": 194,
+              "line": 201,
               "column": 11
             }
           },
@@ -2844,11 +2883,11 @@
           "description": "opens the picker",
           "sourceRange": {
             "start": {
-              "line": 199,
+              "line": 206,
               "column": 10
             },
             "end": {
-              "line": 204,
+              "line": 211,
               "column": 11
             }
           },
@@ -2860,11 +2899,11 @@
           "description": "The orientation against which to align the element horizontally\nrelative to the related input element. Possible values are \"left\", \"right\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 210,
+              "line": 217,
               "column": 10
             },
             "end": {
-              "line": 213,
+              "line": 221,
               "column": 11
             }
           },
@@ -2876,11 +2915,11 @@
           "description": "The orientation against which to align the element vertically\nrelative to the related input element. Possible values are \"top\", \"bottom\", \"auto\". (comparable to `iron-fit-behavior` and its `no-overlap`-attribute)",
           "sourceRange": {
             "start": {
-              "line": 218,
+              "line": 226,
               "column": 10
             },
             "end": {
-              "line": 222,
+              "line": 230,
               "column": 11
             }
           },
@@ -2890,22 +2929,6 @@
         {
           "name": "disabled",
           "description": "disables the input elements",
-          "sourceRange": {
-            "start": {
-              "line": 227,
-              "column": 10
-            },
-            "end": {
-              "line": 230,
-              "column": 11
-            }
-          },
-          "metadata": {},
-          "type": "boolean"
-        },
-        {
-          "name": "auto-confirm",
-          "description": "Set to true to make the input auto-confirming",
           "sourceRange": {
             "start": {
               "line": 235,
@@ -2920,8 +2943,8 @@
           "type": "boolean"
         },
         {
-          "name": "no-cancel-on-esc-key",
-          "description": "Set to true to disable canceling the overlay with the ESC key.",
+          "name": "auto-confirm",
+          "description": "Set to true to make the input auto-confirming",
           "sourceRange": {
             "start": {
               "line": 243,
@@ -2929,6 +2952,22 @@
             },
             "end": {
               "line": 246,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "no-cancel-on-esc-key",
+          "description": "Set to true to disable canceling the overlay with the ESC key.",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 10
+            },
+            "end": {
+              "line": 254,
               "column": 11
             }
           },
