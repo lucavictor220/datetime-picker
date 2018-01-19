@@ -344,9 +344,8 @@
       }
 
       _valueChanged(value) {
-        if (!value) return;
-        let d = typeof value === 'object' ? value : new Date(value);
-
+        if (value === undefined) return;
+        let d = typeof value === 'object' ? value : new Date(+value);
         this._setDate(d);
       }
 

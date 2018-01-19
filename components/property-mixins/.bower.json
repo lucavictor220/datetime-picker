@@ -24,12 +24,12 @@
     "test",
     "tests"
   ],
-  "version": "2.0.0",
-  "_release": "2.0.0",
+  "version": "2.0.2",
+  "_release": "2.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.0",
-    "commit": "e8168ef876ada3ac951fb16d5f07c3228ea85370"
+    "tag": "2.0.2",
+    "commit": "a04106a58511486389222739ddabc8e719a84e1c"
   },
   "_source": "https://github.com/fooloomanzoo/property-mixins.git",
   "_target": "2",
