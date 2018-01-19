@@ -1,0 +1,52 @@
+<script>
+  /**
+   * mixin to extend an element, to be compatible with iron-form
+   *
+   * @mixinFunction
+   * @polymer
+   */
+  const FormElementMixin = (superClass) => { // eslint-disable-line no-unused-vars
+
+    return class extends superClass {
+
+      static get properties() {
+        return {
+          /**
+           * required attribute
+           */
+          required: {
+            type: Boolean
+          },
+
+          /**
+           * disables the input
+           */
+          disabled: {
+            type: Boolean
+          },
+
+          /**
+           * name of the input
+           */
+          name: {
+            type: String
+          },
+
+          /**
+           * value of the input
+           */
+          value: {
+            type: String
+          }
+        }
+      }
+
+      /**
+       * validates the input for iron-form
+       */
+      validate() {
+        return !this.disabled && !(this.required && this.value);
+      }
+    }
+  }
+</script>

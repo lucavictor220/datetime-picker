@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "`number-input` is an element that can:\n* prevent non numeric input\n* guarantee **live**-data to be valid\n* pad a value with `0` (to a specific length)\n* size the input (according to it's length)\n* overflow to minimum or underflow to maximum\n* saturate to minimum or to maximum\n* display a specified unit and size the input\n* specify the decimal separator (the value will still be a Number object)\n\nExample:\n```html\n<number-input step=\"2\" min=\"-20\" max=\"140\" pad-length=\"2\"></number-input>\n```\n\nIt sizes automatically. Use `key-up` and `key-down` to increment the value. If `step` is given, the value is a **multiple** of `step`.\n\n### Styling\nCustom property                  | Description                            | Default\n---------------------------------|----------------------------------------|--------------------\n`--number-input`                 | style of the input                     | {}\n`--number-input-focus`           | style of the focussed and hovered input | {}\n`--number-input-placeholder`     | style of the placeholder               | {}\n\n```css\n:host {\n  --number-input-focus: {\n    background: rgba(0,0,0,.25);\n  };\n  --number-input-placeholder: {\n    color: pink;\n  };\n}\n```",
+      "description": "`number-input` is an element that can:\n* prevent non numeric input\n* guarantee **live**-data to be valid\n* pad a value with `0` (to a specific length)\n* size the input (according to it's length)\n* overflow to minimum or underflow to maximum\n* saturate to minimum or to maximum\n* display a specified unit and size the input\n* specify the decimal separator (the value will still be a Number object)\n* use percent-format\n\nExample:\n```html\n<number-input step=\"2\" min=\"-20\" max=\"140\" pad-length=\"2\"></number-input>\n```\n\nIt sizes automatically. Use `key-up` and `key-down` to increment the value. If `step` is given, the value is a **multiple** of `step`.\n\n### Styling\nCustom property                   | Description                                  | Default\n----------------------------------|----------------------------------------------|--------------------\n`--number-input`                  | style of the input                           | {}\n`--number-input-focus`            | style of the focussed and hovered input      | {}\n`--number-input-placeholder`      | style of the placeholder                     | {}\n`--number-input-color`            | color of the input                           | inherit\n`--number-input-background`       | background of the input                      | inherit\n`--number-input-focus-color`      | color of the focussed and hovered input      | inherit\n`--number-input-focus-background` | background of the focussed and hovered input | inherit\n`--number-input-disabled-color`   | color of the disabled input                  | inherit\n\n```css\n:host {\n  --number-input-disabled-color: grey;\n  --number-input-focus-background: rgba(0,0,0,0.25);\n  --number-input-focus: {\n    font-weight: bold;\n  };\n  --number-input-placeholder: {\n    color: pink;\n  };\n}\n```",
       "summary": "",
       "path": "number-input.html",
       "properties": [
@@ -141,17 +141,40 @@
           "inheritedFrom": "RangeMixin"
         },
         {
+          "name": "noClamp",
+          "type": "boolean",
+          "description": "if true, the value does not clamp according to the given step",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 64,
+              "column": 10
+            },
+            "end": {
+              "line": 67,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_updateValue\""
+            }
+          },
+          "inheritedFrom": "RangeMixin"
+        },
+        {
           "name": "padLength",
           "type": "number",
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 89,
               "column": 10
             },
             "end": {
-              "line": 86,
+              "line": 91,
               "column": 11
             }
           },
@@ -167,16 +190,38 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 97,
               "column": 10
             },
             "end": {
-              "line": 94,
+              "line": 99,
               "column": 11
             }
           },
           "metadata": {
             "polymer": {}
+          },
+          "inheritedFrom": "NumberInputMixin"
+        },
+        {
+          "name": "inPercent",
+          "type": "string",
+          "description": "if true the value string is percent-format\nnotice: min, max and step are not in percent (so e.g. if step is 0.001, it means that the step is 0.1%)",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 109,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_unitChanged\""
+            }
           },
           "inheritedFrom": "NumberInputMixin"
         },
@@ -187,11 +232,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 115,
               "column": 10
             },
             "end": {
-              "line": 103,
+              "line": 118,
               "column": 11
             }
           },
@@ -207,11 +252,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 124,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 128,
               "column": 11
             }
           },
@@ -230,11 +275,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 134,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 136,
               "column": 11
             }
           },
@@ -250,11 +295,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 127,
+              "line": 142,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 146,
               "column": 11
             }
           },
@@ -273,11 +318,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 152,
               "column": 10
             },
             "end": {
-              "line": 140,
+              "line": 155,
               "column": 11
             }
           },
@@ -295,11 +340,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 145,
+              "line": 160,
               "column": 10
             },
             "end": {
-              "line": 149,
+              "line": 164,
               "column": 11
             }
           },
@@ -317,11 +362,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 155,
+              "line": 170,
               "column": 10
             },
             "end": {
-              "line": 157,
+              "line": 172,
               "column": 11
             }
           },
@@ -337,11 +382,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 163,
+              "line": 178,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 180,
               "column": 11
             }
           },
@@ -357,11 +402,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 186,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 189,
               "column": 11
             }
           },
@@ -379,11 +424,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 195,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 198,
               "column": 11
             }
           },
@@ -401,11 +446,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 189,
+              "line": 204,
               "column": 10
             },
             "end": {
-              "line": 192,
+              "line": 207,
               "column": 11
             }
           },
@@ -423,11 +468,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 198,
+              "line": 213,
               "column": 10
             },
             "end": {
-              "line": 201,
+              "line": 216,
               "column": 11
             }
           },
@@ -445,11 +490,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 207,
+              "line": 222,
               "column": 10
             },
             "end": {
-              "line": 210,
+              "line": 225,
               "column": 11
             }
           },
@@ -468,11 +513,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 221,
+              "line": 236,
               "column": 6
             },
             "end": {
-              "line": 229,
+              "line": 244,
               "column": 7
             }
           },
@@ -487,11 +532,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 76,
+              "line": 84,
               "column": 6
             },
             "end": {
-              "line": 85,
+              "line": 93,
               "column": 7
             }
           },
@@ -512,11 +557,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 313,
+              "line": 339,
               "column": 6
             },
             "end": {
-              "line": 330,
+              "line": 356,
               "column": 7
             }
           },
@@ -538,11 +583,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 98,
+              "line": 106,
               "column": 6
             },
             "end": {
-              "line": 128,
+              "line": 136,
               "column": 7
             }
           },
@@ -564,11 +609,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 130,
+              "line": 138,
               "column": 6
             },
             "end": {
-              "line": 134,
+              "line": 142,
               "column": 7
             }
           },
@@ -583,11 +628,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 136,
+              "line": 144,
               "column": 6
             },
             "end": {
-              "line": 149,
+              "line": 157,
               "column": 7
             }
           },
@@ -609,11 +654,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 157,
+              "line": 165,
               "column": 6
             },
             "end": {
-              "line": 179,
+              "line": 187,
               "column": 7
             }
           },
@@ -643,11 +688,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 187,
+              "line": 195,
               "column": 6
             },
             "end": {
-              "line": 206,
+              "line": 214,
               "column": 7
             }
           },
@@ -676,11 +721,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 231,
+              "line": 246,
               "column": 6
             },
             "end": {
-              "line": 235,
+              "line": 250,
               "column": 7
             }
           },
@@ -694,11 +739,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 252,
               "column": 6
             },
             "end": {
-              "line": 242,
+              "line": 257,
               "column": 7
             }
           },
@@ -722,11 +767,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 244,
+              "line": 259,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 270,
               "column": 7
             }
           },
@@ -756,11 +801,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 254,
+              "line": 272,
               "column": 6
             },
             "end": {
-              "line": 258,
+              "line": 276,
               "column": 7
             }
           },
@@ -784,11 +829,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 260,
+              "line": 278,
               "column": 6
             },
             "end": {
-              "line": 264,
+              "line": 283,
               "column": 7
             }
           },
@@ -818,11 +863,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 285,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 287,
               "column": 7
             }
           },
@@ -840,11 +885,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 289,
               "column": 6
             },
             "end": {
-              "line": 272,
+              "line": 291,
               "column": 7
             }
           },
@@ -862,11 +907,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 293,
               "column": 6
             },
             "end": {
-              "line": 276,
+              "line": 295,
               "column": 7
             }
           },
@@ -884,11 +929,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 278,
+              "line": 297,
               "column": 6
             },
             "end": {
-              "line": 281,
+              "line": 300,
               "column": 7
             }
           },
@@ -902,20 +947,16 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 283,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 286,
+              "line": 312,
               "column": 7
             }
           },
           "metadata": {},
-          "params": [
-            {
-              "name": "unit"
-            }
-          ],
+          "params": [],
           "inheritedFrom": "NumberInputMixin"
         },
         {
@@ -924,11 +965,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 288,
+              "line": 314,
               "column": 6
             },
             "end": {
-              "line": 311,
+              "line": 337,
               "column": 7
             }
           },
@@ -949,11 +990,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 332,
+              "line": 358,
               "column": 6
             },
             "end": {
-              "line": 360,
+              "line": 386,
               "column": 7
             }
           },
@@ -971,11 +1012,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 362,
+              "line": 388,
               "column": 6
             },
             "end": {
-              "line": 371,
+              "line": 397,
               "column": 7
             }
           },
@@ -993,11 +1034,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 373,
+              "line": 399,
               "column": 6
             },
             "end": {
-              "line": 377,
+              "line": 403,
               "column": 7
             }
           },
@@ -1011,11 +1052,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 379,
+              "line": 405,
               "column": 6
             },
             "end": {
-              "line": 384,
+              "line": 410,
               "column": 7
             }
           },
@@ -1033,11 +1074,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 386,
+              "line": 412,
               "column": 6
             },
             "end": {
-              "line": 390,
+              "line": 416,
               "column": 7
             }
           },
@@ -1055,11 +1096,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 392,
+              "line": 418,
               "column": 6
             },
             "end": {
-              "line": 397,
+              "line": 423,
               "column": 7
             }
           },
@@ -1077,11 +1118,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 399,
+              "line": 425,
               "column": 6
             },
             "end": {
-              "line": 416,
+              "line": 439,
               "column": 7
             }
           },
@@ -1099,11 +1140,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 418,
+              "line": 441,
               "column": 6
             },
             "end": {
-              "line": 426,
+              "line": 449,
               "column": 7
             }
           },
@@ -1121,11 +1162,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 428,
+              "line": 451,
               "column": 6
             },
             "end": {
-              "line": 436,
+              "line": 459,
               "column": 7
             }
           },
@@ -1143,11 +1184,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 441,
+              "line": 464,
               "column": 6
             },
             "end": {
-              "line": 443,
+              "line": 466,
               "column": 7
             }
           },
@@ -1161,11 +1202,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 448,
+              "line": 471,
               "column": 6
             },
             "end": {
-              "line": 450,
+              "line": 473,
               "column": 7
             }
           },
@@ -1179,11 +1220,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 452,
+              "line": 475,
               "column": 6
             },
             "end": {
-              "line": 479,
+              "line": 502,
               "column": 7
             }
           },
@@ -1202,11 +1243,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 528,
+          "line": 559,
           "column": 4
         },
         "end": {
-          "line": 533,
+          "line": 564,
           "column": 5
         }
       },
@@ -1323,15 +1364,33 @@
           "inheritedFrom": "RangeMixin"
         },
         {
+          "name": "no-clamp",
+          "description": "if true, the value does not clamp according to the given step",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 64,
+              "column": 10
+            },
+            "end": {
+              "line": 67,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "RangeMixin"
+        },
+        {
           "name": "pad-length",
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 89,
               "column": 10
             },
             "end": {
-              "line": 86,
+              "line": 91,
               "column": 11
             }
           },
@@ -1344,11 +1403,28 @@
           "description": "placeholder string",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 97,
               "column": 10
             },
             "end": {
-              "line": 94,
+              "line": 99,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string",
+          "inheritedFrom": "NumberInputMixin"
+        },
+        {
+          "name": "in-percent",
+          "description": "if true the value string is percent-format\nnotice: min, max and step are not in percent (so e.g. if step is 0.001, it means that the step is 0.1%)",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 109,
               "column": 11
             }
           },
@@ -1361,11 +1437,11 @@
           "description": "disables the input",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 115,
               "column": 10
             },
             "end": {
-              "line": 103,
+              "line": 118,
               "column": 11
             }
           },
@@ -1378,11 +1454,11 @@
           "description": "disable autosizing",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 124,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 128,
               "column": 11
             }
           },
@@ -1395,11 +1471,11 @@
           "description": "enables auto padding",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 134,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 136,
               "column": 11
             }
           },
@@ -1412,11 +1488,11 @@
           "description": "value string of the input",
           "sourceRange": {
             "start": {
-              "line": 127,
+              "line": 142,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 146,
               "column": 11
             }
           },
@@ -1429,11 +1505,11 @@
           "description": "unit of the value",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 152,
               "column": 10
             },
             "end": {
-              "line": 140,
+              "line": 155,
               "column": 11
             }
           },
@@ -1446,11 +1522,11 @@
           "description": "The current locale to set the decimal-separator automatically",
           "sourceRange": {
             "start": {
-              "line": 145,
+              "line": 160,
               "column": 10
             },
             "end": {
-              "line": 149,
+              "line": 164,
               "column": 11
             }
           },
@@ -1463,11 +1539,11 @@
           "description": "Separator for local decimal values",
           "sourceRange": {
             "start": {
-              "line": 155,
+              "line": 170,
               "column": 10
             },
             "end": {
-              "line": 157,
+              "line": 172,
               "column": 11
             }
           },
@@ -1480,11 +1556,11 @@
           "description": "always put the sign in the beginning",
           "sourceRange": {
             "start": {
-              "line": 163,
+              "line": 178,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 180,
               "column": 11
             }
           },
@@ -1497,11 +1573,11 @@
           "description": "minimum digits right to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 186,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 189,
               "column": 11
             }
           },
@@ -1514,11 +1590,11 @@
           "description": "minimum digits left to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 195,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 198,
               "column": 11
             }
           },
@@ -1680,17 +1756,40 @@
           "inheritedFrom": "RangeMixin"
         },
         {
+          "name": "noClamp",
+          "type": "boolean",
+          "description": "if true, the value does not clamp according to the given step",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 64,
+              "column": 10
+            },
+            "end": {
+              "line": 67,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_updateValue\""
+            }
+          },
+          "inheritedFrom": "RangeMixin"
+        },
+        {
           "name": "padLength",
           "type": "number",
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 89,
               "column": 10
             },
             "end": {
-              "line": 86,
+              "line": 91,
               "column": 11
             }
           },
@@ -1705,16 +1804,37 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 97,
               "column": 10
             },
             "end": {
-              "line": 94,
+              "line": 99,
               "column": 11
             }
           },
           "metadata": {
             "polymer": {}
+          }
+        },
+        {
+          "name": "inPercent",
+          "type": "string",
+          "description": "if true the value string is percent-format\nnotice: min, max and step are not in percent (so e.g. if step is 0.001, it means that the step is 0.1%)",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 109,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_unitChanged\""
+            }
           }
         },
         {
@@ -1724,11 +1844,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 115,
               "column": 10
             },
             "end": {
-              "line": 103,
+              "line": 118,
               "column": 11
             }
           },
@@ -1743,11 +1863,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 124,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 128,
               "column": 11
             }
           },
@@ -1765,11 +1885,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 134,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 136,
               "column": 11
             }
           },
@@ -1784,11 +1904,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 127,
+              "line": 142,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 146,
               "column": 11
             }
           },
@@ -1806,11 +1926,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 152,
               "column": 10
             },
             "end": {
-              "line": 140,
+              "line": 155,
               "column": 11
             }
           },
@@ -1827,11 +1947,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 145,
+              "line": 160,
               "column": 10
             },
             "end": {
-              "line": 149,
+              "line": 164,
               "column": 11
             }
           },
@@ -1848,11 +1968,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 155,
+              "line": 170,
               "column": 10
             },
             "end": {
-              "line": 157,
+              "line": 172,
               "column": 11
             }
           },
@@ -1867,11 +1987,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 163,
+              "line": 178,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 180,
               "column": 11
             }
           },
@@ -1886,11 +2006,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 186,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 189,
               "column": 11
             }
           },
@@ -1907,11 +2027,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 195,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 198,
               "column": 11
             }
           },
@@ -1928,11 +2048,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 189,
+              "line": 204,
               "column": 10
             },
             "end": {
-              "line": 192,
+              "line": 207,
               "column": 11
             }
           },
@@ -1949,11 +2069,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 198,
+              "line": 213,
               "column": 10
             },
             "end": {
-              "line": 201,
+              "line": 216,
               "column": 11
             }
           },
@@ -1970,11 +2090,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 207,
+              "line": 222,
               "column": 10
             },
             "end": {
-              "line": 210,
+              "line": 225,
               "column": 11
             }
           },
@@ -1992,11 +2112,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 221,
+              "line": 236,
               "column": 6
             },
             "end": {
-              "line": 229,
+              "line": 244,
               "column": 7
             }
           },
@@ -2010,11 +2130,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 76,
+              "line": 84,
               "column": 6
             },
             "end": {
-              "line": 85,
+              "line": 93,
               "column": 7
             }
           },
@@ -2035,11 +2155,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 313,
+              "line": 339,
               "column": 6
             },
             "end": {
-              "line": 330,
+              "line": 356,
               "column": 7
             }
           },
@@ -2060,11 +2180,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 98,
+              "line": 106,
               "column": 6
             },
             "end": {
-              "line": 128,
+              "line": 136,
               "column": 7
             }
           },
@@ -2086,11 +2206,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 130,
+              "line": 138,
               "column": 6
             },
             "end": {
-              "line": 134,
+              "line": 142,
               "column": 7
             }
           },
@@ -2105,11 +2225,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 136,
+              "line": 144,
               "column": 6
             },
             "end": {
-              "line": 149,
+              "line": 157,
               "column": 7
             }
           },
@@ -2131,11 +2251,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 157,
+              "line": 165,
               "column": 6
             },
             "end": {
-              "line": 179,
+              "line": 187,
               "column": 7
             }
           },
@@ -2165,11 +2285,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\range-mixin.html",
             "start": {
-              "line": 187,
+              "line": 195,
               "column": 6
             },
             "end": {
-              "line": 206,
+              "line": 214,
               "column": 7
             }
           },
@@ -2198,11 +2318,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 231,
+              "line": 246,
               "column": 6
             },
             "end": {
-              "line": 235,
+              "line": 250,
               "column": 7
             }
           },
@@ -2215,11 +2335,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 252,
               "column": 6
             },
             "end": {
-              "line": 242,
+              "line": 257,
               "column": 7
             }
           },
@@ -2242,11 +2362,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 244,
+              "line": 259,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 270,
               "column": 7
             }
           },
@@ -2275,11 +2395,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 254,
+              "line": 272,
               "column": 6
             },
             "end": {
-              "line": 258,
+              "line": 276,
               "column": 7
             }
           },
@@ -2302,11 +2422,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 260,
+              "line": 278,
               "column": 6
             },
             "end": {
-              "line": 264,
+              "line": 283,
               "column": 7
             }
           },
@@ -2335,11 +2455,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 285,
               "column": 6
             },
             "end": {
-              "line": 268,
+              "line": 287,
               "column": 7
             }
           },
@@ -2356,11 +2476,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 289,
               "column": 6
             },
             "end": {
-              "line": 272,
+              "line": 291,
               "column": 7
             }
           },
@@ -2377,11 +2497,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 293,
               "column": 6
             },
             "end": {
-              "line": 276,
+              "line": 295,
               "column": 7
             }
           },
@@ -2398,11 +2518,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 278,
+              "line": 297,
               "column": 6
             },
             "end": {
-              "line": 281,
+              "line": 300,
               "column": 7
             }
           },
@@ -2415,20 +2535,16 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 283,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 286,
+              "line": 312,
               "column": 7
             }
           },
           "metadata": {},
-          "params": [
-            {
-              "name": "unit"
-            }
-          ]
+          "params": []
         },
         {
           "name": "_valueStringChanged",
@@ -2436,11 +2552,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 288,
+              "line": 314,
               "column": 6
             },
             "end": {
-              "line": 311,
+              "line": 337,
               "column": 7
             }
           },
@@ -2460,11 +2576,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 332,
+              "line": 358,
               "column": 6
             },
             "end": {
-              "line": 360,
+              "line": 386,
               "column": 7
             }
           },
@@ -2481,11 +2597,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 362,
+              "line": 388,
               "column": 6
             },
             "end": {
-              "line": 371,
+              "line": 397,
               "column": 7
             }
           },
@@ -2502,11 +2618,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 373,
+              "line": 399,
               "column": 6
             },
             "end": {
-              "line": 377,
+              "line": 403,
               "column": 7
             }
           },
@@ -2519,11 +2635,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 379,
+              "line": 405,
               "column": 6
             },
             "end": {
-              "line": 384,
+              "line": 410,
               "column": 7
             }
           },
@@ -2540,11 +2656,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 386,
+              "line": 412,
               "column": 6
             },
             "end": {
-              "line": 390,
+              "line": 416,
               "column": 7
             }
           },
@@ -2561,11 +2677,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 392,
+              "line": 418,
               "column": 6
             },
             "end": {
-              "line": 397,
+              "line": 423,
               "column": 7
             }
           },
@@ -2582,11 +2698,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 399,
+              "line": 425,
               "column": 6
             },
             "end": {
-              "line": 416,
+              "line": 439,
               "column": 7
             }
           },
@@ -2603,11 +2719,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 418,
+              "line": 441,
               "column": 6
             },
             "end": {
-              "line": 426,
+              "line": 449,
               "column": 7
             }
           },
@@ -2624,11 +2740,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 428,
+              "line": 451,
               "column": 6
             },
             "end": {
-              "line": 436,
+              "line": 459,
               "column": 7
             }
           },
@@ -2645,11 +2761,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 441,
+              "line": 464,
               "column": 6
             },
             "end": {
-              "line": 443,
+              "line": 466,
               "column": 7
             }
           },
@@ -2662,11 +2778,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 448,
+              "line": 471,
               "column": 6
             },
             "end": {
-              "line": 450,
+              "line": 473,
               "column": 7
             }
           },
@@ -2679,11 +2795,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 452,
+              "line": 475,
               "column": 6
             },
             "end": {
-              "line": 479,
+              "line": 502,
               "column": 7
             }
           },
@@ -2700,7 +2816,7 @@
           "column": 2
         },
         "end": {
-          "line": 481,
+          "line": 504,
           "column": 3
         }
       },
@@ -2816,15 +2932,33 @@
           "inheritedFrom": "RangeMixin"
         },
         {
+          "name": "no-clamp",
+          "description": "if true, the value does not clamp according to the given step",
+          "sourceRange": {
+            "file": "bower_components\\property-mixins\\range-mixin.html",
+            "start": {
+              "line": 64,
+              "column": 10
+            },
+            "end": {
+              "line": 67,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "RangeMixin"
+        },
+        {
           "name": "pad-length",
           "description": "length to pad the string (with `0`) according to the total amount of numbers",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 89,
               "column": 10
             },
             "end": {
-              "line": 86,
+              "line": 91,
               "column": 11
             }
           },
@@ -2836,11 +2970,27 @@
           "description": "placeholder string",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 97,
               "column": 10
             },
             "end": {
-              "line": 94,
+              "line": 99,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "in-percent",
+          "description": "if true the value string is percent-format\nnotice: min, max and step are not in percent (so e.g. if step is 0.001, it means that the step is 0.1%)",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 109,
               "column": 11
             }
           },
@@ -2852,11 +3002,11 @@
           "description": "disables the input",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 115,
               "column": 10
             },
             "end": {
-              "line": 103,
+              "line": 118,
               "column": 11
             }
           },
@@ -2868,11 +3018,11 @@
           "description": "disable autosizing",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 124,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 128,
               "column": 11
             }
           },
@@ -2884,11 +3034,11 @@
           "description": "enables auto padding",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 134,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 136,
               "column": 11
             }
           },
@@ -2900,11 +3050,11 @@
           "description": "value string of the input",
           "sourceRange": {
             "start": {
-              "line": 127,
+              "line": 142,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 146,
               "column": 11
             }
           },
@@ -2916,11 +3066,11 @@
           "description": "unit of the value",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 152,
               "column": 10
             },
             "end": {
-              "line": 140,
+              "line": 155,
               "column": 11
             }
           },
@@ -2932,11 +3082,11 @@
           "description": "The current locale to set the decimal-separator automatically",
           "sourceRange": {
             "start": {
-              "line": 145,
+              "line": 160,
               "column": 10
             },
             "end": {
-              "line": 149,
+              "line": 164,
               "column": 11
             }
           },
@@ -2948,11 +3098,11 @@
           "description": "Separator for local decimal values",
           "sourceRange": {
             "start": {
-              "line": 155,
+              "line": 170,
               "column": 10
             },
             "end": {
-              "line": 157,
+              "line": 172,
               "column": 11
             }
           },
@@ -2964,11 +3114,11 @@
           "description": "always put the sign in the beginning",
           "sourceRange": {
             "start": {
-              "line": 163,
+              "line": 178,
               "column": 10
             },
             "end": {
-              "line": 165,
+              "line": 180,
               "column": 11
             }
           },
@@ -2980,11 +3130,11 @@
           "description": "minimum digits right to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 171,
+              "line": 186,
               "column": 10
             },
             "end": {
-              "line": 174,
+              "line": 189,
               "column": 11
             }
           },
@@ -2996,11 +3146,11 @@
           "description": "minimum digits left to the decimal separator",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 195,
               "column": 10
             },
             "end": {
-              "line": 183,
+              "line": 198,
               "column": 11
             }
           },

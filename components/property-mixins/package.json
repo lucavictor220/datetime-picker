@@ -1,6 +1,6 @@
 {
   "name": "property-mixins",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "mixin for custom elements to extends property mixins for data formats",
   "main": [
     "color-mixin.html",
@@ -9,6 +9,7 @@
     "range-mixin.html"
   ],
   "scripts": {
+    "prepublish": "git add . && git commit -m \"publish new version\" && git push && npm version patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

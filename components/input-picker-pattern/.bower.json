@@ -31,14 +31,14 @@
       }
     }
   },
-  "version": "1.0.13",
-  "_release": "1.0.13",
+  "version": "1.0.15",
+  "_release": "1.0.15",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.13",
-    "commit": "5973f441d83eb32301df73232601da48eea3396c"
+    "tag": "1.0.15",
+    "commit": "950e9550d4d81531a854a78240cf951b6813986e"
   },
   "_source": "https://github.com/fooloomanzoo/input-picker-pattern.git",
-  "_target": "*",
+  "_target": "1.0.15",
   "_originalSource": "fooloomanzoo/input-picker-pattern"
 }

@@ -1,15 +1,18 @@
 <link rel="import" href="input-picker-shared-style.html">
+<link rel="import" href="form-element-mixin.html">
 
 <script>
   /**
    * mixin to extend an element with a test for an expected input type and implement a polyfill, when wanted or needed
+   *
+   * @appliesMixin FormElementMixin
    *
    * @mixinFunction
    * @polymer
    */
   const InputPickerPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
-    return class extends superClass {
+    return class extends FormElementMixin(superClass) {
       /**
        * the expected input type, that should be polyfilled, if not available
        * @type {string}
@@ -231,14 +234,6 @@
           },
 
           /**
-           * disables the input elements
-           */
-          disabled: {
-            type: Boolean,
-            value: false
-          },
-
-          /**
            * Set to true to make the input auto-confirming
            */
           autoConfirm: {
@@ -324,6 +319,14 @@
           super.toggle();
         }
         this.opened = !this.opened;
+      }
+
+      /**
+       * validates the input
+       */
+      validate() {
+        this.confirm();
+        return super.validate();
       }
 
       /**
