@@ -1,24 +1,27 @@
 {
-  "name": "number-input",
+  "name": "datetime-input",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
-  "description": "input for numeric values",
-  "homepage": "https://github.com/fooloomanzoo/number-input/",
+  "description": "An input for date and time",
+  "homepage": "https://github.com/fooloomanzoo/datetime-input/",
   "keywords": [
     "webcomponents",
     "polymer",
-    "number",
-    "input",
-    "step"
+    "datetime",
+    "date",
+    "time",
+    "range",
+    "input"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fooloomanzoo/number-input.git"
+    "url": "https://github.com/fooloomanzoo/datetime-input.git"
   },
-  "license": "MIT",
+  "licence": "https://github.com/fooloomanzoo/datetime-input/raw/master/LICENSE.txt",
   "dependencies": {
     "polymer": "Polymer/polymer#2",
+    "number-input": "fooloomanzoo/number-input#2",
     "property-mixins": "fooloomanzoo/property-mixins#2",
     "input-picker-pattern": "fooloomanzoo/input-picker-pattern#2"
   },
@@ -28,17 +31,14 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
   },
-  "resolutions": {
-    "webcomponentsjs": "^1.0.0"
-  },
   "version": "2.0.2",
   "_release": "2.0.2",
   "_resolution": {
     "type": "version",
     "tag": "2.0.2",
-    "commit": "e84cc9c37423c4148b0a0da4a52998a0595c76f8"
+    "commit": "3c0eb4cb813270fb28b2dd1cea3c4aef857a658c"
   },
-  "_source": "https://github.com/fooloomanzoo/number-input.git",
+  "_source": "https://github.com/fooloomanzoo/datetime-input.git",
   "_target": "2",
-  "_originalSource": "fooloomanzoo/number-input"
+  "_originalSource": "fooloomanzoo/datetime-input"
 }

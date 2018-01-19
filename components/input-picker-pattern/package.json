@@ -1,6 +1,6 @@
 {
   "name": "@fooloomanzoo/input-picker-pattern",
-  "version": "1.0.15",
+  "version": "2.0.0",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
@@ -14,11 +14,18 @@
     "polyfill",
     "input"
   ],
-  "main": "input-picker-pattern.html",
+  "main": [
+    "input-picker-pattern.html",
+    "input-picker-shared-style.html",
+    "form-element-mixin.html",
+    "overlay-picker-mixin.html",
+    "overlay-element.html",
+    "dropdown-style.html"
+  ],
   "scripts": {
     "postinstall": "bower install",
     "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && git push && npm version patch",
-    "build": "bower update && polymer analyze > analysis.json",
+    "build": "git pull && bower update -f && polymer analyze > analysis.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
