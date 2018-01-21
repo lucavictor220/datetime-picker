@@ -21,7 +21,7 @@ styles for used for a inner dropdown
         position: absolute;
         width: 0;
         height: 0;
-        border-width: 0.5em;
+        border-width: 0.3em;
         border-style: solid;
         border-color: transparent transparent transparent transparent;
         left: auto;
@@ -51,12 +51,11 @@ styles for used for a inner dropdown
       }
 
       :host([horizontal-align="left"][vertical-align="bottom"]) .dropdown {
-        transform: translate(100%, -100%);
+        bottom: 0; top: auto;
       }
 
       :host([horizontal-align="left"][vertical-align="top"]) .dropdown {
-        top: auto; bottom: 0;
-        transform: translate(100%, 100%);
+        top: 0; bottom: auto;
       }
 
       :host([horizontal-align="left"][vertical-align="auto"]) .dropdown {
@@ -70,12 +69,11 @@ styles for used for a inner dropdown
       }
 
       :host([horizontal-align="right"][vertical-align="bottom"]) .dropdown {
-        transform: translate(-100%, -100%);
+        bottom: 0; top: auto;
       }
 
       :host([horizontal-align="right"][vertical-align="top"]) .dropdown {
-        top: auto; bottom: 0;
-        transform: translate(-100%, 100%);
+        top: 0; bottom: auto;
       }
 
       :host([horizontal-align="right"][vertical-align="auto"]) .dropdown {
@@ -89,27 +87,27 @@ styles for used for a inner dropdown
       }
 
       :host([vertical-align="top"]) .dropdown:after {
-        top: -1em;
-        left: 1em;
-        border-bottom-color: var(--datetime-background);
+        top: -0.6em;
+        left: 0.6em;
+        border-bottom-color: var(--input-background, #000);
       }
       :host([vertical-align="bottom"]) .dropdown:after {
-        bottom: -1em;
-        left: 1em;
-        border-top-color: var(--datetime-background);
+        bottom: -0.6em;
+        left: 0.6em;
+        border-top-color: var(--input-background, #000);
       }
 
       :host([horizontal-align="left"]) .dropdown:after {
-        top: 1em;
-        left: -1em;
-        border-right-color: var(--datetime-background);
+        top: 0.6em;
+        left: -0.6em;
+        border-right-color: var(--input-background, #000);
       }
       :host([horizontal-align="left"][vertical-align="top"]) .dropdown:after {
         border-bottom-color: transparent;
       }
       :host([horizontal-align="left"][vertical-align="bottom"]) .dropdown:after {
         top: auto;
-        bottom: 1em;
+        bottom: 0.6em;
         border-top-color: transparent;
       }
       :host([horizontal-align="left"][vertical-align="auto"]) .dropdown:after {
@@ -117,9 +115,9 @@ styles for used for a inner dropdown
       }
 
       :host([horizontal-align="right"]) .dropdown:after {
-        top: 1em;
-        right: -1em;
-        border-left-color: var(--datetime-background);
+        top: 0.6em;
+        right: -0.6em;
+        border-left-color: var(--input-background, #000);
       }
       :host([horizontal-align="right"][vertical-align="top"]) .dropdown:after {
         left: auto;
@@ -127,7 +125,7 @@ styles for used for a inner dropdown
       }
       :host([horizontal-align="right"][vertical-align="bottom"]) .dropdown:after {
         top: auto;
-        bottom: 1em;
+        bottom: 0.6em;
         left: auto;
         border-top-color: transparent;
       }
