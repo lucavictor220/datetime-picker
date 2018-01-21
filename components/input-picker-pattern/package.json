@@ -1,6 +1,6 @@
 {
   "name": "@fooloomanzoo/input-picker-pattern",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
@@ -14,14 +14,7 @@
     "polyfill",
     "input"
   ],
-  "main": [
-    "input-picker-pattern.html",
-    "input-picker-shared-style.html",
-    "form-element-mixin.html",
-    "overlay-picker-mixin.html",
-    "overlay-element.html",
-    "dropdown-style.html"
-  ],
+  "main": "input-picker-pattern.html",
   "scripts": {
     "postinstall": "bower install",
     "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && git push && npm version patch",
