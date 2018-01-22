@@ -24,9 +24,11 @@
           display: inline-flex;
           flex-direction: row;
           align-items: center;
-          background-color: var(--datetime-background);
-          color: var(--datetime-color);
-          @apply --datetime-element;
+          background-color: var(--input-background);
+          color: var(--input-color);
+          padding: 4px;
+          @apply --input-picker;
+          @apply --time-element;
         }
         #timer > .field {
           display: flex;
@@ -40,7 +42,7 @@
           justify-content: space-between;
         }
         #timer > .field > number-input {
-          background-color: var(--datetime-background);
+          background-color: var(--input-background);
         }
         #timer > .field > number-input:focus {
           outline: currentColor auto thin;
@@ -91,6 +93,17 @@
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
+          <div class="field" hidden$="[[!withTimezone]]" style="margin-left:0.167em;">
+            <svg class="icon switch" viewBox="0 0 24 24" prop="_timeZoneHours" step="1"><g><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></g></svg>
+            <number-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></number-input>
+            <svg class="icon switch" viewBox="0 0 24 24" prop="_timeZoneHours" step="-1"><g><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></g></svg>
+          </div>
+          <span hidden$="[[!withTimezone]]">[[_localTimeSeparator]]</span>
+          <div class="field" hidden$="[[!withTimezone]]">
+            <svg class="icon switch" viewBox="0 0 24 24" prop="_timeZoneMinutes" step="15"><g><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></g></svg>
+            <number-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></number-input>
+            <svg class="icon switch" viewBox="0 0 24 24" prop="_timeZoneMinutes" step="-15"><g><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></g></svg>
+          </div>
         </div>
       `
     }
@@ -104,6 +117,18 @@
         clamp: {
           type: String,
           value: 'milliseconds'
+        },
+
+        withTimezone: {
+          type: Boolean
+        },
+
+        _timeZoneHours: {
+          type: Number
+        },
+
+        _timeZoneMinutes: {
+          type: Number
         },
 
         _hideHours: {
@@ -128,6 +153,13 @@
       }
     }
 
+    static get observers() {
+      return [
+        '_offsetMinutesChanged(_offsetMinutes)',
+        '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) '
+      ]
+    }
+
     _addSwitchListener() {
       super._addSwitchListener();
       const switchs = this.root.querySelectorAll('#timer .icon.switch');
@@ -147,6 +179,26 @@
           s.addEventListener('mousedown', this._increm.bind(this, s), false);
           s.addEventListener('touchstart', this._increm.bind(this, s), false);
         })
+      }
+    }
+
+    _offsetMinutesChanged(offsetMinutes) {
+      if (offsetMinutes === undefined) {
+        return;
+      }
+      this.setProperties({
+        _timeZoneHours: -Math.floor(offsetMinutes) / 60,
+        _timeZoneMinutes: Math.abs(offsetMinutes) % 60
+      });
+    }
+
+    _timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) {
+      if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
+        return;
+      }
+      const timezoneOffset = this._computeTimezoneOffset(-(_timeZoneHours*60 + _timeZoneMinutes));
+      if (timezoneOffset) {
+        this.timezoneOffset = timezoneOffset;
       }
     }
 
@@ -175,14 +227,15 @@
        *
        * Custom property | Description | Default
        * ----------------|-------------|----------
-       * `--datetime-background` | text-color of the time-element | `#2b2b2b`
-       * `--datetime-color` | text-color of the time-element | `#dadada`
-       * `--datetime-selected-background` | background-color of the focussed time-input and the hovered icons and buttons | `--primary-color, #394FE8`
-       * `--datetime-selected-color` | color of the focussed time-input and the hovered icons and buttons | `#f5f5f5`
-       * `--datetime-element` | Mixin applied to the time-element and the calender-element | `{border-radius: 4px; padding: 4px;}`
-       * `--datetime-picker` | Mixin applied to the picker | `{ box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4); }`
-       * `--datetime-input` | Mixin applied to the inputs | {border-radius: 4px; padding: 0.3em 0.2em; border: none; outline: none; text-align: center; color: inherit; cursor: pointer; background-color: transparent; box-sizing: content-box; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);}`
-       * `--datetime-icon` | Mixin applied to closing icon | `{border-radius: 2px; padding: 8px; height: 16px; width: 16px; background-color: transparent; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1); cursor: pointer; fill: currentColor; }`
+       * `--input-color` | text-color of the element | `#dadada`
+       * `--input-background` | text-color of the element | `#2b2b2b`
+       * `--input-focus-color` | color of the focussed or hovered inputs and icons | `#f5f5f5`
+       * `--input-focus-background` | background-color of the focussed or hovered inputs and icons | `--primary-color, #394FE8`
+       * `--input-style` | Mixin applied to the inputs | { border-radius: 3px; padding: 0.2em 0.1em; border: none; outline: none; text-align: center; color: inherit; cursor: pointer; background-color: transparent; box-sizing: content-box; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);`
+       * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}`
+       * `--input-icon` | Mixin applied to the icons | `{border-radius: 2px; padding: 8px; height: 16px; width: 16px; background-color: transparent; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1); cursor: pointer; fill: currentColor; }`
+       * `--input-picker` | Mixin applied to the element | `{box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4); border-radius: 4px;}`
+       * `--time-element` | Mixin applied to the time-element | `{}`
        *
        * @customElement
        * @polymer

@@ -5,6 +5,42 @@
 _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/)_
 ## &lt;datetime-picker&gt;
 
+<!--
+```
+<custom-element-demo height="370">
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <link rel="import" href="datetime-picker.html">
+    <style>
+      html {
+        font-family: 'Fira Sans', sans-serif;
+      }
+    </style>
+    <dom-bind>
+      <template is="dom-bind">
+        <datetime-picker native="[[native]]" width-timezone="{{widthTimezone}}" auto-confirm="[[autoConfirm]]" value="{{value}}" confirmed-value="{{confirmedValue}}" date="{{date}}" datetime="{{datetime}}" confirmed-date="{{confirmedDate}}" confirmed-datetime="{{confirmedDatetime}}" confirmed-time="{{confirmedTime}}" time="{{time}}" timezone-offset="{{timezoneOffset}}" vertical-align="top" horizontal-align="left"></datetime-picker><br><br>
+        <input type="checkbox" checked="{{native::change}}">native picker<br>
+        <input type="checkbox" checked="{{autoConfirm::change}}">auto confirm<br><br>
+        <input type="checkbox" checked="{{widthTimezon::change}}">with timezone<br><br>
+        <div class="vertical-section-container result">
+          <div><code>numeric value</code>: <b>[[value]]</b></div>
+          <div><code>date</code>: <b>[[date]]</b></div>
+          <div><code>time</code>: <b>[[time]]</b></div>
+          <div><code>datetime</code>: <b>[[datetime]]</b></div>
+          <div><code>confirmed time</code>: <b>[[confirmedTime]]</b></div>
+          <div><code>confirmed date</code>: <b>[[confirmedDate]]</b></div>
+          <div><code>confirmed datetime</code>: <b>[[confirmedDatetime]]</b></div>
+          <div><code>confirmed numeric value</code>: <b>[[confirmedValue]]</b></div>
+          <div><code>timezoneOffset</code>: <b><input pattern="[+-]/d/d:/d/d" value="{{timezoneOffset::change}}"></b></div>
+        </div>
+      </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
+
 ### What is it for?
 
 `datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` and the `<time-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
@@ -30,7 +66,7 @@ The **picker**-elements can use the **auto-confirm**-attribute, so that all valu
 
 ### Motivation
 
-Internally it tests the browser, if **native** input-types `datetime-local`, `date` or `time` are supported. If it is not, a `<calendar-element>` or a `<time-element>` will be displayed instead, according to the kind of picker you choose. You can decide to use the native or the replacements during runtime. calendar-element and time-element can also be used separately. **Internationalization** of the view in the pickers is inplemented and the attributes remain in **iso8061**-format.
+Internally it tests the browser, if **native** input-types `datetime-local`, `date` or `time` are supported. If it is not, a `<calendar-element>` or a `<time-element>` will be displayed instead, according to the kind of picker you choose. You can decide to use the native or the replacements during runtime. calendar-element and time-element can also be used separately. **Internationalization** of the view in the pickers is inplemented and the attributes remain in **iso8061**-format. You can set the timezone of your datetime-values.
 
 It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, you like to have a different look or you would like to have a guaranteed working **datetime-picker**.
 
@@ -59,10 +95,11 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 <custom-element-demo height="300">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
       }
     </style>
     <dom-bind>
@@ -88,10 +125,11 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 <custom-element-demo height="100">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
       }
     </style>
     <dom-bind>
@@ -117,10 +155,11 @@ By default it checks if `datetime-local`, `date` or `time` is supported as input
 <custom-element-demo height="410">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
         line-height: 1.5;
       }
     </style>
@@ -153,10 +192,11 @@ Set cross data bindings to limit the values of the inputs. Use the ``confirmed``
 <custom-element-demo height="300">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
       }
     </style>
     <dom-bind>
@@ -191,10 +231,11 @@ Choose then the related elements:
 <custom-element-demo height="380">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="overlay-datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
       }
     </style>
     <dom-bind>
@@ -220,10 +261,11 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
 <custom-element-demo height="300">
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="import" href="overlay-datetime-picker.html">
     <style>
       html {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Fira Sans', sans-serif;
       }
     </style>
     <dom-bind>

@@ -6,7 +6,7 @@
 <script>
   /**
    *
-   * Mixin to extend an element to a tim
+   * Mixin to extend an element to a time input
    *
    * @demo demo/index.html
    **/
@@ -16,8 +16,8 @@
 
       static get inputTemplate() {
         return `
-          ${super.inputTemplate === undefined ? '' : (super.inputTemplate + '<span style="order:7;padding-left:0.25ch;"></span>')}
-          <div hidden$="[[_hideHours]]" style="order:7;">
+          ${super.inputTemplate || ''}
+          <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
             <number-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></number-input>
             <number-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></number-input>
           </div>
@@ -37,15 +37,23 @@
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
+          <div hidden$="[[!withTimezone]]" style="order:12;">
+            <number-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></number-input>
+            <span>[[_localTimeSeparator]]</span>
+            <number-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></number-input>
+          </div>
         `;
       }
 
       static get customStyleContent() {
         return `
-          ${super.customStyleContent}
+          ${super.customStyleContent || ''}
           :host > div {
             display: inline-flex;
             align-items: center;
+          }
+          number-input ~ .hours {
+            margin-left: 0.2ch;
           }
           .single-switch {
             align-self: stretch;
@@ -65,6 +73,18 @@
           clamp: {
             type: String,
             value: 'milliseconds'
+          },
+
+          withTimezone: {
+            type: Boolean
+          },
+
+          _timeZoneHours: {
+            type: Number
+          },
+
+          _timeZoneMinutes: {
+            type: Number
           },
 
           _hideHours: {
@@ -89,8 +109,35 @@
         }
       }
 
+      static get observers() {
+        return [
+          '_offsetMinutesChanged(_offsetMinutes)',
+          '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) '
+        ]
+      }
+
       _switchAm() {
         this.isAm = !this.isAm;
+      }
+
+      _offsetMinutesChanged(offsetMinutes) {
+        if (offsetMinutes === undefined) {
+          return;
+        }
+        this.setProperties({
+          _timeZoneHours: -Math.floor(offsetMinutes) / 60,
+          _timeZoneMinutes: Math.abs(offsetMinutes) % 60
+        });
+      }
+
+      _timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) {
+        if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
+          return;
+        }
+        const timezoneOffset = this._computeTimezoneOffset(-(_timeZoneHours*60 + _timeZoneMinutes));
+        if (timezoneOffset) {
+          this.timezoneOffset = timezoneOffset;
+        }
       }
     }
   }
@@ -104,6 +151,15 @@
      *  ```html
      *    <time-input value="{{value}}"></time-input>
      *  ```
+     *
+     * Custom property | Description | Default
+     * ----------------|-------------|----------
+     * `--input-color` | text-color of the inputs | ``
+     * `--input-background` | text-color of the inputs | ``
+     * `--input-focus-color` | color of the focussed or hovered inputs | ``
+     * `--input-focus-background` | background-color of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)`
+     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);`
+     * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}`
      *
      *  @polymer
      *  @customElement
