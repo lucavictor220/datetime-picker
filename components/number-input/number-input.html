@@ -1,103 +1,23 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../property-mixins/range-mixin.html">
 <link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="integer-input.html">
 
 <script>
   /**
    * mixin to create a number-input
    *
-   * @appliesMixin RangeMixin
-   * @appliesMixin FormElementMixin
+   * @appliesMixin IntegerInputMixin
    *
    * @mixinFunction
    * @polymer
    */
   const NumberInputMixin = (superClass) => { // eslint-disable-line no-unused-vars
 
-    return class extends RangeMixin(FormElementMixin(superClass)) {
-
-      static get template() {
-        return `
-          ${this.styleTemplate}
-          ${this.contentTemplate}
-        `;
-      }
-
-      static get styleTemplate() {
-        return `
-          <style>
-            :host {
-              display: inline-flex;
-              box-sizing: content-box;
-              padding: 0 !important;
-            }
-            #input {
-              font-family: inherit;
-              font-size: inherit;
-              font-weight: inherit;
-              text-align: var(--number-input-allign, center);
-              overflow: visible;
-              box-sizing: content-box;
-              border: 0;
-              border-color: transparent;
-              color: var(--number-input-color, var(--input-color, inherit));
-              background: var(--number-input-background, var(--input-background, transparent));
-              @apply --input-style;
-              @apply --number-input;
-            }
-            #input::placeholder {
-              @apply --number-input-placeholder;
-            }
-            #input:hover,
-            #input:focus {
-              outline: none;
-              color: var(--number-input-focus-color, var(--input-focus-color, inherit));
-              background: var(--number-input-focus-background, var(--input-focus-background, rgba(0,0,0,0.1)));
-              @apply --input-focus;
-              @apply --number-input-focus;
-            }
-            :host([disabled]) {
-              color: var(--number-input-disabled-color, var(--input-disabled-color, inherit));
-              background: var(--number-input-disabled-background, var(--input-disabled-background, inherit));
-              @apply --input-disabled;
-            }
-          </style>
-        `;
-      }
-
-      static get contentTemplate() {
-        return `
-          <input id="input"
-            type="tel"
-            placeholder="[[placeholder]]"
-            required="[[required]]"
-            disabled="[[disabled]]"
-            on-focusin="validate"
-            on-focusout="validate"
-            on-blur="validate"
-            on-keydown="_checkKeycode"
-            on-keyup="_stopIncrem">
-        `;
-      }
+    return class extends IntegerInputMixin(superClass) {
 
       static get properties() {
         return {
-          /**
-           * length to pad the string (with `0`) according to the total amount of numbers
-           * @type {number}
-           */
-          padLength: {
-            type: Number
-          },
-
-          /**
-           * placeholder string
-           * @type {string}
-           */
-          placeholder: {
-            type: String
-          },
-
           /**
            * if true the value string is percent-format
            * notice: min, max and step are not in percent (so e.g. if step is 0.001, it means that the step is 0.1%)
@@ -105,35 +25,8 @@
            */
           inPercent: {
             type: Boolean,
-            observer: '_unitChanged'
-          },
-
-          /**
-           * disable autosizing
-           * @type {boolean}
-           */
-          noAutoWidth: {
-            type: Boolean,
             value: false,
-            observer: '_noAutoWidthChanged'
-          },
-
-          /**
-           * enables auto padding
-           * @type {boolean}
-           */
-          autoPadding: {
-            type: Boolean
-          },
-
-          /**
-           * value string of the input
-           * @type {string}
-           */
-          valueString: {
-            type: String,
-            notify: true,
-            observer: '_valueStringChanged'
+            observer: '_unitChanged'
           },
 
           /**
@@ -163,38 +56,12 @@
           },
 
           /**
-           * always put the sign in the beginning
-           * @type {string}
-           */
-          alwaysSign: {
-            type: Boolean
-          },
-
-          /**
            * minimum digits right to the decimal separator
            * @type {number}
            */
           minimumFractionDigits: {
             type: Number,
-            computed: '_computeMinimumFractionDigits(step, min, max)'
-          },
-
-          /**
-           * minimum digits left to the decimal separator
-           * @type {number}
-           */
-          minimumIntegerDigits: {
-            type: Number,
-            computed: '_computeMinimumIntegerDigits(autoPadding, padLength, min, max, minimumFractionDigits)'
-          },
-
-          /**
-           * longest number-string of the given range
-           * @type {number}
-           */
-          _longestStaticLength: {
-            type: Number,
-            computed: '_computeLongestStatic(min, max, placeholder, minimumIntegerDigits, minimumFractionDigits)'
+            computed: '_computeMinimumFractionDigits(step, min, max, inPercent)'
           },
 
           /**
@@ -207,7 +74,7 @@
           },
 
           /**
-           * regular expression to parse the numeric parts of a number string
+           * regular expression to replace non-numeric parts of a number string
            * @type {RegExp}
            */
           _regExpNotInNumber: {
@@ -217,64 +84,45 @@
         }
       }
 
-      static get observers() {
-        return [
-          '_debouncedComputeWidth(valueString)',
-          '_computePadding(autoPadding, minimumIntegerDigits, minimumFractionDigits)'
-        ]
-      }
+      _computeMinimumFractionDigits(step, min, max, inPercent) {
+        if (inPercent) {
+          min = this._safeMult(min || 0, 100);
+          max = this._safeMult(max || 0, 100);
+          step = this._safeMult(step || 0.01, 100);
+        }
 
-      connectedCallback() {
-        super.connectedCallback();
-        /**
-         * IE & Edge ch-unit fix
-         */
-        this._chCorrection = window.navigator.userAgent.match(/Edge|Trident/g) ? 1.25 : 1;
-        this._ensureAttribute('tabindex', 0);
-        this.addEventListener('focus', this.focus.bind(this), false);
-      }
+        min = '' + (Math.abs(min) || '');
+        max = '' + (Math.abs(max) || '');
+        step = '' + step;
 
-      disconnectedCallback() {
-        super.disconnectedCallback();
-        this.removeEventListener('focus', this.focus.bind(this), false);
-        window.removeEventListener('resize', this._debouncedComputeWidth.bind(this, this.valueString), false);
-      }
-
-      _computeMinimumFractionDigits(step, min, max) {
-        return ['0', '' + this._safeMult(step, this.inPercent ? 100 : 1), '' + this._safeMult(min || 0, this.inPercent ? 100 : 1), '' + this._safeMult(max || 0, this.inPercent ? 100 : 1)].reduce( (acc, curr) => {
+        return ['0', step, min, max].reduce( (acc, curr) => {
           const pos = curr.indexOf('.');
           return Math.max((pos < 0) ? 0 : (curr.length - 1 - pos), acc);
         });
       }
 
-      _computeMinimumIntegerDigits(autoPadding, padLength, min, max, minimumFractionDigits) {
+      _computeMinimumIntegerDigits(autoPadding, padLength, min, max, step, inPercent) {
+        if (inPercent === true) {
+          min = Math.round(min * 100);
+          max = Math.round(max * 100);
+          step = Math.round(step * 100);
+        } else {
+          min = Math.round(min);
+          max = Math.round(max);
+          step = Math.round(step);
+        }
+        min = '' + (Math.abs(min) || 0);
+        max = '' + (Math.abs(max) || 0);
+        step = '' + (Math.abs(step) || 0);
+
         if (autoPadding) {
-          return [Math.max(1, (padLength || 0) - (minimumFractionDigits || 0)), '' + this._safeMult(Math.abs(min || 0), this.inPercent ? 100 : 1), '' + this._safeMult(Math.abs(max || 0), this.inPercent ? 100 : 1)].reduce( (acc, curr) => {
-            const pos = curr.indexOf('.');
-            return Math.max(pos > 0 ? pos : curr.length, acc);
-          });
+          return Math.max((padLength || 1), step.length, min.length, max.length);
         }
-        if (padLength) {
-          return Math.max(1, (padLength || 0) - (minimumFractionDigits || 0));
-        }
-        return 1;
+        return padLength || 1;
       }
 
-      _computePadding(autoPadding, minimumIntegerDigits, minimumFractionDigits) {
-        if (autoPadding === true && minimumIntegerDigits !== undefined && minimumFractionDigits !== undefined) {
-          this.padLength = Math.max(minimumIntegerDigits + minimumFractionDigits, this.inPercent ? 3 : 1);
-        }
-      }
-
-      _computeLongestStatic(min, max, placeholder, minimumIntegerDigits, minimumFractionDigits) {
-        return Math.max(this._computeChWidth('' + ((min && this._safeMult(min || 0, this.inPercent ? 100 : 1)) || '')),
-                        this._computeChWidth('' + ((max && this._safeMult(max || 0, this.inPercent ? 100 : 1)) || '')),
-                        this._computeChWidth(placeholder || ''),
-                        this._computeChWidth(this.formatNumber(Math.pow(10, ((minimumIntegerDigits - 1) || 0) + this.inPercent ? 2 : 0) + Math.pow(10, -(minimumFractionDigits || 0) + this.inPercent ? 2 : 0))) + (this.min < 0 || this.max < 0 ? 0.5 : 0));
-      }
-
-      _computeChWidth(str) {
-        return str.length - str.replace(/[\d+-]/g, '').length/2;
+      _computeLongestStatic(alwaysSign, minimumIntegerDigits, minimumFractionDigits) {
+        return this._computeChWidth((!alwaysSign && (this.min < 0 || this.max < 0) ? '-' : '') + this.formatNumber(Math.pow(10, minimumIntegerDigits - 1) + Math.pow(10, -(minimumFractionDigits || 0))));
       }
 
       _computeRegExpDecimalSeparator(decimalSeparator) {
@@ -285,30 +133,30 @@
         return new RegExp('[^\\d\-\+\\' + decimalSeparator + ']', 'g');
       }
 
-      validate() {
-        this._stopIncrem();
-        this._valueStringChanged(this.$.input.value);
-        return super.validate();
-      }
-
       _unitChanged() {
-        if (this.inPercent === true || this.unit === '%') {
-          this.unit = '%';
-          this.inPercent = true;
-          this._unitEmLength = 0.875;
+        if (this.inPercent) {
+          if (this.unit !== '%') {
+            this.unit = '%';
+            return;
+          }
+          this._unitEmLength = 1.125;
+          this._unitChLength = 0;
+        } else if (this.unit === '%') {
+          this.unit = '';
           return;
+        } else {
+          this._unitEmLength = (this._computeEmWidth(this.unit) || 0) + 0.125;
+          this._unitChLength = (this._computeChWidth(this.unit) || 0) * this._chCorrection;
         }
-        const unit = this.unit;
-        this._unitEmLength = unit.length - unit.replace(/\D/g, '').length*0.25 - unit.replace(/\w/g, '').length*0.5; // estimated, that letters do have length: 1em, numbers do have length: 0.75em, other do have length: 0.5em
-        this.validate();
+        this._updateView();
       }
 
-      _valueStringChanged(valueString, oldValueString) {
-        if (!valueString) return;
+      _inputChanged(input, oldinput) {
+        if (!input) return;
 
-        oldValueString = oldValueString || '';
-        const newValue = parseFloat(this._safeMult(valueString.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.'), this.inPercent ? 0.01 : 1));
-        const oldValue = parseFloat(this._safeMult(oldValueString.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.'), this.inPercent ? 0.01 : 1));
+        oldinput = oldinput || '';
+        const newValue = parseFloat(this._safeMult(input.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.'), this.inPercent ? 0.01 : 1));
+        const oldValue = parseFloat(this._safeMult(oldinput.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.'), this.inPercent ? 0.01 : 1));
         let value;
 
         if (isNaN(oldValue)) {
@@ -317,14 +165,14 @@
           value = this._checkValue(newValue, oldValue);
         }
 
-        valueString = this.formatNumber(this._safeMult(value, this.inPercent ? 100 : 1));
+        input = this.formatNumber(this._safeMult(value, this.inPercent ? 100 : 1));
 
-        if (this.valueString !== valueString) {
-          this.valueString = valueString;
+        if (this.input !== input) {
+          this.input = input;
           return;
         }
 
-        this.$.input.value = valueString + (this.unit ? ('\u202F' + this.unit) : '');
+        this.$.input.value = input + (this.unit ? ('\u202F' + this.unit) : '');
         this.value = value;
       }
 
@@ -341,103 +189,30 @@
           this.value = value;
           return;
         }
-        const valueString = this.formatNumber(this._safeMult(value, this.inPercent ? 100 : 1));
+        const input = this.formatNumber(this._safeMult(value, this.inPercent ? 100 : 1));
 
-        this.$.input.value = valueString + (this.unit ? ('\u202F' + this.unit) : '');
-        this.valueString = valueString;
-      }
-
-      _checkKeycode(e) {
-        if (!e.target) {
-          if (e && e.preventDefault) e.preventDefault();
-          return;
-        }
-        // up or down key press
-        if (this.step !== undefined) {
-          const inc = (e.keyCode === 38) ? this.step : (e.keyCode === 40 ? -this.step : 0);
-          if (inc !== 0) {
-            this._startIncrem(inc);
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-          }
-        }
-
-        // enter & space
-        if (e.keyCode === 13 || e.keyCode === 32) {
-          this.validate();
-          return;
-        }
-
-        // esc
-        if (e.keyCode === 27) {
-          this.validate();
-          this.blur();
-          return;
-        }
-      }
-
-      _startIncrem(step) {
-        this._stopIncrem();
-
-        if (step === undefined) return;
-
-        this._increm(step);
-        this._activeJob = setInterval(() => {
-          this._increm(step);
-        }, 150);
-      }
-
-      _stopIncrem() {
-        if (this._activeJob) {
-          clearInterval(this._activeJob);
-        }
+        this.$.input.value = input + (this.unit ? ('\u202F' + this.unit) : '');
+        this.input = input;
       }
 
       _increm(step) {
-        if (step === undefined) return;
-        step = step || this.step || (this.inPercent ? 0.01 : 1);
-        const value = (this.minimumFractionDigits === 0) ? this._safeAdd(this._safeMult(parseInt(this.$.input.value.replace(this._regExpNotInNumber, '')), (this.inPercent ? 0.01 : 1)), step) : this._safeAdd(this._safeMult(parseFloat(this.$.input.value.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.')), (this.inPercent ? 0.01 : 1)), step);
+        const value = (this.minimumFractionDigits === 0) ? this._safeAdd(this._safeMult(parseFloat(this.$.input.value.replace(this._regExpNotInNumber, '')), (this.inPercent ? 0.01 : 1)), step) : this._safeAdd(this._safeMult(parseFloat(this.$.input.value.replace(this._regExpNotInNumber, '').replace(this._regExpDecimalSeparator, '.')), (this.inPercent ? 0.01 : 1)), step);
         this.value = this._checkValue(value, this.value);
       }
 
-      _updateView(prop) {
-        if (prop !== undefined) {
-          this._debouncedComputeWidth(this.valueString);
-        }
-      }
-
-      _debouncedComputeWidth(valueString) {
-        if (this._activeResizeJob) {
-          cancelAnimationFrame(this._activeResizeJob);
-        }
-        this._activeResizeJob = requestAnimationFrame(this._computeWidth.bind(this, valueString));
-      }
-
-      _computeWidth(valueString) {
+      _computeWidth(input) {
         if (this.noAutoWidth) return;
 
-        valueString = valueString || '';
+        input = input || '';
 
-        const currLength = this._computeChWidth(valueString);
+        const currLength = this._computeChWidth(input);
         const length = Math.max(this._longestStaticLength, currLength) * this._chCorrection;
 
-        if (this._unitEmLength) {
-          // add unit-string-length plus one space-length
-          this.$.input.style.width = `calc(${length}ch + ${0.125 + this._unitEmLength}em)`;
+        if (this.unit !== undefined) {
+          this.$.input.style.width = `calc(${length + this._unitChLength}ch + ${this._unitEmLength}em)`;
         } else {
           this.$.input.style.width = `${length}ch`;
         }
-      }
-
-      _noAutoWidthChanged(noAutoWidth) {
-        if (!noAutoWidth) {
-          this._debouncedComputeWidth(this.valueString);
-          window.addEventListener('resize', this._debouncedComputeWidth.bind(this, this.valueString), false);
-          return;
-        }
-        this.$.input.style.width = '';
-        window.removeEventListener('resize', this._debouncedComputeWidth.bind(this, this.valueString), false);
       }
 
       _localeChanged(locale) {
@@ -450,26 +225,11 @@
         this.decimalSeparator = decimalSeparator !== '\u202F' ? decimalSeparator : '.';
       }
 
-      /**
-       * focus the input
-       */
-      focus() {
-        this.$.input.focus();
-      }
-
-      /**
-       * focus the input
-       */
-      blur() {
-        this.$.input.blur();
-      }
-
       formatNumber() {
         const n = arguments[0];
         let str = '' + Math.abs(n);
         const decimalR = str.slice(str.indexOf('.')).length - 1;
         let decimalL = str.length - decimalR - 1;
-
         if (decimalR === 0) {
           decimalL++;
           if (this.minimumFractionDigits > 0) {
@@ -547,6 +307,7 @@
      * @appliesMixin NumberInputMixin
      *
      * @demo demo/index.html
+     * @demo demo/form.html Form Demo
      **/
     class NumberInput extends NumberInputMixin(Polymer.Element) {
 

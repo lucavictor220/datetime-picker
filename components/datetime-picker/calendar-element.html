@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../number-input/number-input.html">
+<link rel="import" href="../number-input/integer-input.html">
 
 <link rel="import" href="datetime-picker-mixin.html">
 
@@ -108,19 +108,19 @@
           will-change: background-color;
           transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1), border-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
         }
-        #calendar #dates .day.selected {
-          background-color: var(--input-focus-background);
-          color: var(--input-focus-color);
-          border-color: rgba(255, 255, 255, 0.33);
-        }
         #calendar #dates .day:hover {
-          border-color: rgba(255, 255, 255, 0.4);
+          border-color: rgba(255, 255, 255, 0.334);
         }
         #calendar #dates .day.current {
-          border-color: rgba(255, 255, 255, 0.5);
+          border-color: rgba(255, 255, 255, 0.667);
         }
         #calendar #dates .day.recent {
           border-color: var(--input-focus-background);
+        }
+        #calendar #dates .day.selected {
+          background-color: var(--input-focus-background);
+          color: var(--input-focus-color);
+          border-color: rgba(255, 255, 255, 0.5);
         }
         #calendar #dates .day.notinmonth {
           opacity: 0.5;
@@ -138,12 +138,12 @@
         ${super.contentTemplate || ''}
         <div id="calendar">
           <div id="top">
-            <svg class="icon switch" step="-1" viewBox="0 0 24 24"><g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></g></svg>
+            <svg class="icon switch" prop="month" step="-1" viewBox="0 0 24 24"><g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></g></svg>
             <div class="view">
               <select id="monthSelector" hidden$="[[_hideMonth]]" style="order:[[_orderDate.month]];" index="1" value="{{month::change}}"></select>
-              <number-input id="year" style="order:[[_orderDate.year]];" index="3" pad-length="4" value="{{year}}"></number-input>
+              <integer-input id="year" style="order:[[_orderDate.year]];" index="3" pad-length="4" value="{{year}}"></integer-input>
             </div>
-            <svg class="icon switch" step="1" viewBox="0 0 24 24"><g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g></svg>
+            <svg class="icon switch" prop="month" step="1" viewBox="0 0 24 24"><g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g></svg>
           </div>
 
           <div id="content" hidden$="[[_hideDay]]">
@@ -215,50 +215,12 @@
         _hideDay: {
           type: Boolean,
           computed: '_ifClamped(clamp, "day")'
+        },
+
+        _regexpDate: {
+          type: RegExp,
+          value: /(-?\d+)-(\d\d)-(\d\d)/
         }
-      }
-    }
-
-    _addSwitchListener() {
-      super._addSwitchListener();
-      const switchs = this.root.querySelectorAll('#calendar .icon.switch');
-
-      if (switchs) {
-        Array.prototype.forEach.call(switchs, s => {
-          s.addEventListener('mousedown', this._incremMonth.bind(this, s), false);
-          s.addEventListener('touchstart', this._incremMonth.bind(this, s), false);
-        })
-      }
-    }
-
-    _removeSwitchListener() {
-      super._removeSwitchListener();
-      const switchs = this.root.querySelectorAll('#calendar .icon.switch');
-
-      if (switchs) {
-        Array.prototype.forEach.call(switchs, s => {
-          s.removeEventListener('mousedown', this._incremMonth.bind(this, s), false);
-          s.removeEventListener('touchstart', this._incremMonth.bind(this, s), false);
-        })
-      }
-    }
-
-    _incremMonth(s) {
-      const step = (s && s.getAttribute) ? s.getAttribute('step') : s;
-      if (this._ifClamped(this.clamp, 'month')) {
-        this._incremProp('Year', step);
-      } else {
-        this._incremProp('Month', step);
-      }
-    }
-
-    _incremView(clamp, step) {
-      if (this._ifClamped(clamp, 'month')) {
-        this._incremProp('Year', step);
-      } else if (this._ifClamped(clamp, 'day')) {
-        this._incremProp('Month', step);
-      } else {
-        this._incremProp('Date', step);
       }
     }
 
@@ -266,7 +228,19 @@
       this._onMouseMoveDay(e);
       if (this.currentHoveredDayNode) {
         this.currentSelectedDayNode = this.currentHoveredDayNode;
-        this.date = this.currentSelectedDayNode.dataset.date;
+        let d = new Date(this.currentSelectedDayNode.dataset.date);
+        const match = this._regexpDate.exec(this.currentSelectedDayNode.dataset.date);
+        if (!match) {
+          return;
+        }
+        setTimeout(() => {
+          this.setProperties({
+            year: +match[1],
+            month: +match[2],
+            day: +match[3],
+            date: this.currentSelectedDayNode.dataset.date
+          })
+        }, 0);
       }
       if (this._dayClicked === true) {
         this._onDblClickDay();
@@ -349,6 +323,7 @@
       if (date === undefined) {
         date = this.confirmedDate || this.date;
       }
+      // console.log(year, month, day, date);
       if (isNaN(+d)) {
         return;
       }
@@ -458,17 +433,17 @@
       if (e && e.keyCode) {
         switch (e.keyCode) {
           case 37: // left
-            this._incremView(this.clamp, -1);
+            this._increm(-1);
             return;
           case 39: // right
-            this._incremView(this.clamp, 1);
+            this._increm(1);
             return;
           case 38: // up
-            this._incremMonth(1);
+            this._incremProp('month', 1);
             e.preventDefault();
             return;
           case 40: // down
-            this._incremMonth(-1);
+            this._incremProp('month', -1);
             e.preventDefault();
             return;
         }
@@ -516,7 +491,7 @@
   * @appliesMixin CalendarElementPattern
   * @appliesMixin DatetimePickerMixin
   *
-  * @demo demo/date-picker.html
+  * @demo demo/date-picker.html date elements
   **/
     class CalendarElement extends CalendarElementPattern(DatetimePickerMixin(Polymer.Element)) { // eslint-disable-line no-undef
 

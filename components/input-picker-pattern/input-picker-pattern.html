@@ -195,7 +195,7 @@
        */
       static get _nativeInputTemplate() {
         return `
-          <input class="native" type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" value="{{${this.nativeInputBinding || this.expectedNativeInputType}::input}}">
+          <input class="native" type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" readonly="[[disabled]]" required="[[required]]" value="{{${this.nativeInputBinding || this.expectedNativeInputType}::input}}">
         `;
       }
 
@@ -345,14 +345,6 @@
           super.toggle();
         }
         this.opened = !this.opened;
-      }
-
-      /**
-       * validates the input
-       */
-      validate() {
-        this.confirm();
-        return super.validate();
       }
 
       /**

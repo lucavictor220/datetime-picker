@@ -15,14 +15,25 @@
            * required attribute
            */
           required: {
-            type: Boolean
+            type: Boolean,
+            reflectToAttribute: true
+          },
+
+          /**
+           * required attribute
+           */
+          invalid: {
+            type: Boolean,
+            reflectToAttribute: true,
+            computed: '_computeInvalid(required, value)'
           },
 
           /**
            * disables the input
            */
           disabled: {
-            type: Boolean
+            type: Boolean,
+            reflectToAttribute: true
           },
 
           /**
@@ -41,11 +52,15 @@
         }
       }
 
+      _computeInvalid(required, value) {
+        return Boolean(this.required && !this.value);
+      }
+
       /**
        * validates the input for iron-form
        */
       validate() {
-        return !this.disabled && !(this.required && this.value);
+        return !this.invalid;
       }
     }
   }

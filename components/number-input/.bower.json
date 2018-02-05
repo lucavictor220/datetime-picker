@@ -9,6 +9,7 @@
     "webcomponents",
     "polymer",
     "number",
+    "integer",
     "input",
     "step"
   ],
@@ -26,17 +27,18 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs",
     "iron-component-page": "PolymerElements/iron-component-page",
     "iron-flex-layout": "PolymerElements/iron-flex-layout",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
+    "iron-form": "PolymerElements/iron-form"
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "version": "2.0.4",
-  "_release": "2.0.4",
+  "version": "2.0.8",
+  "_release": "2.0.8",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.4",
-    "commit": "79e4f5af6e7bf4dbee4feb21dddee107eafe6327"
+    "tag": "2.0.8",
+    "commit": "1584d805d77c2b4b4bf404f5eaa2e0c9c17281b6"
   },
   "_source": "https://github.com/fooloomanzoo/number-input.git",
   "_target": "2",

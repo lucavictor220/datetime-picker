@@ -23,18 +23,22 @@
        */
       static get _nativeInputTemplate() {
         return `
-          <input class="native" type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value="{{${this.nativeInputBinding || this.expectedNativeInputType}::input}}" step="1">
+          <input class="native" type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value="{{${this.expectedNativeInputType}::input}}" step="1">
         `;
       }
 
       static get replacementInputTemplate() {
         return `
-          <${this.nativeInputBinding}-input class="replacement" locale="[[locale]]" hour12=[[hour12]] clamp="[[clamp]]" value="{{confirmedValue}}" with-timezone="{{withTimezone}}" timezone-offset="[[timezoneOffset]]" min="[[min]]" max="[[max]]"></${this.nativeInputBinding}-input>
+          <${this.replacementInputType} class="replacement" required="[[required]]" default="[[default]]" locale="[[locale]]" hour12=[[hour12]] clamp="[[clamp]]" datetime="{{confirmedDatetime}}" with-timezone="[[withTimezone]]" min="[[min]]" max="[[max]]"></${this.replacementInputType}>
         `;
       }
 
-      static get nativeInputBinding() {
-        return 'datetime';
+      static get expectedNativeInputType() {
+        return 'datetime-local';
+      }
+
+      static get replacementInputType() {
+        return 'datetime-input';
       }
 
       static get customStyleToInclude() {
@@ -70,6 +74,13 @@
             background-color: var(--input-background);
             color: var(--input-color);
           }
+          .replacement {
+            border: thin solid transparent;
+          }
+          .replacement[invalid] {
+            border-color: var(--invalid-color);
+            @apply --input-invalid;
+          }
         `;
       }
 
@@ -99,17 +110,19 @@
 
       static get observers() {
         return [
-          '_dateTimeChanged(confirmedDate, confirmedTime)',
-          '_datetimeChanged(confirmedDatetime)',
-          '_valueChanged(confirmedValue)'
+          '_confirmedDatetimeChanged(confirmedDatetime)',
+          '_confirmedDateTimeChanged(confirmedDate, confirmedTime)',
+          '_confirmedValueChanged(confirmedValue)'
         ];
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        setTimeout(() => {
-          this.confirm();
-        })
+      _computeInvalid(required, value) {
+        return Boolean(this.required && isNaN(this.confirmedValue));
+      }
+
+      validate() {
+        this.value = this.confirmedValue;
+        return !Boolean(this.required && isNaN(this.confirmedValue));
       }
 
       /**
@@ -134,13 +147,6 @@
         }
       }
 
-      _timezoneOffsetChanged(timezoneOffset, o) {
-        super._timezoneOffsetChanged(timezoneOffset, o);
-        if (timezoneOffset.match(this._regexpTimezone)) {
-          this.confirm();
-        }
-      }
-
       confirm() {
         super.confirm();
         this._setConfirmedValues();
@@ -151,38 +157,49 @@
         super.cancel();
       }
 
+      _confirmedDatetimeChanged(confirmedDatetime) {
+        if (confirmedDatetime === undefined) {
+          return;
+        }
+        this._datetimeChanged(confirmedDatetime);
+        this._setConfirmedValues();
+      }
+
+      _confirmedDateTimeChanged(confirmedDate, confirmedTime) {
+        this._dateTimeChanged(confirmedDate || this.date, confirmedTime || this.time);
+        this._setConfirmedValues();
+      }
+
+      _confirmedValueChanged(confirmedValue) {
+        if (isNaN(confirmedValue)) {
+          return;
+        }
+        this._valueChanged(confirmedValue);
+        this._setConfirmedValues();
+      }
+
       _setConfirmedValues() {
-        let toSet = {};
-        if (this.time !== undefined && this.confirmedTime !== this.time) {
-          toSet.confirmedTime = this.time;
+        if (isNaN(this.value)) {
+          return;
         }
-        if (this.date !== undefined && this.confirmedDate !== this.date) {
-          toSet.confirmedDate = this.date;
-        }
-        if (this.datetime !== undefined && this.confirmedDatetime !== this.datetime) {
-          toSet.confirmedDatetime = this.datetime;
-        }
-        if (this.value !== undefined && this.confirmedValue !== this.value) {
-          toSet.confirmedValue = this.value;
-        }
-        this.setProperties(toSet)
+        this.setProperties({
+          confirmedDatetime: this.datetime,
+          confirmedDate: this.date,
+          confirmedTime: this.time,
+          confirmedValue: this.value
+        })
       }
 
       _resetValues() {
-        let toSet = {};
-        if (this.confirmedTime !== undefined && this.confirmedTime !== this.time) {
-          toSet.time = this.confirmedTime;
+        if (isNaN(this.confirmedValue)) {
+          return;
         }
-        if (this.confirmedDate !== undefined && this.confirmedDate !== this.date) {
-          toSet.date = this.confirmedDate;
-        }
-        if (this.confirmedDatetime !== undefined && this.confirmedDatetime !== this.datetime) {
-          toSet.datetime = this.confirmedDatetime;
-        }
-        if (this.confirmedValue !== undefined && this.confirmedValue !== this.value) {
-          toSet.value = this.confirmedValue;
-        }
-        this.setProperties(toSet)
+        this.setProperties({
+          datetime: this.confirmedDatetime || this.datetime,
+          date: this.confirmedDate ||  this.date,
+          time: this.confirmedTime || this.time,
+          value: this.confirmedValue
+        })
       }
     }
   }

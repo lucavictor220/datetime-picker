@@ -33,13 +33,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs",
     "iron-component-page": "PolymerElements/iron-component-page",
     "iron-flex-layout": "PolymerElements/iron-flex-layout",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
+    "iron-form": "PolymerElements/iron-form"
   },
-  "_release": "95331553f2",
+  "_release": "1a71e680cd",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "95331553f21fef48f9d0f05669296e283dcddfcf"
+    "commit": "1a71e680cd4c2c6e61f64abc26e8ac89368717f3"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",

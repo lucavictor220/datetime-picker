@@ -20,7 +20,7 @@
       static get properties() {
         return {
           /**
-           * dwell time of incrementing inputs by the buttons in milliseconds. It is minimum 25 milliseceonds.
+           * dwell time of incrementing inputs by the buttons in milliseconds. It is minimum 75 milliseceonds.
            *
            * @type {number}
            */
@@ -54,8 +54,8 @@
       connectedCallback() {
         super.connectedCallback();
         this._addSwitchListener();
-        if (this.confirm) {
-          this.confirm();
+        if (this.value === undefined) {
+          this._setDate(new Date());
         }
       }
 
@@ -68,34 +68,42 @@
         if (super._addKeyListener) {
           super._addKeyListener();
         }
-        this.addEventListener('keyup', this._stopActiveJob.bind(this), false);
+        this.addEventListener('keyup', this._stopActiveIncremJob.bind(this), false);
       }
 
       _removeKeyListener() {
         if (super._removeKeyListener) {
           super._removeKeyListener();
         }
-        this.removeEventListener('keyup', this._stopActiveJob.bind(this), false);
+        this.removeEventListener('keyup', this._stopActiveIncremJob.bind(this), false);
       }
 
       _addSwitchListener() {
-        const switchs = this.root.querySelectorAll('.icon.switch');
+        const switchs = this.root.querySelectorAll('.switch');
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
-            s.addEventListener('mouseup', this._stopActiveJob.bind(this), false);
-            s.addEventListener('mouseleave', this._stopActiveJob.bind(this), false);
-            s.addEventListener('touchend', this._stopActiveJob.bind(this), false);
+            s.addEventListener('mousedown', this._onPushed.bind(this, s), {passive: true});
+            s.addEventListener('touchstart', this._onPushed.bind(this, s), {passive: true});
+            s.addEventListener('mouseup', this._onReleased.bind(this), {passive: true});
+            s.addEventListener('mouseout', this._onReleased.bind(this), {passive: true});
+            s.addEventListener('touchend', this._onReleased.bind(this), {passive: true});
+            s.addEventListener('touchcancel', this._onReleased.bind(this), {passive: true});
+            s.addEventListener('keyup', this._onReleased.bind(this), {passive: true});
           })
         }
       }
 
       _removeSwitchListener() {
-        const switchs = this.root.querySelectorAll('.icon.switch');
+        const switchs = this.root.querySelectorAll('.switch');
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
-            s.addEventListener('mouseup', this._stopActiveJob.bind(this), false);
-            s.addEventListener('mouseleave', this._stopActiveJob.bind(this), false);
-            s.addEventListener('touchend', this._stopActiveJob.bind(this), false);
+            s.removeEventListener('mousedown', this._onPushed.bind(this, s), {passive: true});
+            s.removeEventListener('touchstart', this._onPushed.bind(this, s), {passive: true});
+            s.removeEventListener('mouseup', this._onReleased.bind(this), {passive: true});
+            s.removeEventListener('mouseout', this._onReleased.bind(this), {passive: true});
+            s.removeEventListener('touchend', this._onReleased.bind(this), {passive: true});
+            s.removeEventListener('touchcancel', this._onReleased.bind(this), {passive: true});
+            s.removeEventListener('keyup', this._onReleased.bind(this), {passive: true});
           })
         }
       }
@@ -104,7 +112,7 @@
         if (!e) {
           return;
         }
-        this._stopActiveJob();
+        this._stopActiveIncremJob();
         if (e.keyCode === 13 || e.keyCode === 32) { // space || enter
           this.confirm && this.confirm();
           return;
@@ -114,46 +122,71 @@
         }
       }
 
-      _increm(s) {
-        const prop = s.getAttribute('prop');
-        const step = s.getAttribute('step');
-        this._incremProp(prop, step);
-      }
-
-      _incremProp(prop, step) {
-        this._stopActiveJob();
-        step = +step;
-        const getter = Date.prototype['get' + prop],
-          setter = Date.prototype['set' + prop];
-        if (!getter || !setter) {
-          this[prop] += step;
-          this._activeJob = setInterval(() => {
-            this[prop] += step;
-          }, this._dwellTime || 150);
-          return;
+      _onPushed(s, e) {
+        if (!this._activeIncremJob) {
+          this._increm(s);
         }
-        const d = new Date(this.value);
-        setter.call(d, +(getter.call(d)) + step);
-        d.setMinutes(d.getMinutes() + this._offsetMinutes - d.getTimezoneOffset());
-        this._setDate(d);
-        this._activeJob = setInterval(() => {
-          setter.call(d, +(getter.call(new Date(this.value))) + step);
-          d.setMinutes(d.getMinutes() + this._offsetMinutes - d.getTimezoneOffset());
-          this._setDate(d);
-        }, this._dwellTime || 150);
       }
 
-      _stopActiveJob() {
-        if (this._activeJob) {
-          clearInterval(this._activeJob);
+      _onReleased(s, e) {
+        this._stopActiveIncremJob();
+      }
+
+      _increm(s) {
+        const prop = s.getAttribute && s.getAttribute('prop');
+        const step = (s.getAttribute && s.getAttribute('step')) || 1;
+        const immediate = (s.getAttribute && s.hasAttribute('once'));
+
+        if (step) {
+          if (prop) {
+            this._incremProp(prop, +step, 1, immediate);
+          } else {
+            switch (this.clamp) {
+              case 'year':
+              case 'month':
+                this._incremProp('year', +step); break;
+              case 'day':
+                this._incremProp('month', +step); break;
+              case 'hours':
+                this._incremProp('day', +step); break;
+              case 'minutes':
+                this._incremProp('hours', +step); break;
+              case 'seconds':
+                this._incremProp('minutes', +step); break;
+              case 'milliseconds':
+                this._incremProp('seconds', +step); break;
+              default:
+                this._incremProp('milliseconds', +step); break;
+            }
+          }
+        }
+      }
+
+      _incremProp(prop, step, quantifier, once) {
+        quantifier = quantifier || 1;
+        this._stopActiveIncremJob();
+        this[prop] += step;
+        if (!once) {
+          this._activeIncremJob = setTimeout(() => {
+            this._incremProp(prop, step, quantifier + 1, once);
+          }, (1 + 1/(quantifier*quantifier)) * this.dwellTime);
+        } else {
+          this._stopActiveIncremJob();
+        }
+      }
+
+      _stopActiveIncremJob() {
+        if (this._activeIncremJob) {
+          clearTimeout(this._activeIncremJob);
+          this._activeIncremJob = null;
         }
       }
 
       _dwellTimeChanged(dwellTime) {
         if (typeof dwellTime !== 'number') {
-          this._dwellTime = 150;
-        } else if (dwellTime < 25) {
-          this._dwellTime = 25;
+          this.dwellTime = 150;
+        } else if (dwellTime < 75) {
+          this.dwellTime = 75;
         }
       }
     }

@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../number-input/number-input.html">
+<link rel="import" href="../number-input/integer-input.html">
 
 <link rel="import" href="datetime-input-mixin.html">
 
@@ -12,6 +12,7 @@
    * @polymer
    *
    * @demo demo/index.html
+   * @demo demo/form.html Form
    **/
   const DateInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
@@ -19,11 +20,11 @@
 
       static get inputTemplate() {
         return `
-            <number-input style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" pad-length="4" disabled="[[disabled]]" value="{{year}}"></number-input>
+            <integer-input style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" invalid$="[[invalid]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
             <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
-            <number-input style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]" pad-length="2" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></number-input>
+            <integer-input style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]"  invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
             <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
-            <number-input style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" pad-length="2" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></number-input>
+            <integer-input style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
             ${super.inputTemplate || ''}
           `;
       }
@@ -68,9 +69,11 @@
      * `--input-color` | text-color of the inputs | ``
      * `--input-background` | text-color of the inputs | ``
      * `--input-focus-color` | color of the focussed or hovered inputs | ``
-     * `--input-focus-background` | background-color of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)`
-     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);`
-     * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}`
+     * `--input-focus-background` | background-color of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
+     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+     * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}
+     * `--input-invalid-color` | border-color of invalid inputs | red
+     * `--input-invalid-color` |  Mixin applied to invalid inputs | {}
      *
      *  @polymer
      *  @customElement
@@ -79,6 +82,7 @@
      *  @appliesMixin DatetimeInputMixin
      *
      * @demo demo/index.html
+     * @demo demo/form.html in a form
      **/
     class DateInput extends DateInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
 
