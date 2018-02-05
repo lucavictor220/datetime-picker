@@ -27,9 +27,6 @@
     "iron-form": "PolymerElements/iron-form",
     "datetime-picker": "fooloomanzoo/datetime-picker"
   },
-  "resolutions": {
-    "datetime-picker": "2.4.4"
-  },
   "devDependencies": {
     "datetime-picker": "https://github.com/fooloomanzoo/datetime-picker.git#master"
   }
