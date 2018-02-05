@@ -275,6 +275,14 @@
           },
 
           /**
+           * Regular Expression for date-string
+           */
+          _regexpDate: {
+            type: RegExp,
+            value: /-?\d+-\d\d-\d\d/
+          },
+
+          /**
            * Regular Expression for datetime-string
            */
           _regexpTimezone: {
@@ -331,19 +339,19 @@
           if (isNaN(d)) {
             d = new Date();
           }
-          d.setMilliseconds(milliseconds || 0);
-          d.setSeconds(seconds || 0);
-          d.setMinutes(minutes || 0);
-          d.setHours(hours || 0);
-          if (day !== undefined) {
-            d.setDate(day);
+          if (year !== undefined) {
+            d.setFullYear(year);
           }
           if (month !== undefined) {
             d.setMonth(month - 1);
           }
-          if (year !== undefined) {
-            d.setFullYear(year);
+          if (day !== undefined) {
+            d.setDate(day);
           }
+          d.setHours(hours || 0);
+          d.setMinutes(minutes || 0);
+          d.setSeconds(seconds || 0);
+          d.setMilliseconds(milliseconds || 0);
         } else {
           d = new Date(year, month - 1, day, hours, minutes, seconds, milliseconds);
           d.setFullYear(year);
@@ -387,12 +395,15 @@
           this._setDate(datetime);
           return;
         }
-        const match = this._regexpDatetime.exec(datetime);
-        if (match) {
-          let d;
-          if (this._dateLocked) {
-            d = new Date(match[1]);
-          } else if (match[3] !== undefined) {
+
+        let d, match;
+
+        if (this._dateLocked) {
+          match = this._regexpDate.exec(datetime);
+          d = new Date(match[0]);
+        } else if (isNaN(d = new Date(datetime))) {
+          match = this._regexpDatetime.exec(datetime)
+          if (match[3] !== undefined) {
             d = new Date(match[0]);
             if (match[3] !== this.timezoneOffset) {
               this.__updatingOffsetMinutes = true;
@@ -416,6 +427,8 @@
             }
             d.setMinutes(d.getMinutes() + this.offsetMinutes);
           }
+        }
+        if (!isNaN(d)) {
           this._setDate(d);
         }
       }
