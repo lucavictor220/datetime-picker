@@ -24,6 +24,7 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs",
     "iron-component-page": "PolymerElements/iron-component-page",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
+    "iron-form": "PolymerElements/iron-form",
     "datetime-picker": "fooloomanzoo/datetime-picker"
   },
   "resolutions": {
