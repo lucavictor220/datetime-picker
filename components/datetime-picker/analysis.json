@@ -553,7 +553,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -571,13 +571,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -594,7 +594,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -642,7 +642,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -1643,7 +1643,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -1660,7 +1660,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -1669,7 +1669,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -1689,7 +1689,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -1721,7 +1721,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -1744,7 +1744,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -1761,7 +1761,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -1797,13 +1797,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 54,
+              "line": 91,
               "column": 6
             },
             "end": {
-              "line": 56,
+              "line": 93,
               "column": 7
             }
           },
@@ -1816,7 +1816,7 @@
               "name": "value"
             }
           ],
-          "inheritedFrom": "FormElementMixin"
+          "inheritedFrom": "DatetimeInputMixin"
         },
         {
           "name": "validate",
@@ -1920,11 +1920,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -2510,7 +2510,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -3186,7 +3186,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -3204,13 +3204,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -3227,7 +3227,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -3275,7 +3275,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -4492,7 +4492,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -4509,7 +4509,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -4518,7 +4518,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -4538,7 +4538,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -4570,7 +4570,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -4593,7 +4593,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -4610,7 +4610,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -4769,11 +4769,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -5584,7 +5584,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -6436,7 +6436,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -6454,13 +6454,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -6477,7 +6477,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -6525,7 +6525,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -7413,7 +7413,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -7430,7 +7430,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -7439,7 +7439,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -7459,7 +7459,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -7491,7 +7491,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -7514,7 +7514,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -7531,7 +7531,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -7567,13 +7567,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 54,
+              "line": 91,
               "column": 6
             },
             "end": {
-              "line": 56,
+              "line": 93,
               "column": 7
             }
           },
@@ -7586,7 +7586,7 @@
               "name": "value"
             }
           ],
-          "inheritedFrom": "FormElementMixin"
+          "inheritedFrom": "DatetimeInputMixin"
         },
         {
           "name": "validate",
@@ -7713,11 +7713,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -8286,7 +8286,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -9076,7 +9076,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -9094,13 +9094,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -9117,7 +9117,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -9165,7 +9165,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -10401,7 +10401,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -10418,7 +10418,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -10427,7 +10427,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -10447,7 +10447,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -10479,7 +10479,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -10502,7 +10502,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -10519,7 +10519,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -10678,11 +10678,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -11511,7 +11511,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -12369,7 +12369,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -12387,13 +12387,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -12410,7 +12410,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -12458,7 +12458,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -13571,7 +13571,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -13588,7 +13588,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -13597,7 +13597,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -13617,7 +13617,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -13649,7 +13649,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -13672,7 +13672,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -13689,7 +13689,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -13873,11 +13873,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -14672,7 +14672,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -15643,7 +15643,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -15661,13 +15661,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -15684,7 +15684,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -15732,7 +15732,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -17081,7 +17081,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -17098,7 +17098,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -17107,7 +17107,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -17127,7 +17127,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -17159,7 +17159,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -17182,7 +17182,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -17199,7 +17199,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -17358,11 +17358,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -18185,7 +18185,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -19130,7 +19130,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -19148,13 +19148,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -19171,7 +19171,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -19219,7 +19219,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -20549,7 +20549,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -20566,7 +20566,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -20575,7 +20575,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -20595,7 +20595,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -20627,7 +20627,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -20650,7 +20650,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -20667,7 +20667,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -20826,11 +20826,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -21635,7 +21635,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -22580,7 +22580,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -22598,13 +22598,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -22621,7 +22621,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -22669,7 +22669,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -23891,7 +23891,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -23908,7 +23908,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -23917,7 +23917,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -23937,7 +23937,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -23969,7 +23969,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -23992,7 +23992,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -24009,7 +24009,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -24193,11 +24193,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -24984,7 +24984,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
@@ -25817,7 +25817,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezoneOffset",
+          "name": "timezone",
           "type": "string",
           "description": "The local timezone offset in '±hh:mm' format",
           "privacy": "public",
@@ -25835,13 +25835,13 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_timezoneOffsetChanged\""
+              "observer": "\"_timezoneChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutes",
+          "name": "_timezoneOffset",
           "type": "number",
           "description": "The offset minutes of the set timezone",
           "privacy": "protected",
@@ -25858,7 +25858,7 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_offsetMinutesChanged\""
+              "observer": "\"_timezoneOffsetChanged\""
             }
           },
           "inheritedFrom": "DatetimeMixin"
@@ -25906,7 +25906,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_recentLocalOffsetMinutes",
+          "name": "_recentLocalTimezoneOffset",
           "type": "number",
           "description": "The offset minutes of the current datetime",
           "privacy": "protected",
@@ -26774,7 +26774,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_timezoneOffsetChanged",
+          "name": "_timezoneChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -26791,7 +26791,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             },
             {
               "name": "oldValue"
@@ -26800,7 +26800,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_offsetMinutesChanged",
+          "name": "_timezoneOffsetChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -26820,7 +26820,7 @@
               "name": "offsetMinutes"
             },
             {
-              "name": "oldOffsetMinutes"
+              "name": "oldTimezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -26852,7 +26852,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeTimezoneOffset",
+          "name": "_computeTimezone",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -26875,7 +26875,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "_computeOffsetMinutes",
+          "name": "_computeTimezoneOffset",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -26892,7 +26892,7 @@
           "metadata": {},
           "params": [
             {
-              "name": "timezoneOffset"
+              "name": "timezone"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -26928,13 +26928,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 54,
+              "line": 91,
               "column": 6
             },
             "end": {
-              "line": 56,
+              "line": 93,
               "column": 7
             }
           },
@@ -26947,7 +26947,7 @@
               "name": "value"
             }
           ],
-          "inheritedFrom": "FormElementMixin"
+          "inheritedFrom": "DatetimeInputMixin"
         },
         {
           "name": "validate",
@@ -27064,11 +27064,11 @@
           "sourceRange": {
             "file": "bower_components\\datetime-input\\datetime-input-mixin.html",
             "start": {
-              "line": 132,
+              "line": 136,
               "column": 6
             },
             "end": {
-              "line": 180,
+              "line": 184,
               "column": 7
             }
           },
@@ -27598,7 +27598,7 @@
           "inheritedFrom": "DatetimeMixin"
         },
         {
-          "name": "timezone-offset",
+          "name": "timezone",
           "description": "The local timezone offset in '±hh:mm' format",
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
