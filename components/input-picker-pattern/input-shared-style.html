@@ -27,14 +27,14 @@
           text-align: center;
           cursor: pointer;
           box-sizing: content-box;
-          transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+          transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
         };
         --input-focus: {
-          background-color: var(--input-focus-background);
+          background: var(--input-focus-background);
           color: var(--input-focus-color);
         };
         --input-disabled: {
-          background-color: var(--input-disabled-background);
+          background: var(--input-disabled-background);
           color: var(--input-disabled-color);
           font-weight: lighter;
           cursor: default;
@@ -46,19 +46,18 @@
           border-radius: 4px;
         };
         --input-icon: {
-          border-radius: 2px;
+          border-radius: 4px;
           padding: 8px;
           height: 16px;
           width: 16px;
-          background-color: transparent;
-          transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+          background: transparent;
+          transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
           cursor: pointer;
           fill: currentColor;
         };
         --input-invalid: {
-          border: none;
-          box-shadow: 0 0 1px 1px var(--input-invalid-color);
-        }
+          border-color: var(--input-invalid-color);
+        };
       }
       :host > * {
         position: relative;
@@ -70,6 +69,11 @@
       input::-webkit-clear-button,
       input::-webkit-calendar-picker-indicator {
         color: currentColor;
+        fill: currentColor;
+        cursor: pointer;
+      }
+      input::-webkit-calendar-picker-indicator:hover {
+        background: transparent;
       }
       input:invalid {
         @apply --input-invalid;

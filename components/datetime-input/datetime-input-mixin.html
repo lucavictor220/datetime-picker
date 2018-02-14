@@ -21,7 +21,9 @@
       static get template() {
         return `
           ${this.styleTemplate}
-          ${this.inputTemplate}
+          <div id="input">
+            ${this.inputTemplate}
+          </div>
         `
       }
 
@@ -44,25 +46,72 @@
             display: -webkit-inline-flex;
             display: -ms-inline-flexbox;
             display: inline-flex;
-            align-items: baseline;
+            outline: none;
+          }
+          #input {
+            display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            align-items: center;
             outline: none;
             padding: 0.1em 0.2em;
             border-radius: 3px;
-            --input-focus-background: var(--primary-color, rgba(0,0,0,0.2));
-            --input-style: {
+            border-width: thin;
+            border-style: dotted;
+            border-color: transparent;
+            @apply --input-style;
+          }
+          #input:hover,
+          #input:focus {
+            @apply --input-focus;
+          }
+          :host([invalid]) #input {
+            border-width: thin;
+            border-style: dotted;
+            border-color: var(--input-invalid-color, red);
+            @apply --input-invalid;
+          }
+          #input > div {
+            display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            align-items: center;
+          }
+          #input integer-input {
+            --number-input-focus: {
+              outline: none;
+              color: var(--input-focus-color, inherit);
+              background: var(--input-focus-background, rgba(0,0,0,0.1));
+              @apply --input-focus;
+            };
+            --number-input: {
               border-radius: 2px;
               padding: 0.15em;
               cursor: pointer;
-              transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+              transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
+              @apply --input-style;
+              border-color: transparent !important;
             };
             --number-input-placeholder: {
               color: rgba(0,0,0,0.334);
+              @apply --input-placeholder;
             };
-            --input-invalid: {
-              border-width: thin;
-              border-style: dotted;
-              border-color: var(--input-invalid-color, red);
-            };
+          }
+          #input .icon.reset {
+            padding: 2px;
+            height: 12px;
+            width: 12px;
+            align-self: center;
+            border-radius: 50%;
+            order: 13;
+            opacity: 0.5;
+            fill: var(--input-color, currentColor);
+          }
+          #input .icon.reset:focus,
+          #input .icon.reset:hover {
+            opacity: 1;
+            @apply --input-focus;
+            border-width: 0;
           }
           [hidden] {
             display: none !important;
@@ -75,7 +124,18 @@
        * @type {string}
        */
       static get inputTemplate() {
-        return '';
+        return '<svg class="icon button reset" hidden$="[[_hideResetButton]]" viewBox="0 0 24 24" on-click="_resetDate"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>';
+      }
+
+      static get properties() {
+        return {
+
+          _hideResetButton: {
+            type: Boolean,
+            computed: '_computeHideResetButton(default)'
+          }
+
+        }
       }
 
       connectedCallback() {
@@ -90,7 +150,7 @@
       }
 
       _computeInvalid(required, value) {
-        return Boolean(this.required && isNaN(this.value));
+        this.invalid = required && isNaN(value);
       }
 
       _addKeyListener() {
@@ -156,6 +216,7 @@
           }
           return false;
         });
+
         if (focusable && focusable.length) {
           focusable.sort( (a, b) => {
             return +a.getAttribute('index') > +b.getAttribute('index')
@@ -183,6 +244,11 @@
           }
         }
       }
+
+      _computeHideResetButton(def) {
+        return def !== undefined && !isNaN(this._fromDatetime(def));
+      }
+
     }
   }
 </script>

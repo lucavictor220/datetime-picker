@@ -17,14 +17,13 @@
 
       static get inputTemplate() {
         return `
-          ${super.inputTemplate || ''}
           <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
-            <integer-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
+            <integer-input id="hour" hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
             <integer-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMinutes]]" style="order:8;">
             <span>[[_localTimeSeparator]]</span>
-            <integer-input index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
+            <integer-input id="minute" index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideSeconds]]" style="order:9;">
             <span>[[_localTimeSeparator]]</span>
@@ -43,6 +42,7 @@
             <span>[[_localTimeSeparator]]</span>
             <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
+          ${super.inputTemplate || ''}
         `;
       }
 
@@ -69,11 +69,10 @@
         return {
           /**
            * Clamp timetime to a property
-           * possible values:'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'
+           * possible values: 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds' or ''
            */
           clamp: {
-            type: String,
-            value: 'milliseconds'
+            type: String
           },
 
           withTimezone: {
@@ -103,6 +102,19 @@
         }
       }
 
+      connectedCallback() {
+        super.connectedCallback();
+        let d;
+        if (this.default) {
+          d = new Date(this.default);
+        }
+        if (isNaN(d)) {
+          d = new Date();
+        }
+        this.$.hour.startAt = d.getHours();
+        this.$.minute.startAt = d.getMinutes();
+      }
+
       _switchAm() {
         this.isAm = !this.isAm;
       }
@@ -124,8 +136,8 @@
      * `--input-color` | text-color of the inputs | ``
      * `--input-background` | text-color of the inputs | ``
      * `--input-focus-color` | color of the focussed or hovered inputs | ``
-     * `--input-focus-background` | background-color of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
-     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+     * `--input-focus-background` | background of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
+     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
      * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}
      * `--input-invalid-color` | border-color of invalid inputs | red
      * `--input-invalid-color` |  Mixin applied to invalid inputs | {}
@@ -144,6 +156,22 @@
       static get is() {
         return 'time-input';
       }
+
+      _dateTimeChanged(date, time) {
+        if (this.__updatingTimezoneOffset) {
+          return;
+        }
+        if (time === undefined) {
+          if (this.default !== undefined) {
+            this._setDate(new Date(this.default));
+          } else {
+            this._resetDate();
+          }
+          return;
+        }
+        this.datetime = (date || '1970-01-01') + 'T' + (time || (this.timezone ? this.timezone.slice(1) : '00:00')) + (this.timezone || 'Z');
+      }
+
     }
     window.customElements.define(TimeInput.is, TimeInput);
   </script>

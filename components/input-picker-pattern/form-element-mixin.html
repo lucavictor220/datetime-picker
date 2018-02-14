@@ -24,8 +24,7 @@
            */
           invalid: {
             type: Boolean,
-            reflectToAttribute: true,
-            computed: '_computeInvalid(required, value)'
+            reflectToAttribute: true
           },
 
           /**
@@ -52,8 +51,14 @@
         }
       }
 
+      static get observers() {
+        return [
+          '_computeInvalid(required, value)'
+        ]
+      }
+
       _computeInvalid(required, value) {
-        return Boolean(this.required && !this.value);
+        this.invalid = Boolean(this.required && !this.value);
       }
 
       /**
