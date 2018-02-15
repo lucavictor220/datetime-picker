@@ -132,6 +132,9 @@ styles for used for a inner dropdown
       :host([horizontal-align="right"][vertical-align="auto"]) .dropdown:after {
         top: 50%; bottom: auto;
       }
+      :host([no-tip]) .dropdown:after {
+        display: none;
+      }
 
     </style>
   </template>
