@@ -1,6 +1,6 @@
 {
   "name": "iron-form",
-  "version": "2.1.6",
+  "version": "2.2.1",
   "description": "Wrapper around native form that submits native and custom elements",
   "keywords": [
     "web-components",
@@ -68,11 +68,11 @@
   "resolutions": {
     "webcomponentsjs": "^1.0.0"
   },
-  "_release": "2.1.6",
+  "_release": "2.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.6",
-    "commit": "c5135d4af5ba528b2603ff4b9187fcc0b2f8155d"
+    "tag": "v2.2.1",
+    "commit": "6f4ab6112a21dc3a4c5fe7abb8095c48eca19e26"
   },
   "_source": "https://github.com/PolymerElements/iron-form.git",
   "_target": "*",

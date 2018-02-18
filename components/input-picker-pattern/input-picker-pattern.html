@@ -1,4 +1,5 @@
 <link rel="import" href="input-shared-style.html">
+<link rel="import" href="dropdown-tip-style.html">
 <link rel="import" href="form-element-mixin.html">
 
 <script>
@@ -67,7 +68,7 @@
        * @type {string}
        */
       static get customStyleToInclude() {
-        return `${super.customStyleToInclude || ''} input-shared-style`;
+        return `${super.customStyleToInclude || ''} input-shared-style dropdown-tip-style`;
       }
 
       /**
@@ -225,6 +226,15 @@
           },
 
           /**
+           * use the native input automatically on mobile devices
+           */
+          nativeOnMobile: {
+            type: Boolean,
+            value: false,
+            observer: '_nativeOnMobileChanged'
+          },
+
+          /**
            * opens the picker
            */
           opened: {
@@ -267,13 +277,69 @@
           noCancelOnEscKey: {
             type: Boolean,
             value: false
+          },
+
+          /**
+           * Set to disable the tip of the picker
+           */
+          noTip: {
+            type: Boolean,
+            reflectToAttribute: true
           }
         }
       }
 
       connectedCallback() {
-        this._ensureAttribute('tabindex', 0);
         super.connectedCallback();
+        this._ensureAttribute('tabindex', 0);
+        this._addClickListener();
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        this._removeClickListener();
+      }
+
+      _addClickListener() {
+        if (super._addClickListener) {
+          super._addClickListener();
+        }
+        // close on outer clicking
+        document.addEventListener('click', this.close.bind(this), {passive: true});
+        // prevent inner click to close the picker
+        this.addEventListener('click', this._clickHandler.bind(this),  {passive: true});
+      }
+
+      _removeClickListener() {
+        if (super._removeClickListener) {
+          super._removeClickListener();
+        }
+        // close on outer clicking
+        document.removeEventListener('click', this.close.bind(this), {passive: true});
+        // prevent inner click to close the picker
+        this.removeEventListener('click', this._clickHandler.bind(this),  {passive: true});
+      }
+
+      _clickHandler(e) {
+        if (e && e.stopPropagation) {
+          e.stopPropagation();
+        }
+      }
+
+      _nativeOnMobileChanged(nativeOnMobile) {
+        if (nativeOnMobile === undefined) {
+          return;
+        }
+
+        const ua = window.navigator.userAgent,
+          isMobile = /[mM]obi/i.test(ua) || /[tT]ablet/i.test(ua) || /[aA]ndroid/i.test(ua);
+        if (isMobile === true) {
+          if (nativeOnMobile === true) {
+            this.native = true;
+          } else if (!this.native && nativeOnMobile === false) {
+            this.native = false;
+          }
+        }
       }
 
       /**
