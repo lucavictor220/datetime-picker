@@ -223,7 +223,7 @@
        */
       static get pickerTemplate() {
         return `
-          <div id="picker" class="dropdown" tabindex$="[[opened]]">
+          <div id="picker" class="dropdown" on-transitionend="_onTransitionEnd">
             <div id="buttons">
               ${this._buttonTemplate}
             <div>
@@ -382,8 +382,10 @@
         if (!e) {
           return;
         }
-        if (super._checkKeycode) {
-          super._checkKeycode(e);
+        console.log(e);
+        if (e.keyCode === 27 && !this.noCancelOnEscKey) { // esc
+          this.cancel();
+          return;
         }
         if (e.keyCode === 13 || e.keyCode === 32) { // space || enter
           if (this.opened) {
@@ -394,9 +396,8 @@
           }
           return;
         }
-        if (e.keyCode === 27 && !this.noCancelOnEscKey) { // esc
-          this.cancel();
-          return;
+        if (super._checkKeycode) {
+          super._checkKeycode(e);
         }
       }
 
@@ -407,6 +408,7 @@
         if (super.open) {
           super.open();
         }
+        this.$.picker.style.display = '';
         this.opened = true;
         if (!this.noCancelOnOutsideClick) {
           this._addCancelOnClickListener();
@@ -472,6 +474,12 @@
           this.confirm();
         }
         this.close();
+      }
+
+      _onTransitionEnd() {
+        if (!this.opened) {
+          this.$.picker.style.display = 'none';
+        }
       }
     }
   }
