@@ -11,6 +11,7 @@
         -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
         position: relative;
         box-sizing: content-box;
+        --dropdown-tip-size: 6px;
         --input-color: #dadada;
         --input-background: #2b2b2b;
         --input-disabled-background: transparent;
@@ -18,26 +19,22 @@
         --input-focus-color: #f5f5f5;
         --input-focus-background: var(--primary-color, #394FE8);
         --input-invalid-color: #e83953;
+        --input-selection-color: var(--input-focus-color);
+        --input-selection-background: rgba(255,255,255,0.1);
         /* initial mixins */
         --input-style: {
-          border-radius: 3px;
-          padding: 0.2em 0.1em;
-          border: none;
-          outline: none;
+          padding: 0.2em;
+          border-radius: 4px;
           text-align: center;
-          cursor: pointer;
-          box-sizing: content-box;
-          -webkit-background-clip: padding-box;
-          background-clip: padding-box;
-          transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
+          transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
         };
         --input-focus: {
-          background: var(--input-focus-background);
           color: var(--input-focus-color);
+          background: var(--input-focus-background);
         };
         --input-disabled: {
-          background: var(--input-disabled-background);
           color: var(--input-disabled-color);
+          background: var(--input-disabled-background);
           font-weight: lighter;
           cursor: default;
         };
@@ -45,7 +42,7 @@
           box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
                       0 1px 8px 0 rgba(0, 0, 0, 0.12),
                       0 3px 3px -2px rgba(0, 0, 0, 0.4);
-          border-radius: 4px;
+          border-radius: 6px;
         };
         --input-icon: {
           border-radius: 4px;
@@ -53,39 +50,135 @@
           height: 16px;
           width: 16px;
           background: transparent;
-          transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
-          cursor: pointer;
-          fill: currentColor;
+          transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
         };
         --input-invalid: {
           border-color: var(--input-invalid-color);
         };
       }
-      input::-webkit-input-edit-text,
-      input::-webkit-input-placeholder,
-      input::-webkit-inner-spin-button,
-      input::-webkit-outer-spin-button,
-      input::-webkit-clear-button,
-      input::-webkit-calendar-picker-indicator {
-        color: currentColor;
-        fill: currentColor;
+      select,
+      input {
+        display: inline-flex;
+        align-items: center;
+        line-height: 1;
+        outline: none;
+        font-family: inherit;
+        font-size: inherit;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        text-align: center;
         cursor: pointer;
+        @apply --input-style;
+        padding: 0.3em;
       }
-      input::-webkit-calendar-picker-indicator:hover {
+      input {
+        border: thin solid transparent;
+      }
+      select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        color: currentColor;
+        border-style: none;
+        text-align-last: center;
         background: transparent;
+        background-image: none;
+      }
+      select:focus,
+      select:hover,
+      input:hover {
+        outline: none;
+        @apply --input-focus;
+      }
+      select:focus option,
+      select option {
+        outline: none;
+        font-family: inherit;
+        color: var(--input-color);
+        background: var(--input-background);
       }
       input:invalid {
+        border-width: thin;
+        border-style: solid;
         @apply --input-invalid;
       }
       input[disabled] {
         @apply --input-disabled;
       }
+      button {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        display: inline-flex;
+        background: transparent;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        border-width: 0;
+        padding: 0;
+        box-sizing: content-box;
+      }
+      button > * {
+        pointer-events: none;
+      }
       .icon {
         @apply --input-icon;
       }
+      .icon > svg {
+        height: 100%;
+        width: 100%;
+        fill: currentColor;
+      }
       .icon:focus,
       .icon:hover {
+        outline: none;
         @apply --input-focus;
+      }
+      select:focus::-ms-value {
+        background: transparent;
+      }
+      select::-ms-expand {
+        display: none;
+      }
+      ::-webkit-input-edit-text,
+      ::-webkit-input-placeholder,
+      ::-webkit-inner-spin-button,
+      ::-webkit-outer-spin-button,
+      ::-webkit-search-cancel-button,
+      ::-webkit-clear-button {
+        color: currentColor;
+        align-self: center;
+        cursor: pointer;
+      }
+      ::-webkit-search-cancel-button,
+      ::-webkit-clear-button {
+        mix-blend-mode: luminosity;
+      }
+      ::-moz-selection {
+        color: inherit;
+        background: transparent;
+      }
+      :focus::-moz-selection {
+        color: var(--input-selection-color);
+        background: var(--input-selection-background);
+      }
+      ::selection {
+        color: inherit;
+        background: transparent;
+      }
+      :focus::selection {
+        color: var(--input-selection-color);
+        background: var(--input-selection-background);
+      }
+      ::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+      ::-moz-focusring {
+        border-width: 0
+        color: transparent;
+        text-shadow: 0 0 0 var(--input-focus-color, #000);
       }
       [hidden] {
         display: none !important;

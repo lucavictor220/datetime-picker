@@ -47,18 +47,36 @@
            */
           value: {
             type: String
+          },
+
+          /**
+           * is true when the value is not undefined
+           */
+          _valueIsSet: {
+            type: Boolean,
+            value: false
           }
         }
       }
 
       static get observers() {
         return [
-          '_computeInvalid(required, value)'
+          '_computeInvalid(required, value)',
+          '_computeValueIsSet(value)'
         ]
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this._ensureAttribute('tabindex', 0);
       }
 
       _computeInvalid(required, value) {
         this.invalid = Boolean(required && !value);
+      }
+
+      _computeValueIsSet(value) {
+        this._valueIsSet = value !== undefined;
       }
 
       /**

@@ -1,7 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../number-input/integer-input.html">
 
-<link rel="import" href="datetime-picker-mixin.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../input-picker-pattern/input-shared-style.html">
+<link rel="import" href="../input-picker-pattern/switch-container-mixin.html">
+
+<link rel="import" href="../number-input/integer-input.html">
 
 <script>
   /**
@@ -13,11 +17,27 @@
    * @param {Object} superClass class to extend
    * @return {Object} extended class
    */
-  const CalendarElementPattern = (superClass) => class extends superClass { // eslint-disable-line no-unused-vars
+  const CalendarElementPattern = (superClass) => class extends superClass { // eslint-disable-line no-unused-vars, no-undef
 
+    static get styleTemplate() {
+      return `
+        <style include="${this.customStyleToInclude}" calendar>
+          ${this.customStyleContent}
+        </style>
+      `;
+    }
+
+    static get customStyleToInclude() {
+      return 'input-shared-style';
+    }
+
+    /**
+     * custom style content
+     * @type {string}
+     */
     static get customStyleContent() {
       return `
-        ${super.customStyleContent}
+        ${super.customStyleContent || ''}
         #calendar {
           display: -ms-inline-flexbox;
           display: -webkit-inline-flex;
@@ -44,40 +64,31 @@
           align-items: center;
           flex-grow: 1;
           padding: 0 4px;
-          cursor: pointer;
         }
         #calendar .view > * {
-          flex: 0 0 auto;
+          align-self: stretch;
         }
         #calendar #monthSelector {
-          -moz-appearance: none;
-          -webkit-appearance: none;
-          appearance: none;
-          text-indent: 0.01px;
-          text-overflow: '';
-          text-align-last: center;
-          flex: 1 0 auto;
-          font-family: inherit;
-          font-size: inherit;
-          font-weight: inherit;
-          color: currentColor;
-          background: transparent;
           @apply --input-style;
-        }
-        #calendar #monthSelector:hover,
-        #calendar #monthSelector:focus {
-          color: var(--input-focus-color);
-          background: var(--input-focus-background);
-        }
-        #calendar #monthSelector option {
-          color: var(--input-color);
-          background: var(--input-background);
+          flex: 1 0 auto;
+          padding: 6px;
         }
         #calendar #year {
           font-weight: bold;
+          flex: 0 0 auto;
+          --number-input: {
+            @apply --input-style;
+            padding: 6px;
+          };
         }
         #calendar #content {
           display: table;
+          position: relative;
+          line-height: 1;
+          border-collapse: collapse;
+        }
+        #calendar #content:focus {
+          outline: none;
         }
         #calendar #header {
           display: table-header-group;
@@ -96,18 +107,28 @@
           -webkit-background-clip: padding-box;
           background-clip: padding-box;
           font-size: 0.8em;
-          text-align: center;
           white-space: nowrap;
-          border-radius: 0.3em;
+          border-radius: 4px;
           @apply --calendar-date-cell;
         }
-        #calendar .day::before {
+        #calendar:hover #content .day.selected,
+        #calendar #content:focus .day.selected {
+          background: var(--input-focus-background);
+          color: var(--input-focus-color);
+        }
+        #calendar .day:before {
           content: '';
           display: block;
-          width: var(--calendar-date-width, 2.8em);
-          margin-top: 100%;
+          will-change: opacity, border-color;
+          opacity: 0;
+          border-radius: inherit;
+          border: 1px solid currentColor;
+          box-sizing: content-box;
+          width: var(--calendar-date-width, 2.6em);
+          padding-top: calc(100% - 2px);
+          transition: border-color 200ms cubic-bezier(0.6, 1, 0.2, 1), opacity 200ms cubic-bezier(0.6, 1, 0.2, 1);
         }
-        #calendar .day::after {
+        #calendar .day:after {
           content: attr(data-day);
           position: absolute;
           top: 50%;
@@ -116,28 +137,30 @@
         }
         #calendar #dates .day {
           cursor: pointer;
-          will-change: background;
-          transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1), border-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+          transition: background 200ms cubic-bezier(0.6, 1, 0.2, 1);
         }
         #calendar #dates .day:hover {
-          box-shadow: inset 0 0 1px currentColor;
+          will-change: background;
           @apply --calendar-date-cell-hovered;
         }
-        #calendar #dates .day.current {
-          box-shadow: inset 0 0 1px 1px currentColor;
+        #calendar #dates .day.selected:before,
+        #calendar #dates .day.recent:before {
+          border-color: var(--input-focus-background);
         }
-        #calendar #dates .day.selected {
-          background: var(--input-focus-background);
-          color: var(--input-focus-color);
-          box-shadow: inset 0 0 1px 1px var(--input-focus-background);
+        #calendar #content .day.recent:before,
+        #calendar #content .day.current:before {
+          opacity: 0.75;
         }
-        #calendar #dates .day.recent {
-          box-shadow: inset 0 0 1px 1px var(--input-focus-background);
-        }
-        #calendar #dates .day.notinmonth {
+        #calendar #dates .day:hover:before {
           opacity: 0.5;
         }
-        #calendar #dates .day.outofrange {
+        #calendar #content .day.selected:before {
+          opacity: 1;
+        }
+        #calendar #dates .day.notinmonth:after {
+          opacity: 0.5;
+        }
+        #calendar #dates .day.outofrange:after {
           opacity: 0.15;
           font-style: italic;
           pointer-events: none;
@@ -150,15 +173,15 @@
         ${super.contentTemplate || ''}
         <div id="calendar">
           <div id="top">
-            <svg class="icon switch" prop="month" step="-1" viewBox="0 0 24 24"><g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></g></svg>
+            <button class="icon switch" prop="month" step="-1">${this._iconStepLeftTemplate}</button>
             <div class="view">
-              <select id="monthSelector" hidden$="[[_hideMonth]]" style="order:[[_orderDate.month]];" index="1" value="{{month::change}}"></select>
-              <integer-input id="year" style="order:[[_orderDate.year]];" index="3" pad-length="4" placeholder="- - - -" value="{{year}}"></integer-input>
+              <select id="monthSelector" hidden$="[[_hideMonth]]" style="order:[[_orderDate.month]];" value="{{month::change}}"></select>
+              <integer-input id="year" style="order:[[_orderDate.year]];" pad-length="4" placeholder="- - - -" value="{{year}}"></integer-input>
             </div>
-            <svg class="icon switch" prop="month" step="1" viewBox="0 0 24 24"><g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g></svg>
+            <button class="icon switch" prop="month" step="1">${this._iconStepRightTemplate}</button>
           </div>
 
-          <div id="content" hidden$="[[_hideDay]]">
+          <div id="content" hidden$="[[_hideDay]]" tabindex="0" on-keydown="_checkKeycodeForDates">
             <div id="header">
               <div id="caption" class="week">
                 <div class="day"></div> <div class="day"></div> <div class="day"></div> <div class="day"></div> <div class="day"></div> <div class="day"></div> <div class="day"></div>
@@ -238,12 +261,12 @@
 
     connectedCallback() {
       super.connectedCallback();
-      let d;
-      if (this.default) {
-        d = new Date(this.default);
-      }
+      let d = new Date(this.value || this.default);
       if (isNaN(d)) {
         d = new Date();
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        this._setDate(d);
       }
       this.$.year.startAt = d.getFullYear();
     }
@@ -308,6 +331,8 @@
         return;
       }
       super._localeChanged(locale);
+      // test locale (currently just for Latin letters and Western Arabic/European numerals)
+      locale += '-u-nu-latn-ca-iso8601';
 
       while (this.$.monthSelector.hasChildNodes()) {
         this.$.monthSelector.removeChild(this.$.monthSelector.lastChild);
@@ -327,10 +352,11 @@
 
       // set weekday titles
       for (let i = 0; i < 7; i++) {
-        let d = new Date(0, 0, i);
-        let weekday = (d.getDay() - 1 + 7) % 7;
+        let d = new Date(Date.UTC(1970, 0, 15 + i));
+        let weekday = (d.getUTCDay() - 1 + 7) % 7;
         if (this.$.caption.children[weekday]) {
           this.$.caption.children[weekday].dataset.day = d.toLocaleDateString(locale, {
+            timeZone: 'UTC',
             weekday: 'short'
           });
         }
@@ -347,7 +373,6 @@
     renderCalendar(year, month, day, date) {
       if (year === undefined || month === undefined || day === undefined) return;
       const d = new Date(year, +month - 1, day);
-
       if (isNaN(+d)) {
         return;
       }
@@ -370,7 +395,7 @@
 
       let recentDay, min, max;
 
-      recentDay = this._dayDiff(new Date(date), firstDayOfMonth);
+      recentDay = this._dayDiff(d, firstDayOfMonth);
 
       if (this.min) {
         let minDate = new Date(this.min);
@@ -386,7 +411,8 @@
       const firstWeekDay = +new Date(year, month, 1).getDay() - 1; // Monday is first day
       let selectedDayInView;
 
-      let counter = -(7 + firstWeekDay) % 7 + 1;
+      let counter = -(firstWeekDay + 7) % 7 + 1;
+
       for (let i = 0; i < this.$.dates.children.length; i++) {
         for (let j = 0; j < this.$.dates.children[i].children.length; j++) {
           // Day Numbers
@@ -453,39 +479,33 @@
     }
 
     /**
-     * key press event handler
+     * key press event handler on dates area
      * @param  {[type]} e Event
      */
-    _checkKeycode(e) {
+    _checkKeycodeForDates(e) {
       if (e && e.keyCode) {
-        let prop;
-        switch (this.clamp) {
-          case 'year': // falls through
-          case 'month':
-            prop = 'year';
-            break;
-          case 'day': // falls through
-          case 'hours':
-            prop = 'month';
-            break;
-          default:
-            prop = 'day';
-        }
         switch (e.keyCode) {
-          case 37: // left // falls through
-          case 40: // down
-            this._incremProp(prop, -1);
+          case 37: // left
+            this._incremProp('day', -1);
             e.preventDefault();
+            e.stopPropagation();
             return;
-          case 39: // right // falls through
-          case 38: // up
-            this._incremProp(prop, 1);
+          case 39: // right
+            this._incremProp('day', 1);
             e.preventDefault();
+            e.stopPropagation();
+            return;
+          case 38: // up
+            this._incremProp('month', 1);
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          case 40: // down
+            this._incremProp('month', -1);
+            e.preventDefault();
+            e.stopPropagation();
             return;
         }
-      }
-      if (super._checkKeycode) {
-        super._checkKeycode(e);
       }
     }
 
@@ -511,25 +531,32 @@
   *
   * Custom property | Description | Default
   * ----------------|-------------|----------
-  * `--input-color` | text-color of the element | `#dadada`
-  * `--input-background` | text-color of the element | `#2b2b2b`
-  * `--input-focus-color` | color of the focussed or hovered inputs and icons | `#f5f5f5`
-  * `--input-focus-background` | background of the focussed or hovered inputs and icons | `--primary-color, #394FE8`
-  * `--input-style` | Mixin applied to the inputs | { border-radius: 3px; padding: 0.2em 0.1em; border: none; outline: none; text-align: center; color: inherit; cursor: pointer; background: transparent; box-sizing: content-box; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);`
-  * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}`
-  * `--input-icon` | Mixin applied to the icons | `{border-radius: 2px; padding: 8px; height: 16px; width: 16px; background: transparent; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1); cursor: pointer; fill: currentColor; }`
+  * `--input-color` | Text-color of the element | `#dadada`
+  * `--input-background` | Text-color of the element | `#2b2b2b`
+  * `--input-focus-color` | Color of the focussed or hovered inputs and icons | `#f5f5f5`
+  * `--input-focus-background` | Background of the focussed or hovered inputs and icons | `--primary-color, #394FE8`
+  * `--input-style` | Mixin applied to the inputs | { padding: 0.2em; border-radius: 4px; text-align: center; transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);}`
+  * `--input-focus` | Mixin applied to the focussed or hovered inputs | { color: var(--input-focus-color); background: var(--input-focus-background); }`
+  * `--input-icon` | Mixin applied to the icons | `{border-radius: 2px; padding: 8px; height: 16px; width: 16px; background: transparent; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1); }`
   * `--input-picker` | Mixin applied to the element | `{box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4); border-radius: 4px;}`
+  * `--input-selection-color` | Text-color of selected texts | `var(--input-focus-color)`
+  * `--input-selection-background` | Background of selected texts | `rgba(255,255,255,0.1)`
   * `--calendar-element` | Mixin applied to the calender | `{}`
+  * `--calendar-date-cell` | Mixin applied to the date cells | `{}`
+  * `--calendar-date-cell-hovered` | Mixin applied to hovered date cells | `{}`
+  * `--calendar-date-width` | width of a date cell | `2.6em`
   *
   * @customElement
   * @polymer
   *
   * @appliesMixin CalendarElementPattern
-  * @appliesMixin DatetimePickerMixin
+  * @appliesMixin SwitchContainerMixin
+  * @appliesMixin FormElementMixin
+  * @appliesMixin DatetimeMixin
   *
   * @demo demo/date-picker.html date elements
   **/
-    class CalendarElement extends CalendarElementPattern(DatetimePickerMixin(Polymer.Element)) { // eslint-disable-line no-undef
+    class CalendarElement extends CalendarElementPattern(SwitchContainerMixin(FormElementMixin(DatetimeMixin(Polymer.Element)))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'calendar-element';

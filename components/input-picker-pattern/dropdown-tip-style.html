@@ -13,7 +13,7 @@ styles for used for a tip of the dropdown
         position: absolute;
         width: 0;
         height: 0;
-        border-width: 0.3em;
+        border-width: var(--dropdown-tip-size, 0px);
         border-style: solid;
         border-color: transparent transparent transparent transparent;
         left: auto;
@@ -25,19 +25,19 @@ styles for used for a tip of the dropdown
         display: none;
       }
       :host([vertical-align="top"]) .dropdown:after {
-        top: -0.6em;
-        left: 0.6em;
+        top: calc(-2 * var(--dropdown-tip-size, 0px));
+        left: calc(2 * var(--dropdown-tip-size, 0px));
         border-bottom-color: var(--input-background, #000);
       }
       :host([vertical-align="bottom"]) .dropdown:after {
-        bottom: -0.6em;
-        left: 0.6em;
+        bottom: calc(-2 * var(--dropdown-tip-size, 0px));
+        left: calc(2 * var(--dropdown-tip-size, 0px));
         border-top-color: var(--input-background, #000);
       }
 
       :host([horizontal-align="left"]) .dropdown:after {
-        top: 0.6em;
-        left: -0.6em;
+        top: calc(2 * var(--dropdown-tip-size, 0px));
+        left: calc(-2 * var(--dropdown-tip-size, 0px));
         border-right-color: var(--input-background, #000);
       }
       :host([horizontal-align="left"][vertical-align="top"]) .dropdown:after {
@@ -45,16 +45,12 @@ styles for used for a tip of the dropdown
       }
       :host([horizontal-align="left"][vertical-align="bottom"]) .dropdown:after {
         top: auto;
-        bottom: 0.6em;
+        bottom: calc(2 * var(--dropdown-tip-size, 0px));
         border-top-color: transparent;
       }
-      :host([horizontal-align="left"][vertical-align="auto"]) .dropdown:after {
-        top: 50%; bottom: auto;
-      }
-
       :host([horizontal-align="right"]) .dropdown:after {
-        top: 0.6em;
-        right: -0.6em;
+        top: calc(2 * var(--dropdown-tip-size, 0px));
+        right: calc(-2 * var(--dropdown-tip-size, 0px));
         border-left-color: var(--input-background, #000);
       }
       :host([horizontal-align="right"][vertical-align="top"]) .dropdown:after {
@@ -63,12 +59,12 @@ styles for used for a tip of the dropdown
       }
       :host([horizontal-align="right"][vertical-align="bottom"]) .dropdown:after {
         top: auto;
-        bottom: 0.6em;
+        bottom: calc(2 * var(--dropdown-tip-size, 0px));
         left: auto;
         border-top-color: transparent;
       }
-      :host([horizontal-align="right"][vertical-align="auto"]) .dropdown:after {
-        top: 50%; bottom: auto;
+      :host([vertical-align="auto"]) .dropdown:after {
+        top: calc(50% - var(--dropdown-tip-size, 0px)); bottom: auto;
       }
     </style>
   </template>
