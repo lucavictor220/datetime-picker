@@ -19,23 +19,24 @@ styles for used for a inner dropdown
       }
 
       :host([opened]) .dropdown {
+        visibility: visible;
         opacity: 1;
         pointer-events: all;
       }
 
       :host([vertical-align="bottom"]) .dropdown {
         top: 0; left: 0;
-        transform: translateY(calc(-100% - var(--dropdown-tip-size, 0px)));
+        transform: translateY(-100%);
       }
 
       :host([vertical-align="top"]) .dropdown {
         bottom: 0; left: 0;
-        transform: translateY(calc(100% + var(--dropdown-tip-size, 0px)));
+        transform: translateY(100%);
       }
 
       :host([horizontal-align="left"]) .dropdown {
         top: 0; right: 0; left: auto; bottom: auto;
-        transform: translateX(calc(100% + var(--dropdown-tip-size, 0px)));
+        transform: translateX(100%);
       }
 
       :host([horizontal-align="left"][vertical-align="bottom"]) .dropdown {
@@ -48,12 +49,12 @@ styles for used for a inner dropdown
 
       :host([horizontal-align="left"][vertical-align="auto"]) .dropdown {
         top: auto; bottom: 50%;
-        transform: translate(calc(100% + var(--dropdown-tip-size, 0px)), 50%);
+        transform: translate(100%, 50%);
       }
 
       :host([horizontal-align="right"]) .dropdown {
         top: 0; left: 0; right: auto; bottom: auto;
-        transform: translateX(calc(-100% - var(--dropdown-tip-size, 0px)));
+        transform: translateX(-100%);
       }
 
       :host([horizontal-align="right"][vertical-align="bottom"]) .dropdown {
@@ -66,7 +67,7 @@ styles for used for a inner dropdown
 
       :host([horizontal-align="right"][vertical-align="auto"]) .dropdown {
         top: auto; bottom: 50%;
-        transform: translate(calc(-100% - var(--dropdown-tip-size, 0px)), 50%);
+        transform: translate(-100%, 50%);
       }
 
       :host([vertical-align="auto"][horizontal-align="auto"]) .dropdown {

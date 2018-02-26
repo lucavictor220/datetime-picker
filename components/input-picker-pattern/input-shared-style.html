@@ -29,6 +29,7 @@
           transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
         };
         --input-focus: {
+          outline: none;
           color: var(--input-focus-color);
           background: var(--input-focus-background);
         };
@@ -172,12 +173,11 @@
         background: var(--input-selection-background);
       }
       ::-moz-focus-inner {
-        border-style: none;
+        border: 0;
         padding: 0;
       }
       ::-moz-focusring {
-        border-width: 0
-        color: transparent;
+        color: transparent !important;
         text-shadow: 0 0 0 var(--input-focus-color, #000);
       }
       [hidden] {
