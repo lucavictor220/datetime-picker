@@ -1,6 +1,6 @@
 {
   "name": "@fooloomanzoo/datetime-picker",
-  "version": "2.7.7",
+  "version": "2.7.10",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
@@ -33,5 +33,19 @@
     "type": "git",
     "url": "git+https://github.com/fooloomanzoo/datetime-picker.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@polymer/polymer": "^2",
+    "@fooloomanzoo/datetime-input": "^2",
+    "@fooloomanzoo/number-input": "^2",
+    "@fooloomanzoo/property-mixins": "^2",
+    "@fooloomanzoo/input-picker-pattern": "^2"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "*",
+    "@polymer/iron-component-page": "*",
+    "@polymer/iron-flex-layout": "*",
+    "@polymer/iron-demo-helpers": "*",
+    "@polymer/iron-form": "*"
+  }
 }

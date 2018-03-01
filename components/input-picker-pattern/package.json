@@ -1,6 +1,6 @@
 {
   "name": "@fooloomanzoo/input-picker-pattern",
-  "version": "2.1.3",
+  "version": "2.1.6",
   "authors": [
     "Johannes Brautzsch <fooloomanzoo>"
   ],
@@ -25,5 +25,13 @@
     "type": "git",
     "url": "git+https://github.com/fooloomanzoo/datetime-picker.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@polymer/polymer": "^2",
+    "@polymer/iron-overlay-behavior": "*"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "*",
+    "@polymer/iron-form": "*"
+  }
 }

@@ -21,51 +21,61 @@ styles for used for a tip of the dropdown
         bottom: auto;
         right: auto;
       }
+
+      :host([dynamic-align]) .dropdown:after,
       :host([no-tip]) .dropdown:after {
-        display: none;
+        display: none !important;
       }
-      :host([vertical-align="top"]) .dropdown:after {
+
+      :host([vertical-align]) .dropdown:after,
+      :host([vertical-align="auto"]) .dropdown:after,
+      :host([vertical-align="top"]) .dropdown:after,
+      :host([horizontal-align]) .dropdown:after,
+      :host([horizontal-align="auto"]) .dropdown:after,
+      :host([horizontal-align="left"]) .dropdown:after {
         top: calc(-2 * var(--dropdown-tip-size, 0px));
         left: calc(2 * var(--dropdown-tip-size, 0px));
         border-bottom-color: var(--input-background, #000);
       }
-      :host([vertical-align="bottom"]) .dropdown:after {
+
+      :host([horizontal-align="right"][vertical-align]) .dropdown:after {
+        left: auto;
+        right: calc(2 * var(--dropdown-tip-size, 0px));
+      }
+
+      :host([horizontal-align="center"][vertical-align]) .dropdown:after {
+        left: 50%; right: auto;
+        transform: translate(-50%, 0%);
+      }
+
+      :host([horizontal-align][vertical-align="bottom"]) .dropdown:after {
+        top: auto;
         bottom: calc(-2 * var(--dropdown-tip-size, 0px));
-        left: calc(2 * var(--dropdown-tip-size, 0px));
+        border-bottom-color: transparent;
         border-top-color: var(--input-background, #000);
       }
 
-      :host([horizontal-align="left"]) .dropdown:after {
-        top: calc(2 * var(--dropdown-tip-size, 0px));
+      :host([horizontal-align][vertical-align="middle"]) .dropdown:after {
+        top: auto; right: auto;
+        bottom: 50%;
         left: calc(-2 * var(--dropdown-tip-size, 0px));
-        border-right-color: var(--input-background, #000);
-      }
-      :host([horizontal-align="left"][vertical-align="top"]) .dropdown:after {
-        border-bottom-color: transparent;
-      }
-      :host([horizontal-align="left"][vertical-align="bottom"]) .dropdown:after {
-        top: auto;
-        bottom: calc(2 * var(--dropdown-tip-size, 0px));
         border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-right-color: var(--input-background, #000);
+        transform: translate(0%, 50%);
       }
-      :host([horizontal-align="right"]) .dropdown:after {
-        top: calc(2 * var(--dropdown-tip-size, 0px));
+
+      :host([horizontal-align="left"][vertical-align="middle"]) .dropdown:after {
+        left: auto;
         right: calc(-2 * var(--dropdown-tip-size, 0px));
+        border-right-color: transparent;
         border-left-color: var(--input-background, #000);
       }
-      :host([horizontal-align="right"][vertical-align="top"]) .dropdown:after {
-        left: auto;
-        border-bottom-color: transparent;
+
+      :host([horizontal-align="center"][vertical-align="middle"]) .dropdown:after {
+        border: none;
       }
-      :host([horizontal-align="right"][vertical-align="bottom"]) .dropdown:after {
-        top: auto;
-        bottom: calc(2 * var(--dropdown-tip-size, 0px));
-        left: auto;
-        border-top-color: transparent;
-      }
-      :host([vertical-align="auto"]) .dropdown:after {
-        top: calc(50% - var(--dropdown-tip-size, 0px)); bottom: auto;
-      }
+
     </style>
   </template>
 

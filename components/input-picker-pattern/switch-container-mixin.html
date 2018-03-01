@@ -1,6 +1,6 @@
 <script>
   /**
-   * Mixin to extend an element for binding switch button to increment properties. Button-switches should be of class `switch` and have the attributes `prop` and `step` that define the property to increment in the given step. 
+   * Mixin to extend an element for binding switch button to increment properties. Button-switches should be of class `switch` and have the attributes `prop` and `step` that define the property to increment in the given step.
    *
    * @mixinFunction
    * @polymer
@@ -45,6 +45,12 @@
 
       connectedCallback() {
         super.connectedCallback();
+
+        // Eventhandler binding to this to be able to remove the Eventlisteners properly
+        this._increm = this._increm.bind(this);
+        this._stopActiveIncremJob = this._stopActiveIncremJob.bind(this);
+        this._checkKeycodeSwitch = this._checkKeycodeSwitch.bind(this);
+        
         this._addSwitchListener();
       }
 
@@ -104,8 +110,10 @@
         this._stopActiveIncremJob();
         let prop = s.getAttribute && s.getAttribute('prop');
         const step = (s.getAttribute && s.getAttribute('step')) || 1;
+        s.setAttribute('active', '');
         this._incremProp(prop, +step);
         this._activeIncremJob = setInterval(this._incremProp.bind(this, prop, +step), this.dwellTime);
+        this._activeSwitch = s;
       }
 
       _incremProp(prop, step) {
@@ -116,6 +124,8 @@
         if (this._activeIncremJob) {
           clearInterval(this._activeIncremJob);
           this._activeIncremJob = null;
+          this._activeSwitch.removeAttribute('active');
+          this._activeSwitch = null;
         }
       }
 
