@@ -8,17 +8,6 @@
    *
    * @appliesMixin FormElementMixin
    *
-   * Custom property | Description | Default
-   * ----------------|-------------|----------
-   * `--input-color` | text-color of the element | `#dadada`
-   * `--input-background` | text-color of the element | `#2b2b2b`
-   * `--input-focus-color` | color of the focussed or hovered inputs and icons | `#f5f5f5`
-   * `--input-focus-background` | background of the focussed or hovered inputs and icons | `--primary-color, #394FE8`
-   * `--input-style` | Mixin applied to the inputs | { border-radius: 3px; padding: 0.2em 0.1em; border: none; outline: none; text-align: center; color: inherit; cursor: pointer; background: transparent; box-sizing: content-box; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);`
-   * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}`
-   * `--input-icon` | Mixin applied to the icons | `{border-radius: 2px; padding: 8px; height: 16px; width: 16px; background: transparent; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1); cursor: pointer; fill: currentColor; }`
-   * `--input-picker` | Mixin applied to the element | `{box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4); border-radius: 4px;}`
-   *
    * @mixinFunction
    * @polymer
    */
@@ -79,40 +68,38 @@
         return `
           ${super.customStyleContent || ''}
           :host {
-            display: -webkit-inline-flex;
-            display: -ms-inline-flexbox;
             display: inline-flex;
+            align-items: center;
             position: relative;
           }
           #polyfill {
-            display: -webkit-inline-flex;
-            display: -ms-inline-flexbox;
+            @apply --input-style;
             display: inline-flex;
             align-items: center;
             cursor: pointer;
-            @apply --input-style;
             padding: 0;
-          }
-          :host(:hover) #polyfill,
-          :host(:focus) #polyfill {
-            @apply --input-focus;
-          }
-          #polyfill > .replacement {
-            --input-color: currentColor;
-            --input-background: transparent;
+            border-width: 0;
           }
           #picker {
+            color: var(--input-picker-color);
+            background: var(--input-picker-background);
+            border-radius: var(--input-picker-border-radius);
+            box-shadow: var(--input-picker-box-shadow);
+            @apply --input-picker;
             display: inline-flex;
             flex-flow: column nowrap;
-            color: var(--input-color);
-            background: var(--input-background);
-            @apply --input-picker;
             padding: 0;
           }
+          #picker[horizontal] {
+            flex-flow: row nowrap;
+          }
           #picker > * {
-            padding: var(--input-picker-padding, 4px);
+            color: var(--input-picker-color);
+            background: var(--input-picker-background);
+            padding: var(--input-picker-padding);
             box-shadow: none !important;
             box-sizing: border-box;
+            flex-shrink: 0;
           }
           #picker #buttons {
             display: inline-flex;
@@ -120,8 +107,6 @@
             align-self: stretch;
             align-items: flex-end;
             justify-content: flex-end;
-            color: var(--input-color);
-            background: var(--input-background);
           }
           #picker > :first-child {
             border-top-left-radius: inherit;
@@ -176,7 +161,7 @@
       static get buttonTemplate() {
         return `
           ${super.buttonTemplate || ''}
-          <button class="icon confirm" on-click="confirm" on-keydown="_stopPropagation">${this._iconConfirmTemplate}</button>
+          <button class="icon confirm" hidden$="[[disabled]]" on-click="confirm" on-keydown="_stopPropagation">${this._iconConfirmTemplate}</button>
           <button class="icon cancel" on-click="cancel" on-keydown="_stopPropagation" hidden$="[[autoConfirm]]">${this._iconCloseTemplate}</button>
         `;
       }
@@ -223,7 +208,7 @@
       static get properties() {
         return {
           /**
-           * use the native input, if it exists
+           * Set to `true` to use the native input, if it available
            */
           native: {
             type: Boolean,
@@ -231,16 +216,24 @@
           },
 
           /**
-           * use the native input automatically on mobile devices
+           * Set to `true` to use the native input automatically on mobile devices, if it available
            */
           nativeOnMobile: {
             type: Boolean,
-            value: false,
             observer: '_nativeOnMobileChanged'
           },
 
           /**
-           * opens the picker
+           * When `nativeOnMobile` is set to `true` this string is used to test the userAgent for a mobile device
+           */
+          mobileUserAgentTestString: {
+            type: Boolean,
+            value: 'mM]obi|[tT]ablet|[aA]ndroid',
+            observer: '_nativeOnMobileChanged'
+          },
+
+          /**
+           * if `true` the picker is opened
            */
           opened: {
             type: Boolean,
@@ -270,7 +263,7 @@
           },
 
           /**
-           * Set to true to make the input auto-confirming
+           * Set to `true` to make the input auto-confirming
            */
           autoConfirm: {
             type: Boolean,
@@ -278,7 +271,7 @@
           },
 
           /**
-           * Set to true to disable canceling the overlay with the ESC key.
+           * Set to `true` to disable canceling the overlay with the ESC key.
            */
           noCancelOnEscKey: {
             type: Boolean,
@@ -286,7 +279,7 @@
           },
 
           /**
-           * Set to true to disable canceling the dropdown by clicking outside the picker.
+           * Set to `true` to disable canceling the dropdown by clicking outside the picker.
            */
           noCancelOnOutsideClick: {
             type: Boolean,
@@ -294,7 +287,7 @@
           },
 
           /**
-           * Set to true to keep multiple pickers open. (will only work as expected when e.g. `noCancelOnOutsideClick` is set to true)
+           * Set to `true` to keep multiple pickers open. (will only work as expected when e.g. `noCancelOnOutsideClick` is set to true)
            */
           keepMultiplePickersOpen: {
             type: Boolean,
@@ -302,7 +295,7 @@
           },
 
           /**
-           * Set to true to disable the tip of the picker
+           * Set to `true` to disable the tip of the picker
            */
           noTip: {
             type: Boolean,
@@ -394,17 +387,17 @@
         this.removeEventListener('keydown', this._checkKeycode, false);
       }
 
-      _nativeOnMobileChanged(nativeOnMobile) {
-        if (nativeOnMobile === undefined) {
+      _nativeOnMobileChanged() {
+        if (this.nativeOnMobile === undefined) {
           return;
         }
 
         const ua = window.navigator.userAgent,
-          isMobile = /[mM]obi/i.test(ua) || /[tT]ablet/i.test(ua) || /[aA]ndroid/i.test(ua);
+          isMobile = new RegExp(this.mobileUserAgentTestString, 'i').test(ua);
         if (isMobile === true) {
-          if (nativeOnMobile === true) {
+          if (this.nativeOnMobile === true) {
             this.native = true;
-          } else if (!this.native && nativeOnMobile === false) {
+          } else if (!this.native && this.nativeOnMobile === false) {
             this.native = false;
           }
         }
@@ -498,6 +491,10 @@
         if (e && e.stopPropagation) {
           e.stopPropagation();
         }
+        if (this.disabled) {
+          this.cancel();
+          return;
+        }
         if (super.confirm) {
           super.confirm();
         }
@@ -520,7 +517,8 @@
         }
         this.close();
       }
-
     }
   }
+
+  window.InputPickerPattern = InputPickerPattern;
 </script>

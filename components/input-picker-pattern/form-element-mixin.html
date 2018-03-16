@@ -16,7 +16,8 @@
            */
           required: {
             type: Boolean,
-            reflectToAttribute: true
+            reflectToAttribute: true,
+            notify: true
           },
 
           /**
@@ -24,7 +25,8 @@
            */
           invalid: {
             type: Boolean,
-            reflectToAttribute: true
+            reflectToAttribute: true,
+            notify: true
           },
 
           /**
@@ -32,7 +34,8 @@
            */
           disabled: {
             type: Boolean,
-            reflectToAttribute: true
+            reflectToAttribute: true,
+            notify: true
           },
 
           /**
@@ -46,7 +49,8 @@
            * value of the input
            */
           value: {
-            type: String
+            type: Object,
+            notify: true
           },
 
           /**
@@ -55,6 +59,14 @@
           _valueIsSet: {
             type: Boolean,
             value: false
+          },
+
+          /**
+           * defines the property that should be used for the value
+           */
+          propertyForValue: {
+            type: String,
+            observer: '_createReflectPropertyToValueObserver'
           }
         }
       }
@@ -99,6 +111,23 @@
         }
         return this.shadowRoot;
       }
+
+      _createReflectPropertyToValueObserver(prop) {
+        if (prop !== undefined) {
+          this._createPropertyObserver(prop, '_reflectPropertyToValue', true);
+          this._createPropertyObserver('value', '_reflectValueToProperty', true);
+        }
+      }
+
+      _reflectPropertyToValue(v) {
+        this.set('value', v);
+      }
+
+      _reflectValueToProperty(v) {
+        this.set(this.propertyForValue, v);
+      }
     }
   }
+
+  window.FormElementMixin = FormElementMixin;
 </script>

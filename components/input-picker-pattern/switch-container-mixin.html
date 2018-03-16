@@ -15,7 +15,7 @@
       static get properties() {
         return {
           /**
-           * dwell time of incrementing inputs by the buttons in milliseconds. It is minimum 75 milliseceonds.
+           * dwell time of incrementing inputs by the buttons in milliseconds. It is minimum 75 milliseconds.
            *
            * @type {number}
            */
@@ -50,7 +50,7 @@
         this._increm = this._increm.bind(this);
         this._stopActiveIncremJob = this._stopActiveIncremJob.bind(this);
         this._checkKeycodeSwitch = this._checkKeycodeSwitch.bind(this);
-        
+
         this._addSwitchListener();
       }
 
@@ -60,59 +60,78 @@
       }
 
       _addSwitchListener() {
-        this.addEventListener('focus', this._stopActiveIncremJob.bind(this), {passive: true});
-        this.addEventListener('blur', this._stopActiveIncremJob.bind(this), {passive: true});
-        this.addEventListener('contextmenu', this._stopActiveIncremJob.bind(this), {passive: true});
+        // this.addEventListener('focus', this._stopActiveIncremJob, {passive: true});
+        this.addEventListener('blur', this._stopActiveIncremJob, {passive: true});
+        this.addEventListener('contextmenu', this._stopActiveIncremJob, {passive: true});
         const switchs = this.root.querySelectorAll('.switch');
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
-            s.addEventListener('mousedown', this._increm.bind(this, s), {passive: true});
-            s.addEventListener('touchstart', this._increm.bind(this, s), {passive: true});
-            s.addEventListener('keydown', this._checkKeycodeSwitch.bind(this, s), {passive: true});
-            s.addEventListener('mouseup', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.addEventListener('mouseout', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.addEventListener('touchend', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.addEventListener('touchcancel', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.addEventListener('keyup', this._stopActiveIncremJob.bind(this), {passive: true});
+            s.addEventListener('mousedown', this._increm, {passive: true});
+            s.addEventListener('touchstart', this._increm, {passive: true});
+            s.addEventListener('keydown', this._checkKeycodeSwitch, {passive: true});
+            s.addEventListener('mouseup', this._stopActiveIncremJob, {passive: true});
+            s.addEventListener('mouseout', this._stopActiveIncremJob, {passive: true});
+            s.addEventListener('touchend', this._stopActiveIncremJob, {passive: true});
+            s.addEventListener('touchcancel', this._stopActiveIncremJob, {passive: true});
+            s.addEventListener('keyup', this._stopActiveIncremJob, {passive: true});
           })
         }
       }
 
       _removeSwitchListener() {
-        this.removeEventListener('focus', this._stopActiveIncremJob.bind(this), {passive: true});
-        this.removeEventListener('blur', this._stopActiveIncremJob.bind(this), {passive: true});
-        this.removeEventListener('contextmenu', this._stopActiveIncremJob.bind(this), {passive: true});
+        // this.removeEventListener('focus', this._stopActiveIncremJob, {passive: true});
+        this.removeEventListener('blur', this._stopActiveIncremJob, {passive: true});
+        this.removeEventListener('contextmenu', this._stopActiveIncremJob, {passive: true});
         const switchs = this.root.querySelectorAll('.switch');
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
-            s.removeEventListener('mousedown', this._increm.bind(this, s), {passive: true});
-            s.removeEventListener('touchstart', this._increm.bind(this, s), {passive: true});
-            s.removeEventListener('keydown', this._checkKeycodeSwitch.bind(this, s), {passive: true});
-            s.removeEventListener('mouseup', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.removeEventListener('mouseout', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.removeEventListener('touchend', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.removeEventListener('touchcancel', this._stopActiveIncremJob.bind(this), {passive: true});
-            s.removeEventListener('keyup', this._stopActiveIncremJob.bind(this), {passive: true});
+            s.removeEventListener('mousedown', this._increm, {passive: true});
+            s.removeEventListener('touchstart', this._increm, {passive: true});
+            s.removeEventListener('keydown', this._checkKeycodeSwitch, {passive: true});
+            s.removeEventListener('mouseup', this._stopActiveIncremJob, {passive: true});
+            s.removeEventListener('mouseout', this._stopActiveIncremJob, {passive: true});
+            s.removeEventListener('touchend', this._stopActiveIncremJob, {passive: true});
+            s.removeEventListener('touchcancel', this._stopActiveIncremJob, {passive: true});
+            s.removeEventListener('keyup', this._stopActiveIncremJob, {passive: true});
           })
         }
       }
 
-      _checkKeycodeSwitch(s, e) {
+      _checkKeycodeSwitch(e) {
         if (e && (e.keyCode === 13 || e.keyCode === 32)) { // space or enter
-          this._increm(s);
+          this._increm(e);
           e.stopPropagation();
         } else {
           this._stopActiveIncremJob();
         }
       }
 
-      _increm(s) {
+      _increm(e) {
         this._stopActiveIncremJob();
-        let prop = s.getAttribute && s.getAttribute('prop');
-        const step = (s.getAttribute && s.getAttribute('step')) || 1;
+        if (e === undefined) {
+          return;
+        }
+        let s;
+        if (e.path) {
+          for (let i = 0; i < e.path.length; i++) {
+            if (e.path[i].classList.contains('switch')) {
+              s = e.path[i];
+              break;
+            }
+          }
+        } else if (e.target && e.target.classList.contains('switch')) {
+          s = e.target;
+        }
+        if (s === undefined ) {
+          return;
+        }
+
+        let prop = s.getAttribute('prop');
+        const step = s.getAttribute('step') || 1;
+        const sign = s.hasAttribute('invert') ? -1 : 1;
         s.setAttribute('active', '');
-        this._incremProp(prop, +step);
-        this._activeIncremJob = setInterval(this._incremProp.bind(this, prop, +step), this.dwellTime);
+        this._incremProp(prop, +step*sign);
+        this._activeIncremJob = setInterval(this._incremProp.bind(this, prop, +step*sign), this.dwellTime);
         this._activeSwitch = s;
       }
 

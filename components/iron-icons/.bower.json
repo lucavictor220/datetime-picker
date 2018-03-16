@@ -1,6 +1,6 @@
 {
   "name": "iron-icons",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A set of icons for use with iron-icon",
   "authors": [
     "The Polymer Authors"
@@ -74,11 +74,11 @@
     "util",
     "update-icons.sh"
   ],
-  "_release": "2.1.0",
+  "_release": "2.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.0",
-    "commit": "3e6294c810ceeee980af692815557ad31912a881"
+    "tag": "v2.1.1",
+    "commit": "bc3d1a82b24449732cf3cb3d663748a9f5636d2d"
   },
   "_source": "https://github.com/PolymerElements/iron-icons.git",
   "_target": "1 - 2",

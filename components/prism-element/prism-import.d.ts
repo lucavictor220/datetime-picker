@@ -5,9 +5,6 @@
  *   https://github.com/Polymer/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   index.html
+ *   prism-import.html
  */
-
-/// <reference path="../webcomponentsjs/webcomponents-lite.d.ts" />
-/// <reference path="../iron-component-page/iron-component-page.d.ts" />
 

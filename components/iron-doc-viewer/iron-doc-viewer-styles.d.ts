@@ -5,8 +5,6 @@
  *   https://github.com/Polymer/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   test/index.html
+ *   iron-doc-viewer-styles.html
  */
-
-/// <reference path="../../web-component-tester/browser.d.ts" />
 

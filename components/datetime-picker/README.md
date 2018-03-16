@@ -1,13 +1,14 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker)
 [![API](https://img.shields.io/badge/API-available-green.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker/elements/datetime-picker)
 [![Demo](https://img.shields.io/badge/demo-available-red.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-picker/demo/demo/datetime-picker.html)
+[![Codepen](https://img.shields.io/badge/codepen-demo-black.svg)](https://codepen.io/fooloomanzoo/pen/RxqNOb)
 
 _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/datetime-picker/)_
 ## &lt;datetime-picker&gt;
 
 ### What is it for?
 
-`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` and the `<time-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes.
+`datetime-picker` is a picker for date and time for **[Polymer](https://github.com/Polymer/polymer)** that can use the **native** input, too. If the **native** picker is choosen and is not supported, this element uses the **polyfill** date-picker. The `<calendar-element>` and the `<time-element>` will come in place if the native picker is not available or is not explicitly wanted. A range picker is provided by combining the `min`- and `max`-attributes. A codepen demo is available [here](https://codepen.io/fooloomanzoo/pen/RxqNOb).
 
 <!--
 ```
@@ -34,7 +35,7 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
   <input type="checkbox" checked="{{native::change}}">native picker
   <input type="checkbox" checked="{{autoConfirm::change}}">auto confirm
   <input type="checkbox" checked="{{withTimezone::change}}">with timezone
-  <input type="checkbox" checked="{{hour12::change}}">hour 12
+  <input type="checkbox" checked="{{hour12Format::change}}">hour 12
   horizontal-align: <select value="{{horizontalAlign::change}}">
     <option value="auto">auto</option>
     <option value="left">left</option>
@@ -58,7 +59,7 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
     <div><code>confirmed datetime</code>: [[confirmedDatetime]]</div>
     <div><code>confirmed numeric value</code>: [[confirmedValue]]</div>
   </p>
-  <datetime-picker native="[[native]]" with-timezone="{{withTimezone}}" auto-confirm="[[autoConfirm]]" value="{{value}}" confirmed-value="{{confirmedValue}}" date="{{date}}" datetime="{{datetime}}" confirmed-date="{{confirmedDate}}" confirmed-datetime="{{confirmedDatetime}}" confirmed-time="{{confirmedTime}}" time="{{time}}" timezone="{{timezone}}" vertical-align="{{verticalAlign}}" horizontal-align="{{horizontalAlign}}" hour12="[[hour12]]"></datetime-picker>
+  <datetime-picker native="[[native]]" with-timezone="{{withTimezone}}" auto-confirm="[[autoConfirm]]" value="{{value}}" confirmed-value="{{confirmedValue}}" date="{{date}}" datetime="{{datetime}}" confirmed-date="{{confirmedDate}}" confirmed-datetime="{{confirmedDatetime}}" confirmed-time="{{confirmedTime}}" time="{{time}}" timezone="{{timezone}}" vertical-align="{{verticalAlign}}" horizontal-align="{{horizontalAlign}}" hour12-format="[[hour12Format]]"></datetime-picker>
 ```
 
 If you like an **overlay** then use `<overlay-datetime-picker>`, what creates the polyfill in an `<overlay-element>`, that extends Polymer.IronOverlayBehavior and will create some of its attribute-bindings.
@@ -88,7 +89,7 @@ Internally it tests the browser, if **native** input-types `datetime-local`, `da
 
 It might be useful for you to use, if you like to keep the native approach of Browsers like in Chrome for Desktop or Mobile, you like to have a different look or you would like to have a guaranteed working **datetime-picker**.
 
-Another use case could be for example, if you want on *mobile devices* use the native picker, when supported, and on *desktop devices* this polyfill. For that purpose the attribute `native-on-mobile` is also provided.
+Another use case could be for example, if you want on _mobile devices_ use the native picker, when supported, and on _desktop devices_ this polyfill. For that purpose the attribute `native-on-mobile` is also provided.
 
 ```html
   <datetime-picker native="[[isMobile]]"></datetime-picker>
@@ -132,8 +133,16 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 ```html
 <p><calendar-element date="{{date}}"></calendar-element></p>
 <p>date: <date-input date="{{date}}" datetime="{{datetime}}"></date-input></p>
-<p>datetime: <datetime-input default="2020-05-23" datetime="{{datetime}}"></datetime-input></p>
+<p>datetime: <datetime-input default="2020-05-23" datetime="{{datetime}}" step="5"></datetime-input></p>
 ```
+
+Use `default` or another attribute to preset the date. If `step` is set on a picker, the attribute defines the step a date should be incremented (in seconds). The input for the most inferior standing, that would create an integer step, is used to increment the value.
+For example, if the `step` is:
+  * `0.05`: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behave as expected
+  * `1.05`: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behave as expected
+  * `2`: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behave as expected
+  * `180`: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behave as expected
+If `step="0"` all inputs will be disabled, or when the step is below `0.001` the step will be set to `0.001`. The most superior input that will become the given step is the day-input.
 
 #### Stand-alone time-picker and time-input (preset by using its attributes)
 
@@ -160,7 +169,7 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 -->
 ```html
 <time-element time="{{time}}"></time-element>
-<p> time: <time-input time="{{time}}" hours="8"></time-input></p>
+<p> time: <time-input time="{{time}}" hour="8"></time-input></p>
 ```
 
 #### Use the polyfill or the native picker
@@ -247,7 +256,7 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
 
 ```html
 <p>
-  hour12: <input type="checkbox" checked="{{hour12::change}}">
+  hour12-format: <input type="checkbox" checked="{{hour12Format::change}}">
   <br>
   locale:
   <select value="{{locale::change}}">
@@ -268,7 +277,7 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
 
 <p>
   <calendar-element locale="{{locale}}" date="{{date}}" ></calendar-element>
-  <time-element locale="{{locale}}" hour12="[[hour12]]" datetime="{{datetime}}" date="{{date}}"></time-element>
+  <time-element locale="{{locale}}" hour12-format="[[hour12Format]]" datetime="{{datetime}}" date="{{date}}"></time-element>
 </p>
 
 <p>datetime: [[datetime]]</p>
@@ -286,7 +295,7 @@ npm install --save @fooloomanzoo/datetime-picker
 ### Update
 to last version
 ```
-bower update
+bower update -f
 ```
 
 ### Notable Changes
@@ -324,6 +333,18 @@ bower update
 
 * 2.7.0
   - `timezone` attribute
+  - using `<integer-input>` for the separate parts of the date
+  - every input and button is reachable by using the `tabulator`-key
+
+* 2.8.0
+  - `step` attribute
+  - `parts-hidden` attribute
+  - style-values have been partially renamed and split up, because the style scoping is not working correctly for browsers other than Chromium-browsers. For example:
+    + the picker uses now `--input-picker-color`, `--input-picker-background` instead of `--input-color`, `--input-background` (they stand exclusivly for the polyfill and the native element)
+    + the picker-style-values are further split up to `--input-picker-border-radius`, `--input-picker-padding` etc.
+    + simular for all mixins: by default are `--input-style`, `--input-focus`, `--input-placeholder`, `--input-invalid` etc. from now on empty and their most important values are separately split up in own values which are applied before the mixins. This might not be the final solution, while the behaviours of `shadycss` and `webcomponents` are still changing.
+  - changed internationalization implementation
+  - `default` can also be a `time`-value
 
 ### Contribute?
 Feel free to send a new issue, a commit, a pull request or just fork it!

@@ -34,26 +34,19 @@
             <template is="dom-bind">
               <custom-style>
                 <style is="custom-style">
-                  number-input {
-                    --number-input: {
-                      background: rgba(0, 0, 0, 0.05);
-                      transition: background 150ms ease-in-out;
-                      color: #111;
-                      border-color: transparent;
-                      border-style: unset;
-                      padding: 0.3em;
-                      border-radius: 0.2em;
-                    };
-                    --number-input-focus: {
-                      background: rgba(0, 0, 0, 0.15);
-                    };
-                    --number-input-placeholder: {
-                      color: #492020;
-                    };
+                  .simple {
+                    --input-background: rgba(149, 176, 236, 0.3);
+                    --input-transition: background 150ms ease-in-out;
+                    --input-color: #222fa6;
+                    --input-border: thin solid transparent;
+                    --input-padding: 0.3em;
+                    --input-border-radius: 0.2em;
+                    --input-focus-color: #b4d0fa;
+                    --input-focus-background: #333;
                   }
                 </style>
               </custom-style>
-              <number-input value="{{value}}" step="0.001" min="-1" max="1" default="0"></number-input>
+              <number-input class="simple" value="{{value}}" step="0.001" min="-1" max="1" placeholder="0" start-at="0"></number-input>
               <div class="vertical-section-container result">
                 <div><code>step</code>: <b>0.001</b><code>min</code>: <b>-1</b><code>max</code>: <b>1</b><code>default</code>: <b>0</b></div>
                 <div><code>value</code>: <b>[[value]]</b></div>
@@ -72,26 +65,22 @@
             <template is="dom-bind">
               <custom-style>
                 <style is="custom-style">
-                  integer-input {
+                  .integer {
                     --number-input: {
                       background: rgba(0, 0, 0, 0.05);
                       transition: background 150ms ease-in-out;
                       color: #111;
                       border-color: transparent;
-                      border-style: unset;
                       padding: 2px;
                       border-radius: 2px;
                     };
                     --number-input-focus: {
                       background: rgba(0, 0, 0, 0.15);
                     };
-                    --number-input-placeholder: {
-                      color: #492020;
-                    };
                   }
                 </style>
               </custom-style>
-              <integer-input always-sign value="{{value}}" minlength="3" step="2" min="-100" max="1000" default="10" no-clamp></integer-input>
+              <integer-input class="integer" always-sign value="{{value}}" minlength="3" step="2" min="-100" max="1000" default="10" no-clamp></integer-input>
               <div class="vertical-section-container result">
                 <div><code>step</code>: <b>2</b><code>min</code>: <b>-100</b><code>max</code>: <b>1000</b><code>default</code>: <b>10</b><code> always-sign</code></div>
                 <div><code>value</code>: <b>[[value]]</b></div>
@@ -110,21 +99,20 @@
             <template is="dom-bind">
               <custom-style>
                 <style is="custom-style">
-                  integer-input {
+                  #year {
+                    --input-placeholder-opacity: 0.25;
                     --number-input: {
-                      background: rgba(0, 0, 0, 0.05);
+                      background: rgba(0, 0, 0, 0.8);
                       transition: background 150ms ease-in-out;
-                      color: #111;
-                      border-color: transparent;
-                      border-style: unset;
-                      padding: 2px;
-                      border-radius: 2px;
+                      color: #eee;
+                      border: none;
+                      padding: 0.3em;
+                      border-radius: 0.2em;
                     };
                     --number-input-focus: {
-                      background: rgba(0, 0, 0, 0.15);
-                    };
-                    --number-input-placeholder: {
-                      color: #492020;
+                      background: rgba(0, 0, 0, 0.5);
+                      color: #fff;
+                      border: none;
                     };
                   }
                 </style>
@@ -133,6 +121,7 @@
               <script>
                 const input = document.querySelector('integer-input#year');
                 input.startAt = new Date().getFullYear();
+                input.placeholder = new Date().getFullYear();
               </script>
             </template>
           </dom-bind>
@@ -142,13 +131,13 @@
 
     <div class="vertical-section-container centered">
       <demo-snippet>
-        <h4>In percent and no clamping to step</h4>
+        <h4>various options</h4>
         <template>
           <dom-bind>
             <template is="dom-bind">
               <custom-style>
                 <style is="custom-style">
-                  number-input {
+                  .various {
                     --number-input: {
                       background: rgba(0, 0, 0, 0.05);
                       transition: background 150ms ease-in-out;
@@ -167,12 +156,43 @@
                   }
                 </style>
               </custom-style>
-              <input type="checkbox" checked="{{inPercent::change}}">in Percent<br>
-              <input type="checkbox" checked="{{autoPadding::change}}">auto Padding<br>
+              number-style: <select value="{{numberStyle::change}}">
+                <option value="decimal">decimal</option>
+                <option value="percent">percent</option>
+                <option value="currency">currency</option>
+              </select>
+              currency: <select value="{{currency::change}}">
+                <option value=""></option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="RUB">RUB</option>
+                <option value="JPY">JPY</option>
+                <option value="CNY">CNY</option>
+              </select>
+              locale: <select value="{{locale::change}}">
+                <option value=""></option>
+                <option value="en">english</option>
+                <option value="fr">français</option>
+                <option value="de">deutsch</option>
+                <option value="es">español</option>
+                <option value="it">italiano</option>
+                <option value="ru">русский</option>
+                <option value="tr">Türkçe</option>
+                <option value="ar">العربية</option>
+                <option value="he">עברית</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ja">日本語</option>
+                <option value="zh">中文</option>
+              </select><br>
+              unit: <input type="text" value="{{unit::change}}">
+              <input type="checkbox" checked="{{autoPadding::change}}">auto padding
+              <input type="checkbox" checked="{{alwaysSign::change}}">always sign
+              <input type="checkbox" checked="{{useGrouping::change}}">use grouping<br>
               <br>
-              <number-input value="{{value}}" minlength="5" no-clamp step="0.001" min="-1" max="20" start-at="1" in-percent="[[inPercent]]" auto-padding="[[autoPadding]]"></number-input>
+              <number-input class="various" value="{{value}}" no-clamp default="1" step="0.01" min="-1" max="20000" unit="[[unit]]" start-at="1" use-grouping="[[useGrouping]]" always-sign="[[alwaysSign]]" locale="{{locale}}" number-style="[[numberStyle]]" currency="[[currency]]" auto-padding="[[autoPadding]]"></number-input>
               <div class="vertical-section-container result">
-                <div><code>step</code>: <b>0.001</b><code>min</code>: <b>-1</b><code>max</code>: <b>20</b><code>default</code>: <b>1</b></div>
+                <div><code>step</code>: <b>0.01</b><code>min</code>: <b>-1</b><code>max</code>: <b>20000</b><code>default</code>: <b>1.00</b></div>
                 <div><code>value</code>: <b>[[value]]</b></div>
               </div>
             </template>
@@ -189,7 +209,7 @@
             <template is="dom-bind">
               <custom-style>
                 <style is="custom-style">
-                  .custom-color {
+                  .saturate {
                     --number-input: {
                       background: rgba(60, 172, 78, 0.8);
                       transition: background 150ms ease-in-out;
@@ -197,12 +217,13 @@
                       padding: 0.5em;
                       border-radius: 4px;
                       border-color: transparent;
-                      border-style: unset;
+                      border-style: solid;
                       text-align: center;
                     };
                     --number-input-focus: {
                       background: rgba(60, 172, 78, 0.5);
                       color: #291e60;
+                      border-style: solid;
                       outline: none;
                     };
                     --number-input-placeholder: {
@@ -211,7 +232,7 @@
                   }
                 </style>
               </custom-style>
-              <number-input class="custom-color" value="{{value}}" pad-length="4" saturate placeholder="0000" min="-10" step="100" max="9999.11" default="100"></number-input>
+              <number-input class="saturate" value="{{value}}" pad-length="4" saturate placeholder="0000" min="-10" step="100" max="9999.11" default="100"></number-input>
               <div class="vertical-section-container result">
                 <div><code>step</code>: <b>100</b><code>min</code>: <b>-10</b><code>max</code>: <b>9999.11</b><code>default</code>: <b>100</b><code>placeholder</code>: <b>0000</b><code>pad-length</code>: <b>4</b></div>
                 <div><code>value</code>: <b>[[value]]</b></div>
@@ -231,21 +252,16 @@
                 <style is="custom-style">
                   .decimal {
                     font-size: 1.5em;
-                    --number-input: {
-                      background: rgba(60, 61, 172, 0.5);
-                      transition: background 150ms ease-in-out;
-                      color: white;
-                      padding: 0.3em;
-                      border-radius: 0;
-                      border-color: transparent;
-                      border-style: unset;
-                      text-align: right;
-                    };
-                    --number-input-focus: {
-                      background: rgba(60, 61, 172, 0.9);
-                      color: #f1f1f1;
-                      outline: none;
-                    };
+                    --input-background: rgba(60, 61, 172, 0.5);
+                    --input-transition: background 150ms ease-in-out;
+                    --input-color: #f1f1f1;
+                    --input-border: thin solid transparent;
+                    --input-padding: 0.3em;
+                    --input-border-radius: 0;
+                    --input-focus-color: white;
+                    --input-focus-background: rgba(60, 61, 172, 0.9);
+                    --input-focus-border: thin solid transparent;
+                    --input-placeholder-color: inherit;
                   }
                 </style>
               </custom-style>
@@ -269,18 +285,16 @@
               <custom-style>
                 <style is="custom-style">
                   .units {
-                    --number-input: {
-                      background: rgba(35, 35, 40, 0.5);
-                      transition: background 150ms ease-in-out;
-                      color: #f1f1f1;
-                      padding: 0.3em;
-                      border-radius: 0;
-                    };
-                    --number-input-focus: {
-                      background: rgba(35, 35, 40, 1);
-                      color: #f1f1f1;
-                      outline: none;
-                    };
+                    --input-background: rgba(35, 35, 40, 0.5);
+                    --input-transition: background 150ms ease-in-out;
+                    --input-color: #f1f1f1;
+                    --input-border: thin solid transparent;
+                    --input-padding: 0.3em;
+                    --input-border-radius: 0.5em;
+                    --input-focus-color: #f1f1f1;
+                    --input-focus-background: #333;
+                    --input-focus-border: thin solid transparent;
+                    --input-placeholder-color: inherit;
                   }
                 </style>
               </custom-style>

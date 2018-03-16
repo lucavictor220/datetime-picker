@@ -20,11 +20,13 @@
 
       static get inputTemplate() {
         return `
-          <integer-input id="year" style$="order:[[_orderDate.year]];" tabindex$="[[_computeTabindex(0, _orderDate.year)]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
-          <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
-          <integer-input id="month" style$="order:[[_orderDate.month]];" tabindex$="[[_computeTabindex(_hideMonth, _orderDate.month)]]" hidden$="[[_hideMonth]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
-          <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
-          <integer-input id="day" style$="order:[[_orderDate.day]];" tabindex$="[[_computeTabindex(_hideDay, _orderDate.day)]]" hidden$="[[_hideDay]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+          <div style="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
+            <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
+            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
+            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
+          </div>
           ${super.inputTemplate || ''}
         `;
       }
@@ -33,21 +35,12 @@
         return {
           /**
            * Clamp datetime to a property
-           * possible values:'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'
+           * possible values:'month', 'day', 'hour', 'minute', 'second', 'millisecond'
            */
           clamp: {
             type: String,
-            value: 'hours'
-          },
-
-          _hideMonth: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "month")'
-          },
-
-          _hideDay: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "day")'
+            value: 'hour',
+            notify: true
           }
         }
       }
@@ -66,6 +59,44 @@
         this.$.day.startAt = d.getDate();
       }
 
+      _edgeIsHidden(order, yearHidden, monthHidden, dayHidden, leftToRight) {
+        if (order === undefined) {
+          return true; // hide if not fully initialized
+        }
+        if (yearHidden + monthHidden + dayHidden >= 2) {
+          return true; // more than two are hidden
+        }
+        if (leftToRight) {
+          if (order.year < order.month) {
+            if (order.year < order.day) {
+              return Boolean(yearHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          } else {
+            if (order.month < order.day) {
+              return Boolean(monthHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          }
+        } else {
+          if (order.year > order.month) {
+            if (order.year > order.day) {
+              return Boolean(yearHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          } else {
+            if (order.month > order.day) {
+              return Boolean(monthHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          }
+        }
+      }
+
     }
   }
 </script>
@@ -81,14 +112,32 @@
      *
      * Custom property | Description | Default
      * ----------------|-------------|----------
-     * `--input-color` | text-color of the inputs | ``
-     * `--input-background` | text-color of the inputs | ``
-     * `--input-focus-color` | color of the focussed or hovered inputs | ``
-     * `--input-focus-background` | background of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
-     * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
-     * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}
-     * `--input-invalid-color` | border-color of invalid inputs | red
-     * `--input-invalid-color` |  Mixin applied to invalid inputs | {}
+     * `--input-color`                   | color of the input                           | inherit
+     * `--input-background`              | background of the input                      | transparent
+     * `--input-border`                  | border of the input                          | thin dotted transparent
+     * `--input-padding`                 | padding of the input                         | 0.16em
+     * `--input-border-radius`           | border-radius of the input                   | 0.16em
+     * `--input-transition`              | transition of the input                      | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
+     * `--input-allign`                  | text-allign of the input input               | center
+     * `--input-cursor`                  | cursor of the input input                    | initial
+     * `--input-focus-color`             | color of the focussed and hovered input      | inherit
+     * `--input-focus-background`        | background of the focussed and hovered input | rgba(0,0,0,0.16)
+     * `--input-focus-border`            | border of the focussed and hovered input     | thin dotted currentColor
+     * `--input-invalid-color`           | color of the invalid input                   | inherit
+     * `--input-invalid-background`      | background of the invalid input              | rgba(255,0,0,0.16)
+     * `--input-invalid-border`          | border of the invalid input                  | thin dotted rgba(255,0,0,0.5)
+     * `--input-disabled-color`          | color of the disabled input                  | inherit
+     * `--input-disabled-background`     | background of the disabled input             | transparent
+     * `--input-disabled-font-style`     | font-style of the disabled input             | italic
+     * `--input-disabled-opacity`        | opacity of the disabled input                | 1
+     * `--input-placeholder-color`       | color of the placeholder                     | inherit
+     * `--input-placeholder-opacity`     | opacity of the placeholder                   | 0.75
+     * `--input-selection-color`         | color of the selected text                   | inherit
+     * `--input-selection-background`    | background of the selected text              | rgba(255,255,255,0.5
+     * `--input-style`                   | style of the input                           | {}
+     * `--input-focus`                   | style of the focussed and hovered input      | {}
+     * `--input-invalid`                 | style of the invalid input                   | {}
+     * `--input-placeholder`             | style of the placeholder                     | {}
      *
      *  @polymer
      *  @customElement
