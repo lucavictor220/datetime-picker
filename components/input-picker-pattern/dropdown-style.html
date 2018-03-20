@@ -66,13 +66,13 @@ styles for used for a inner dropdown
       }
 
       :host([horizontal-align][vertical-align="middle"]) .dropdown {
-        left: auto; right: 0;
-        transform: translate(100%, 50%);
+        left: 0; right: auto;
+        transform: translate(-100%, 50%);
       }
 
       :host([horizontal-align="left"][vertical-align="middle"]) .dropdown {
-        left: 0; right: auto;
-        transform: translate(-100%, 50%);
+        left: auto; right: 0;
+        transform: translate(100%, 50%);
       }
 
       :host([horizontal-align="center"][vertical-align="middle"]) .dropdown {

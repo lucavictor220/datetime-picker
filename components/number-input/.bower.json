@@ -30,12 +30,12 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
     "iron-form": "PolymerElements/iron-form"
   },
-  "version": "2.2.3",
-  "_release": "2.2.3",
+  "version": "2.3.0",
+  "_release": "2.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "2.2.3",
-    "commit": "2177eed1e822cb8dce598b5a08bb48495306b2ea"
+    "tag": "2.3.0",
+    "commit": "aa4181ff69adb78273352a9fbae119229790fa4c"
   },
   "_source": "https://github.com/fooloomanzoo/number-input.git",
   "_target": "2",

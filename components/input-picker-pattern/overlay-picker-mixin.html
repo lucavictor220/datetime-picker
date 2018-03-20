@@ -1,5 +1,5 @@
 <link rel="import" href="overlay-element.html">
-<link rel="import" href="input-shared-style.html">
+<link rel="import" href="input-picker-shared-style.html">
 <link rel="import" href="dropdown-tip-style.html">
 
 <script>
@@ -104,9 +104,9 @@
         `;
       }
 
-      static get customStyleContent() {
+      static get styleTemplate() {
         return `
-          ${super.customStyleContent || ''}
+          ${super.styleTemplate || ''}
           #overlay {
             display: -webkit-inline-flex;
             display: -ms-inline-flexbox;
@@ -117,8 +117,8 @@
         `;
       }
 
-      static get customStyleToInclude() {
-        return 'input-shared-style dropdown-tip-style';
+      static get styleToInclude() {
+        return 'input-picker-shared-style dropdown-tip-style';
       }
 
       connectedCallback() {
@@ -126,9 +126,6 @@
         this.positionTarget = this;
         this._set_sizingTarget(this.$.overlay);
         this.fit();
-        this._initializeInputs = this._initializeInputs.bind(this);
-        this.addEventListener('iron-overlay-opened', this._initializeInputs, true);
-        this.addEventListener('iron-resize', this._initializeInputs, true);
       }
 
       /**
@@ -141,17 +138,6 @@
       open() {
         super.open();
         this.fit();
-      }
-
-      _initializeInputs() {
-        // neccessary because the overlay is hidden initially and the inputs are sized dynamically and so a width has still to be computed for the inputs
-        const inputs = this.root.querySelectorAll('integer-input, number-input, text-input');
-        if (inputs) {
-          Array.prototype.forEach.call(inputs, inp => {
-            inp.resize && inp.resize();
-          });
-          this.removeEventListener('iron-overlay-opened', this._initializeInputs, true);
-        }
       }
 
       /**

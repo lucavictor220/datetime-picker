@@ -3,230 +3,103 @@
 <dom-module id="input-shared-style">
   <template>
     <style>
-      :host {
-        font-family: inherit;
-        font-size: inherit;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight-color: transparent;
-        -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
-        position: relative;
-        box-sizing: content-box;
-        --dropdown-tip-size: 0.3em;
-
-        --input-color: currentColor;
-        --input-background: transparent;
-        --input-border: thin solid transparent;
-        --input-padding: 0.3em;
-        --input-border-radius: 0.3em;
-        --input-align: center;
-        --input-cursor: pointer;
-        --input-transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1), color 50ms linear;
-
-        --input-focus-color: #f1f1f1;
-        --input-focus-background: var(--primary-color, #394FE8);
-        --input-focus-border: thin solid transparent;
-
-        --input-placeholder-color: currentColor;
-        --input-placeholder-opacity: 0.75;
-
-        --input-selection-color: var(--input-focus-color);
-        --input-selection-background: rgba(255,255,255,0.1);
-
-        --input-picker-color: #d5d5d5;
-        --input-picker-background: #252525;
-        --input-picker-padding: 0.25em;
-        --input-picker-border-radius: 0.5em;
-        --input-picker-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4);
-
-        --input-disabled-color: currentColor;
-        --input-disabled-background: transparent;
-        --input-disabled-font-style: italic;
-        --input-disabled-opacity: 1;
-
-        --input-invalid-color: #e83953;
-        --input-invalid-background: transparent;
-        --input-invalid-border: thin dotted #e83953);
-
-        --input-icon-border-radius: 0.25em;
-        --input-icon-padding: 0.5em;
-        --input-icon-height: 1em;
-        --input-icon-width: 1em;
-        --input-icon-background: transparent;
-
-        --input-disabled: {
-          font-weight: lighter;
-          cursor: default;
-        };
-
-        --input-icon: {
-          transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1), border-color 250ms cubic-bezier(0.6, 1, 0.2, 1);
-        };
-
-      }
-
       :host(:focus) {
         outline: none;
       }
-
-      :host([disabled]) {
-        pointer-events: none;
-      }
-
-      button,
-      select {
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        appearance: none;
-        border-style: none;
-        text-align-last: center;
-        background-image: none;
-        border-width: 0;
-      }
-
-      button,
-      select,
-      input {
-        display: inline-flex;
-        align-items: center;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        box-sizing: border-box;
+      #input {
+        overflow: visible;
         font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
         font-style: inherit;
         outline: none;
         line-height: normal;
-        color: var(--input-color);
-        background: var(--input-background);
-        border-radius: var(--input-border-radius);
-        transition: var(--input-transition);
-        border: var(--input-border);
-        padding: var(--input-padding);
+        box-sizing: content-box;
+        cursor: var(--input-cursor, initial);
+        color: var(--input-color, inherit);
+        background: var(--input-background, transparent);
+        transition: var(--input-transition, background 250ms cubic-bezier(0.6, 1, 0.2, 1));
+        text-align: var(--input-allign, center);
+        padding: var(--input-padding, 0.2em);
+        border-radius: var(--input-border-radius, 0.25em);
+        border-width: var(--input-border-width, thin);
+        border-style: var(--input-border-style, dotted);
+        border-color: var(--input-border-color, transparent);
         @apply --input-style;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        margin: 0;
       }
-
-
-      select:focus,
-      button:focus,
-      input:focus {
+      :host(:focus) #input,
+      :host(:hover) #input,
+      #input:hover,
+      #input:focus {
+        color: var(--input-focus-color, inherit);
+        background: var(--input-focus-background, rgba(0,0,0,0.16));
+        border-style: var(--input-focus-border-style, dotted);
+        border-color: var(--input-focus-border-color, currentColor);
         outline: none;
-      }
-
-      button > * {
-        pointer-events: none;
-      }
-
-      select:focus,
-      select:hover,
-      input:hover {
-        color: var(--input-focus-color);
-        background: var(--input-focus-background);
-        border: var(--input-focus-border);
         @apply --input-focus;
       }
-
-      select:focus option,
-      select option {
-        color: var(--input-color);
-        background: var(--input-background);
+      /** will be ignored by IE **/
+      #input:focus-within {
+        color: var(--input-focus-color, inherit);
+        background: var(--input-focus-background, rgba(0,0,0,0.16));
+        border-style: var(--input-focus-border-style, dotted);
+        border-color: var(--input-focus-border-color, currentColor);
         outline: none;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
+        @apply --input-focus;
       }
-
-      :host([required]) input:invalid {
-        color: var(--input-invalid-color);
-        background: var(--input-invalid-background);
-        border: var(--input-invalid-border);
+      :host([invalid]) #input {
+        color: var(--input-invalid-color, inherit);
+        background: var(--input-invalid-background, rgba(255,0,0,0.16));
+        border-style: var(--input-invalid-border-style, dotted);
+        border-color: var(--input-invalid-border-color, rgba(255,0,0,0.5));
         @apply --input-invalid;
       }
-
-      select[disabled],
-      button[disabled],
-      input[disabled] {
-        color: var(--input-disabled-color);
-        background: var(--input-disabled-background);
-        font-style: var(--input-disabled-font-style);
-        opacity: var(--input-disabled-opacity);
+      :host([invalid]) #input:hover,
+      :host([invalid]) #input:focus {
+        border-style: var(--input-focus-border-style, dotted);
+        border-color: var(--input-focus-border-color, currentColor);
+      }
+      :host([disabled]) #input {
+        color: var(--input-disabled-color, inherit);
+        background: var(--input-disabled-background, transparent);
+        font-style: var(--input-disabled-font-style, italic);
+        opacity: var(--input-disabled-opacity, 1);
         @apply --input-disabled;
+        pointer-events: none;
       }
-      .icon {
-        color: inherit;
-        border-radius: var(--input-icon-border-radius);
-        padding: var(--input-icon-padding);
-        height: var(--input-icon-height);
-        width: var(--input-icon-width);
-        background: var(--input-icon-background);
-        @apply --input-icon;
-        box-sizing: content-box;
-        flex-shrink: 0;
-        border: thin solid transparent;
-      }
-      .icon > svg {
-        height: 100%;
-        width: 100%;
-        fill: currentColor;
-      }
-      .icon:focus {
-        border-color: var(--input-focus-background);
-        background: transparent;
-        outline: none;
-      }
-      :host(:hover) .icon.switch:focus,
-      .icon:hover,
-      .icon:not(.switch):focus,
-      .icon:active,
-      .icon[active] {
-        color: var(--input-focus-color);
-        background: var(--input-focus-background);
-        border: var(--input-focus-border);
-        @apply --input-focus;
-        outline: none;
-      }
-      select:focus::-ms-value {
-        background: transparent;
-      }
-      select::-ms-expand {
-        display: none;
-      }
-      ::-webkit-input-edit-text,
       ::-webkit-input-placeholder,
-      ::-webkit-inner-spin-button,
-      ::-webkit-outer-spin-button,
-      ::-webkit-search-cancel-button,
-      ::-webkit-clear-button {
-        color: currentColor;
-        cursor: pointer;
-      }
-      ::-webkit-input-placeholder {
+      ::placeholder {
+        color: var(--input-placeholder-color, inherit);
+        opacity: var(--input-placeholder-opacity, 0.75);
         @apply --input-placeholder;
-      }
-      ::-webkit-search-cancel-button,
-      ::-webkit-clear-button {
-        mix-blend-mode: luminosity;
       }
       ::-moz-selection {
         color: inherit;
         background: transparent;
       }
       :focus::-moz-selection {
-        color: var(--input-selection-color);
-        background: var(--input-selection-background);
+        color: var(--input-selection-color, inherit);
+        background: var(--input-selection-background, rgba(255,255,255,0.5));
       }
       ::selection {
         color: inherit;
         background: transparent;
       }
       :focus::selection {
-        color: var(--input-selection-color);
-        background: var(--input-selection-background);
+        color: var(--input-selection-color, inherit);
+        background: var(--input-selection-background, rgba(255,255,255,0.5));
       }
       ::-moz-focus-inner {
-        border: 0;
+        border-width: 0;
+        border-style: none;
         padding: 0;
       }
       ::-moz-focusring {
+        border-width: 0;
+        border-style: none;
         color: transparent !important;
         text-shadow: 0 0 0 var(--input-focus-color, #000);
       }

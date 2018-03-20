@@ -1,4 +1,4 @@
-<link rel="import" href="input-shared-style.html">
+<link rel="import" href="input-picker-shared-style.html">
 <link rel="import" href="dropdown-tip-style.html">
 <link rel="import" href="form-element-mixin.html">
 
@@ -35,38 +35,28 @@
 
       static get template() {
         return `
-          ${this.styleTemplate}
+          <style include="${this.styleToInclude || ''}">
+            ${this.styleTemplate}
+          </style>
           ${this.hasNative ? this.nativeTemplate : this.polyfillTemplate}
         `
-      }
-
-      /**
-       * custom style template
-       * @type {string}
-       */
-      static get styleTemplate() {
-        return `
-          <style include="${this.customStyleToInclude || ''}">
-            ${this.customStyleContent}
-          </style>
-        `;
       }
 
       /**
        * custom style to include in `<style include="..."`
        * @type {string}
        */
-      static get customStyleToInclude() {
-        return `${super.customStyleToInclude || ''} input-shared-style dropdown-tip-style`;
+      static get styleToInclude() {
+        return `${super.styleToInclude || ''} input-picker-shared-style dropdown-tip-style`;
       }
 
       /**
        * custom style content
        * @type {string}
        */
-      static get customStyleContent() {
+      static get styleTemplate() {
         return `
-          ${super.customStyleContent || ''}
+          ${super.styleTemplate || ''}
           :host {
             display: inline-flex;
             align-items: center;
