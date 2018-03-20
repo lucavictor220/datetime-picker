@@ -21,6 +21,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#2",
     "property-mixins": "fooloomanzoo/property-mixins#2",
+    "text-input": "fooloomanzoo/text-input#2",
     "input-picker-pattern": "fooloomanzoo/input-picker-pattern#2"
   },
   "devDependencies": {
@@ -30,12 +31,12 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
     "iron-form": "PolymerElements/iron-form"
   },
-  "version": "2.3.0",
-  "_release": "2.3.0",
+  "version": "2.3.2",
+  "_release": "2.3.2",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.0",
-    "commit": "aa4181ff69adb78273352a9fbae119229790fa4c"
+    "tag": "2.3.2",
+    "commit": "e77f9a4d9bdac56bf3ae86ead5c5e13322706974"
   },
   "_source": "https://github.com/fooloomanzoo/number-input.git",
   "_target": "2",
