@@ -1,154 +1,64 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../input-picker-pattern/input-pattern.html">
 
 <script>
   /**
    * mixin to create a text-input
    *
-   * @appliesMixin FormElementMixin
+   * @appliesMixin InputPattern
    *
    * @mixinFunction
    * @polymer
    */
   const TextInputMixin = (superClass) => { // eslint-disable-line no-unused-vars
 
-    return class extends FormElementMixin(superClass) { // eslint-disable-line no-undef
-
-      static get template() {
-        return `
-          ${this.styleTemplate}
-          ${this.contentTemplate}
-        `;
-      }
+    return class extends InputPattern(superClass) { // eslint-disable-line no-undef
 
       static get styleTemplate() {
         return `
-          <style>
-            :host {
-              display: inline-flex;
-              box-sizing: content-box;
-              padding: 0 !important;
-            }
-            :host(:focus),
-            #input:focus {
-              outline: none;
-            }
-            #input {
-              font-family: inherit;
-              font-size: inherit;
-              font-weight: inherit;
-              text-align: var(--text-input-allign, center);
-              overflow: visible;
-              box-sizing: content-box;
-              border: none;
-              outline: none;
-              -webkit-background-clip: padding-box;
-              background-clip: padding-box;
-              border-color: transparent;
-              line-height: 1;
-              color: var(--text-input-color, var(--input-color, inherit));
-              background: var(--text-input-background, var(--input-background, inherit));
-              @apply --input-style;
-              @apply --text-input;
-            }
-            #input::-webkit-input-placeholder,
-            #input::placeholder {
-              @apply --input-placeholder;
-              @apply --text-input-placeholder;
-            }
-            #input:hover,
-            #input:focus {
-              color: var(--text-input-focus-color, var(--input-focus-color, var(--text-input-color, inherit)));
-              background: var(--text-input-focus-background, var(--input-focus-background, var(--text-input-background, inherit)));
-              @apply --input-focus;
-              @apply --text-input-focus;
-            }
-            input::-moz-focus-inner {
-              border-style: none;
-              padding: 0;
-            }
-            input::-moz-focusring {
-              border-width: 0;
-              color: transparent;
-              text-shadow: 0 0 0 var(--text-input-focus-color, var(--input-focus-color, #000));
-            }
-            :host([invalid]) #input,
-            #input:not(:valid),
-            #input:invalid {
-              @apply --input-invalid;
-              @apply --text-input-invalid;
-            }
-            :host([disabled]) {
-              color: var(--text-input-disabled-color, var(--input-disabled-color, inherit));
-              @apply --input-disabled;
-            }
-            input::-moz-selection {
-              color: var(--text-input-color, var(--input-color, inherit));
-              background: var(--text-input-background, var(--input-background, transparent));
-            }
-            input:focus::-moz-selection {
-              color: var(--input-selection-color, inherit);
-              background: var(--input-selection-background, rgba(255,255,255,0.5));
-            }
-            input::selection {
-              color: var(--text-input-color, var(--input-color, inherit));
-              background: var(--text-input-background, var(--input-background, transparent));
-            }
-            input:focus::selection {
-              color: var(--input-selection-color, inherit);
-              background: var(--input-selection-background, rgba(255,255,255,0.5));
-            }
-          </style>
+          ${super.styleTemplate || ''}
+          #minsize,
+          #size,
+          #input {
+            @apply --text-input;
+            margin: 0;
+            min-width: 1ch;
+          }
+          :host(:focus) #input,
+          :host(:hover) #input,
+          #input:hover,
+          #input:focus {
+            @apply --text-input-focus;
+          }
+          :host([invalid]) #input {
+            @apply --text-input-invalid;
+          }
+          :host([disabled]) #input {
+            @apply --text-input-disabled;
+          }
+          #input::-webkit-input-placeholder,
+          #input::placeholder {
+            @apply --text-input-placeholder;
+          }
         `;
       }
 
-      static get contentTemplate() {
+      static get inputTemplate() {
         return `
           <input id="input"
             type="[[type]]"
-            value="{{input::input}}"
+            value="{{_input::input}}"
             placeholder="[[placeholder]]"
             pattern="[[pattern]]"
             disabled="[[disabled]]"
-            autocomplete="[[autocomplete]]"
             required="[[required]]"
-            minlength="[[minlength]]"
-            maxlength="[[maxlength]]"
-            size="[[size]]"
-            spellcheck$="[[_computeSpellcheckAttribute(spellcheck)]]"
-            on-focusin="validate"
-            on-focusout="validate"
-            on-blur="validate"
-            on-keydown="_checkKeycode">
+            autocomplete$="[[_computeAutocompleteAttribute(autocomplete)]]"
+            spellcheck$="[[_computeSpellcheckAttribute(spellcheck)]]">
         `;
       }
 
       static get properties() {
         return {
-          /**
-           * autocomplete the input
-           * @type {string}
-           */
-          autocomplete: {
-            type: Boolean
-          },
-          /**
-           * specify the type like 'password'
-           * @type {string}
-           */
-          type: {
-            type: String,
-            notify: true,
-            value: 'text'
-          },
-
-          /**
-           * placeholder string
-           * @type {string}
-           */
-          placeholder: {
-            type: String
-          },
 
           /**
            * regular expression pattern of the input
@@ -161,71 +71,15 @@
           },
 
           /**
-           * default value of the input
-           * @type {string}
+           * if `true`, autocomplete is enabled
            */
-          default: {
-            type: String,
-            notify: true,
-            observer: '_inputChanged'
+          autocomplete: {
+            type: Boolean,
+            value: false
           },
 
           /**
-           * value string of the input
-           * @type {string}
-           */
-          input: {
-            type: String,
-            notify: true,
-            observer: '_inputChanged'
-          },
-
-          /**
-           * value string of the input
-           * @type {string}
-           */
-          value: {
-            type: String,
-            notify: true,
-            value: '',
-            observer: '_valueChanged'
-          },
-
-          /**
-           * minlength of the input
-           * @type {number}
-           */
-          minlength: {
-            type: Number
-          },
-
-          /**
-           * maxlength of the input
-           * @type {number}
-           */
-          maxlength: {
-            type: Number
-          },
-
-          /**
-           * size of the input
-           * @type {number}
-           */
-          size: {
-            type: Number
-          },
-
-          /**
-           * if true, the length of the value is not used for computing the size-attribute
-           * @type {number}
-           */
-          noAutoWidth: {
-            type: Boolean
-          },
-
-          /**
-           * if true, the input will check the spelling
-           * @type {number}
+           * if `true`, spellcheck is enabled
            */
           spellcheck: {
             type: Boolean,
@@ -234,29 +88,23 @@
         }
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        this._ensureAttribute('tabindex', 0);
-        this.addEventListener('focus', this.focus.bind(this), false);
-        if (!this.noAutoWidth) {
-          this._computeWidth(this.value || this.placeholder || '0');
-        }
+      static get observers() {
+        return [
+          '_computeInvalid(required, _input)'
+        ]
       }
 
-      disconnectedCallback() {
-        super.disconnectedCallback();
-        this.removeEventListener('focus', this.focus.bind(this), false);
+      _computeInvalid() {
+        return this.validate();
       }
 
       validate() {
         if (this.disabled) {
           return false;
         }
-        if (!(this._validationRegExp && this._validationRegExp.exec(this.$.input.value) === null) && !(this.required && !this.$.input.value)) {
-          this.input = this.value = this.$.input.value;
+        if (!(this._validationRegExp && this._validationRegExp.exec(this._input) === null) && !(this.required && !this._input)) {
           return true;
         } else if (!(this._validationRegExp && this._validationRegExp.exec(this.value) === null) && !(this.required && !this.value)) {
-          this.input = this.$.input.value = this.value;
           return true;
         }
         return false;
@@ -283,57 +131,26 @@
         if (value === undefined) return;
 
         if (!(this._validationRegExp && this._validationRegExp.exec(value) === null)) {
-          if (!this.noAutoWidth) {
-            this._computeWidth(value);
-          }
-          this.input = value;
+          this._input = value;
+          this._debouncedComputeWidth();
         } else if (oldValue !== undefined && this._validationRegExp.exec(oldValue) !== null) {
           this.value = oldValue;
-        }
-      }
-      _computeWidth(str) {
-        this.size = str.length || 1;
-      }
-
-      _checkKeycode(e) {
-        if (!e.target) {
-          if (e && e.preventDefault) e.preventDefault();
-          return;
-        }
-
-        // enter & space
-        if (e.keyCode === 13 || e.keyCode === 32) {
-          this.validate();
-          return;
-        }
-
-        // esc
-        if (e.keyCode === 27) {
-          this.validate();
-          this.blur();
-          return;
+          this._debouncedComputeWidth();
         }
       }
 
       _computeSpellcheckAttribute(spellcheck) {
-        return !spellcheck ? 'false' : 'true';
+        return spellcheck ? 'true' : 'false';
       }
 
-      /**
-       * focus the input
-       */
-      focus() {
-        this.$.input.focus();
+      _computeAutocompleteAttribute(autocomplete) {
+        return autocomplete ? 'on' : 'off';
       }
 
-      /**
-       * focus the input
-       */
-      blur() {
-        this.$.input.blur();
-      }
     }
   }
+
+  window.TextInputMixin = TextInputMixin;
 </script>
 
 <dom-module id="text-input">
@@ -353,30 +170,46 @@
      * ### Styling
      * Custom property                   | Description                                  | Default
      * ----------------------------------|----------------------------------------------|--------------------
-     * `--text-input` | mixin applied to of the input | {}
-     * `--text-input-invalid` | mixin applied to an invalid input | {}
-     * `--text-input-focus` | mixin applied to the focussed and hovered input | {}
-     * `--text-input-placeholder` | mixin applied to the placeholder           | {}
-     * `--text-input-color` | color of the input | var(--input-color, inherit)
-     * `--text-input-background` | background of the input | var(--input-background, inherit)
-     * `--text-input-focus-color` | color of the focussed and hovered input | var(--input-focus-color, inherit)
-     * `--text-input-focus-background` | background of the focussed and hovered input | var(--input-background-color, inherit)
-     * `--text-input-disabled-color` | color of the disabled input | var(--input-disabled-color, inherit)
-     * `--text-input-allign` | allignment of the text of the input | center
-     * `--input-disabled` | mixin applied to the disabled input | {}
-     * `--input-selection-color` | color of selected text in the input only when focused | rgba(255,255,255,0.5)
-     * `--input-selection-background` | background of selected text in the input only when focused | transparent
+     * `--input-color`                   | color of the input                             | inherit
+     * `--input-background`              | background of the input                        | transparent
+     * `--input-border-width`            | border width of the input                      | thin
+     * `--input-border-style`            | border style of the input                      | dotted
+     * `--input-border-color`            | border color of the input                      | transparent
+     * `--input-padding`                 | padding of the input                           | 0.2em
+     * `--input-border-radius`           | border-radius of the input                     | 0.25em
+     * `--input-transition`              | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
+     * `--input-allign`                  | text-allign of the input input                 | center
+     * `--input-cursor`                  | cursor of the input input                      | initial
+     * `--input-focus-color`             | color of the focussed and hovered input        | inherit
+     * `--input-focus-background`        | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
+     * `--input-focus-border-style`      | border style of the focussed and hovered input | dotted
+     * `--input-focus-border-color`      | border color of the focussed and hovered input | currentColor
+     * `--input-invalid-color`           | color of the invalid input                     | inherit
+     * `--input-invalid-background`      | background of the invalid input                | rgba(255, 0, 0, 0.16)
+     * `--input-invalid-border-style`    | border style of the invalid input              | dotted
+     * `--input-invalid-border-color`    | border color of the invalid input              | rgba(255, 0, 0, 0.5)
+     * `--input-disabled-color`          | color of the disabled input                    | inherit
+     * `--input-disabled-background`     | background of the disabled input               | transparent
+     * `--input-disabled-font-style`     | font-style of the disabled input               | italic
+     * `--input-disabled-opacity`        | opacity of the disabled input                  | 1
+     * `--input-placeholder-color`       | color of the placeholder                       | inherit
+     * `--input-placeholder-opacity`     | opacity of the placeholder                     | 0.75
+     * `--input-placeholder-align`       | text-allign of the placeholder                 | center
+     * `--input-selection-color`         | color of the selected text                     | inherit
+     * `--input-selection-background`    | background of the selected text                | rgba(255, 255, 255, 0.5)
+     * `--input-style`                   | style of the input                             | {}
+     * `--input-focus`                   | style of the focussed and hovered input        | {}
+     * `--input-invalid`                 | style of the invalid input                     | {}
+     * `--input-placeholder`             | style of the placeholder                       | {}
      *
      * ```css
      * :host {
-     *   --text-input-disabled-color: grey;
-     *   --text-input-focus-background: rgba(0,0,0,0.25);
-     *   --text-input-focus: {
+     *   --input-disabled-color: grey;
+     *   --input-focus-background: rgba(0,0,0,0.25);
+     *   --input-focus: {
      *     font-weight: bold;
      *   };
-     *   --text-input-placeholder: {
-     *     color: pink;
-     *   };
+     *   --input-placeholder-color: pink;
      * }
      * ```
      * @polymer
@@ -392,7 +225,9 @@
       static get is() {
         return 'text-input';
       }
+
     }
+
     window.customElements.define(TextInput.is, TextInput);
   </script>
 </dom-module>

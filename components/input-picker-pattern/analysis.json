@@ -3016,6 +3016,1048 @@
       "slots": []
     },
     {
+      "description": "Mixin to extend an element that includes a native input to be wrapped. The pattern is using `input-shared-style` to unify the style between different inputs and should resize according to its properties and input.",
+      "summary": "",
+      "path": "input-pattern.html",
+      "properties": [
+        {
+          "name": "required",
+          "type": "boolean",
+          "description": "required attribute",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 16,
+              "column": 10
+            },
+            "end": {
+              "line": 20,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "description": "required attribute",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 25,
+              "column": 10
+            },
+            "end": {
+              "line": 29,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "disables the input",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 34,
+              "column": 10
+            },
+            "end": {
+              "line": 38,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "name of the input",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 43,
+              "column": 10
+            },
+            "end": {
+              "line": 45,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "value string of the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 110,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_valueChanged\""
+            }
+          }
+        },
+        {
+          "name": "_valueIsSet",
+          "type": "boolean",
+          "description": "is true when the value is not undefined",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 58,
+              "column": 10
+            },
+            "end": {
+              "line": 61,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "propertyForValue",
+          "type": "string",
+          "description": "defines the property that should be used for the value",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 66,
+              "column": 10
+            },
+            "end": {
+              "line": 69,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_createReflectPropertyToValueObserver\""
+            }
+          },
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "the type of the native input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 91,
+              "column": 10
+            },
+            "end": {
+              "line": 94,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "\"text\""
+        },
+        {
+          "name": "_input",
+          "type": "string",
+          "description": "live value of the input",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 99,
+              "column": 10
+            },
+            "end": {
+              "line": 101,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "placeholder string",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 10
+            },
+            "end": {
+              "line": 117,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "default",
+          "type": "string",
+          "description": "default value of the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 122,
+              "column": 10
+            },
+            "end": {
+              "line": 124,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "minlength",
+          "type": "number",
+          "description": "minlength of the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 129,
+              "column": 10
+            },
+            "end": {
+              "line": 131,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "noAutoWidth",
+          "type": "boolean",
+          "description": "if true, the length of the value is not used for computing the size-attribute",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 136,
+              "column": 10
+            },
+            "end": {
+              "line": 138,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "autoResize",
+          "type": "boolean",
+          "description": "if true, the length of the value is not used for computing the size-attribute",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 143,
+              "column": 10
+            },
+            "end": {
+              "line": 145,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_minWidthString",
+          "type": "string",
+          "description": "string that is used to compute the minimal width of the input",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 150,
+              "column": 10
+            },
+            "end": {
+              "line": 152,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "hidden",
+          "type": "boolean",
+          "description": "if `true`, the input is not displayed",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 157,
+              "column": 10
+            },
+            "end": {
+              "line": 159,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 171,
+              "column": 6
+            },
+            "end": {
+              "line": 182,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_computeInvalid",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 85,
+              "column": 6
+            },
+            "end": {
+              "line": 87,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "required"
+            },
+            {
+              "name": "value"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_computeValueIsSet",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 89,
+              "column": 6
+            },
+            "end": {
+              "line": 91,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "validate",
+          "description": "validates the input for iron-form",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 96,
+              "column": 6
+            },
+            "end": {
+              "line": 98,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_attachDom",
+          "description": "attach dom with `delegatesFocus: true` so that the element is also focussed while its's children are too, and to autofocus to first tabable",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 103,
+              "column": 6
+            },
+            "end": {
+              "line": 112,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dom"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_createReflectPropertyToValueObserver",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 114,
+              "column": 6
+            },
+            "end": {
+              "line": 119,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "prop"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_reflectPropertyToValue",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 121,
+              "column": 6
+            },
+            "end": {
+              "line": 123,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "v"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_reflectValueToProperty",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 125,
+              "column": 6
+            },
+            "end": {
+              "line": 127,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "v"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "disconnectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 184,
+              "column": 6
+            },
+            "end": {
+              "line": 187,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_addEventListeners",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 189,
+              "column": 6
+            },
+            "end": {
+              "line": 194,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_removeEventListeners",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 196,
+              "column": 6
+            },
+            "end": {
+              "line": 201,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "focus",
+          "description": "focus the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 206,
+              "column": 6
+            },
+            "end": {
+              "line": 209,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "blur",
+          "description": "focus the input",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 214,
+              "column": 6
+            },
+            "end": {
+              "line": 217,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_checkKeycode",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 219,
+              "column": 6
+            },
+            "end": {
+              "line": 238,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_inputChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 243,
+              "column": 6
+            },
+            "end": {
+              "line": 246,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "input"
+            }
+          ]
+        },
+        {
+          "name": "_valueChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 6
+            },
+            "end": {
+              "line": 253,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "_defaultChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 255,
+              "column": 6
+            },
+            "end": {
+              "line": 259,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "def"
+            }
+          ]
+        },
+        {
+          "name": "_checkInput",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 261,
+              "column": 6
+            },
+            "end": {
+              "line": 264,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_updateValue",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 266,
+              "column": 6
+            },
+            "end": {
+              "line": 269,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_computeMinWidth",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 271,
+              "column": 6
+            },
+            "end": {
+              "line": 290,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "resize",
+          "description": "called automatically when static `_minWidthString` changes, but can called manually to resize the minwidth of the input, when the input is for example initially hidden",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 295,
+              "column": 6
+            },
+            "end": {
+              "line": 311,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_debouncedComputeWidth",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 313,
+              "column": 6
+            },
+            "end": {
+              "line": 318,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_computeWidth",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 320,
+              "column": 6
+            },
+            "end": {
+              "line": 322,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 12,
+          "column": 2
+        },
+        "end": {
+          "line": 325,
+          "column": 3
+        }
+      },
+      "privacy": "public",
+      "name": "InputPattern",
+      "attributes": [
+        {
+          "name": "required",
+          "description": "required attribute",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 16,
+              "column": 10
+            },
+            "end": {
+              "line": 20,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "invalid",
+          "description": "required attribute",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 25,
+              "column": 10
+            },
+            "end": {
+              "line": 29,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "disabled",
+          "description": "disables the input",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 34,
+              "column": 10
+            },
+            "end": {
+              "line": 38,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "name",
+          "description": "name of the input",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 43,
+              "column": 10
+            },
+            "end": {
+              "line": 45,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "value",
+          "description": "value string of the input",
+          "sourceRange": {
+            "start": {
+              "line": 106,
+              "column": 10
+            },
+            "end": {
+              "line": 110,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "property-for-value",
+          "description": "defines the property that should be used for the value",
+          "sourceRange": {
+            "file": "form-element-mixin.html",
+            "start": {
+              "line": 66,
+              "column": 10
+            },
+            "end": {
+              "line": 69,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string",
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "type",
+          "description": "the type of the native input",
+          "sourceRange": {
+            "start": {
+              "line": 91,
+              "column": 10
+            },
+            "end": {
+              "line": 94,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "placeholder",
+          "description": "placeholder string",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 10
+            },
+            "end": {
+              "line": 117,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "default",
+          "description": "default value of the input",
+          "sourceRange": {
+            "start": {
+              "line": 122,
+              "column": 10
+            },
+            "end": {
+              "line": 124,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "minlength",
+          "description": "minlength of the input",
+          "sourceRange": {
+            "start": {
+              "line": 129,
+              "column": 10
+            },
+            "end": {
+              "line": 131,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "no-auto-width",
+          "description": "if true, the length of the value is not used for computing the size-attribute",
+          "sourceRange": {
+            "start": {
+              "line": 136,
+              "column": 10
+            },
+            "end": {
+              "line": 138,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "auto-resize",
+          "description": "if true, the length of the value is not used for computing the size-attribute",
+          "sourceRange": {
+            "start": {
+              "line": 143,
+              "column": 10
+            },
+            "end": {
+              "line": 145,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "hidden",
+          "description": "if `true`, the input is not displayed",
+          "sourceRange": {
+            "start": {
+              "line": 157,
+              "column": 10
+            },
+            "end": {
+              "line": 159,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "mixins": [
+        "FormElementMixin"
+      ]
+    },
+    {
       "description": "mixin to extend an element with a test for an expected input type and implement a polyfill, when wanted or needed",
       "summary": "",
       "path": "input-picker-pattern.html",
@@ -3221,7 +4263,7 @@
         },
         {
           "name": "mobileUserAgentTestString",
-          "type": "boolean",
+          "type": "string",
           "description": "When `nativeOnMobile` is set to `true` this string is used to test the userAgent for a mobile device",
           "privacy": "public",
           "sourceRange": {
@@ -4096,7 +5138,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "string"
         },
         {
           "name": "opened",

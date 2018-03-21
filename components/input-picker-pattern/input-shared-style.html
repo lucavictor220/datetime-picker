@@ -3,6 +3,9 @@
 <dom-module id="input-shared-style">
   <template>
     <style>
+      :host([hidden]) {
+        display: none;
+      }
       :host(:focus) {
         outline: none;
       }
@@ -14,7 +17,6 @@
         font-style: inherit;
         outline: none;
         line-height: normal;
-        box-sizing: content-box;
         cursor: var(--input-cursor, initial);
         color: var(--input-color, inherit);
         background: var(--input-background, transparent);
@@ -26,6 +28,7 @@
         border-style: var(--input-border-style, dotted);
         border-color: var(--input-border-color, transparent);
         @apply --input-style;
+        box-sizing: border-box;
         -webkit-background-clip: padding-box;
         background-clip: padding-box;
         margin: 0;
@@ -50,7 +53,8 @@
         outline: none;
         @apply --input-focus;
       }
-      :host([invalid]) #input {
+      :host([invalid]) #input,
+      #input:invalid {
         color: var(--input-invalid-color, inherit);
         background: var(--input-invalid-background, rgba(255,0,0,0.16));
         border-style: var(--input-invalid-border-style, dotted);
@@ -58,7 +62,9 @@
         @apply --input-invalid;
       }
       :host([invalid]) #input:hover,
-      :host([invalid]) #input:focus {
+      :host([invalid]) #input:focus,
+      #input:invalid:focus,
+      #input:invalid:focus {
         border-style: var(--input-focus-border-style, dotted);
         border-color: var(--input-focus-border-color, currentColor);
       }
@@ -74,6 +80,7 @@
       ::placeholder {
         color: var(--input-placeholder-color, inherit);
         opacity: var(--input-placeholder-opacity, 0.75);
+        text-align: var(--input-placeholder-allign, center);
         @apply --input-placeholder;
       }
       ::-moz-selection {
