@@ -2013,7 +2013,7 @@
               "column": 6
             },
             "end": {
-              "line": 300,
+              "line": 299,
               "column": 7
             }
           },
@@ -2032,11 +2032,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 302,
+              "line": 301,
               "column": 6
             },
             "end": {
-              "line": 313,
+              "line": 312,
               "column": 7
             }
           },
@@ -4694,7 +4694,7 @@
               "column": 6
             },
             "end": {
-              "line": 300,
+              "line": 299,
               "column": 7
             }
           },
@@ -4713,11 +4713,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 302,
+              "line": 301,
               "column": 6
             },
             "end": {
-              "line": 313,
+              "line": 312,
               "column": 7
             }
           },
@@ -7412,7 +7412,7 @@
               "column": 6
             },
             "end": {
-              "line": 300,
+              "line": 299,
               "column": 7
             }
           },
@@ -7431,11 +7431,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 302,
+              "line": 301,
               "column": 6
             },
             "end": {
-              "line": 313,
+              "line": 312,
               "column": 7
             }
           },
@@ -10082,7 +10082,7 @@
               "column": 6
             },
             "end": {
-              "line": 300,
+              "line": 299,
               "column": 7
             }
           },
@@ -10099,11 +10099,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 302,
+              "line": 301,
               "column": 6
             },
             "end": {
-              "line": 313,
+              "line": 312,
               "column": 7
             }
           },
@@ -10127,7 +10127,7 @@
           "column": 2
         },
         "end": {
-          "line": 315,
+          "line": 314,
           "column": 3
         }
       },
