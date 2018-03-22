@@ -32,9 +32,7 @@ _[Demo and API docs](https://fooloomanzoo.github.io/datetime-picker/components/d
 ```
 -->
 ```html
-<calendar-element date="{{date}}"></calendar-element><br>
-<date-input date="{{date}}"></date-input><br>
-<datetime-picker date="{{date}}" datetime="{{datetime}}" auto-confirm></datetime-picker>
+<datetime-picker></datetime-picker>
 ```
 
 If you like an **overlay** then use `<overlay-datetime-picker>`, what creates the polyfill in an `<overlay-element>`, that extends Polymer.IronOverlayBehavior and will create some of its attribute-bindings.
@@ -101,8 +99,8 @@ You can use it stand-alone, with overlay or as a range of dates. Examples:
 -->
 ```html
 <p><calendar-element date="{{date}}"></calendar-element></p>
-<p>date: <date-input date="{{date}}" datetime="{{datetime}}"></date-input></p>
-<p>datetime: <datetime-input default="2020-05-23" datetime="{{datetime}}" step="5"></datetime-input></p>
+<p>date: <date-input date="{{date}}"></date-input></p>
+<p>datetime: <datetime-input default="2020-05-23" date="{{date}}" datetime="{{datetime}}" step="5"></datetime-input></p>
 ```
 
 Use `default` or another attribute to preset the date. If `step` is set on a picker, the attribute defines the step a date should be incremented (in seconds). The input for the most inferior standing, that would create an integer step, is used to increment the value.
