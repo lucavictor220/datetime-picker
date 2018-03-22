@@ -21,12 +21,12 @@
     "polymer": "Polymer/polymer#2",
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#2"
   },
-  "version": "2.2.5",
-  "_release": "2.2.5",
+  "version": "2.2.6",
+  "_release": "2.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "2.2.5",
-    "commit": "9c4235fa8d475eab4de610eec550bf64283c8392"
+    "tag": "2.2.6",
+    "commit": "a5485a0ddb513adc8aada8b620fb66b1e445c2e6"
   },
   "_source": "https://github.com/fooloomanzoo/input-picker-pattern.git",
   "_target": "2",

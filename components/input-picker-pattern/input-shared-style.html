@@ -6,6 +6,9 @@
       :host([hidden]) {
         display: none;
       }
+      :host([disabled]) {
+        pointer-events: none;
+      }
       :host(:focus) {
         outline: none;
       }
@@ -71,8 +74,8 @@
       :host([disabled]) #input {
         color: var(--input-disabled-color, inherit);
         background: var(--input-disabled-background, transparent);
-        font-style: var(--input-disabled-font-style, italic);
-        opacity: var(--input-disabled-opacity, 1);
+        font-style: var(--input-disabled-font-style, oblique);
+        opacity: var(--input-disabled-opacity, 0.9);
         @apply --input-disabled;
         pointer-events: none;
       }

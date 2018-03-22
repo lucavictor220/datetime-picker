@@ -42,8 +42,8 @@
 
         --input-disabled-color: currentColor;
         --input-disabled-background: transparent;
-        --input-disabled-font-style: italic;
-        --input-disabled-opacity: 1;
+        --input-disabled-font-style: oblique;
+        --input-disabled-opacity: 0.9;
 
         --input-invalid-color: #e83953;
         --input-invalid-background: transparent;
@@ -108,9 +108,9 @@
         border-style: var(--input-border-style);
         border-color: var(--input-border-color);
         padding: var(--input-padding);
+        cursor: var(--input-cursor);
         @apply --input-style;
       }
-
 
       select:focus,
       button:focus,
@@ -157,6 +157,7 @@
         font-style: var(--input-disabled-font-style);
         opacity: var(--input-disabled-opacity);
         @apply --input-disabled;
+        pointer-events: none;
       }
       .icon {
         color: inherit;

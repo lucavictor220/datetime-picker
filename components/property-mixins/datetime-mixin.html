@@ -261,8 +261,7 @@
           '_datetimeChanged(datetime)',
           '_dateTimeChanged(date, time)',
           '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes)',
-          '_defaultChanged(default)',
-          '_clampChanged(clamp)'
+          '_defaultChanged(default)'
         ]
       }
 
@@ -298,7 +297,7 @@
             this.setProperties(this._computeTimezone(new Date().getTimezoneOffset()));
             this.__updatingTimezoneOffset = false;
           }
-          d = new Date(this.value !== undefined ? this.value : this.datetime || ((this.date || this._toDate(new Date())) + 'T' + (this.time || '00:00') + this.timezone));
+          d = new Date(this.value !== undefined ? this.value : this.datetime || ((this.date || '1970-01-01') + 'T' + (this.time || '00:00') + this.timezone));
           if (isNaN(d)) {
             d = new Date();
           }
@@ -665,15 +664,12 @@
 
       /**
        * clamp to date component
-       * @param  {string} clamp 'clamp'-property
-       * @param  {string} comp the property to compare to
-       * @return {boolean}     true when should be hidden
        */
-      _ifClamped(clamp, comp) {
+      _ifClamped(clamp, comp, hidden) {
         const features = ['month', 'day', 'hour', 'minute', 'second', 'millisecond'];
         const pos = features.indexOf(clamp);
         const index = features.indexOf(comp);
-        return pos !== -1 && index !== -1 && pos <= index;
+        return hidden || (pos !== -1 && index !== -1 && pos <= index);
       }
 
       _timezoneChanged(timezone, oldValue) {
@@ -784,12 +780,6 @@
           return d.getDate();
         }
         return 31;
-      }
-
-      _clampChanged() {
-        if (this.value !== undefined) {
-          this._setDate(new Date(this.value));
-        }
       }
 
       _localeChanged(locale) {

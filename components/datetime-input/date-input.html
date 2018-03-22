@@ -21,11 +21,11 @@
       static get inputTemplate() {
         return `
           <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
-            <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
-            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
-            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
-            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
+            <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, _ifClamped(clamp, 'year', partsHidden.year), _ifClamped(clamp, 'month', partsHidden.month), _ifClamped(clamp, 'day', partsHidden.day), 'true')]]">[[dateSeparator]]</span>
+            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, _ifClamped(clamp, 'year', partsHidden.year), _ifClamped(clamp, 'month', partsHidden.month), _ifClamped(clamp, 'day', partsHidden.day))]]">[[dateSeparator]]</span>
+            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
@@ -97,6 +97,12 @@
         }
       }
 
+      /**
+       *  Sets value to the actual date
+       **/
+      now() {
+        this._setDate(this._fromDatetime(this._toDate(new Date())));
+      }
     }
   }
 </script>
@@ -132,8 +138,8 @@
      * `--input-invalid-border-color`     | border color of the invalid input              | rgba(255, 0, 0, 0.5)
      * `--input-disabled-color`           | color of the disabled input                    | inherit
      * `--input-disabled-background`      | background of the disabled input               | transparent
-     * `--input-disabled-font-style`      | font-style of the disabled input               | italic
-     * `--input-disabled-opacity`         | opacity of the disabled input                  | 1
+     * `--input-disabled-font-style`      | font-style of the disabled input               | oblique
+     * `--input-disabled-opacity`         | opacity of the disabled input                  | 0.9
      * `--input-placeholder-color`        | color of the placeholder                       | inherit
      * `--input-placeholder-opacity`      | opacity of the placeholder                     | 0.75
      * `--input-selection-color`          | color of the selected text                     | inherit
@@ -147,8 +153,8 @@
      * `--inner-input-border-width`       | border width of the inner inputs                      | thin
      * `--inner-input-border-style`       | border style of the inner inputs                      | dotted
      * `--inner-input-border-color`       | border color of the inner inputs                      | transparent
-     * `--inner-input-padding`            | padding of the inner inputs                           | 0.16em
-     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.16em
+     * `--inner-input-padding`            | padding of the inner inputs                           | 0.1em
+     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.1em
      * `--inner-input-focus-color`        | color of the focussed and hovered inner inputs        | inherit
      * `--inner-input-focus-background`   | background of the focussed and hovered inner inputs   | rgba(0, 0, 0, 0.16)
      * `--inner-input-focus-border-style` | border style of the focussed and hovered inner inputs | dotted
