@@ -230,7 +230,9 @@
        * @overwrite
        */
       _inputChanged(input) {
-        this._reflectPropertyToValue(input);
+        if (input !== undefined) {
+          this._reflectPropertyToValue(input);
+        }
         if (this.autoResize) {
           this._debouncedComputeWidth();
         }
@@ -249,7 +251,9 @@
       }
 
       _updateValue(e) {
-        this._reflectValueToProperty(this.value);
+        if (this.value !== undefined) {
+          this._reflectValueToProperty(this.value);
+        }
         this._debouncedComputeWidth();
         e && e.stopPropagation && e.stopPropagation();
       }
@@ -297,7 +301,6 @@
           }
         }
         this._minSizeJob = setTimeout(minsizer.bind(this), 0);
-
       }
 
       _debouncedComputeWidth() {
