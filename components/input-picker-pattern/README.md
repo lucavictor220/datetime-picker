@@ -109,7 +109,7 @@ Custom property                   | Default
 `--inner-input-focus-color`       | #f1f1f1
 `--inner-input-focus-background`  | --primary-color, #394FE8
 `--input-disabled`                | { font-weight: lighter; }
-  |  
+
 
 #### drop-down-tip-style
 Custom property                   | Description                                  | Default
@@ -117,6 +117,7 @@ Custom property                   | Description                                 
 --dropdown-tip-size               | dimensions of the tip of the dropdown        | 6px
 --dropdown-tip-gap                | gap to the outside of the tip                | 12px
 --dropdown-tip-background         | background of the tip of the dropdown        | --input-picker-background, transparent
+
 
 #### overlays
 Have a look at iron-overlay-behavior's [repository](https://github.com/PolymerElements/iron-overlay-behavior#styling) to find out more about its style-properties.

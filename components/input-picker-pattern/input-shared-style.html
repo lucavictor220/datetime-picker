@@ -19,6 +19,15 @@
       /**
        * general input style
        */
+
+       button,
+       select {
+         -moz-appearance: none;
+         -webkit-appearance: none;
+         appearance: none;
+         border: thin solid transparent;
+       }
+
       input,
       #minsize,
       #size,
@@ -26,17 +35,6 @@
         vertical-align: inherit;
         min-width: inherit;
         max-width: inherit;
-        border-style: var(--input-border-style, dotted);
-        border-width: var(--input-border-width, thin);
-        border-color: var(--input-border-color, rgba(0,0,0,0.25));
-      }
-
-      button,
-      select {
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        appearance: none;
-        border: thin solid transparent;
       }
 
       button,
@@ -53,19 +51,40 @@
         outline: none;
         line-height: normal;
         cursor: var(--input-cursor, initial);
-        color: var(--input-color, inherit);
-        background-color: var(--input-background, transparent);
+        text-align: var(--input-align, center);
+        padding: var(--input-padding, 0.25em);
         transition-duration: var(--input-transition-duration, 250ms);
         transition-timing-function: var(--input-transition-timing-function, cubic-bezier(0.6, 1, 0.2, 1));
         transition-property: var(--input-transition-property, background-color);
-        text-align: var(--input-align, center);
-        padding: var(--input-padding, 0.25em);
-        border-radius: var(--input-border-radius, 0.25em);
         @apply --input-style;
         box-sizing: border-box;
         -webkit-background-clip: padding-box;
         background-clip: padding-box;
         margin: 0;
+      }
+
+      button,
+      #input {
+        color: var(--input-color, inherit);
+        background-color: var(--input-background, transparent);
+        border-radius: var(--input-border-radius, 0.25em);
+      }
+
+      #minsize,
+      #size,
+      #input {
+        border-style: var(--input-border-style, dotted);
+        border-width: var(--input-border-width, thin);
+        border-color: var(--input-border-color, rgba(0,0,0,0.25));
+      }
+
+      select {
+        color: var(--inner-input-color, currentColor);
+        background: var(--inner-input-background, transparent);
+        border-width: var(--inner-input-border-width, thin);
+        border-color: var(--inner-input-border-color, transparent);
+        border-style: var(--inner-input-border-style, dotted);
+        border-radius: var(--inner-input-border-radius, 0.1em);
       }
 
       /**
@@ -77,8 +96,6 @@
        #input:focus,
        input:focus,
        input:hover,
-       select:focus,
-       select:hover,
        button:focus,
        button:hover {
          border-style: var(--input-focus-border-style, dotted);
@@ -86,6 +103,17 @@
          border-width: var(--input-border-width, thin);
          color: var(--input-focus-color, inherit);
          background-color: var(--input-focus-background, rgba(0,0,0,0.1));
+         outline: none;
+         @apply --input-focus;
+       }
+
+       select:focus,
+       select:hover {
+         color: var(--inner-input-focus-color, inherit);
+         background-color: var(--inner-input-focus-background, rgba(0,0,0,0.1));
+         border-style: var(--inner-input-focus-border-style, dotted);
+         border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.1));
+         border-width: var(--inner-input-border-width, thin);
          outline: none;
          @apply --input-focus;
        }

@@ -58,7 +58,6 @@
     _onDblClickDay() {
       super._onDblClickDay();
       this.confirm();
-      this.close();
     }
 
     renderCalendar(year, month, day) {
@@ -69,13 +68,29 @@
     }
 
     open() {
+      const oldValue = this.opened;
       if (super.open) {
         super.open();
       }
       this.renderCalendar(this.year, this.month, this.day);
-      if (!(this.partsDisabled && this.partsDisabled.days) && !(this.partsHidden && this.partsHidden.days)) {
-        this.$.days.focus();
+      if (oldValue === false) {
+        if (!(this.partsDisabled && this.partsDisabled.days) && !(this.partsHidden && this.partsHidden.days)) {
+          this.$.days.focus();
+        }
       }
+    }
+    
+    _setConfirmedValues() {
+      if (!this.date && this.currentSelectedDayNode) {
+        this.date = this.currentSelectedDayNode.dataset.date;
+        return;
+      }
+      this.setProperties({
+        confirmedDatetime: this.datetime,
+        confirmedDate: this.date,
+        confirmedTime: this.time,
+        confirmedValue: this.value
+      })
     }
   }
 </script>

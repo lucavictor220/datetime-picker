@@ -50,20 +50,20 @@
           align-self: stretch;
         }
         #calendar #monthSelector {
-          flex: 1 0 1px;
-          padding: 0.3em;
-          --input-color: currentColor;
-          --input-background: transparent;
-          --input-border-color: transparent;
+          flex: 1 0 auto;
+          --inner-input-border-style: solid;
+          --inner-input-focus-border-style: solid;
+        }
+        #monthSelector option {
+          color: var(--inner-input-focus-color, currentColor);
+          background: var(--inner-input-focus-background, rgba(0,0,0,0.1));
+          text-align: center;
         }
         #calendar #yearInput {
           font-weight: bold;
           flex: 0 0 auto;
-          --input-color: currentColor;
-          --input-background: transparent;
-          --input-padding: 0.3em;
-          --input-border-color: transparent;
-          --input-focus-border-color: transparent;
+          --inner-input-border-style: solid;
+          --inner-input-focus-border-style: solid;
         }
         #calendar #days {
           position: relative;
@@ -363,7 +363,7 @@
     renderCalendar(year, month, day, date) { // eslint-disable-line
       // working in UTC-timezone
       const currentDate = this._clampDay(new Date()),
-        selectedDate = (year === undefined || month === undefined || day === undefined) ? currentDate : this._clampDay(new Date(year, +month - 1, day));
+        selectedDate = (year === undefined || month === undefined || day === undefined) ? this._min || currentDate : this._clampDay(new Date(year, +month - 1, day));
       let recentDate;
       if (date || this.date) {
         const match = this._regexpDate.exec(date || this.date);

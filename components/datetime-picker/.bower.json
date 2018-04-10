@@ -36,11 +36,11 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers",
     "iron-form": "PolymerElements/iron-form"
   },
-  "_release": "813b46124b",
+  "_release": "e8970cfdb1",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "813b46124b8def807f660de19a2638dabed4ba99"
+    "commit": "e8970cfdb1d085bbe35888fb07989817893a650b"
   },
   "_source": "https://github.com/fooloomanzoo/datetime-picker.git",
   "_target": "master",
