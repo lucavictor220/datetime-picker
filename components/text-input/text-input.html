@@ -47,11 +47,12 @@
         return `
           <input id="input"
             type="[[type]]"
-            value="{{_input::input}}"
+            value="{{input::input}}"
             placeholder="[[placeholder]]"
             pattern="[[pattern]]"
-            disabled="[[disabled]]"
-            required="[[required]]"
+            disabled$="[[disabled]]"
+            required$="[[required]]"
+            maxlength$="[[maxlength]]"
             autocomplete$="[[_computeAutocompleteAttribute(autocomplete)]]"
             spellcheck$="[[_computeSpellcheckAttribute(spellcheck)]]">
         `;
@@ -84,30 +85,43 @@
           spellcheck: {
             type: Boolean,
             value: false
+          },
+
+          /**
+           * maximum length of the input
+           */
+          maxlength: {
+            type: Number
+          },
+
+          propertyForValue: {
+            type: String,
+            readOnly: true,
+            value: 'input'
           }
+
         }
       }
 
       static get observers() {
         return [
-          '_computeInvalid(required, _input)'
+          '_computeInvalid(required, input)'
         ]
       }
 
-      _computeInvalid() {
-        return this.validate();
+      _computeInvalid(req, v) {
+        this.invalid = !this._validate(v, req);
       }
 
-      validate() {
-        if (this.disabled) {
+      _validate(v, req) {
+        if (this._validationRegExp) {
+          if ((this._validationRegExp.exec(v) !== null) && !(req && !v)) {
+            return true;
+          }
           return false;
+        } else {
+          return !(req && !v);
         }
-        if (!(this._validationRegExp && this._validationRegExp.exec(this._input) === null) && !(this.required && !this._input)) {
-          return true;
-        } else if (!(this._validationRegExp && this._validationRegExp.exec(this.value) === null) && !(this.required && !this.value)) {
-          return true;
-        }
-        return false;
       }
 
       _patternChanged(pattern) {
@@ -121,7 +135,6 @@
 
       _inputChanged(input) {
         if (input === undefined) return;
-
         if (!(this._validationRegExp && this._validationRegExp.exec(input) === null)) {
           this.value = input;
         }
@@ -131,7 +144,7 @@
         if (value === undefined) return;
 
         if (!(this._validationRegExp && this._validationRegExp.exec(value) === null)) {
-          this._input = value;
+          this.input = value;
           this._debouncedComputeWidth();
         } else if (oldValue !== undefined && this._validationRegExp.exec(oldValue) !== null) {
           this.value = oldValue;
@@ -145,6 +158,23 @@
 
       _computeAutocompleteAttribute(autocomplete) {
         return autocomplete ? 'on' : 'off';
+      }
+
+      _checkInput(e) {
+        if (this.invalid) {
+          this._updateValue(e);
+          return;
+        } else {
+          this._inputChanged(this.input || '');
+        }
+        this._debouncedComputeWidth();
+        e && e.stopPropagation && e.stopPropagation();
+      }
+
+      _reflectPropertyToValue(input) {
+        if (!this.invalid) {
+          this.value = input;
+        }
       }
 
     }
@@ -167,40 +197,7 @@
      *
      * It sizes automatically. Use `key-up` and `key-down` to increment the value. If `step` is given, the value is a **multiple** of `step`.
      *
-     * ### Styling
-     * Custom property                   | Description                                  | Default
-     * ----------------------------------|----------------------------------------------|--------------------
-     * `--input-color`                   | color of the input                             | inherit
-     * `--input-background`              | background of the input                        | transparent
-     * `--input-border-width`            | border width of the input                      | thin
-     * `--input-border-style`            | border style of the input                      | dotted
-     * `--input-border-color`            | border color of the input                      | transparent
-     * `--input-padding`                 | padding of the input                           | 0.2em
-     * `--input-border-radius`           | border-radius of the input                     | 0.25em
-     * `--input-transition`              | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-allign`                  | text-allign of the input input                 | center
-     * `--input-cursor`                  | cursor of the input input                      | initial
-     * `--input-focus-color`             | color of the focussed and hovered input        | inherit
-     * `--input-focus-background`        | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
-     * `--input-focus-border-style`      | border style of the focussed and hovered input | dotted
-     * `--input-focus-border-color`      | border color of the focussed and hovered input | currentColor
-     * `--input-invalid-color`           | color of the invalid input                     | inherit
-     * `--input-invalid-background`      | background of the invalid input                | rgba(255, 0, 0, 0.16)
-     * `--input-invalid-border-style`    | border style of the invalid input              | dotted
-     * `--input-invalid-border-color`    | border color of the invalid input              | rgba(255, 0, 0, 0.5)
-     * `--input-disabled-color`          | color of the disabled input                    | inherit
-     * `--input-disabled-background`     | background of the disabled input               | transparent
-     * `--input-disabled-font-style`     | font-style of the disabled input               | italic
-     * `--input-disabled-opacity`        | opacity of the disabled input                  | 1
-     * `--input-placeholder-color`       | color of the placeholder                       | inherit
-     * `--input-placeholder-opacity`     | opacity of the placeholder                     | 0.75
-     * `--input-placeholder-align`       | text-allign of the placeholder                 | center
-     * `--input-selection-color`         | color of the selected text                     | inherit
-     * `--input-selection-background`    | background of the selected text                | rgba(255, 255, 255, 0.5)
-     * `--input-style`                   | style of the input                             | {}
-     * `--input-focus`                   | style of the focussed and hovered input        | {}
-     * `--input-invalid`                 | style of the invalid input                     | {}
-     * `--input-placeholder`             | style of the placeholder                       | {}
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see how to style the element.
      *
      * ```css
      * :host {

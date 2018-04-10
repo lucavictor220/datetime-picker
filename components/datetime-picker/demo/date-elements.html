@@ -108,6 +108,8 @@
                     --input-picker-background: #448b7e;
                     --input-focus-background: #1cccac;
                     --input-focus-color: #fff;
+                    --inner-input-focus-background: #9bf1e1;
+                    --inner-input-focus-color: #444;
                   }
                   date-picker.end {
                     --input-color: #fff;
@@ -116,12 +118,14 @@
                     --input-picker-background: #594894;
                     --input-focus-color: #fff;
                     --input-focus-background: #7551ee;
+                    --inner-input-focus-background: #b7a4f4;
+                    --inner-input-focus-color: #fff;
                   }
                 </style>
               </custom-style>
               <div class="vertical-section-container">
-                <date-picker class="begin" month="6" day="11" auto-confirm date="{{min}}" max="{{max}}" vertical-align="bottom"></date-picker>
-                <date-picker class="end" month="6" day="21" auto-confirm date="{{max}}" min="{{min}}" vertical-align="top"></date-picker>
+                <date-picker class="begin" year="2010" month="6" day="11" date="{{min}}" max="{{max}}" vertical-align="bottom"></date-picker>
+                <date-picker class="end" year="2030" month="6" day="21" date="{{max}}" min="{{min}}" vertical-align="top"></date-picker>
               </div>
               <div class="vertical-section-container result">
                 <div><code>start</code>: <b>[[min]]</b></div>
@@ -147,7 +151,9 @@
                     --input-picker-color: #f1f1f1;
                     --input-picker-background: #b07143;
                     --input-focus-background: #ddcd7e;
+                    --inner-input-focus-background: #f4edce;
                     --input-focus-color: #202020;
+                    --inner-input-focus-color: #121212;
                   }
                   .info {
                     background: #e9bd9d;
@@ -229,6 +235,7 @@
               <custom-style>
                 <style is="custom-style">
                   date-picker.clamp {
+                    --inner-input-focus-background: #618cdf;
                     --input-focus-background: #9ab6ed;
                     --input-focus-color: #001641;
                     --input-background: #e39f3b;

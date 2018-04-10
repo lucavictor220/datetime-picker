@@ -8,12 +8,19 @@ styles for used for a tip of the dropdown
 <dom-module id="dropdown-tip-style">
   <template>
     <style>
+
+      :host {
+        --computed-dropdown-tip-size: var(--dropdown-tip-size, 6px);
+        --computed-dropdown-tip-gap: var(--dropdown-tip-gap, 12px);
+        --dropdown-tip-background: var(--input-picker-background, transparent);
+      }
+
       .dropdown:after {
         content: "";
         position: absolute;
         width: 0;
         height: 0;
-        border-width: var(--dropdown-tip-size, 0);
+        border-width: var(--computed-dropdown-tip-size);
         border-style: solid;
         border-color: transparent transparent transparent transparent;
         left: auto;
@@ -33,44 +40,43 @@ styles for used for a tip of the dropdown
       :host([horizontal-align]) .dropdown:after,
       :host([horizontal-align="auto"]) .dropdown:after,
       :host([horizontal-align="left"]) .dropdown:after {
-        top: calc(-2 * var(--dropdown-tip-size, 0));
-        left: calc(2 * var(--dropdown-tip-size, 0));
-        border-bottom-color: var(--input-picker-background, var(--input-background));
+        top: 0;
+        left: var(--computed-dropdown-tip-gap);
+        border-bottom-color: var(--dropdown-tip-background);
+        transform: translateY(-100%);
       }
 
       :host([horizontal-align="right"][vertical-align]) .dropdown:after {
         left: auto;
-        right: calc(2 * var(--dropdown-tip-size, 0));
+        right: var(--computed-dropdown-tip-gap);
       }
 
       :host([horizontal-align="center"][vertical-align]) .dropdown:after {
         left: 50%; right: auto;
-        transform: translate(-50%, 0%);
+        transform: translate(-50%, -100%);
       }
 
       :host([horizontal-align][vertical-align="bottom"]) .dropdown:after {
-        top: auto;
-        bottom: calc(-2 * var(--dropdown-tip-size, 0));
+        top: auto; bottom: 0;
         border-bottom-color: transparent;
-        border-top-color: var(--input-picker-background, var(--input-background));
+        border-top-color: var(--dropdown-tip-background);
+        transform: translateY(100%);
       }
 
       :host([horizontal-align][vertical-align="middle"]) .dropdown:after {
-        top: auto; bottom: 50%;
-        transform: translate(0%, 50%);
+        top: auto; bottom: 50%; right: 0; left: auto;
+        transform: translate(100%, 50%);
         border-top-color: transparent;
         border-bottom-color: transparent;
-        right: calc(-2 * var(--dropdown-tip-size, 0));
-        left: auto;
         border-right-color: transparent;
-        border-left-color: var(--input-picker-background, var(--input-background));
+        border-left-color: var(--dropdown-tip-background);
       }
 
       :host([horizontal-align="left"][vertical-align="middle"]) .dropdown:after {
-        right: auto;
-        left: calc(-2 * var(--dropdown-tip-size, 0));
+        right: auto; left: 0;
+        transform: translate(-100%, 50%);
         border-left-color: transparent;
-        border-right-color: var(--input-picker-background, var(--input-background));
+        border-right-color: var(--dropdown-tip-background);
       }
 
       :host([horizontal-align="center"][vertical-align="middle"]) .dropdown:after {

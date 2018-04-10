@@ -116,6 +116,13 @@
         if (prop !== undefined) {
           this._createPropertyObserver(prop, '_reflectPropertyToValue', true);
           this._createPropertyObserver('value', '_reflectValueToProperty', true);
+          setTimeout(() => {
+            if (this[prop] !== undefined) {
+              this.set('value', this[prop]);
+            } else if (this.value !== undefined) {
+              this.set(prop, this.value);
+            }
+          }, 0)
         }
       }
 

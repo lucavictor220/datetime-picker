@@ -73,6 +73,9 @@ This element wants to achieve that, by using the [Intl.NumberFormat API](https:/
 <span>as integer: </span><integer-input min="-150" step="15" max="300" default="15"></integer-input>
 ```
 
+### Styling
+Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see how to style the element.
+
 ### Installation
 ```
 bower install --save fooloomanzoo/number-input

@@ -34,12 +34,20 @@ By default, a native `<button>` element will submit this form. However, if you
 want to submit it from a custom element's click handler, you need to explicitly
 call the `iron-form`'s `submit` method.
 
-  Example:
+  Example (using `<paper-button>` for the form `<iron-form id="myForm">`):
 
-    <paper-button raised onclick="submitForm()">Submit</paper-button>
+    <paper-button raised on-click="submitForm">Submit</paper-button>
 
     function submitForm() {
-      document.getElementById('iron-form').submit();
+      this.$.myForm.submit();
+    }
+
+  or (using `<button>` for a form in the same document):
+
+    <button raised onclick="submitForm()">Submit</button>
+
+    function submitForm() {
+      document.getElementById('myForm').submit();
     }
 
 If you are not using the `allow-redirect` mode, then you also have the option of
@@ -184,7 +192,7 @@ attach it to the `<iron-form>`:
           // we won't be able to look into their shadowRoots for submittables.
           // We wait a tick and check again for any missing submittable default
           // values.
-          this.async(this._saveInitialValues.bind(this));
+          this.async(this._saveInitialValues.bind(this), 1);
         } else {
           this._nodeObserver = Polymer.dom(this).observeNodes(
             function(mutations) {
@@ -223,7 +231,7 @@ attach it to the `<iron-form>`:
       },
 
       _saveInitialValues: function() {
-        var nodes = this._getSubmittableElements();
+        var nodes = this._getValidatableElements();
         for (var i = 0; i < nodes.length; i++) {
           var node = nodes[i];
           if (!this._defaults.has(node)) {
@@ -235,7 +243,7 @@ attach it to the `<iron-form>`:
             if ('checked' in node) {
               defaults.checked = node.checked;
             }
-            // In 1.x iron-form would reset `invalid`, so 
+            // In 1.x iron-form would reset `invalid`, so
             // keep it here for backwards compat.
             if ('invalid' in node) {
               defaults.invalid = node.invalid;
@@ -346,7 +354,7 @@ attach it to the `<iron-form>`:
         }
 
         // Load the initial values.
-        var nodes = this._getSubmittableElements();
+        var nodes = this._getValidatableElements();
         for (var i = 0; i < nodes.length; i++) {
           var node = nodes[i];
           if (this._defaults.has(node)) {
@@ -469,7 +477,7 @@ attach it to the `<iron-form>`:
             continue;
           }
 
-          // Note: assignedNodes does not contain <slot> or <content> because 
+          // Note: assignedNodes does not contain <slot> or <content> because 
           // getDistributedNodes flattens the tree.
           this._searchSubmittable(submittable, assignedNodes[i], ignoreName);
           var nestedAssignedNodes = Polymer.dom(assignedNodes[i]).querySelectorAll('*');
@@ -508,7 +516,7 @@ attach it to the `<iron-form>`:
        * @private
        */
       _isSubmittable: function(node, ignoreName) {
-        return  (!node.disabled && (ignoreName ? typeof node.validate === 'function' : node.name));
+        return  (!node.disabled && (ignoreName ? node.name || typeof node.validate === 'function' : node.name));
       },
 
       _serializeElementValues: function(element) {

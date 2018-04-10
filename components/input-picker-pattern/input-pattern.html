@@ -20,7 +20,7 @@
             ${this.styleTemplate}
           </style>
           ${this.inputTemplate}
-          <div id="size">[[_input]]</div>
+          <div id="size">[[input]]</div>
           <div id="minsize">[[_minWidthString]]</div>
         `;
       }
@@ -39,22 +39,8 @@
           }
           #minsize,
           #size {
-            display: block;
-            overflow: visible;
-            font-family: inherit;
-            font-size: inherit;
-            font-weight: inherit;
-            font-style: inherit;
-            color: inherit;
-            background: transparent;
-            outline: none;
-            line-height: normal;
-            padding: var(--input-padding, 0.25em);
-            border-radius: var(--input-border-radius, 0.25em);
-            border-width: var(--input-border-width, thin);
-            border-style: var(--input-border-style, dotted);
-            border-color: var(--input-border-color, transparent);
-            @apply --input-style;
+            min-width: inherit;
+            max-width: inherit;
             box-sizing: border-box;
             margin: 0;
             position: fixed;
@@ -62,6 +48,10 @@
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
+            border: var(--input-border-width, thin) solid transparent;
+          }
+          #input {
+            width: 0;
           }
         `;
       }
@@ -74,10 +64,10 @@
         return `
           <input id="input"
             type="[[type]]"
-            value="{{_input::input}}"
+            value="{{input::input}}"
             placeholder="[[placeholder]]"
-            required="[[required]]"
-            disabled="[[disabled]]"
+            required$="[[required]]"
+            disabled$="[[disabled]]"
             spellcheck="false"
             autocomplete="off">
         `;
@@ -95,37 +85,30 @@
           },
 
           /**
-           * live value of the input
+           * the immediate input string
            */
-          _input: {
-            type: String
-          },
-
-          /**
-           * value string of the input
-           */
-          value: {
+          input: {
             type: String,
             notify: true,
-            observer: '_valueChanged'
+            observer: '_inputChanged'
           },
 
           /**
-           * placeholder string
+           * the placeholder string
            */
           placeholder: {
             type: String
           },
 
           /**
-           * default value of the input
+           * the default value of the input
            */
           default: {
             type: String
           },
 
           /**
-           * minlength of the input
+           * the minlength of the input
            */
           minlength: {
             type: Number
@@ -157,6 +140,14 @@
            */
           hidden: {
             type: Boolean
+          },
+
+          /**
+           * defines the property that should be used for the value
+           */
+          propertyForValue: {
+            type: String,
+            value: 'input'
           }
         }
       }
@@ -176,10 +167,7 @@
         this._checkInput = this._checkInput.bind(this);
         this._checkKeycode = this._checkKeycode.bind(this);
         this._addEventListeners();
-        this._debouncedComputeWidth();
-        setTimeout(() => {
-          this.resize();
-        }, 0)
+        setTimeout(this.resize.bind(this), 0);
       }
 
       disconnectedCallback() {
@@ -242,30 +230,27 @@
        * @overwrite
        */
       _inputChanged(input) {
-        this.value = input;
-        this._debouncedComputeWidth();
-      }
-
-      /*
-       * @overwrite
-       */
-      _valueChanged(value) {
-        this._input = value;
+        this._reflectPropertyToValue(input);
+        if (this.autoResize) {
+          this._debouncedComputeWidth();
+        }
       }
 
       _defaultChanged(def) {
-        if (!this._input && def) {
-          this._input = def;
+        if (!this.input && def) {
+          this.input = def;
         }
       }
 
       _checkInput(e) {
-        this._inputChanged(this._input || this.default || '');
+        this._inputChanged(this.input || '');
+        this._debouncedComputeWidth();
         e && e.stopPropagation && e.stopPropagation();
       }
 
       _updateValue(e) {
-        this._valueChanged(this.value);
+        this._reflectValueToProperty(this.value);
+        this._debouncedComputeWidth();
         e && e.stopPropagation && e.stopPropagation();
       }
 
@@ -294,21 +279,25 @@
        * called automatically when static `_minWidthString` changes, but can called manually to resize the minwidth of the input, when the input is for example initially hidden
        */
       resize() {
-        if (this._minSizeJob) {
+        if (!this._minWidthString) {
           return;
         }
-
+        if (this._minSizeJob) {
+          clearTimeout(this._minSizeJob);
+          this._minSizeJob = null;
+        }
         const minsizer = () => {
           const width = this.$.minsize.getBoundingClientRect().width;
           this._minSizeJob = null;
           if (width === 0) {
-            this._minSizeJob = requestAnimationFrame(minsizer.bind(this));
+            this._minSizeJob = setTimeout(minsizer.bind(this), 0);
           } else {
             this.$.input.style.minWidth = `${width}px`;
             this._debouncedComputeWidth();
           }
         }
-        this._minSizeJob = requestAnimationFrame(minsizer.bind(this));
+        this._minSizeJob = setTimeout(minsizer.bind(this), 0);
+
       }
 
       _debouncedComputeWidth() {

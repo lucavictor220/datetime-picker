@@ -67,7 +67,6 @@
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
             s.addEventListener('mousedown', this._increm, {passive: true});
-            s.addEventListener('touchstart', this._increm, {passive: true});
             s.addEventListener('keydown', this._checkKeycodeSwitch, {passive: true});
             s.addEventListener('mouseup', this._stopActiveIncremJob, {passive: true});
             s.addEventListener('mouseout', this._stopActiveIncremJob, {passive: true});
@@ -86,7 +85,6 @@
         if (switchs) {
           Array.prototype.forEach.call(switchs, s => {
             s.removeEventListener('mousedown', this._increm, {passive: true});
-            s.removeEventListener('touchstart', this._increm, {passive: true});
             s.removeEventListener('keydown', this._checkKeycodeSwitch, {passive: true});
             s.removeEventListener('mouseup', this._stopActiveIncremJob, {passive: true});
             s.removeEventListener('mouseout', this._stopActiveIncremJob, {passive: true});
@@ -130,6 +128,9 @@
         const step = s.getAttribute('step') || 1;
         const sign = s.hasAttribute('invert') ? -1 : 1;
         s.setAttribute('active', '');
+        if (isNaN(this[prop])) {
+          this[prop] = this._getDefaultForProp(prop);
+        }
         this._incremProp(prop, +step*sign);
         this._activeIncremJob = setInterval(this._incremProp.bind(this, prop, +step*sign), this.dwellTime);
         this._activeSwitch = s;
@@ -137,6 +138,10 @@
 
       _incremProp(prop, step) {
         this[prop] += step;
+      }
+
+      _getDefaultForProp(prop) {
+        return 0;
       }
 
       _stopActiveIncremJob() {

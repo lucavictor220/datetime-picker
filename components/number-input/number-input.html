@@ -27,12 +27,8 @@
           #input {
             @apply --number-input;
             margin: 0;
-            min-width: 1ch;
             -moz-appearance: textfield;
             appearance: textfield;
-          }
-          #input {
-            width: 1ch;
           }
           :host(:focus) #input,
           :host(:hover) #input,
@@ -61,11 +57,11 @@
         return `
           <input id="input"
             type="[[type]]"
-            value="{{_input::input}}"
+            value="{{input::input}}"
             step="[[step]]"
+            required$="[[required]]"
+            disabled$="[[disabled]]"
             placeholder="[[placeholder]]"
-            required="[[required]]"
-            disabled="[[disabled]]"
             spellcheck="false"
             autocomplete="off">
         `;
@@ -79,7 +75,7 @@
            */
           type: {
             type: String,
-            computed: '_computeType(formatNumber)'
+            computed: '_computeType(formatNumber, alwaysSign)'
           },
 
           /**
@@ -137,13 +133,21 @@
             type: Number,
             computed: '_computeMinimumIntegerDigits(autoPadding, padLength, default, startAt, min, max, _step, numberStyle)',
             notify: true
+          },
+
+          /**
+           * defines the property that should be used for the value
+           */
+          propertyForValue: {
+            type: String,
+            value: 'valueAsNumber'
           }
         }
       }
 
       static get observers() {
         return [
-          '_computeMinWidth(formatNumber, startAt, min, max, minimumIntegerDigits, minimumFractionDigits)',
+          '_computeMinWidth(formatNumber, startAt, min, max, minimumIntegerDigits, minimumFractionDigits, alwaysSign)',
           '_updateValue(formatNumber)'
         ]
       }
@@ -153,7 +157,7 @@
         const step = (e.keyCode === 38) ? this._step : (e.keyCode === 40 ? -this._step : 0);
         if (step !== 0) {
           this._checkInput();
-          setTimeout(this._increm.bind(this, +step), 0);
+          setTimeout(this._increm.bind(this, this.valueAsNumber, +step), 0);
           e.stopPropagation();
           return;
         }
@@ -161,18 +165,18 @@
         super._checkKeycode && super._checkKeycode(e);
       }
 
-      _increm(step) {
-        let value = this._safeAdd(this.value, step);
+      _increm(value, step) {
+        value = +this._safeAdd(value, step);
         if (isNaN(value)) {
           if (!isNaN(this.startAt)) {
-            this.value = this.startAt;
+            this.valueAsNumber = +this.startAt;
           } else if (!isNaN(this.default)) {
-            this.value = this.default;
+            this.valueAsNumber = +this.default;
           } else {
-            this.value = this.min < 0 ? 0 : this.min || 0;
+            this.valueAsNumber = this.min < 0 ? 0 : this.min || 0;
           }
         } else {
-          this.value = value;
+          this.valueAsNumber = value;
         }
       }
 
@@ -184,26 +188,31 @@
         if (!input) {
           if (!isNaN(this.default)) {
             this.setProperties({
-              _input: this.formatNumber(this.default),
-              value: +this.default
+              input: this.formatNumber(this.default),
+              valueAsNumber: +this.default
             })
           }
+          this._debouncedComputeWidth();
           return;
         }
-        const value = this._checkValue(this.parseNumber(input), this.value);
+        const value = this._checkValue(this.parseNumber(input), this.valueAsNumber);
+        input = this.formatNumber(value);
 
         this.setProperties({
-          _input: this.formatNumber(value),
-          value: value
+          input: input,
+          valueAsNumber: value
         });
+        if (this.autoResize) {
+          this._debouncedComputeWidth();
+        }
       }
 
-      _valueChanged(value, oldValue) {
+      _valueAsNumberChanged(value, oldValue) {
         if (value === undefined) {
           if (!isNaN(this.default)) {
-            this.value = this.default;
+            this.valueAsNumber = this.default;
           } else {
-            this._input = '';
+            this.input = this.input = '';
           }
           return;
         }
@@ -214,17 +223,16 @@
           value = this._checkValue(value, oldValue);
         }
 
-        if (this.value !== value) {
-          this.value = value;
+        if (this.valueAsNumber !== value) {
+          this.valueAsNumber = value;
           return;
         }
-        this._input = this.formatNumber(value);
-        this._debouncedComputeWidth();
+        this.input = this.input = this.formatNumber(value);
       }
 
       _defaultChanged(def) {
-        if (isNaN(this.value) && !isNaN(def)) {
-          this.value = def;
+        if (isNaN(this.valueAsNumber) && !isNaN(def)) {
+          this.valueAsNumber = def;
         }
       }
 
@@ -251,7 +259,7 @@
             startAt = this.formatNumber(this.startAt || 0),
             min = this.formatNumber(this.min || 0),
             max = this.formatNumber(this.max || 0),
-            minlength = this.formatNumber(Math.pow(10, (this.minlength || 1) - 1));
+            minlength = this.formatNumber(Math.pow(10, Math.ceil(this.minlength || 1) - (this.numberStyle === 'percent' ? 3 : 1)));
           const gen = (!this.alwaysSign && (this.min < 0 || this.max < 0) ? '-' : '') + this.formatNumber(Math.pow(10, (this.minimumIntegerDigits || 1) - 1) + Math.pow(10, -(this.minimumFractionDigits || 0)));
           this._minWidthString = (this.noAutoWidth ? [minlength] : [max, min, def, startAt, gen, minlength]).reduce( (acc, curr) => {
             return curr.length > acc.length ? curr : acc;
@@ -335,40 +343,7 @@
      *
      * It sizes automatically. Use `key-up` and `key-down` to increment the value. If `step` is given, the value is a **multiple** of `step`.
      *
-     * ### Styling
-     * Custom property                   | Description                                    | Default
-     * ----------------------------------|------------------------------------------------|--------------------
-     * `--input-color`                   | color of the input                             | inherit
-     * `--input-background`              | background of the input                        | transparent
-     * `--input-border-width`            | border width of the input                      | thin
-     * `--input-border-style`            | border style of the input                      | dotted
-     * `--input-border-color`            | border color of the input                      | transparent
-     * `--input-padding`                 | padding of the input                           | 0.2em
-     * `--input-border-radius`           | border-radius of the input                     | 0.25em
-     * `--input-transition`              | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-allign`                  | text-allign of the input input                 | center
-     * `--input-cursor`                  | cursor of the input input                      | initial
-     * `--input-focus-color`             | color of the focussed and hovered input        | inherit
-     * `--input-focus-background`        | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
-     * `--input-focus-border-style`      | border style of the focussed and hovered input | dotted
-     * `--input-focus-border-color`      | border color of the focussed and hovered input | currentColor
-     * `--input-invalid-color`           | color of the invalid input                     | inherit
-     * `--input-invalid-background`      | background of the invalid input                | rgba(255, 0, 0, 0.16)
-     * `--input-invalid-border-style`    | border style of the invalid input              | dotted
-     * `--input-invalid-border-color`    | border color of the invalid input              | rgba(255, 0, 0, 0.5)
-     * `--input-disabled-color`          | color of the disabled input                    | inherit
-     * `--input-disabled-background`     | background of the disabled input               | transparent
-     * `--input-disabled-font-style`     | font-style of the disabled elements            | oblique
-     * `--input-disabled-opacity`        | opacity of the disabled input                  | 0.9
-     * `--input-placeholder-color`       | color of the placeholder                       | inherit
-     * `--input-placeholder-opacity`     | opacity of the placeholder                     | 0.75
-     * `--input-placeholder-align`       | text-allign of the placeholder                 | center
-     * `--input-selection-color`         | color of the selected text                     | inherit
-     * `--input-selection-background`    | background of the selected text                | rgba(255, 255, 255, 0.5)
-     * `--input-style`                   | style of the input                             | {}
-     * `--input-focus`                   | style of the focussed and hovered input        | {}
-     * `--input-invalid`                 | style of the invalid input                     | {}
-     * `--input-placeholder`             | style of the placeholder                       | {}
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see how to style the element.
      *
      * ```css
      *  number-input {

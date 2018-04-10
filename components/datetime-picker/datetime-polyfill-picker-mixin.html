@@ -24,31 +24,15 @@
        */
       static get nativeInputTemplate() {
         return `
-          <input class="native" autofocus type="${this.expectedNativeInputType}" hidden$="[[!native]]" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value-as-number="{{confirmedValue::input}}" step="[[step]]">
-          <template is="dom-if" if="[[_computeAnd(withTimezone, native)]]">
-            <integer-input pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23" disabled="{{disabled}}"></integer-input>
-            <span>[[timeSeparator]]</span>
-            <integer-input pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00" disabled="{{disabled}}"></integer-input>
+          <template is="dom-if" if="[[_computeAnd(_hasNative, native)]]" restamp>
+            <input class="native" autofocus type="${this.expectedNativeInputType}" disabled$="[[disabled]]" min="[[min]]" max="[[max]]" value-as-number="{{_nativeValueAsNumber::input}}" step="[[_computeNativeStep(step, clamp)]]">
+            <template is="dom-if" if="[[withTimezone]]">
+              <integer-input class="native timezone" pad-length="2" always-sign step="1" value-as-number="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23" disabled="{{disabled}}"></integer-input>
+              <span>[[timeSeparator]]</span>
+              <integer-input class="native timezone" pad-length="2" min="0" max="45" step="15" value-as-number="{{_timeZoneMinutes}}" placeholder="00" disabled="{{disabled}}"></integer-input>
+            </template>
           </template>
         `;
-      }
-
-      static get polyfillInputTemplate() {
-        return `
-          <${this.replacementInputType} class="replacement" required="[[required]]" disabled="{{disabled}}" default="[[default]]" locale="[[locale]]" hour12-format=[[hour12Format]] clamp="{{clamp}}" step="{{step}}" value="{{confirmedValue}}" timezone="{{timezone}}" with-timezone="[[withTimezone]]" min="[[min]]" max="[[max]]" parts-disabled="{{_partsDisabled}}" parts-hidden="{{partsHidden}}" parts-step="{{_partsStep}}"></${this.replacementInputType}>
-        `;
-      }
-
-      static get expectedNativeInputType() {
-        return 'datetime-local';
-      }
-
-      static get replacementInputType() {
-        return 'datetime-input';
-      }
-
-      static get styleToInclude() {
-        return `input-picker-shared-style dropdown-style dropdown-tip-style`;
       }
 
       static get styleTemplate() {
@@ -57,6 +41,7 @@
           ::-webkit-datetime-edit,
           ::-webkit-datetime-edit-fields-wrapper,
           ::-webkit-datetime-edit-ampm-field,
+          ::-webkit-datetime-edit-text,
           ::-webkit-datetime-edit-day-field,
           ::-webkit-datetime-edit-second-field,
           ::-webkit-datetime-edit-millisecond-field,
@@ -65,49 +50,57 @@
           ::-webkit-datetime-edit-month-field,
           ::-webkit-datetime-edit-week-field,
           ::-webkit-datetime-edit-year-field {
+            position: relative;
             line-height: normal;
             outline: none;
-            border-color: transparent;
+            color: var(--inner-input-color, currentColor);
             font-family: inherit;
             font-size: inherit;
-            color: currentColor;
-            cursor: pointer;
             flex: 0 0 auto;
+            box-sizing: border-box;
+            padding: 0;
+          }
+          ::-webkit-datetime-edit-ampm-field,
+          ::-webkit-datetime-edit-day-field,
+          ::-webkit-datetime-edit-second-field,
+          ::-webkit-datetime-edit-millisecond-field,
+          ::-webkit-datetime-edit-hour-field,
+          ::-webkit-datetime-edit-minute-field,
+          ::-webkit-datetime-edit-month-field,
+          ::-webkit-datetime-edit-week-field,
+          ::-webkit-datetime-edit-year-field {
+            cursor: var(--input-cursor, pointer);
+            border: thin solid transparent;
             @apply --input-style;
+            background: var(--inner-input-background, transparent);
+            border-width: var(--inner-input-border-width, thin);
+            border-color: var(--inner-input-border-color, transparent);
+            border-style: var(--inner-input-border-style, dotted);
+            padding: var(--inner-input-padding, 0);
+            border-radius: var(--inner-input-border-radius, 0.1em);
+          }
+          ::-webkit-datetime-edit-ampm-field:focus,
+          ::-webkit-datetime-edit-day-field:focus,
+          ::-webkit-datetime-edit-second-field:focus,
+          ::-webkit-datetime-edit-millisecond-field:focus,
+          ::-webkit-datetime-edit-hour-field:focus,
+          ::-webkit-datetime-edit-minute-field:focus,
+          ::-webkit-datetime-edit-month-field:focus,
+          ::-webkit-datetime-edit-week-field:focus,
+          ::-webkit-datetime-edit-year-field:focus {
+            color: var(--inner-input-focus-color, currentColor);
+            background: var(--inner-input-focus-background, rgba(0,0,0,0.1));
+            border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.1));
+            border-style: var(--inner-input-focus-border-style, dotted);
           }
           ::-webkit-datetime-edit,
           ::-webkit-datetime-edit-fields-wrapper {
             display: inline-flex;
             align-items: baseline;
             padding: 0;
-            box-sizing: border-box;
           }
-          ::-webkit-datetime-edit-ampm-field,
-          ::-webkit-datetime-edit-day-field,
-          ::-webkit-datetime-edit-hour-field,
-          ::-webkit-datetime-edit-second-field,
-          ::-webkit-datetime-edit-millisecond-field,
-          ::-webkit-datetime-edit-minute-field,
-          ::-webkit-datetime-edit-month-field,
-          ::-webkit-datetime-edit-week-field,
-          ::-webkit-datetime-edit-year-field {
-            padding: 0.2em;
-            box-sizing: border-box;
-            position: relative;
-          }
-          ::-webkit-datetime-edit-text:focus,
-          ::-webkit-datetime-edit-fields-wrapper:focus,
-          ::-webkit-datetime-edit-ampm-field:focus,
-          ::-webkit-datetime-edit-day-field:focus,
-          ::-webkit-datetime-edit-hour-field:focus,
-          ::-webkit-datetime-edit-millisecond-field:focus,
-          ::-webkit-datetime-edit-minute-field:focus,
-          ::-webkit-datetime-edit-month-field:focus,
-          ::-webkit-datetime-edit-second-field:focus,
-          ::-webkit-datetime-edit-week-field:focus,
-          ::-webkit-datetime-edit-year-field:focus {
-            background: transparent;
-            @apply --input-focus;
+          ::-webkit-datetime-edit-fields-wrapper {
+            flex: 1;
           }
           ::-webkit-calendar-picker-indicator {
             fill: currentColor;
@@ -115,6 +108,10 @@
           }
           ::-webkit-calendar-picker-indicator:hover {
             background: transparent;
+          }
+          .native.timezone {
+            --input-border-color: transparent;
+            --input-focus-border-color: transparent;
           }
         `;
       }
@@ -165,7 +162,7 @@
            * The confirmed value. When `auto-confirm` is not set, the value will only change, when you confirm.
            */
           confirmedValue: {
-            type: Number,
+            type: Object,
             notify: true
           },
 
@@ -200,6 +197,14 @@
               return {}
             },
             notify: true
+          },
+
+          /**
+           * defines the property that should be used for the value
+           */
+          propertyForValue: {
+            type: String,
+            value: 'valueAsNumber'
           }
         };
       }
@@ -209,12 +214,14 @@
           '_confirmedDatetimeChanged(confirmedDatetime)',
           '_confirmedDateTimeChanged(confirmedDate, confirmedTime)',
           '_confirmedValueChanged(confirmedValue)',
-          '_computeInvalid(required, confirmedValue)'
+          '_computeInvalid(required, confirmedValue)',
+          '_computeNativeValueAsNumber(native, valueAsDate, _timezoneOffset)',
+          '_reflectNativeValueAsNumber(native, _nativeValueAsNumber, _timezoneOffset)'
         ];
       }
 
       _computeInvalid(required) {
-        this.invalid = required && isNaN(this.confirmedValue);
+        this.invalid = required && isNaN(this._fromDatetime(this.confirmedValue));
       }
 
       validate() {
@@ -226,7 +233,10 @@
         return a && b;
       }
 
-      _computeNativeStep(clamp) {
+      _computeNativeStep(step, clamp) {
+        if (step !== undefined) {
+          return step;
+        }
         switch (clamp) {
           case 'year':
           case 'month':
@@ -242,6 +252,55 @@
           default:
             return 0.001;
         }
+      }
+
+      _computeNativeValueAsNumber(native, valueAsDate) {
+        if (!(native && this._hasNative)) {
+          return;
+        }
+        if (valueAsDate === undefined) {
+          return;
+        }
+        const d = new Date(valueAsDate);
+        if (this._timeOnly) {
+          if (!this.timezone || !this.date) {
+            this.__updatingTimezoneOffset = true;
+            this._timezoneOffset = 0;
+            this.__updatingTimezoneOffset = false;
+          }
+        } else {
+          if (!this.timezone) {
+            this._checkDefaultTimezone(d);
+          }
+          d.setMinutes(d.getMinutes() - this._timezoneOffset);
+        }
+        this._nativeValueAsNumber = +d;
+      }
+
+      _reflectNativeValueAsNumber(native, nativeValueAsNumber) {
+        if (!(native && this._hasNative)) {
+          return;
+        }
+        if (this.__updatingTimezoneOffset) {
+          return;
+        }
+        if (nativeValueAsNumber === undefined) {
+          return;
+        }
+          const d = new Date(nativeValueAsNumber)
+          if (this._timeOnly) {
+            if (!this.timezone || !this.date) {
+              this.__updatingTimezoneOffset = true;
+              this._timezoneOffset = 0;
+              this.__updatingTimezoneOffset = false;
+            }
+          } else {
+            if (!this.timezone) {
+              this._checkDefaultTimezone(d);
+            }
+            d.setMinutes(d.getMinutes() + this._timezoneOffset);
+          }
+          this._setDate(d);
       }
 
       _setDate(d) {
@@ -318,6 +377,11 @@
         })
       }
 
+      _resetDate() {
+        this._resetConfirmedValues();
+        super._resetDate();
+      }
+
       _resetConfirmedValues() {
         this.setProperties({
           value: undefined,
@@ -329,9 +393,6 @@
       }
 
       _resetValues() {
-        if (isNaN(this.confirmedValue)) {
-          return;
-        }
         this.setProperties({
           datetime: this.confirmedDatetime,
           date: this.confirmedDate,

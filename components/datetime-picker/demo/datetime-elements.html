@@ -31,10 +31,11 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <!-- <datetime-input datetime="{{datetime}}" default="2001-01-02"></datetime-input> -->
+              <datetime-input datetime="{{datetime}}" date="{{date}}" default="2001-01-02"></datetime-input>
               <!-- <date-input locale="{{locale}}" date="{{date}}" ></date-input> -->
-              <calendar-element locale="{{locale}}" date="{{date}}" ></calendar-element>
-              <time-element locale="{{locale}}" hour12-format="[[hour12Format]]" datetime="{{datetime}}" date="{{date}}"></time-element>
+              <calendar-element locale="{{locale}}" date="{{date}}" datetime="{{datetime}}"></calendar-element>
+              <!-- <datetime-picker locale="{{locale}}" date="{{date}}" datetime="{{datetime}}"></datetime-picker> -->
+              <!-- <time-element locale="{{locale}}" hour12-format="[[hour12Format]]" datetime="{{datetime}}" date="{{date}}"></time-element> -->
               <div class="vertical-section-container result">
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>
                 <div><code>date</code>: <b>[[date]]</b></div>
@@ -81,7 +82,7 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <datetime-picker datetime="{{datetime}}" default="2005-02-01" time="{{time}}" timezone="{{timezone}}"></datetime-picker>
+              <datetime-picker datetime="{{datetime}}" default="2005-02-01" time="{{time}}" max="2100-01-02T06:00+11:00" timezone="{{timezone}}"></datetime-picker>
               <div class="vertical-section-container result">
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>
                 <div><code>time</code>: <b>[[time]]</b></div>
@@ -102,14 +103,22 @@
               <custom-style>
                 <style is="custom-style">
                   datetime-picker.begin {
+                    --inner-input-focus-background: #e36666;
                     --input-focus-background: #CC1C1C;
-                    --input-background: #531010;
+                    --input-focus-color: #eeeeee;
+                    --input-background: #7d1010;
                     --input-color: #eeeeee;
+                    --input-picker-background: #7d1010;
+                    --input-picker-color: #eeeeee;
                   }
                   datetime-picker.end {
+                    --inner-input-focus-background: #6993ee;
                     --input-focus-background: #2362EC;
-                    --input-background: #071533;
+                    --input-background: #102e6f;
+                    --input-focus-color: #eeeeee;
                     --input-color: #eeeeee;
+                    --input-picker-background: #102e6f;
+                    --input-picker-color: #eeeeee;
                   }
                 </style>
               </custom-style>
@@ -207,12 +216,12 @@
     </div>
 
     <div class="vertical-section-container centered">
-      <h3>A non-native datetime-picker in 12-hour-format</h3>
+      <h3>A datetime-picker in 12-hour-format</h3>
       <demo-snippet>
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <datetime-picker hour12-format value="{{value}}" datetime="{{datetime}}" vertical-align="bottom"></datetime-picker>
+              <datetime-picker hour12-format value="{{value}}" datetime="{{datetime}}" default="2019-04-06T17:12" vertical-align="bottom"></datetime-picker>
               <div class="vertical-section-container result">
                 <div><code>numeric value</code>: <b>[[value]]</b></div>
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>

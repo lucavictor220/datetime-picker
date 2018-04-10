@@ -13,7 +13,7 @@ An input for text values.
 
 The normal `input` with `type="text"` is fairly good to use, but it has some flaws, because it should if wanted e.g.:
 
-* guarantee **live**-data to be valid
+* guarantee **live**-value to be valid
 * to be styled easily
 
 ### Example
@@ -71,6 +71,9 @@ The normal `input` with `type="text"` is fairly good to use, but it has some fla
   <p>input: <b>[[input]]</b></p>
   <p>value: <b>[[value]]</b></p>
 ```
+
+### Styling
+Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see how to style the element.
 
 ### Installation
 ```
