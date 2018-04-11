@@ -19,7 +19,6 @@
       /**
        * general input style
        */
-
        button,
        select {
          -moz-appearance: none;
@@ -27,24 +26,25 @@
          appearance: none;
          background: transparent;
          border: thin solid transparent;
+         box-sizing: border-box;
        }
 
       input,
-      #minsize,
-      #size,
       #input {
         vertical-align: inherit;
+        color: inherit;
         min-width: inherit;
         max-width: inherit;
+        box-sizing: content-box;
+        border-style: var(--input-border-style, dotted);
+        border-width: var(--input-border-width, thin);
+        border-color: var(--input-border-color, rgba(0,0,0,0.25));
       }
 
       button,
       input,
       select,
-      #minsize,
-      #size,
       #input {
-        overflow: visible;
         font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
@@ -53,15 +53,20 @@
         line-height: normal;
         cursor: var(--input-cursor, initial);
         text-align: var(--input-align, center);
-        padding: var(--input-padding, 0.25em);
         transition-duration: var(--input-transition-duration, 250ms);
         transition-timing-function: var(--input-transition-timing-function, cubic-bezier(0.6, 1, 0.2, 1));
         transition-property: var(--input-transition-property, background-color);
         @apply --input-style;
-        box-sizing: border-box;
         -webkit-background-clip: padding-box;
         background-clip: padding-box;
         margin: 0;
+      }
+
+      button,
+      input,
+      select,
+      #input {
+        padding: var(--input-padding, 0.25em);
       }
 
       button,
@@ -71,17 +76,9 @@
         border-radius: var(--input-border-radius, 0.25em);
       }
 
-      #minsize,
-      #size,
-      #input {
-        border-style: var(--input-border-style, dotted);
-        border-width: var(--input-border-width, thin);
-        border-color: var(--input-border-color, rgba(0,0,0,0.25));
-      }
-
       select {
-        color: var(--inner-input-color, currentColor);
-        background: var(--inner-input-background, transparent);
+        color: var(--inner-input-color, inherit);
+        background-color: var(--inner-input-background, transparent);
         border-width: var(--inner-input-border-width, thin);
         border-color: var(--inner-input-border-color, transparent);
         border-style: var(--inner-input-border-style, dotted);
@@ -126,8 +123,7 @@
       :host([invalid]:hover) #input,
       :host([invalid]:focus) #input,
       #input:invalid:hover,
-      #input:invalid:focus,
-      #input:invalid {
+      #input:invalid:focus {
         color: var(--input-invalid-color, inherit);
         background-color: var(--input-invalid-background, rgba(255,0,0,0.25));
         border-width: var(--input-border-width, thin);
@@ -151,14 +147,14 @@
       integer-input,
       number-input,
       text-input {
-        --input-color: var(--inner-input-color, currentColor);
+        --input-color: var(--inner-input-color, inherit);
         --input-background: var(--inner-input-background, transparent);
         --input-border-width: var(--inner-input-border-width, thin);
         --input-border-color: var(--inner-input-border-color, transparent);
         --input-border-style: var(--inner-input-border-style, dotted);
         --input-padding: var(--inner-input-padding, 0);
         --input-border-radius: var(--inner-input-border-radius, 0.1em);
-        --input-focus-color: var(--inner-input-focus-color, currentColor);
+        --input-focus-color: var(--inner-input-focus-color, inherit);
         --input-focus-background: var(--inner-input-focus-background, rgba(0,0,0,0.1));
         --input-focus-border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.1));
         --input-focus-border-style: var(--inner-input-focus-border-style, dotted);
@@ -222,12 +218,20 @@
        * placeholder
        */
       ::-webkit-input-placeholder,
+      ::-ms-input-placeholder,
       ::placeholder {
-        color: var(--input-placeholder-color, inherit);
+        color: currentColor;
         opacity: var(--input-placeholder-opacity, 0.75);
         text-align: var(--input-placeholder-align, center);
         @apply --input-placeholder;
       }
+
+      ::-ms-input-placeholder {
+        color: currentColor;
+        opacity: var(--input-placeholder-opacity, 0.75);
+        text-align: var(--input-placeholder-align, center);
+      }
+
       :host([invalid]) ::-webkit-input-placeholder,
       :host([invalid]) ::placeholder {
         color: var(--input-invalid-color, inherit);
@@ -272,7 +276,8 @@
         background: transparent;
       }
 
-      select::-ms-expand {
+      ::-ms-clear,
+      ::-ms-expand {
         display: none;
       }
 
@@ -285,7 +290,7 @@
         color: currentColor;
         cursor: pointer;
       }
-      
+
       [invisible] {
         visibility: hidden;
       }
