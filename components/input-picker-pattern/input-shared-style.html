@@ -25,7 +25,7 @@
          -webkit-appearance: none;
          appearance: none;
          background: transparent;
-         border: thin solid transparent;
+         border: var(--inner-input-border-width, thin) solid transparent;
          box-sizing: border-box;
        }
 
@@ -56,24 +56,18 @@
         transition-duration: var(--input-transition-duration, 250ms);
         transition-timing-function: var(--input-transition-timing-function, cubic-bezier(0.6, 1, 0.2, 1));
         transition-property: var(--input-transition-property, background-color);
-        @apply --input-style;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        margin: 0;
-      }
-
-      button,
-      input,
-      select,
-      #input {
         padding: var(--input-padding, 0.25em);
-      }
-
-      button,
-      #input {
         color: var(--input-color, inherit);
         background-color: var(--input-background, transparent);
         border-radius: var(--input-border-radius, 0.25em);
+        @apply --input-style;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        transform: rotate(0);
+        margin: 0;
       }
 
       select {
@@ -184,6 +178,7 @@
          align-self: center;
          margin: 0 0.1em;
          cursor: pointer;
+         will-change: opacity;
          border-width: var(--inner-input-border-width, thin);
          border-style: var(--inner-input-border-style, dotted);
          border-color: var(--inner-input-border-color, transparent);
@@ -191,7 +186,7 @@
          opacity: 0.5;
          color: inherit;
          background-color: transparent;
-         transition: opacity 250ms cubic-bezier(0.6, 1, 0.2, 1);
+         transition-property: background, opacity;
          height: 1em;
          width: 1em;
          border-radius: 50%;
@@ -202,18 +197,19 @@
          width: 100%;
          fill: currentColor;
        }
-       #input .reset:hover,
-       #input .reset:focus {
-         color: var(--inner-input-focus-color, inherit);
-         background-color: var(--inner-input-focus-background, rgba(0,0,0,0.1));
-         border-style: var(--inner-input-focus-border-style, dotted);
-         border-color: var(--inner-input-focus-border-color, transparent);
-         outline: none;
-       }
        #input .reset:hover {
          opacity: 1;
+         color: var(--inner-input-focus-color, inherit);
+         background-color: var(--inner-input-focus-background, rgba(0,0,0,0.1));
        }
-
+       #input .reset:focus {
+         border-color: var(--inner-input-focus-border-color, var(--inner-input-focus-background, transparent));
+       }
+       #input .reset:hover,
+       #input .reset:focus {
+         border-style: var(--inner-input-focus-border-style, dotted);
+         outline: none;
+       }
       /**
        * placeholder
        */

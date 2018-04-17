@@ -77,6 +77,7 @@
         padding: var(--input-icon-padding);
         height: var(--input-icon-height);
         width: var(--input-icon-width);
+        border: var(--inner-input-border-width, thin) solid transparent;
         background: var(--input-icon-background);
         transition-duration: var(--input-transition-duration, 250ms);
         transition-timing-function: var(--input-transition-timing-function, cubic-bezier(0.6, 1, 0.2, 1));
@@ -105,7 +106,6 @@
       .icon[active] {
         color: var(--inner-input-focus-color);
         background-color: var(--inner-input-focus-background);
-        border-width: var(--inner-input-border-width, thin);
         border-style: solid;
         border-color: var(--inner-input-focus-background);
         @apply --input-focus;
