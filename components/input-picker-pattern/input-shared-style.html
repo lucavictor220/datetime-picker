@@ -3,6 +3,9 @@
 <dom-module id="input-shared-style">
   <template>
     <style>
+      :host {
+        vertical-align: middle;
+      }
       :host([hidden]),
       [hidden] {
         display: none !important;
@@ -104,7 +107,7 @@
          color: var(--inner-input-focus-color, inherit);
          background-color: var(--inner-input-focus-background, rgba(0,0,0,0.1));
          border-style: var(--inner-input-focus-border-style, dotted);
-         border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.1));
+         border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.2));
          border-width: var(--inner-input-border-width, thin);
          outline: none;
          @apply --input-focus;
@@ -150,7 +153,7 @@
         --input-border-radius: var(--inner-input-border-radius, 0.1em);
         --input-focus-color: var(--inner-input-focus-color, inherit);
         --input-focus-background: var(--inner-input-focus-background, rgba(0,0,0,0.1));
-        --input-focus-border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.1));
+        --input-focus-border-color: var(--inner-input-focus-border-color, rgba(0,0,0,0.15));
         --input-focus-border-style: var(--inner-input-focus-border-style, dotted);
         --input-invalid-color: var(--inner-input-invalid-color, inherit);
         --input-invalid-background: var(--inner-input-invalid-background, rgba(0,0,0,0.1));
@@ -178,7 +181,6 @@
          align-self: center;
          margin: 0 0.1em;
          cursor: pointer;
-         will-change: opacity;
          border-width: var(--inner-input-border-width, thin);
          border-style: var(--inner-input-border-style, dotted);
          border-color: var(--inner-input-border-color, transparent);
@@ -197,18 +199,18 @@
          width: 100%;
          fill: currentColor;
        }
+       #input .reset:focus,
+       #input .reset:hover {
+         border-style: var(--inner-input-focus-border-style, dotted);
+         outline: none;
+       }
        #input .reset:hover {
          opacity: 1;
          color: var(--inner-input-focus-color, inherit);
          background-color: var(--inner-input-focus-background, rgba(0,0,0,0.1));
        }
        #input .reset:focus {
-         border-color: var(--inner-input-focus-border-color, var(--inner-input-focus-background, transparent));
-       }
-       #input .reset:hover,
-       #input .reset:focus {
-         border-style: var(--inner-input-focus-border-style, dotted);
-         outline: none;
+         border-color: var(--inner-input-focus-border-color, var(--inner-input-focus-background, rgba(0,0,0,0.2)));
        }
       /**
        * placeholder

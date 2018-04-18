@@ -67,6 +67,13 @@
           propertyForValue: {
             type: String,
             observer: '_createReflectPropertyToValueObserver'
+          },
+
+          /**
+           * default value of the input
+           */
+          default: {
+            type: Object
           }
         }
       }
@@ -74,7 +81,8 @@
       static get observers() {
         return [
           '_computeInvalid(required, value)',
-          '_computeValueIsSet(value)'
+          '_computeValueIsSet(value)',
+          '_defaultChanged(default)'
         ]
       }
 
@@ -89,6 +97,13 @@
 
       _computeValueIsSet(value) {
         this._valueIsSet = value !== undefined;
+      }
+
+      _defaultChanged(def) {
+        super._defaultChanged && super._defaultChanged(def);
+        if (def && this.value === undefined) {
+          this.value = this[this.propertyForValue || 'value'] = def;
+        }
       }
 
       /**
@@ -117,10 +132,10 @@
           this._createPropertyObserver(prop, '_reflectPropertyToValue');
           this._createPropertyObserver('value', '_reflectValueToProperty');
           setTimeout(() => {
-            if (this[prop] !== undefined) {
-              this.set('value', this[prop]);
-            } else if (this.value !== undefined) {
+            if (this.value !== undefined) {
               this.set(prop, this.value);
+            } else if (this[prop] !== undefined) {
+              this.set('value', this[prop]);
             }
           }, 0)
         }

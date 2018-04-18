@@ -245,8 +245,16 @@
           noTip: {
             type: Boolean,
             reflectToAttribute: true
-          }
+          },
 
+          /**
+           * The confirmed value. When `auto-confirm` is not set, the value will only change, when you confirm.
+           */
+          confirmedValue: {
+            type: Object,
+            notify: true
+          }
+          
           /**
           * @event input-picker-opened
           * Fired when a picker has been opened.
@@ -257,6 +265,14 @@
           * Fired after a picker has been closed.
           */
         }
+      }
+
+      static get observers() {
+        return [
+          '_valueChanged(value, autoConfirm)',
+          '_confirmedValueChanged(confirmedValue)',
+          '_computeInvalid(required, confirmedValue)'
+        ];
       }
 
       connectedCallback() {
@@ -443,6 +459,7 @@
         if (super.confirm) {
           super.confirm();
         }
+        this._setConfirmedValues();
         this.close();
       }
 
@@ -460,7 +477,60 @@
         if (this.autoConfirm) {
           this.confirm();
         }
+
+        this._resetValues();
         this.close();
+      }
+
+      _valueChanged(value) {
+        if (value === undefined) {
+          this._resetConfirmedValues();
+          return; // return, if resseting, so that the picker is not itself resetted
+        }
+        if (this.autoConfirm || (this._hasNative && this.native)) {
+          setTimeout(() => {
+            this._setConfirmedValues();
+          }, 0);
+        }
+      }
+
+      _confirmedValueChanged(confirmedValue) {
+        if (confirmedValue === undefined) {
+          this._resetConfirmedValues();
+          return;
+        }
+        this.value = confirmedValue;
+      }
+
+      validate() {
+        this.value = this.confirmedValue;
+        return super.validate();
+      }
+
+      _setConfirmedValues() {
+        this.setProperties({
+          confirmedValue: this.value
+        })
+      }
+
+      _resetConfirmedValues() {
+        this.setProperties({
+          value: undefined,
+          confirmedValue: undefined
+        })
+      }
+
+      _resetValues() {
+        this.setProperties({
+          value: this.confirmedValue
+        })
+      }
+
+      _defaultChanged(def) {
+        super._defaultChanged(def);
+        if (def && this.value !== undefined) {
+          this._setConfirmedValues();
+        }
       }
     }
   }
