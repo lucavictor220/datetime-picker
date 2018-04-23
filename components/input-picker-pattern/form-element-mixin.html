@@ -102,7 +102,13 @@
       _defaultChanged(def) {
         super._defaultChanged && super._defaultChanged(def);
         if (def && this.value === undefined) {
-          this.value = this[this.propertyForValue || 'value'] = def;
+          let toSet = { value: def };
+          if (this.propertyForValue) {
+            toSet[this.propertyForValue] = def;
+          }
+          setTimeout( () => {
+            this.setProperties(toSet);
+          }, 0);
         }
       }
 
@@ -133,9 +139,10 @@
           this._createPropertyObserver('value', '_reflectValueToProperty');
           setTimeout(() => {
             if (this.value !== undefined) {
-              this.set(prop, this.value);
-            } else if (this[prop] !== undefined) {
-              this.set('value', this[prop]);
+              this.set(this.propertyForValue, this.value);
+            }
+            if (this[this.propertyForValue] !== undefined) {
+              this.set('value', this[this.propertyForValue]);
             }
           }, 0)
         }

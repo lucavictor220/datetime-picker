@@ -1,3 +1,4 @@
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="input-picker-shared-style.html">
 <link rel="import" href="dropdown-tip-style.html">
 <link rel="import" href="form-element-mixin.html">
@@ -13,7 +14,7 @@
    */
   const InputPickerPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
-    return class extends FormElementMixin(superClass) { // eslint-disable-line no-undef
+    return class extends Polymer.GestureEventListeners(FormElementMixin(superClass)) { // eslint-disable-line no-undef
       /**
        * the expected input type, that should be polyfilled, if not available
        * @type {string}
@@ -254,7 +255,7 @@
             type: Object,
             notify: true
           }
-          
+
           /**
           * @event input-picker-opened
           * Fired when a picker has been opened.
@@ -314,14 +315,15 @@
       _addCancelOnClickListener() {
         // prevent when clicking on the picker that it is closes
         if (!this.noCancelOnOutsideClick) {
-          document.addEventListener('click', this.cancel, false);
-          this.addEventListener('click', this._stopPropagation, false);
+          Polymer.Gestures.addListener(document, 'tap', this.cancel, false);
+          Polymer.Gestures.setTouchAction(this, 'auto');
+          this.addEventListener('tap', this._stopPropagation, false);
         }
       }
 
       _removeCancelOnClickListener() {
-        document.removeEventListener('click', this.cancel, false);
-        this.removeEventListener('click', this._stopPropagation, false);
+        Polymer.Gestures.removeListener(document, 'tap', this.cancel, false);
+        this.removeEventListener('tap', this._stopPropagation, false);
       }
 
       _addKeepPickersOpenListener() {
@@ -335,7 +337,8 @@
       }
 
       _stopPropagation(e) {
-        e && e.stopPropagation();
+        e && e.stopPropagation && e.stopPropagation();
+        e && e.detail && e.detail.sourceEvent && e.detail.sourceEvent.stopPropagation && e.detail.sourceEvent.stopPropagation();
       }
 
       _addKeyListener() {
@@ -528,8 +531,12 @@
 
       _defaultChanged(def) {
         super._defaultChanged(def);
-        if (def && this.value !== undefined) {
-          this._setConfirmedValues();
+        if (def) {
+          setTimeout( () => {
+            if (this.value !== undefined) {
+              this._setConfirmedValues();
+            }
+          }, 0);
         }
       }
     }
