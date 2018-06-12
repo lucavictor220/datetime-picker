@@ -5,15 +5,28 @@
     <title>&lt;time-picker&gt; demo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-    <link rel="import" href="../../datetime-input/time-input.html">
-    <link rel="import" href="../time-picker.html">
-    <link rel="import" href="../date-picker.html">
+    <script type="module" src="../../../datetime-input/time-input.js"></script>
+    <script type="module" src="../time-picker.js"></script>
+    <script type="module" src="../date-picker.js"></script>
     <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         .result {
           margin: 0.75em auto;
@@ -21,12 +34,17 @@
           line-height: 1.5;
         }
       </style>
-    </custom-style>
-  </head>
+    </custom-style>`;
 
-  <body>
+document.body.appendChild($_documentContainer.content);
+</script>div class="vertical-section-container centered">
+      <h3>Create a standalone time-element and time-input</h3>
+      <demo-snippet>
+        <template>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-    <div class="vertical-section-container centered">
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Create a standalone time-element and time-input</h3>
       <demo-snippet>
         <template>
@@ -40,15 +58,22 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>o-snippet>
+        <template>
+          <dom-bind>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Create a native time-picker, if available</h3>
       <demo-snippet>
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <time-picker native confirmed-value="{{value}}" confirmed-date="{{date}}" confirmed-time="{{time}}" timezone="{{timezone}}" position="bottom"></time-picker>
+              <time-picker native="" confirmed-value="{{value}}" confirmed-date="{{date}}" confirmed-time="{{time}}" timezone="{{timezone}}" position="bottom"></time-picker>
               <div class="vertical-section-container result">
                 <div><code>(confirmed) numeric value</code>: <b>[[value]]</b></div>
                 <div><code>(confirmed) date</code>: <b>[[date]]</b></div>
@@ -59,9 +84,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>using millisecond (unset 'clamp'-attribute or setting the step to a lower value than 1)</h5>
+      <demo-snippet>
+        <template>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Mediated Input</h3>
       <h4>to confirm the values for date, time, datetime and value</h4>
       <h5>using millisecond (unset 'clamp'-attribute or setting the step to a lower value than 1)</h5>
@@ -78,9 +110,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script><dom-bind>
+            <template is="dom-bind">
+              <time-picker datetime="{{datetime}}" default="06:34:56.789" step="0.001"></time-picker>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Presetting time</h3>
       <demo-snippet>
         <template>
@@ -94,9 +133,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>  <template is="dom-bind">
+              <custom-style>
+                <style is="custom-style">
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Handling range of dates</h3>
       <demo-snippet>
         <template>
@@ -114,11 +160,11 @@
               </custom-style>
               <div class="vertical-section-container">
                 <b>starting time:</b>
-                <time-picker class="begin" auto-confirm value="[[value]]" datetime="{{min}}" max="[[max]]" vertical-align="bottom"></time-picker>
+                <time-picker class="begin" auto-confirm="" value="[[value]]" datetime="{{min}}" max="[[max]]" vertical-align="bottom"></time-picker>
                 <b>end time:</b>
-                <time-picker class="end" auto-confirm value="[[value]]" datetime="{{max}}" min="[[min]]" vertical-align="top"></time-picker>
+                <time-picker class="end" auto-confirm="" value="[[value]]" datetime="{{max}}" min="[[min]]" vertical-align="top"></time-picker>
                 <b>at date:</b>
-                <date-picker value="{{value}}" vertical-align="top" auto-confirm></date-picker>
+                <date-picker value="{{value}}" vertical-align="top" auto-confirm=""></date-picker>
               </div>
               <div class="vertical-section-container result">
                 <code>start:</code>
@@ -130,9 +176,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>    <custom-style>
+                <style is="custom-style">
+                  time-picker.clamp {
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Clamp on second</h3>
       <demo-snippet>
         <template>
@@ -158,8 +211,7 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-  </body>
-
-</html>
+document.body.appendChild($_documentContainer.content);
+</script>

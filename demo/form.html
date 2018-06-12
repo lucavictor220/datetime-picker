@@ -6,19 +6,30 @@
 
     <title>datetime-picker in iron-Form</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-    <link rel="import" href="../../polymer/polymer.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-form/iron-form.html">
-    <link rel="import" href="../../paper-styles/shadow.html">
+    <script type="module" src="../../../@polymer/polymer/polymer-legacy.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../../../@polymer/iron-form/iron-form.js"></script>
+    <script type="module" src="../../../@polymer/paper-styles/shadow.js"></script>
 
-    <link rel="import" href="../datetime-picker.html">
-    <link rel="import" href="../date-picker.html">
-    <link rel="import" href="../time-picker.html">
+    <script type="module" src="../datetime-picker.js"></script>
+    <script type="module" src="../date-picker.js"></script>
+    <script type="module" src="../time-picker.js"></script>
 
-    <custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         input {
           margin-bottom: 0.25em;
@@ -77,27 +88,33 @@
           border-style: dashed;
         }
       </style>
-    </custom-style>
+    </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
   </head>
   <body>
 
-    <div class="vertical-section-container centered">
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>datetime-picker in <code>iron-form</code></h3>
       <demo-snippet>
         <template>
           <dom-bind>
             <template>
               <label>
-                <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection
+                <input type="checkbox" checked="" onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection
               </label>
               <br><br>
 
               <iron-form id="form1">
                 <form action="/foo" method="get">
-                  name: <input name="name" required value="Batman"/><br>
-                  job: <input name="job" required value="Hero"/><br>
+                  name: <input name="name" required="" value="Batman"><br>
+                  job: <input name="job" required="" value="Hero"><br>
                   <br>
-                  first day: <date-picker name="first" required max="{{end}}" confirmed-value="{{start}}"></date-picker><br>
+                  first day: <date-picker name="first" required="" max="{{end}}" confirmed-value="{{start}}"></date-picker><br>
                   last day: <date-picker name="last" min="{{start}}" confirmed-value="{{end}}"></date-picker><br>
                   <br>
                   last job: <datetime-picker name="lastjob" min="[[start]]" max="[[end]]" date="{{lastjob}}" property-for-value="datetime"></datetime-picker><br>
@@ -112,7 +129,21 @@
                 form1.addEventListener('iron-form-submit', function(event) {
                   this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
                 });
-              </script>
+              &lt;/script>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>ort '../datetime-picker.js';
+import '../date-picker.js';
+import '../time-picker.js';
+form1.addEventListener('iron-form-submit', function(event) {
+  this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
+});
+</script>
             </template>
           </dom-bind>
         </template>

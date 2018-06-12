@@ -5,14 +5,27 @@
     <title>&lt;date-picker&gt; demo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-    <link rel="import" href="../date-picker.html">
-    <link rel="import" href="../../input-picker-pattern/overlay-element.html">
+    <script type="module" src="../date-picker.js"></script>
+    <script type="module" src="../../../input-picker-pattern/overlay-element.js"></script>
     <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         .result {
           margin: 0.75em;
@@ -20,12 +33,17 @@
           line-height: 1.5;
         }
       </style>
-    </custom-style>
-  </head>
+    </custom-style>`;
 
-  <body>
+document.body.appendChild($_documentContainer.content);
+</script>div class="vertical-section-container centered">
+      <h3>Create a standalone calendar-element and date-input</h3>
+      <demo-snippet>
+        <template>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-    <div class="vertical-section-container centered">
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Create a standalone calendar-element and date-input</h3>
       <demo-snippet>
         <template>
@@ -39,15 +57,22 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>o-snippet>
+        <template>
+          <dom-bind>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Create a native date-picker, if available</h3>
       <demo-snippet>
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-picker native confirmed-value="{{value}}" date="{{date}}" confirmed-date="{{confirmedDate}}" vertical-align="bottom"></date-picker>
+              <date-picker native="" confirmed-value="{{value}}" date="{{date}}" confirmed-date="{{confirmedDate}}" vertical-align="bottom"></date-picker>
               <div class="vertical-section-container result">
                 <div><code>(confirmed) numeric value</code>: <b>[[value]]</b></div>
                 <div><code>date</code>: <b>[[date]]</b></div>
@@ -57,16 +82,23 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>o-snippet>
+        <template>
+          <dom-bind>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Autoconfirming Input</h3>
       <h4>to confirm the values for date, time, datetime and value</h4>
       <demo-snippet>
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-picker auto-confirm date="{{date}}" confirmed-date="{{confirmedDate}}" vertical-align="bottom"></date-picker>
+              <date-picker auto-confirm="" date="{{date}}" confirmed-date="{{confirmedDate}}" vertical-align="bottom"></date-picker>
               <div class="vertical-section-container result">
                 <div><code>current date</code>: <b>[[date]]</b></div>
                 <div><code>confirmed date</code>: <b>[[confirmedDate]]</b></div>
@@ -75,9 +107,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script><dom-bind>
+            <template is="dom-bind">
+              <date-picker confirmed-value="{{confirmedValue}}" default="2005-02-01"></date-picker>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Presetting date</h3>
       <demo-snippet>
         <template>
@@ -91,9 +130,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>  <template is="dom-bind">
+              <custom-style>
+                <style is="custom-style">
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Handling range of dates</h3>
       <demo-snippet>
         <template>
@@ -135,9 +181,16 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>    <custom-style>
+                <style is="custom-style">
+                  #eventPicker {
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Use the properties to extend a picker to a custom event listing</h3>
       <demo-snippet>
         <template>
@@ -172,7 +225,7 @@
               <div class="vertical-section-container">
                 <date-picker id="eventPicker" opened="{{opened}}" date="{{date}}" current-selected-day-node="{{currentSelectedDayNode}}" vertical-align="bottom"></date-picker>
                 <template is="dom-if" if="[[currentSelectedDayNode]]">
-                  <overlay-element class="overlay" opened$="[[_enshureOpened(opened, currentSelectedDayNode)]]" on-mousedown="close" no-overlap fit-into="[[currentSelectedDayNode]]" no-cancel-on-outside-click dynamic-align vertical-align="auto" horizontal-align="auto">
+                  <overlay-element class="overlay" opened\$="[[_enshureOpened(opened, currentSelectedDayNode)]]" on-mousedown="close" no-overlap="" fit-into="[[currentSelectedDayNode]]" no-cancel-on-outside-click="" dynamic-align="" vertical-align="auto" horizontal-align="auto">
                     <div class="info">
                       <div><b>[[_toLocaleDateString(currentSelectedDayNode.dataset.date)]]</b></div>
                       <ul>
@@ -221,12 +274,20 @@
                 paths.shift();
               }
             }
-          </script>
+          &lt;/script>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-    <div class="vertical-section-container centered">
+document.body.appendChild($_documentContainer.content);
+</script>       <custom-style>
+                <style is="custom-style">
+                  date-picker.clamp {
+                    --inner-input-focus-background: #618cdf;
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
       <h3>Clamp on day to get a month-picker</h3>
       <demo-snippet>
         <template>
@@ -255,8 +316,7 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div>`;
 
-  </body>
-
-</html>
+document.body.appendChild($_documentContainer.content);
+</script>
